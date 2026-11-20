@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dosero | Italian Espresso Management</title>
+  <style>
+    :root {
+      --espresso: #2c1810;
+      --espresso-dark: #1a0d08;
+      --roast: #4a2c20;
+      --crema: #c88a4b;
+      --crema-light: #e5b887;
+      --cream-bg: #faf6f1;
+      --card-bg: #ffffff;
+      --soft: #f4ece3;
+      --line: #e6dacb;
+      --text: #24150e;
+      --muted: #7d685c;
+      --green: #1e7e4f;
+      --green-soft: #e7f6ee;
+      --red: #c93b3b;
+      --red-soft: #fdecec;
+      --warn: #b87414;
+      --warn-soft: #fff4e0;
+      --shadow: 0 12px 30px rgba(44, 24, 16, 0.09);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: var(--cream-bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* شريط العلم الإيطالي الرفيع في أعلى الصفحة */
+    .italy-ribbon {
+      height: 5px;
+      background: linear-gradient(90deg, #009246 33.33%, #ffffff 33.33% 66.66%, #ce2b37 66.66%);
+    }
+
+    /* شاشة الدخول */
+    .login-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: radial-gradient(circle at top right, #4a2c20, #1a0d08);
+      display: grid; place-items: center; padding: 20px;
+    }
+    .login-overlay[hidden] { display: none; }
+    .login-box {
+      width: min(410px, 100%);
+      background: var(--card-bg);
+      border-radius: 22px;
+      padding: 34px 28px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+      text-align: center;
+      border-top: 5px solid var(--crema);
+    }
+    .brand-emblem {
+      width: 78px; height: 78px; margin: 0 auto 14px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--espresso), var(--roast));
+      color: var(--crema-light);
+      display: grid; place-items: center;
+      font-size: 32px; font-weight: bold;
+      box-shadow: 0 10px 24px rgba(44,24,16,0.3);
+      border: 2px solid var(--crema);
+    }
+    .login-box h1 { margin: 0; font-size: 26px; letter-spacing: 1.5px; color: var(--espresso); }
+    .login-box p { margin: 6px 0 22px; font-size: 12px; color: var(--muted); }
+    .form-stack { display: flex; flex-direction: column; gap: 14px; text-align: start; }
+
+    /* الهيدر العلوي */
+    header.topbar {
+      background: linear-gradient(125deg, var(--espresso-dark), var(--espresso), var(--roast));
+      color: #fff;
+      padding: 16px 4%;
+      box-shadow: 0 8px 25px rgba(26, 13, 8, 0.25);
+    }
+    .topbar-inner {
+      max-width: 1240px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .brand-title { display: flex; align-items: center; gap: 12px; }
+    .brand-badge {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: rgba(200, 138, 75, 0.2); border: 1px solid var(--crema);
+      display: grid; place-items: center; font-size: 24px;
+    }
+    .brand-title h2 { margin: 0; font-size: 22px; letter-spacing: 1px; color: var(--crema-light); }
+    .brand-title span { font-size: 12px; color: #dfd3c8; }
+
+    .nav-tabs {
+      max-width: 1240px; margin: 18px auto 0; padding: 0 4%;
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .tab-btn {
+      padding: 11px 18px; border-radius: 12px; border: 1px solid var(--line);
+      background: var(--card-bg); color: var(--text);
+      font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+      transition: .2s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+    }
+    .tab-btn:hover { background: var(--soft); }
+    .tab-btn.active {
+      background: var(--espresso); color: var(--crema-light);
+      border-color: var(--espresso);
+    }
+
+    main { max-width: 1240px; margin: 18px auto 40px; padding: 0 4%; }
+
+    /* بطاقات الإحصائيات */
+    .kpi-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px; margin-bottom: 20px;
+    }
+    .kpi-card {
+      background: var(--card-bg); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow);
+      border-right: 4px solid var(--crema);
+    }
+    .kpi-card span { font-size: 12px; color: var(--muted); display: block; }
+    .kpi-card strong { font-size: 22px; margin-top: 8px; display: block; color: var(--espresso); }
+    .kpi-card small { font-size: 11px; color: var(--muted); margin-top: 4px; display: block; }
+
+    .panel {
+      background: var(--card-bg); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 22px; margin-bottom: 18px;
+      box-shadow: var(--shadow);
+    }
+    .panel-head {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 10px; margin-bottom: 16px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--line);
+    }
+    .panel-head h3 { margin: 0; font-size: 17px; color: var(--espresso); }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 5px; font-weight: 700; }
+    input, select {
+      width: 100%; padding: 10px 12px; border: 1px solid var(--line);
+      border-radius: 10px; font: inherit; font-size: 13px; background: #fff; color: var(--text);
+    }
+    input:focus, select:focus { outline: none; border-color: var(--crema); box-shadow: 0 0 0 3px rgba(200,138,75,0.18); }
+
+    button.btn {
+      border: 0; border-radius: 10px; padding: 11px 18px;
+      font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+      transition: .18s ease;
+    }
+    button.btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--espresso); color: var(--crema-light); }
+    .btn-crema { background: var(--crema); color: #fff; }
+    .btn-soft { background: var(--soft); color: var(--text); }
+    .btn-green { background: var(--green-soft); color: var(--green); padding: 6px 11px; }
+    .btn-red { background: var(--red-soft); color: var(--red); padding: 6px 11px; }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; min-width: 780px; border-collapse: collapse; }
+    th, td { padding: 12px 10px; text-align: start; border-bottom: 1px solid var(--line); font-size: 13px; }
+    th { background: var(--soft); color: var(--espresso); font-weight: 700; }
+    tbody tr:hover { background: #fcf9f5; }
+
+    .badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; display: inline-block; }
+    .badge-ok { background: var(--green-soft); color: var(--green); }
+    .badge-warn { background: var(--warn-soft); color: var(--warn); }
+    .badge-red { background: var(--red-soft); color: var(--red); }
+
+    /* سلة الفاتورة */
+    .invoice-items-box {
+      background: var(--soft); border: 1px dashed var(--crema);
+      border-radius: 14px; padding: 15px; margin: 16px 0;
+    }
+    .inv-row {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto;
+      gap: 10px; align-items: center; margin-bottom: 10px;
+      background: #fff; padding: 10px; border-radius: 10px; border: 1px solid var(--line);
+    }
+
+    /* نافذة معاينة وطباعة الفاتورة */
+    .modal-backdrop {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(26, 13, 8, 0.72); backdrop-filter: blur(4px);
+      display: grid; place-items: center; padding: 20px;
+    }
+    .modal-backdrop[hidden] { display: none; }
+    .invoice-paper {
+      width: min(680px, 100%); background: #fff; color: #1a0d08;
+      border-radius: 16px; padding: 30px; box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .inv-header {
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 2px solid var(--espresso); padding-bottom: 15px; margin-bottom: 18px;
+    }
+    .inv-header h2 { margin: 0; font-size: 26px; color: var(--espresso); letter-spacing: 1px; }
+    .inv-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 13px; margin-bottom: 18px; background: var(--soft); padding: 12px; border-radius: 10px; }
+    .inv-totals { margin-top: 16px; text-align: end; font-size: 14px; line-height: 1.9; }
+
+    footer { text-align: center; padding: 20px; font-size: 12px; color: var(--muted); }
+
+    @media print {
+      body * { visibility: hidden; }
+      #invoiceModal, #invoiceModal * { visibility: visible; }
+      #invoiceModal { position: fixed; inset: 0; background: #fff; padding: 0; }
+      .no-print { display: none !important; }
+      .invoice-paper { box-shadow: none; width: 100%; max-height: none; }
+    }
+    @media (max-width: 768px) {
+      .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+      .inv-row { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .grid-3, .grid-4, .inv-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="italy-ribbon"></div>
+
+  <!-- شاشة الدخول التجريبية -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+      <div class="brand-emblem">☕</div>
+      <h1>DOSERO</h1>
+      <p>ITALIAN ESPRESSO • EGYPT & ITALY 🇮🇹🇪🇬</p>
+      <form class="form-stack" id="loginForm">
+        <div>
+          <label>اختر الحساب للدخول</label>
+          <select id="loginUserSelect">
+            <option value="admin">👑 المدير (صلاحية كاملة + التكلفة والأرباح)</option>
+            <option value="user">👤 موظف المبيعات (فواتير وعملاء ومخزون فقط)</option>
+          </select>
+        </div>
+        <div>
+          <label>كلمة المرور (تجريبي: 123)</label>
+          <input type="password" id="loginPass" value="123" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; padding:13px;">دخول النظام</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- الهيدر -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-title">
+        <div class="brand-badge">☕</div>
+        <div>
+          <h2>DOSERO ESPRESSO</h2>
+          <span id="roleSubtitle">نظام إدارة المخزون والمبيعات والموردين</span>
+        </div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <button class="btn btn-crema" id="switchRoleBtn" type="button">🔄 تبديل المستخدم</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- التبويبات -->
+  <nav class="nav-tabs">
+    <button class="tab-btn active" data-tab="salesTab">🧾 فاتورة بيع جديدة</button>
+    <button class="tab-btn" data-tab="inventoryTab">📦 المخزون والأصناف</button>
+    <button class="tab-btn" data-tab="customersTab">👥 العملاء والمسحوبات</button>
+    <button class="tab-btn admin-only" data-tab="suppliersTab">🚢 الموردين والتحويلات</button>
+    <button class="tab-btn" data-tab="invoicesLogTab">📒 سجل الفواتير</button>
+  </nav>
+
+  <main>
+    <!-- الملخص السريع -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <span>📦 إجمالي المخزون المتاح</span>
+        <strong id="kpiStock">0 عبوة/كجم</strong>
+        <small id="kpiStockValue" class="admin-only">تكلفة المخزون: 0 ج.م</small>
+      </div>
+      <div class="kpi-card">
+        <span>💰 إجمالي المبيعات</span>
+        <strong id="kpiSales">0.00 ج.م</strong>
+        <small id="kpiProfit" class="admin-only" style="color:var(--green); font-weight:bold;">صافي الربح: 0.00 ج.م</small>
+      </div>
+      <div class="kpi-card">
+        <span>⏳ فلوس آجل عند العملاء</span>
+        <strong id="kpiCustomerDebt" style="color:var(--warn);">0.00 ج.م</strong>
+        <small>مستحقات قيد التحصيل</small>
+      </div>
+      <div class="kpi-card admin-only">
+        <span>🚢 مستحقات الموردين</span>
+        <strong id="kpiSupplierDebt" style="color:var(--red);">0.00 ج.م</strong>
+        <small>متبقي للموردين بعد التحويلات</small>
+      </div>
+    </section>
+
+    <!-- 1. تبويب إصدار فاتورة بيع -->
+    <section id="salesTab" class="tab-content">
+      <div class="panel">
+        <div class="panel-head">
+          <h3>🧾 إنشاء فاتورة مبيعات (كاش / آجل / تحويل)</h3>
+          <span style="font-size:12px; color:var(--muted);" id="todayDateLabel"></span>
+        </div>
+
+        <form id="newInvoiceForm">
+          <div class="grid-3">
+            <div>
+              <label>اختر العميل</label>
+              <select id="invCustomerSelect"></select>
+            </div>
+            <div id="newCustomerNameBox">
+              <label>أو اكتب اسم عميل جديد</label>
+              <input type="text" id="newCustomerName" placeholder="مثال: كافيه روما - التجمع">
+            </div>
+            <div>
+              <label>رقم هاتف العميل (اختياري)</label>
+              <input type="text" id="newCustomerPhone" placeholder="010xxxxxxxx">
+            </div>
+          </div>
+
+          <div class="invoice-items-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <strong style="font-size:14px; color:var(--espresso);">☕ أصناف الإسبريسو في الفاتورة</strong>
+              <button type="button" class="btn btn-crema" id="addInvRowBtn" style="padding:7px 12px;">➕ إضافة صنف</button>
+            </div>
+            <div id="invRowsContainer"></div>
+          </div>
+
+          <div class="grid-4">
+            <div>
+              <label>إجمالي الفاتورة</label>
+              <input type="text" id="invGrandTotal" readonly style="font-weight:bold; background:var(--soft);">
+            </div>
+            <div>
+              <label>المبلغ المدفوع الآن</label>
+              <input type="number" id="invPaidAmount" min="0" step="0.01" value="0" required>
+            </div>
+            <div>
+              <label>المتبقي (آجل على العميل)</label>
+              <input type="text" id="invRemainingAmount" readonly style="font-weight:bold; color:var(--red); background:var(--soft);">
+            </div>
+            <div>
+              <label>طريقة الدفع</label>
+              <select id="invPayMethod">
+                <option value="كاش">💵 كاش</option>
+                <option value="إنستا باي">📱 إنستا باي</option>
+                <option value="تحويل بنكي">🏦 تحويل بنكي</option>
+                <option value="آجل بالكامل">⏳ آجل بالكامل</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top:16px; display:flex; gap:10px;">
+            <button type="submit" class="btn btn-primary" style="padding:13px 24px; font-size:14px;">✅ حفظ الفاتورة وخصم المخزون</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 2. تبويب المخزون والأصناف -->
+    <section id="inventoryTab" class="tab-content" hidden>
+      <div class="panel admin-only">
+        <div class="panel-head"><h3>➕ إضافة صنف إسبريسو جديد / توريد كمية للمخزون</h3></div>
+        <form id="addProductForm" class="grid-4">
+          <div>
+            <label>اسم المنتج / الخلطة</label>
+            <input type="text" id="prodName" placeholder="Dosero Crema Oro 1kg" required>
+          </div>
+          <div>
+            <label>النوع / المنشأ</label>
+            <select id="prodOrigin">
+              <option value="🇮🇹 إيطالي مستورد">🇮🇹 إيطالي مستورد</option>
+              <option value="🇮🇹🇪🇬 تحميص مصري - حبوب إيطالي">🇮🇹🇪🇬 تحميص مصري - حبوب إيطالي</option>
+              <option value="☕ كبسولات إسبريسو">☕ كبسولات إسبريسو</option>
+            </select>
+          </div>
+          <div>
+            <label>سعر التكلفة (للقطعة/الكجم)</label>
+            <input type="number" id="prodCost" min="1" step="0.01" placeholder="450" required>
+          </div>
+          <div>
+            <label>سعر البيع</label>
+            <input type="number" id="prodPrice" min="1" step="0.01" placeholder="620" required>
+          </div>
+          <div>
+            <label>الكمية المضافة</label>
+            <input type="number" id="prodQty" min="1" step="1" placeholder="50" required>
+          </div>
+          <div style="align-self:end;">
+            <button type="submit" class="btn btn-primary" style="width:100%;">💾 إضافة للمخزون</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h3>📦 جرد المخزون الحالي</h3></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>الصنف</th>
+                <th>النوع</th>
+                <th>الكمية المتاحة</th>
+                <th class="admin-only">سعر التكلفة</th>
+                <th>سعر البيع</th>
+                <th class="admin-only">هامش الربح</th>
+                <th>الحالة</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. تبويب العملاء والمسحوبات -->
+    <section id="customersTab" class="tab-content" hidden>
+      <div class="panel">
+        <div class="panel-head"><h3>👥 سجل العملاء والمسحوبات والآجل</h3></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>اسم العميل</th>
+                <th>الهاتف</th>
+                <th>عدد مرات الشراء</th>
+                <th>المنتجات التي اشتراها</th>
+                <th>إجمالي المسحوبات</th>
+                <th>المتبقي (آجل)</th>
+                <th>إجراء</th>
+              </tr>
+            </thead>
+            <tbody id="customersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. تبويب الموردين والتحويلات (للأدمن فقط) -->
+    <section id="suppliersTab" class="tab-content admin-only" hidden>
+      <div class="panel">
+        <div class="panel-head"><h3>💸 تسجيل عملية تحويل لمورد / إضافة توريد</h3></div>
+        <form id="supplierTxForm" class="grid-4">
+          <div>
+            <label>اختر المورد</label>
+            <select id="supSelect"></select>
+          </div>
+          <div>
+            <label>نوع العملية</label>
+            <select id="supActionType">
+              <option value="transfer">💸 تحويل مالي للمورد (سداد)</option>
+              <option value="purchase">🚢 فاتورة توريد بضاعة جديدة</option>
+            </select>
+          </div>
+          <div>
+            <label>المبلغ (ج.م)</label>
+            <input type="number" id="supAmount" min="1" step="0.01" required>
+          </div>
+          <div>
+            <label>تفاصيل التحويل / رقم الإيصال</label>
+            <input type="text" id="supNote" placeholder="تحويل بنكي / إنستا باي...">
+          </div>
+          <div style="align-self:end;">
+            <button type="submit" class="btn btn-primary" style="width:100%;">✅ تنفيذ وتسجيل</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h3>🚢 كشف حساب الموردين (إيطاليا ومصر)</h3></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>اسم المورد</th>
+                <th>الدولة / التخصص</th>
+                <th>إجمالي التوريدات</th>
+                <th>إجمالي ما تم تحويله</th>
+                <th>المتبقي له (آجل)</th>
+              </tr>
+            </thead>
+            <tbody id="suppliersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. سجل الفواتير -->
+    <section id="invoicesLogTab" class="tab-content" hidden>
+      <div class="panel">
+        <div class="panel-head"><h3>📒 سجل الفواتير الصادرة</h3></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>رقم الفاتورة</th>
+                <th>التاريخ</th>
+                <th>العميل</th>
+                <th>الأصناف</th>
+                <th>الإجمالي</th>
+                <th>المدفوع</th>
+                <th>الآجل</th>
+                <th>عرض / طباعة</th>
+              </tr>
+            </thead>
+            <tbody id="invoicesTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- نافذة الفاتورة للطباعة -->
+  <div class="modal-backdrop" id="invoiceModal" hidden>
+    <div class="invoice-paper">
+      <div class="italy-ribbon" style="margin-bottom:14px;"></div>
+      <div class="inv-header">
+        <div>
+          <h2>☕ DOSERO</h2>
+          <small style="color:var(--muted);">Italian Espresso & Specialty Coffee • Egypt & Italy</small>
+        </div>
+        <div style="text-align:end;">
+          <strong id="modalInvNum" style="font-size:16px;">#INV-1001</strong><br>
+          <small id="modalInvDate"></small>
+        </div>
+      </div>
+      <div class="inv-meta">
+        <div><strong>العميل:</strong> <span id="modalCustName"></span></div>
+        <div><strong>الهاتف:</strong> <span id="modalCustPhone"></span></div>
+        <div><strong>طريقة الدفع:</strong> <span id="modalPayMethod"></span></div>
+        <div><strong>بواسطة:</strong> <span id="modalIssuedBy"></span></div>
+      </div>
+      <table style="min-width:100%;">
+        <thead>
+          <tr><th>الصنف</th><th>الكمية</th><th>سعر الوحدة</th><th>الإجمالي</th></tr>
+        </thead>
+        <tbody id="modalItemsBody"></tbody>
+      </table>
+      <div class="inv-totals">
+        <div>إجمالي الفاتورة: <strong id="modalTotal">0.00 ج.م</strong></div>
+        <div style="color:var(--green);">المدفوع: <strong id="modalPaid">0.00 ج.م</strong></div>
+        <div style="color:var(--red);">المتبقي (آجل): <strong id="modalRemain">0.00 ج.م</strong></div>
+      </div>
+      <div class="no-print" style="margin-top:20px; display:flex; gap:10px; justify-content:flex-end;">
+        <button class="btn btn-primary" onclick="window.print()">🖨️ طباعة الفاتورة</button>
+        <button class="btn btn-soft" onclick="document.getElementById('invoiceModal').hidden=true">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>✨ Dosero Espresso System • Designed by <strong>Samy Aziz</strong></footer>
+
+  <script>
+    let currentRole = "admin";
+
+    // بيانات تجريبية مبدئية (ستُربط بجوجل شيت بعد اعتمادك للشكل)
+    let products = [
+      { id: "P1", name: "Dosero Classico 1kg", origin: "🇮🇹 إيطالي مستورد", cost: 480, price: 650, qty: 45 },
+      { id: "P2", name: "Dosero Oro 100% Arabica 1kg", origin: "🇮🇹 إيطالي مستورد", cost: 560, price: 760, qty: 28 },
+      { id: "P3", name: "Dosero Intenso Crema 1kg", origin: "🇮🇹🇪🇬 تحميص مصري - حبوب إيطالي", cost: 390, price: 540, qty: 60 },
+      { id: "P4", name: "كبسولات Dosero (علبة 10 كبسولات)", origin: "☕ كبسولات إسبريسو", cost: 95, price: 145, qty: 8 }
+    ];
+
+    let customers = [
+      { id: "C1", name: "كافيه ميلانو - المعادي", phone: "01011223344", ordersCount: 4, itemsBought: { "Dosero Classico 1kg": 15, "Dosero Oro 100% Arabica 1kg": 8 }, totalSpent: 15830, debt: 2500 },
+      { id: "C2", name: "إسبريسو بار - الشيخ زايد", phone: "01199887766", ordersCount: 2, itemsBought: { "Dosero Intenso Crema 1kg": 10 }, totalSpent: 5400, debt: 0 }
+    ];
+
+    let suppliers = [
+      { id: "S1", name: "Torrefazione Italiano S.r.l", country: "🇮🇹 إيطاليا - حبوب خضراء ومحمصة", totalSupplied: 85000, totalTransferred: 60000 },
+      { id: "S2", name: "شركة النيل للتغليف والتحميص", country: "🇪🇬 مصر - عبوات وتغليف", totalSupplied: 22000, totalTransferred: 18000 }
+    ];
+
+    let invoices = [
+      { id: "INV-1001", date: "2026-11-20", customer: "كافيه ميلانو - المعادي", phone: "01011223344", payMethod: "كاش + آجل", total: 6500, paid: 4000, remain: 2500, items: [{ name: "Dosero Classico 1kg", qty: 10, price: 650 }] }
+    ];
+
+    const money = v => Number(v || 0).toLocaleString("ar-EG", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " ج.م";
+    document.getElementById("todayDateLabel").textContent = "📅 " + new Date().toISOString().slice(0, 10);
+
+    // تسجيل الدخول وتبديل الصلاحية
+    document.getElementById("loginForm").addEventListener("submit", e => {
+      e.preventDefault();
+      currentRole = document.getElementById("loginUserSelect").value;
+      document.getElementById("loginOverlay").hidden = true;
+      applyRoleVisibility();
+      renderAll();
+    });
+    document.getElementById("switchRoleBtn").addEventListener("click", () => {
+      document.getElementById("loginOverlay").hidden = false;
+    });
+
+    function applyRoleVisibility() {
+      const isAdmin = currentRole === "admin";
+      document.querySelectorAll(".admin-only").forEach(el => {
+        el.style.display = isAdmin ? "" : "none";
+      });
+      document.getElementById("roleSubtitle").textContent = isAdmin
+        ? "👑 وضع المدير (صلاحية كاملة + التكلفة والأرباح)"
+        : "👤 وضع المبيعات (إصدار فواتير ومتابعة العملاء والمخزون)";
+    }
+
+    // التنقل بين التبويبات
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.querySelectorAll(".tab-content").forEach(sec => sec.hidden = true);
+        document.getElementById(btn.dataset.tab).hidden = false;
+      });
+    });
+
+    // إضافة سطر منتج في الفاتورة
+    function addInvoiceItemRow() {
+      const container = document.getElementById("invRowsContainer");
+      const row = document.createElement("div");
+      row.className = "inv-row";
+      const options = products.map(p => `<option value="${p.id}" data-price="${p.price}">${p.name} (متاح: ${p.qty})</option>`).join("");
+      row.innerHTML = `
+        <select class="row-prod">${options}</select>
+        <input type="number" class="row-qty" min="1" value="1" placeholder="الكمية">
+        <input type="number" class="row-price" min="1" step="0.01" placeholder="السعر">
+        <input type="text" class="row-sub" readonly style="background:var(--soft); font-weight:bold;">
+        <button type="button" class="btn btn-red">✖</button>
+      `;
+      const prodSel = row.querySelector(".row-prod");
+      const qtyInp = row.querySelector(".row-qty");
+      const priceInp = row.querySelector(".row-price");
+      const subInp = row.querySelector(".row-sub");
+
+      function updateRowCalc() {
+        const selectedProd = products.find(p => p.id === prodSel.value);
+        if (!priceInp.dataset.edited && selectedProd) priceInp.value = selectedProd.price;
+        const sub = (Number(qtyInp.value) || 0) * (Number(priceInp.value) || 0);
+        subInp.value = money(sub);
+        recalcInvoiceTotals();
+      }
+
+      prodSel.addEventListener("change", () => { delete priceInp.dataset.edited; updateRowCalc(); });
+      qtyInp.addEventListener("input", updateRowCalc);
+      priceInp.addEventListener("input", () => { priceInp.dataset.edited = "1"; updateRowCalc(); });
+      row.querySelector("button").addEventListener("click", () => { row.remove(); recalcInvoiceTotals(); });
+
+      container.appendChild(row);
+      updateRowCalc();
+    }
+
+    function recalcInvoiceTotals() {
+      let total = 0;
+      document.querySelectorAll("#invRowsContainer .inv-row").forEach(r => {
+        const q = Number(r.querySelector(".row-qty").value) || 0;
+        const p = Number(r.querySelector(".row-price").value) || 0;
+        total += q * p;
+      });
+      document.getElementById("invGrandTotal").value = total.toFixed(2);
+      const paid = Number(document.getElementById("invPaidAmount").value) || 0;
+      const remain = Math.max(0, total - paid);
+      document.getElementById("invRemainingAmount").value = remain.toFixed(2);
+    }
+
+    document.getElementById("addInvRowBtn").addEventListener("click", addInvoiceItemRow);
+    document.getElementById("invPaidAmount").addEventListener("input", recalcInvoiceTotals);
+
+    // حفظ الفاتورة
+    document.getElementById("newInvoiceForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const rows = [...document.querySelectorAll("#invRowsContainer .inv-row")];
+      if (!rows.length) return alert("أضف صنف واحد على الأقل!");
+
+      const items = [];
+      for (const r of rows) {
+        const pId = r.querySelector(".row-prod").value;
+        const qty = Number(r.querySelector(".row-qty").value) || 0;
+        const price = Number(r.querySelector(".row-price").value) || 0;
+        const prod = products.find(x => x.id === pId);
+        if (!prod || qty <= 0) continue;
+        if (qty > prod.qty) return alert(`الكمية المطلوبة من (${prod.name}) أكبر من المتاح بالمخزون (${prod.qty})!`);
+        items.push({ id: prod.id, name: prod.name, qty, price, cost: prod.cost });
+      }
+
+      // خصم المخزون
+      items.forEach(it => {
+        const p = products.find(x => x.id === it.id);
+        if (p) p.qty -= it.qty;
+      });
+
+      const custSelVal = document.getElementById("invCustomerSelect").value;
+      const newCustName = document.getElementById("newCustomerName").value.trim();
+      const phone = document.getElementById("newCustomerPhone").value.trim();
+      let custObj = customers.find(c => c.id === custSelVal);
+
+      if (!custObj) {
+        const finalName = newCustName || "عميل نقدي";
+        custObj = customers.find(c => c.name === finalName);
+        if (!custObj) {
+          custObj = { id: "C" + Date.now(), name: finalName, phone: phone || "—", ordersCount: 0, itemsBought: {}, totalSpent: 0, debt: 0 };
+          customers.push(custObj);
+        }
+      }
+
+      const total = Number(document.getElementById("invGrandTotal").value) || 0;
+      const paid = Number(document.getElementById("invPaidAmount").value) || 0;
+      const remain = Math.max(0, total - paid);
+
+      custObj.ordersCount += 1;
+      custObj.totalSpent += total;
+      custObj.debt += remain;
+      items.forEach(it => {
+        custObj.itemsBought[it.name] = (custObj.itemsBought[it.name] || 0) + it.qty;
+      });
+
+      const inv = {
+        id: "INV-" + (1001 + invoices.length),
+        date: new Date().toISOString().slice(0, 10),
+        customer: custObj.name,
+        phone: custObj.phone,
+        payMethod: document.getElementById("invPayMethod").value,
+        total, paid, remain, items
+      };
+      invoices.unshift(inv);
+
+      e.target.reset();
+      document.getElementById("invRowsContainer").innerHTML = "";
+      addInvoiceItemRow();
+      renderAll();
+      openInvoiceModal(inv);
+    });
+
+    // إضافة صنف للمخزون
+    document.getElementById("addProductForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const name = document.getElementById("prodName").value.trim();
+      const origin = document.getElementById("prodOrigin").value;
+      const cost = Number(document.getElementById("prodCost").value);
+      const price = Number(document.getElementById("prodPrice").value);
+      const qty = Number(document.getElementById("prodQty").value);
+
+      const existing = products.find(p => p.name === name);
+      if (existing) {
+        existing.qty += qty; existing.cost = cost; existing.price = price;
+      } else {
+        products.push({ id: "P" + Date.now(), name, origin, cost, price, qty });
+      }
+      e.target.reset();
+      renderAll();
+      alert("✅ تم تحديث المخزون بنجاح!");
+    });
+
+    // عمليات الموردين والتحويلات
+    document.getElementById("supplierTxForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const sup = suppliers.find(s => s.id === document.getElementById("supSelect").value);
+      const type = document.getElementById("supActionType").value;
+      const amt = Number(document.getElementById("supAmount").value);
+      if (!sup) return;
+      if (type === "transfer") sup.totalTransferred += amt;
+      else sup.totalSupplied += amt;
+      e.target.reset();
+      renderAll();
+      alert("✅ تم تسجيل العملية في حساب المورد!");
+    });
+
+    // تحصيل دفعة آجل من عميل
+    window.collectCustomerDebt = function(custId) {
+      const c = customers.find(x => x.id === custId);
+      if (!c) return;
+      const val = prompt(`المتبقي على (${c.name}): ${money(c.debt)}\nأدخل المبلغ المحصل الآن:`, c.debt);
+      const num = Number(val);
+      if (num > 0) {
+        c.debt = Math.max(0, c.debt - num);
+        renderAll();
+      }
+    };
+
+    // فتح الفاتورة للطباعة
+    window.openInvoiceModal = function(inv) {
+      document.getElementById("modalInvNum").textContent = inv.id;
+      document.getElementById("modalInvDate").textContent = inv.date;
+      document.getElementById("modalCustName").textContent = inv.customer;
+      document.getElementById("modalCustPhone").textContent = inv.phone;
+      document.getElementById("modalPayMethod").textContent = inv.payMethod;
+      document.getElementById("modalIssuedBy").textContent = currentRole === "admin" ? "الإدارة" : "المبيعات";
+      document.getElementById("modalTotal").textContent = money(inv.total);
+      document.getElementById("modalPaid").textContent = money(inv.paid);
+      document.getElementById("modalRemain").textContent = money(inv.remain);
+
+      const tbody = document.getElementById("modalItemsBody");
+      tbody.innerHTML = inv.items.map(it => `<tr><td>${it.name}</td><td>${it.qty}</td><td>${money(it.price)}</td><td><strong>${money(it.qty * it.price)}</strong></td></tr>`).join("");
+      document.getElementById("invoiceModal").hidden = false;
+    };
+
+    function renderAll() {
+      // تحديث القوائم المنسدلة
+      const custSel = document.getElementById("invCustomerSelect");
+      custSel.innerHTML = `<option value="">+ عميل جديد (اكتب الاسم بجانبه)</option>` + customers.map(c => `<option value="${c.id}">${c.name} (آجل: ${money(c.debt)})</option>`).join("");
+
+      const supSel = document.getElementById("supSelect");
+      supSel.innerHTML = suppliers.map(s => `<option value="${s.id}">${s.name}</option>`).join("");
+
+      // 1. جدول المخزون
+      let totalQty = 0, totalCostVal = 0;
+      const invBody = document.getElementById("inventoryTableBody");
+      invBody.innerHTML = "";
+      products.forEach(p => {
+        totalQty += p.qty;
+        totalCostVal += p.qty * p.cost;
+        const margin = p.price - p.cost;
+        const statusBadge = p.qty <= 10 ? `<span class="badge badge-red">⚠️ قرب يخلص</span>` : `<span class="badge badge-ok">✅ متوفر</span>`;
+        invBody.innerHTML += `
+          <tr>
+            <td><strong>${p.name}</strong></td>
+            <td>${p.origin}</td>
+            <td><strong>${p.qty}</strong></td>
+            <td class="admin-only">${money(p.cost)}</td>
+            <td><strong>${money(p.price)}</strong></td>
+            <td class="admin-only" style="color:var(--green); font-weight:bold;">${money(margin)}</td>
+            <td>${statusBadge}</td>
+          </tr>
+        `;
+      });
+
+      // 2. جدول العملاء
+      let totalCustDebt = 0;
+      const custBody = document.getElementById("customersTableBody");
+      custBody.innerHTML = "";
+      customers.forEach(c => {
+        totalCustDebt += c.debt;
+        const boughtSummary = Object.entries(c.itemsBought).map(([k, v]) => `${k} (${v})`).join("، ") || "—";
+        const debtBadge = c.debt > 0 ? `<span class="badge badge-warn">${money(c.debt)}</span>` : `<span class="badge badge-ok">خالص</span>`;
+        const collectBtn = c.debt > 0 ? `<button class="btn btn-green" onclick="collectCustomerDebt('${c.id}')">💵 تحصيل</button>` : "—";
+        custBody.innerHTML += `
+          <tr>
+            <td><strong>${c.name}</strong></td>
+            <td>${c.phone}</td>
+            <td>${c.ordersCount} مرة</td>
+            <td style="font-size:12px;">${boughtSummary}</td>
+            <td><strong>${money(c.totalSpent)}</strong></td>
+            <td>${debtBadge}</td>
+            <td>${collectBtn}</td>
+          </tr>
+        `;
+      });
+
+      // 3. جدول الموردين
+      let totalSupDebt = 0;
+      const supBody = document.getElementById("suppliersTableBody");
+      supBody.innerHTML = "";
+      suppliers.forEach(s => {
+        const rem = Math.max(0, s.totalSupplied - s.totalTransferred);
+        totalSupDebt += rem;
+        supBody.innerHTML += `
+          <tr>
+            <td><strong>${s.name}</strong></td>
+            <td>${s.country}</td>
+            <td>${money(s.totalSupplied)}</td>
+            <td style="color:var(--green); font-weight:bold;">${money(s.totalTransferred)}</td>
+            <td style="color:var(--red); font-weight:bold;">${money(rem)}</td>
+          </tr>
+        `;
+      });
+
+      // 4. سجل الفواتير
+      let totalSales = 0, totalProfit = 0;
+      const logBody = document.getElementById("invoicesTableBody");
+      logBody.innerHTML = "";
+      invoices.forEach((inv, idx) => {
+        totalSales += inv.total;
+        inv.items.forEach(it => {
+          const cost = it.cost || (products.find(p => p.name === it.name)?.cost || 0);
+          totalProfit += (it.price - cost) * it.qty;
+        });
+        const itemsText = inv.items.map(i => `${i.name} ×${i.qty}`).join(" + ");
+        logBody.innerHTML += `
+          <tr>
+            <td><strong>${inv.id}</strong></td>
+            <td>${inv.date}</td>
+            <td>${inv.customer}</td>
+            <td>${itemsText}</td>
+            <td><strong>${money(inv.total)}</strong></td>
+            <td style="color:var(--green);">${money(inv.paid)}</td>
+            <td style="color:var(--red);">${money(inv.remain)}</td>
+            <td><button class="btn btn-soft" style="padding:6px 10px;" onclick='openInvoiceModal(invoices[${idx}])'>🖨️ فاتورة</button></td>
+          </tr>
+        `;
+      });
+
+      // تحديث بطاقات الـ KPI
+      document.getElementById("kpiStock").textContent = `${totalQty} وحدة`;
+      document.getElementById("kpiStockValue").textContent = `تكلفة المخزون: ${money(totalCostVal)}`;
+      document.getElementById("kpiSales").textContent = money(totalSales);
+      document.getElementById("kpiProfit").textContent = `صافي الربح: ${money(totalProfit)}`;
+      document.getElementById("kpiCustomerDebt").textContent = money(totalCustDebt);
+      document.getElementById("kpiSupplierDebt").textContent = money(totalSupDebt);
+
+      applyRoleVisibility();
+    }
+
+    addInvoiceItemRow();
+    renderAll();
+  </script>
+</body>
+</html>
