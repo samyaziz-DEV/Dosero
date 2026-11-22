@@ -204,7 +204,6 @@
     .theme-dot:hover { transform: scale(1.18); }
     .theme-dot.active { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-    /* Pending Banner */
     .pending-banner {
       background: var(--warn-soft);
       border: 1px solid var(--warn);
@@ -305,12 +304,12 @@
     .btn-warn { background: var(--warn-soft); color: var(--warn); padding: 6px 11px; font-size: 12px; }
 
     .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
-    table { width: 100%; min-width: 820px; border-collapse: collapse; }
-    th, td { padding: 11px 13px; text-align: start; border-bottom: 1px solid var(--border); font-size: 13px; }
+    table { width: 100%; min-width: 840px; border-collapse: collapse; }
+    th, td { padding: 11px 13px; text-align: start; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: middle; }
     th { background: var(--surface-alt); font-weight: 700; color: var(--muted); font-size: 12px; white-space: nowrap; }
     tbody tr:last-child td { border-bottom: 0; }
     tbody tr:hover { background: var(--surface-hover); }
-    tr.returned-row, tr.rejected-row { opacity: 0.52; text-decoration: line-through; background: var(--red-soft); }
+    tr.returned-row, tr.rejected-row { opacity: 0.62; background: var(--red-soft); }
     tr.pending-row { background: rgba(253, 176, 34, 0.06); }
 
     .pill {
@@ -321,6 +320,7 @@
     .pill-warn { background: var(--warn-soft); color: var(--warn); }
     .pill-red { background: var(--red-soft); color: var(--red); }
     .pill-blue { background: var(--blue-soft); color: var(--blue); }
+    .by-sub { display: block; color: var(--muted); font-size: 11px; margin-top: 4px; font-weight: 600; }
 
     .inv-basket {
       background: var(--surface-alt); border-radius: 14px;
@@ -638,7 +638,7 @@
             <thead>
               <tr>
                 <th>رقم الفاتورة</th><th>التاريخ</th><th>العميل</th><th>الأصناف</th>
-                <th>الإجمالي</th><th>المدفوع</th><th>الآجل</th><th>الحالة</th><th>إجراءات الاعتماد والطباعة</th>
+                <th>الإجمالي</th><th>المدفوع</th><th>الآجل</th><th>الحالة والاعتماد</th><th>إجراءات</th>
               </tr>
             </thead>
             <tbody id="invoicesBody"></tbody>
@@ -723,7 +723,7 @@
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>التاريخ</th><th>النوع</th><th>الصنف</th><th>الكمية</th><th class="admin-only">التكلفة</th><th>بواسطة</th><th>ملاحظات</th><th>الحالة</th><th class="admin-only">قرار الإدارة</th></tr>
+              <tr><th>التاريخ</th><th>النوع</th><th>الصنف</th><th>الكمية</th><th class="admin-only">التكلفة</th><th>بواسطة</th><th>ملاحظات</th><th>الحالة والاعتماد</th><th class="admin-only">قرار الإدارة</th></tr>
             </thead>
             <tbody id="wasteLogsBody"></tbody>
           </table>
@@ -905,7 +905,7 @@
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>التاريخ</th><th>النوع</th><th>البند / الصنف</th><th>الكمية</th><th>التكلفة</th><th>الحساب</th><th>بواسطة</th><th>ملاحظات</th><th>الحالة</th><th>قرار الإدارة</th></tr>
+              <tr><th>التاريخ</th><th>النوع</th><th>البند / الصنف</th><th>الكمية</th><th>التكلفة</th><th>الحساب</th><th>بواسطة</th><th>ملاحظات</th><th>الحالة والاعتماد</th><th>قرار الإدارة</th></tr>
             </thead>
             <tbody id="expensesBody"></tbody>
           </table>
@@ -1043,7 +1043,8 @@
         <div><strong>العميل:</strong> <span id="mCustName"></span></div>
         <div><strong>الهاتف:</strong> <span id="mCustPhone"></span></div>
         <div><strong>طريقة الدفع:</strong> <span id="mPayMethod"></span></div>
-        <div><strong>الموظف:</strong> <span id="mIssuedBy"></span></div>
+        <div><strong>حررت بواسطة:</strong> <span id="mIssuedBy"></span></div>
+        <div id="mActionByWrap" style="grid-column: 1 / -1; display:none;"><strong>حالة الاعتماد:</strong> <span id="mActionBy"></span></div>
       </div>
 
       <table style="min-width:100%; border-collapse:collapse;">
@@ -1307,8 +1308,9 @@
         phone: custObj.phone,
         payMethod: document.getElementById("invPayMethod").value,
         subtotal, discount, shipping, total, paid, remain, items,
-        status: "pending", // قيد المراجعة دائماً حتى للمدير
-        issuedBy: currentUser.username
+        status: "pending",
+        issuedBy: currentUser.username,
+        actionBy: ""
       };
       invoices.unshift(inv);
 
@@ -1322,12 +1324,11 @@
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "addInvoice", invoice: inv }) });
     });
 
-    // 2. اعتماد فاتورة معلقة -> خصم المخزون وتحديث العميل والمبيعات
+    // 2. اعتماد فاتورة معلقة
     window.approveInvoice = function(idx) {
       const inv = invoices[idx];
       if (!inv || inv.status !== "pending") return;
 
-      // التحقق من توفر الكميات بالمخزون لحظة الاعتماد
       for (const it of (inv.items || [])) {
         const p = products.find(x => x.id === it.id || x.name === it.name);
         if (!p || p.qty < Number(it.qty)) {
@@ -1335,13 +1336,11 @@
         }
       }
 
-      // تنفيذ الخصم من المخزون
       (inv.items || []).forEach(it => {
         const p = products.find(x => x.id === it.id || x.name === it.name);
         if (p) p.qty -= Number(it.qty);
       });
 
-      // تحديث بيانات العميل
       let custObj = customers.find(c => c.name === inv.customer);
       if (!custObj) {
         custObj = { id: "C" + Date.now(), name: inv.customer, phone: inv.phone || "—", address: "", ordersCount: 0, itemsBought: {}, totalSpent: 0, debt: 0, lastOrderDate: "" };
@@ -1356,10 +1355,11 @@
       });
 
       inv.status = "active";
+      inv.actionBy = currentUser.username;
       renderAll();
-      notify(`✅ تم اعتماد الفاتورة (${inv.id}) وخصم الكميات من المخزون`);
+      notify(`✅ تم اعتماد الفاتورة (${inv.id}) بواسطة ${currentUser.username}`);
 
-      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "active" }) });
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "active", actionBy: currentUser.username }) });
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncProducts", products }) });
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncCustomers", customers }) });
     };
@@ -1370,29 +1370,32 @@
       if (!inv || inv.status !== "pending") return;
       if (!confirm(`هل أنت متأكد من رفض الفاتورة (${inv.id})؟`)) return;
       inv.status = "rejected";
+      inv.actionBy = currentUser.username;
       renderAll();
       notify(`❌ تم رفض الفاتورة (${inv.id})`);
-      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "rejected" }) });
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "rejected", actionBy: currentUser.username }) });
     };
 
-    // 3. طلب إرجاع فاتورة معتمدة -> يتحول إلى pending_return لحين تأكيد الإدارة
+    // 3. طلب إرجاع فاتورة معتمدة
     window.requestReturnInvoice = function(idx) {
       const inv = invoices[idx];
       if (!inv || inv.status !== "active") return;
       if (!confirm(`هل تريد إرسال طلب مرتجع للفاتورة (${inv.id}) للمراجعة والاعتماد؟`)) return;
       inv.status = "pending_return";
+      inv.actionBy = currentUser.username;
       renderAll();
       notify(`⏳ تم إرسال طلب إرجاع الفاتورة (${inv.id}) بانتظار تأكيد الإدارة`);
-      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "pending_return" }) });
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "pending_return", actionBy: currentUser.username }) });
     };
 
-    // 4. تأكيد المرتجع من الإدارة -> إرجاع الكميات للمخزون وتعديل حساب العميل
+    // 4. تأكيد المرتجع من الإدارة
     window.confirmReturnInvoice = function(idx) {
       const inv = invoices[idx];
       if (!inv || inv.status !== "pending_return") return;
       if (!confirm(`تأكيد اعتماد مرتجع الفاتورة (${inv.id}) وإعادة البضاعة للمخزون؟`)) return;
 
       inv.status = "returned";
+      inv.actionBy = currentUser.username;
       (inv.items || []).forEach(it => {
         const p = products.find(x => x.name === it.name || x.id === it.id);
         if (p) p.qty += Number(it.qty) || 0;
@@ -1405,8 +1408,8 @@
       }
 
       renderAll();
-      notify(`↩️ تم اعتماد المرتجع وإعادة الكميات للمخزون`);
-      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "returned" }) });
+      notify(`↩️ تم اعتماد المرتجع بواسطة ${currentUser.username}`);
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "returned", actionBy: currentUser.username }) });
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncProducts", products }) });
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncCustomers", customers }) });
     };
@@ -1416,9 +1419,10 @@
       const inv = invoices[idx];
       if (!inv || inv.status !== "pending_return") return;
       inv.status = "active";
+      inv.actionBy = currentUser.username;
       renderAll();
       notify(`تم إلغاء طلب المرتجع وإبقاء الفاتورة (${inv.id}) معتمدة`);
-      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "active" }) });
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "active", actionBy: currentUser.username }) });
     };
 
     // إضافة صنف للمخزون
@@ -1464,7 +1468,8 @@
         account: "مخزون",
         note,
         by: currentUser.username,
-        status: "pending"
+        status: "pending",
+        actionBy: ""
       };
       expenses.unshift(expObj);
 
@@ -1492,7 +1497,8 @@
         account,
         note,
         by: currentUser.username,
-        status: "pending"
+        status: "pending",
+        actionBy: ""
       };
       expenses.unshift(expObj);
 
@@ -1507,7 +1513,6 @@
       const ex = expenses[idx];
       if (!ex || ex.status !== "pending") return;
 
-      // إذا كان هالك أو عينة، يخصم من المخزون عند الاعتماد
       if (ex.account === "مخزون" || ex.kind === "تالف مخزن" || ex.kind === "عينات تذوق") {
         const prod = products.find(p => p.id === ex.prodId || p.name === ex.title);
         if (!prod || prod.qty < Number(ex.qty)) {
@@ -1518,9 +1523,10 @@
       }
 
       ex.status = "approved";
+      ex.actionBy = currentUser.username;
       renderAll();
-      notify(`✅ تم اعتماد (${ex.kind}: ${ex.title}) وتطبيق الخصم`);
-      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateExpenseStatus", expenseId: ex.id, status: "approved" }) });
+      notify(`✅ تم اعتماد (${ex.kind}: ${ex.title}) بواسطة ${currentUser.username}`);
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateExpenseStatus", expenseId: ex.id, status: "approved", actionBy: currentUser.username }) });
     };
 
     window.rejectExpense = function(idx) {
@@ -1528,9 +1534,10 @@
       if (!ex || ex.status !== "pending") return;
       if (!confirm(`هل أنت متأكد من رفض (${ex.kind}: ${ex.title})؟`)) return;
       ex.status = "rejected";
+      ex.actionBy = currentUser.username;
       renderAll();
-      notify(`❌ تم رفض الطلب`);
-      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateExpenseStatus", expenseId: ex.id, status: "rejected" }) });
+      notify(`❌ تم رفض الطلب بواسطة ${currentUser.username}`);
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateExpenseStatus", expenseId: ex.id, status: "rejected", actionBy: currentUser.username }) });
     };
 
     // إضافة عميل جديد
@@ -1644,6 +1651,16 @@
       document.getElementById("mCustPhone").textContent = inv.phone;
       document.getElementById("mPayMethod").textContent = inv.payMethod;
       document.getElementById("mIssuedBy").textContent = inv.issuedBy || currentUser.username;
+
+      const actionWrap = document.getElementById("mActionByWrap");
+      if (inv.actionBy) {
+        actionWrap.style.display = "block";
+        const verb = inv.status === "returned" ? "تأكيد المرتجع بواسطة:" : (inv.status === "rejected" ? "تم الرفض بواسطة:" : "تم الاعتماد بواسطة:");
+        document.getElementById("mActionBy").textContent = `${verb} ${inv.actionBy}`;
+      } else {
+        actionWrap.style.display = "none";
+      }
+
       document.getElementById("mSub").textContent = money(inv.subtotal || inv.total);
       document.getElementById("mDisc").textContent = money(inv.discount || 0);
       document.getElementById("mShip").textContent = money(inv.shipping || 0);
@@ -1664,8 +1681,8 @@
     window.printInvoice = function() { document.body.className = "print-invoice"; window.print(); document.body.className = ""; };
     window.printReport = function() { document.body.className = "print-report"; window.print(); document.body.className = ""; };
     window.exportReportCSV = function() {
-      let csv = "data:text/csv;charset=utf-8,\uFEFFرقم الفاتورة,التاريخ,العميل,الإجمالي,المدفوع,الآجل,طريقة الدفع,الحالة\r\n";
-      invoices.forEach(i => { csv += `"${i.id}","${i.date}","${i.customer}","${i.total}","${i.paid}","${i.remain}","${i.payMethod}","${i.status}"\r\n`; });
+      let csv = "data:text/csv;charset=utf-8,\uFEFFرقم الفاتورة,التاريخ,العميل,الإجمالي,المدفوع,الآجل,طريقة الدفع,الحالة,بواسطة_الاعتماد\r\n";
+      invoices.forEach(i => { csv += `"${i.id}","${i.date}","${i.customer}","${i.total}","${i.paid}","${i.remain}","${i.payMethod}","${i.status}","${i.actionBy || ""}"\r\n`; });
       const a = document.createElement("a"); a.href = encodeURI(csv); a.download = `تقرير_Dosero_${todayStr()}.csv`; a.click();
     };
 
@@ -1686,7 +1703,6 @@
       const fromD = document.getElementById("repFromDate").value;
       const toD = document.getElementById("repToDate").value;
 
-      // التقارير تحسب الفواتير والمصاريف المعتمدة فقط
       const filteredInvs = invoices.filter(inv => {
         if (inv.status !== "active" && inv.status !== "pending_return") return false;
         const d = (inv.date || "").slice(0, 10);
@@ -1882,7 +1898,7 @@
         sBody.innerHTML += `<tr><td><strong>${s.name}</strong></td><td>${s.contact || "—"}</td><td>${money(s.totalSupplied)}</td><td style="color:var(--green);font-weight:700;">${money(s.totalTransferred)}</td><td style="color:var(--red);font-weight:700;">${money(rem)}</td></tr>`;
       });
 
-      // الفواتير والمرتجعات (تحسب المعتمدة فقط في المبيعات والمحافظ)
+      // الفواتير والمرتجعات
       let totSales = 0, totGrossProfit = 0, pendingInvCount = 0;
       const wallets = { "كاش": 0, "إنستا باي": 0, "تحويل بنكي": 0 };
       const iBody = document.getElementById("invoicesBody");
@@ -1892,7 +1908,6 @@
         const st = inv.status || "active";
         if (st === "pending" || st === "pending_return") pendingInvCount++;
 
-        // المبيعات الفعلية = الفواتير المعتمدة أو التي في انتظار مراجعة المرتجع
         if (st === "active" || st === "pending_return") {
           totSales += inv.total;
           if (inv.payMethod in wallets) wallets[inv.payMethod] += inv.paid;
@@ -1908,11 +1923,21 @@
 
         const itemsTxt = (inv.items || []).map(i => `${i.name} ×${i.qty}`).join(" + ");
 
-        let statusBadge = `<span class="pill pill-green">✅ معتمدة</span>`;
-        if (st === "pending") statusBadge = `<span class="pill pill-warn">⏳ قيد المراجعة</span>`;
-        else if (st === "pending_return") statusBadge = `<span class="pill pill-warn">⏳ مرتجع قيد المراجعة</span>`;
-        else if (st === "returned") statusBadge = `<span class="pill pill-red">↩️ مرتجع معتمد</span>`;
-        else if (st === "rejected") statusBadge = `<span class="pill pill-red">❌ مرفوضة</span>`;
+        // إظهار اسم من قام بالاعتماد أو تأكيد المرتجع تحت الشارة
+        const byTag = inv.actionBy ? `<span class="by-sub">✓ اعتمدها: ${inv.actionBy}</span>` : "";
+        let statusBadge = `<span class="pill pill-green">✅ معتمدة</span>${byTag}`;
+        if (st === "pending") {
+          statusBadge = `<span class="pill pill-warn">⏳ قيد المراجعة</span>`;
+        } else if (st === "pending_return") {
+          const reqTag = inv.actionBy ? `<span class="by-sub">طلب: ${inv.actionBy}</span>` : "";
+          statusBadge = `<span class="pill pill-warn">⏳ مرتجع قيد المراجعة</span>${reqTag}`;
+        } else if (st === "returned") {
+          const retByTag = inv.actionBy ? `<span class="by-sub">↩️ أكد المرتجع: ${inv.actionBy}</span>` : "";
+          statusBadge = `<span class="pill pill-red">↩️ مرتجع معتمد</span>${retByTag}`;
+        } else if (st === "rejected") {
+          const rejByTag = inv.actionBy ? `<span class="by-sub">✕ رفضها: ${inv.actionBy}</span>` : "";
+          statusBadge = `<span class="pill pill-red">❌ مرفوضة</span>${rejByTag}`;
+        }
 
         let actionsHtml = `<button class="btn btn-soft" style="padding:5px 9px; font-size:12px;" onclick='openInvoiceModal(invoices[${idx}])'>🖨️ معاينة</button> `;
 
@@ -1925,14 +1950,14 @@
         }
 
         const rowClass = (st === "returned" || st === "rejected") ? "returned-row" : ((st === "pending" || st === "pending_return") ? "pending-row" : "");
-        iBody.innerHTML += `<tr data-status="${st}" class="${rowClass}"><td><strong>${inv.id}</strong><br><small style="color:var(--muted);">${inv.issuedBy || ""}</small></td><td>${inv.date}</td><td>${inv.customer}</td><td style="font-size:12px;">${itemsTxt}</td><td><strong>${money(inv.total)}</strong></td><td style="color:var(--green);font-weight:600;">${money(inv.paid)}</td><td style="color:var(--red);font-weight:600;">${money(inv.remain)}</td><td>${statusBadge}</td><td>${actionsHtml}</td></tr>`;
+        iBody.innerHTML += `<tr data-status="${st}" class="${rowClass}"><td><strong>${inv.id}</strong><span class="by-sub">حررها: ${inv.issuedBy || "—"}</span></td><td>${inv.date}</td><td>${inv.customer}</td><td style="font-size:12px;">${itemsTxt}</td><td><strong>${money(inv.total)}</strong></td><td style="color:var(--green);font-weight:600;">${money(inv.paid)}</td><td style="color:var(--red);font-weight:600;">${money(inv.remain)}</td><td>${statusBadge}</td><td>${actionsHtml}</td></tr>`;
       });
 
       const pInvBadge = document.getElementById("navPendingInvBadge");
       pInvBadge.textContent = pendingInvCount;
       pInvBadge.style.display = pendingInvCount > 0 ? "inline-block" : "none";
 
-      // مصاريف التشغيل والتوالف والعينات (تحسب المعتمدة فقط في الخصم)
+      // مصاريف التشغيل والتوالف والعينات
       let totOpExpenses = 0, pendingExpCount = 0;
       const expBody = document.getElementById("expensesBody");
       const wasteLogsBody = document.getElementById("wasteLogsBody");
@@ -1948,9 +1973,14 @@
           if (ex.account in wallets) wallets[ex.account] -= ex.cost;
         }
 
-        let stBadge = `<span class="pill pill-green">✅ معتمد</span>`;
-        if (st === "pending") stBadge = `<span class="pill pill-warn">⏳ قيد المراجعة</span>`;
-        else if (st === "rejected") stBadge = `<span class="pill pill-red">❌ مرفوض</span>`;
+        const expByTag = ex.actionBy ? `<span class="by-sub">✓ اعتمدها: ${ex.actionBy}</span>` : "";
+        let stBadge = `<span class="pill pill-green">✅ معتمد</span>${expByTag}`;
+        if (st === "pending") {
+          stBadge = `<span class="pill pill-warn">⏳ قيد المراجعة</span>`;
+        } else if (st === "rejected") {
+          const rejTag = ex.actionBy ? `<span class="by-sub">✕ رفضها: ${ex.actionBy}</span>` : "";
+          stBadge = `<span class="pill pill-red">❌ مرفوض</span>${rejTag}`;
+        }
 
         const decisionBtns = (st === "pending" && isAdmin)
           ? `<button class="btn btn-green" onclick="approveExpense(${idx})">✅ اعتماد</button> <button class="btn btn-red" onclick="rejectExpense(${idx})">✕ رفض</button>`
@@ -1960,7 +1990,6 @@
 
         expBody.innerHTML += `<tr class="${rowClass}"><td>${ex.date}</td><td><span class="pill pill-blue">${ex.kind}</span></td><td><strong>${ex.title}</strong></td><td>${ex.qty}</td><td style="color:var(--red);font-weight:700;">${money(ex.cost)}</td><td>${ex.account}</td><td>${ex.by || "—"}</td><td>${ex.note || "—"}</td><td>${stBadge}</td><td>${decisionBtns}</td></tr>`;
 
-        // عرض التوالف والعينات أيضاً في شاشة المخزون والتوالف لمتابعتها
         if (ex.account === "مخزون" || ex.kind === "تالف مخزن" || ex.kind === "عينات تذوق") {
           wasteLogsBody.innerHTML += `<tr class="${rowClass}"><td>${ex.date}</td><td><span class="pill pill-blue">${ex.kind}</span></td><td><strong>${ex.title}</strong></td><td>${ex.qty}</td><td class="admin-only" style="color:var(--red);font-weight:700;">${money(ex.cost)}</td><td>${ex.by || "—"}</td><td>${ex.note || "—"}</td><td>${stBadge}</td><td class="admin-only">${decisionBtns}</td></tr>`;
         }
@@ -1970,7 +1999,6 @@
       pExpBadge.textContent = pendingExpCount;
       pExpBadge.style.display = pendingExpCount > 0 ? "inline-block" : "none";
 
-      // شريط التنبيه العلوي للمدير
       const totalPendingAll = pendingInvCount + pendingExpCount;
       const banner = document.getElementById("pendingAlertBanner");
       if (isAdmin && totalPendingAll > 0) {
@@ -1981,7 +2009,6 @@
         banner.style.display = "none";
       }
 
-      // خصم تحويلات الموردين من المحافظ
       supplierLogs.forEach(l => {
         if (l.type === "تحويل مالي" && (l.account in wallets)) wallets[l.account] -= l.amount;
       });
