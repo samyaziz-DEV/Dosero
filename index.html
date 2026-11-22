@@ -88,7 +88,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Overlays & Login */
     .overlay {
       position: fixed; inset: 0; z-index: 2000;
       background: rgba(10, 8, 6, 0.78);
@@ -116,7 +115,6 @@
     .login-card p { margin: 0 0 24px; font-size: 13px; color: var(--muted); }
     .stack { display: flex; flex-direction: column; gap: 15px; text-align: start; }
 
-    /* Toast Notifications */
     .toast-container {
       position: fixed; bottom: 22px; left: 22px; z-index: 3000;
       display: flex; flex-direction: column; gap: 10px; pointer-events: none;
@@ -131,7 +129,6 @@
     }
     @keyframes slideUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Sidebar */
     aside.sidebar {
       width: 270px;
       background: var(--sidebar-bg);
@@ -182,11 +179,10 @@
 
     .side-footer { border-top: 1px solid var(--sidebar-border); padding-top: 14px; display: flex; flex-direction: column; gap: 8px; }
 
-    /* Workspace & Topbar */
     .workspace { flex: 1; padding: 20px 26px; overflow-x: hidden; max-width: 1600px; margin: 0 auto; }
     .top-bar {
       display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
-      margin-bottom: 22px; background: var(--surface);
+      margin-bottom: 18px; background: var(--surface);
       padding: 14px 20px; border-radius: var(--radius);
       border: 1px solid var(--border); box-shadow: var(--shadow-sm);
     }
@@ -208,7 +204,23 @@
     .theme-dot:hover { transform: scale(1.18); }
     .theme-dot.active { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-    /* KPI Cards */
+    /* Pending Banner */
+    .pending-banner {
+      background: var(--warn-soft);
+      border: 1px solid var(--warn);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 12px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+
     .stats-row {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 14px; margin-bottom: 22px;
@@ -230,7 +242,6 @@
     .stat-box strong { font-size: 22px; font-weight: 700; display: block; letter-spacing: -0.3px; }
     .stat-box small { font-size: 11.5px; color: var(--muted); margin-top: 6px; display: block; font-weight: 500; }
 
-    /* Cards & Layouts */
     .card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 22px; margin-bottom: 20px;
@@ -261,7 +272,6 @@
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
     .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 
-    /* Forms & Inputs */
     label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
     input, select {
       width: 100%; padding: 10px 13px;
@@ -276,35 +286,33 @@
       background: var(--surface);
     }
     .search-input {
-      max-width: 280px; background: var(--surface-alt);
+      max-width: 260px; background: var(--surface-alt);
       border-color: transparent; padding: 8px 14px; font-size: 13px;
     }
 
-    /* Buttons */
     .btn {
       border: 0; border-radius: 11px; padding: 10px 16px;
       font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
-      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
-      transition: all .16s ease;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      transition: all .16s ease; white-space: nowrap;
     }
     .btn:hover { filter: brightness(0.95); transform: translateY(-1px); }
     .btn:active { transform: translateY(0); }
     .btn-accent { background: var(--accent); color: #fff; box-shadow: 0 4px 12px var(--accent-soft); }
     .btn-soft { background: var(--surface-alt); color: var(--text); border: 1px solid var(--border); }
-    .btn-green { background: var(--green-soft); color: var(--green); padding: 6px 12px; font-size: 12px; }
-    .btn-red { background: var(--red-soft); color: var(--red); padding: 6px 12px; font-size: 12px; }
-    .btn-warn { background: var(--warn-soft); color: var(--warn); padding: 6px 12px; font-size: 12px; }
+    .btn-green { background: var(--green-soft); color: var(--green); padding: 6px 11px; font-size: 12px; }
+    .btn-red { background: var(--red-soft); color: var(--red); padding: 6px 11px; font-size: 12px; }
+    .btn-warn { background: var(--warn-soft); color: var(--warn); padding: 6px 11px; font-size: 12px; }
 
-    /* Tables */
     .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
-    table { width: 100%; min-width: 760px; border-collapse: collapse; }
-    th, td { padding: 12px 14px; text-align: start; border-bottom: 1px solid var(--border); font-size: 13px; }
+    table { width: 100%; min-width: 820px; border-collapse: collapse; }
+    th, td { padding: 11px 13px; text-align: start; border-bottom: 1px solid var(--border); font-size: 13px; }
     th { background: var(--surface-alt); font-weight: 700; color: var(--muted); font-size: 12px; white-space: nowrap; }
     tbody tr:last-child td { border-bottom: 0; }
     tbody tr:hover { background: var(--surface-hover); }
-    tr.returned-row { opacity: 0.5; text-decoration: line-through; background: var(--red-soft); }
+    tr.returned-row, tr.rejected-row { opacity: 0.52; text-decoration: line-through; background: var(--red-soft); }
+    tr.pending-row { background: rgba(253, 176, 34, 0.06); }
 
-    /* Pills */
     .pill {
       padding: 4px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 700;
       display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
@@ -314,7 +322,6 @@
     .pill-red { background: var(--red-soft); color: var(--red); }
     .pill-blue { background: var(--blue-soft); color: var(--blue); }
 
-    /* Invoice Lines */
     .inv-basket {
       background: var(--surface-alt); border-radius: 14px;
       padding: 16px; margin: 16px 0; border: 1px solid var(--border);
@@ -331,7 +338,6 @@
       border: 1px solid var(--border);
     }
 
-    /* Charts & Reports */
     .charts-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 18px; margin-bottom: 20px; }
     .chart-box {
       background: var(--surface); border: 1px solid var(--border);
@@ -348,7 +354,6 @@
     }
     .rank-item:last-child { border-bottom: 0; }
 
-    /* Printable Invoice Modal */
     .invoice-sheet {
       width: min(680px, 100%); background: #ffffff; color: #111111;
       border-radius: 18px; padding: 32px; box-shadow: 0 25px 60px rgba(0,0,0,0.5);
@@ -440,7 +445,7 @@
       <div class="nav-group-label">العمليات اليومية</div>
       <nav class="nav-list">
         <button class="nav-item active" data-sec="secSales"><span>🧾 فاتورة بيع جديدة</span></button>
-        <button class="nav-item" data-sec="secInvoices"><span>📒 سجل الفواتير</span><span class="nav-badge" id="navInvCount">0</span></button>
+        <button class="nav-item" data-sec="secInvoices"><span>📒 سجل الفواتير والمرتجعات</span><span class="nav-badge" id="navPendingInvBadge" style="display:none;background:#b86e09;">0</span></button>
       </nav>
 
       <div class="nav-group-label">إدارة الموارد</div>
@@ -452,7 +457,7 @@
 
       <div class="nav-group-label admin-only">المالية والتقارير</div>
       <nav class="nav-list">
-        <button class="nav-item admin-only" data-sec="secExpenses"><span>💸 الخزنة والمصاريف</span></button>
+        <button class="nav-item admin-only" data-sec="secExpenses"><span>💸 الخزنة والمصاريف</span><span class="nav-badge" id="navPendingExpBadge" style="display:none;background:#b86e09;">0</span></button>
         <button class="nav-item admin-only" data-sec="secReports"><span>📊 التقارير والرسوم</span></button>
         <button class="nav-item admin-only" data-sec="secUsers"><span>⚙️ المستخدمين</span></button>
       </nav>
@@ -485,15 +490,24 @@
       </div>
     </div>
 
-    <!-- بطاقات الإحصائيات الذكية -->
+    <!-- شريط تنبيه الحركات المعلقة للاعتماد (للمدير) -->
+    <div id="pendingAlertBanner" class="pending-banner admin-only" style="display:none;">
+      <span id="pendingAlertText">⏳ يوجد معاملات بانتظار المراجعة والاعتماد.</span>
+      <div style="display:flex; gap:8px;">
+        <button type="button" class="btn btn-warn" onclick="switchSection('secInvoices'); document.getElementById('invStatusFilter').value='pending'; filterInvoicesStatus('pending');">مراجعة الفواتير والمرتجعات</button>
+        <button type="button" class="btn btn-warn" onclick="switchSection('secExpenses')">مراجعة المصاريف والهالك</button>
+      </div>
+    </div>
+
+    <!-- بطاقات الإحصائيات الذكية (تحسب المعتمد فقط) -->
     <div class="stats-row">
       <div class="stat-box">
-        <div class="stat-head"><span>إجمالي المخزون</span><div class="stat-icon">📦</div></div>
+        <div class="stat-head"><span>إجمالي المخزون الفعلي</span><div class="stat-icon">📦</div></div>
         <strong id="kpiStock">0 وحدة</strong>
         <small id="kpiStockCost" class="admin-only">التكلفة: 0.00 ج.م</small>
       </div>
       <div class="stat-box">
-        <div class="stat-head"><span>إجمالي المبيعات</span><div class="stat-icon" style="background:var(--green-soft);color:var(--green);">💰</div></div>
+        <div class="stat-head"><span>المبيعات المعتمدة</span><div class="stat-icon" style="background:var(--green-soft);color:var(--green);">💰</div></div>
         <strong id="kpiSales">0.00 ج.م</strong>
         <small id="kpiProfit" class="admin-only" style="color:var(--green); font-weight:700;">صافي الربح: 0.00 ج.م</small>
       </div>
@@ -508,13 +522,13 @@
         <small>متبقي للموردين</small>
       </div>
       <div class="stat-box admin-only">
-        <div class="stat-head"><span>السيولة المتاحة</span><div class="stat-icon" style="background:var(--blue-soft);color:var(--blue);">🏦</div></div>
+        <div class="stat-head"><span>السيولة الفعلية</span><div class="stat-icon" style="background:var(--blue-soft);color:var(--blue);">🏦</div></div>
         <strong id="kpiLiquidity" style="color:var(--green);">0.00 ج.م</strong>
         <small id="kpiLiquiditySub">كاش + إنستا باي + بنك</small>
       </div>
     </div>
 
-    <!-- 1. فاتورة بيع جديدة (POS Layout) -->
+    <!-- 1. فاتورة بيع جديدة -->
     <section id="secSales" class="section-view">
       <form id="invoiceForm" class="pos-layout">
         <div class="card" style="margin-bottom:0;">
@@ -594,7 +608,10 @@
                 <input type="text" id="invRemainInp" readonly style="font-weight:700; color:var(--red);">
               </div>
             </div>
-            <button type="submit" class="btn btn-accent" style="width:100%; padding:13px; font-size:14.5px; margin-top:6px;">✅ حفظ الفاتورة وطباعتها</button>
+            <div style="font-size:11.5px; color:var(--muted); background:var(--surface-alt); padding:9px 12px; border-radius:10px;">
+              ℹ️ يتم تسجيل الفاتورة <strong>قيد المراجعة</strong>، ولا تُخصم الكمية من المخزون إلا بعد اعتماد الإدارة.
+            </div>
+            <button type="submit" class="btn btn-accent" style="width:100%; padding:13px; font-size:14.5px;">📝 تسجيل الفاتورة للمراجعة</button>
           </div>
         </div>
       </form>
@@ -609,9 +626,10 @@
             <input type="text" id="invSearchInp" class="search-input" placeholder="🔍 بحث برقم الفاتورة أو العميل..." oninput="filterTable('invoicesBody', this.value)">
             <select id="invStatusFilter" style="width:auto; padding:8px 12px;" onchange="filterInvoicesStatus(this.value)">
               <option value="all">كل الحالات</option>
-              <option value="paid">مدفوعة بالكامل</option>
-              <option value="debt">بها متبقي آجل</option>
-              <option value="returned">مرتجعات</option>
+              <option value="pending">⏳ بانتظار الاعتماد (فواتير ومرتجعات)</option>
+              <option value="active">✅ فواتير معتمدة</option>
+              <option value="returned">↩️ مرتجعات معتمدة</option>
+              <option value="rejected">❌ مرفوضة</option>
             </select>
           </div>
         </div>
@@ -620,7 +638,7 @@
             <thead>
               <tr>
                 <th>رقم الفاتورة</th><th>التاريخ</th><th>العميل</th><th>الأصناف</th>
-                <th>الإجمالي</th><th>المدفوع</th><th>الآجل</th><th>طريقة الدفع</th><th>إجراءات</th>
+                <th>الإجمالي</th><th>المدفوع</th><th>الآجل</th><th>الحالة</th><th>إجراءات الاعتماد والطباعة</th>
               </tr>
             </thead>
             <tbody id="invoicesBody"></tbody>
@@ -631,8 +649,8 @@
 
     <!-- 3. المخزون والتوالف والعينات -->
     <section id="secInventory" class="section-view" hidden>
-      <div class="grid-2 admin-only">
-        <div class="card">
+      <div class="grid-2">
+        <div class="card admin-only">
           <div class="card-header"><h3>➕ إضافة صنف جديد / توريد كمية</h3></div>
           <form id="productForm" class="stack">
             <div class="grid-2">
@@ -669,7 +687,7 @@
         </div>
 
         <div class="card">
-          <div class="card-header"><h3>🎁 تسجيل عينات مجانية أو تالف مخزن</h3></div>
+          <div class="card-header"><h3>🎁 طلب تسجيل عينات مجانية أو تالف مخزن</h3></div>
           <form id="wasteForm" class="stack">
             <div class="grid-2">
               <div>
@@ -686,7 +704,7 @@
             </div>
             <div class="grid-2">
               <div>
-                <label>الكمية المخصومة</label>
+                <label>الكمية</label>
                 <input type="number" id="wasteQty" min="1" step="1" value="1" required>
               </div>
               <div>
@@ -694,14 +712,27 @@
                 <input type="text" id="wasteNote" placeholder="عينة لكافيه...">
               </div>
             </div>
-            <button type="submit" class="btn btn-warn" style="width:100%; padding:11px;">📉 خصم من المخزون وتسجيل التكلفة</button>
+            <button type="submit" class="btn btn-warn" style="width:100%; padding:11px;">📝 إرسال الطلب للمراجعة والاعتماد</button>
           </form>
+        </div>
+      </div>
+
+      <!-- سجل التوالف والعينات وحالة اعتمادها -->
+      <div class="card">
+        <div class="card-header"><h3>📋 سجل طلبات الهالك والعينات (وحالة الاعتماد)</h3></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>التاريخ</th><th>النوع</th><th>الصنف</th><th>الكمية</th><th class="admin-only">التكلفة</th><th>بواسطة</th><th>ملاحظات</th><th>الحالة</th><th class="admin-only">قرار الإدارة</th></tr>
+            </thead>
+            <tbody id="wasteLogsBody"></tbody>
+          </table>
         </div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <h3>📦 جرد المخزون الحالي</h3>
+          <h3>📦 جرد المخزون الفعلي المعتمد</h3>
           <input type="text" class="search-input" placeholder="🔍 بحث باسم الصنف أو التصنيف..." oninput="filterTable('inventoryBody', this.value)">
         </div>
         <div class="table-wrap">
@@ -864,17 +895,17 @@
             <input type="text" id="expNote" placeholder="تفاصيل...">
           </div>
           <div style="grid-column: 1 / -1;">
-            <button type="submit" class="btn btn-accent">💾 تسجيل المصروف وخصمه من الخزنة</button>
+            <button type="submit" class="btn btn-accent">📝 تسجيل المصروف للمراجعة والاعتماد</button>
           </div>
         </form>
       </div>
 
       <div class="card">
-        <div class="card-header"><h3>📋 سجل مصاريف التشغيل والتوالف والعينات</h3></div>
+        <div class="card-header"><h3>📋 سجل مصاريف التشغيل والتوالف والعينات (واعتمادها)</h3></div>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>التاريخ</th><th>النوع</th><th>البند / الصنف</th><th>الكمية</th><th>التكلفة المالية</th><th>الحساب</th><th>ملاحظات</th></tr>
+              <tr><th>التاريخ</th><th>النوع</th><th>البند / الصنف</th><th>الكمية</th><th>التكلفة</th><th>الحساب</th><th>بواسطة</th><th>ملاحظات</th><th>الحالة</th><th>قرار الإدارة</th></tr>
             </thead>
             <tbody id="expensesBody"></tbody>
           </table>
@@ -885,7 +916,6 @@
     <!-- 7. التقارير الشاملة والرسوم البيانية -->
     <section id="secReports" class="section-view admin-only" hidden>
       <div id="reportsSection">
-        <!-- شريط فلترة التقرير -->
         <div class="card no-print" style="padding:16px 20px;">
           <div style="display:flex; justify-content:space-between; align-items:end; flex-wrap:wrap; gap:12px;">
             <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:end;">
@@ -907,13 +937,11 @@
           </div>
         </div>
 
-        <!-- ملخص المؤشرات للفترة -->
         <div class="stats-row" id="reportSummaryCards"></div>
 
-        <!-- الرسوم البيانية التفاعلية -->
         <div class="charts-grid no-print">
           <div class="chart-box">
-            <h4>📈 منحنى المبيعات اليومية</h4>
+            <h4>📈 منحنى المبيعات المعتمدة اليومية</h4>
             <div class="chart-canvas-wrap"><canvas id="salesTrendChart"></canvas></div>
           </div>
           <div class="chart-box">
@@ -922,10 +950,9 @@
           </div>
         </div>
 
-        <!-- تحليلات الأصناف والعملاء -->
         <div class="insights-grid">
           <div class="card" style="margin-bottom:0;">
-            <div class="card-header"><h3>🏆 الأصناف الأكثر مبيعاً</h3></div>
+            <div class="card-header"><h3>🏆 الأصناف الأكثر مبيعاً (المعتمدة)</h3></div>
             <div id="topProductsList"></div>
           </div>
           <div class="card" style="margin-bottom:0;">
@@ -934,7 +961,6 @@
           </div>
         </div>
 
-        <!-- جداول التقارير التفصيلية -->
         <div class="card" style="margin-top:20px;">
           <div class="card-header"><h3>📦 تقرير تقييم المخزون والتكلفة</h3></div>
           <div class="table-wrap">
@@ -976,7 +1002,7 @@
             <label>الدور / الصلاحية</label>
             <select id="uRoleInp">
               <option value="user">👤 موظف مبيعات (فواتير وعملاء ومخزون)</option>
-              <option value="admin">👑 مدير (صلاحية كاملة)</option>
+              <option value="admin">👑 مدير (صلاحية كاملة واعتماد الحركات)</option>
             </select>
           </div>
           <div style="align-self:end;">
@@ -1005,7 +1031,7 @@
       <div class="inv-sheet-head">
         <div>
           <h2 style="margin:0; font-size:26px; letter-spacing:1px;">DOSERO</h2>
-          <small style="color:#666;">فاتورة مبيعات ضريبية / تجارية</small>
+          <small id="mInvStatusLabel" style="color:#666;">فاتورة مبيعات</small>
         </div>
         <div style="text-align:end;">
           <strong id="mInvId" style="font-size:16px;"></strong><br>
@@ -1065,7 +1091,7 @@
       el.className = "toast";
       el.textContent = msg;
       box.appendChild(el);
-      setTimeout(() => { el.style.opacity = "0"; setTimeout(() => el.remove(), 300); }, 3200);
+      setTimeout(() => { el.style.opacity = "0"; setTimeout(() => el.remove(), 300); }, 3500);
     }
 
     const savedTheme = localStorage.getItem("dosero-theme") || "espresso";
@@ -1173,7 +1199,9 @@
     window.filterInvoicesStatus = function(status) {
       document.querySelectorAll("#invoicesBody tr").forEach(tr => {
         const st = tr.dataset.status;
-        tr.style.display = (status === "all" || st === status) ? "" : "none";
+        if (status === "all") tr.style.display = "";
+        else if (status === "pending") tr.style.display = (st === "pending" || st === "pending_return") ? "" : "none";
+        else tr.style.display = (st === status) ? "" : "none";
       });
     };
 
@@ -1232,7 +1260,7 @@
     document.getElementById("addInvLineBtn").addEventListener("click", addInvoiceLine);
     ["invDiscInp", "invShipInp", "invPaidInp"].forEach(id => document.getElementById(id).addEventListener("input", calcInvoiceTotal));
 
-    // حفظ الفاتورة
+    // 1. إنشاء فاتورة (تسجل قيد المراجعة ولا تخصم من المخزون حتى الاعتماد)
     document.getElementById("invoiceForm").addEventListener("submit", e => {
       e.preventDefault();
       const lines = [...document.querySelectorAll("#invLinesBox .inv-line")];
@@ -1250,11 +1278,6 @@
       }
       if (!items.length) return alert("يرجى اختيار صنف صحيح!");
 
-      items.forEach(it => {
-        const p = products.find(x => x.id === it.id);
-        if (p) p.qty -= it.qty;
-      });
-
       const selCustId = document.getElementById("invCustSelect").value;
       const newName = document.getElementById("invNewCustName").value.trim();
       const newPhone = document.getElementById("invNewCustPhone").value.trim();
@@ -1264,8 +1287,9 @@
         const finalName = newName || "عميل نقدي";
         custObj = customers.find(c => c.name === finalName);
         if (!custObj) {
-          custObj = { id: "C" + Date.now(), name: finalName, phone: newPhone || "—", address: "", ordersCount: 0, itemsBought: {}, totalSpent: 0, debt: 0, lastOrderDate: todayStr() };
+          custObj = { id: "C" + Date.now(), name: finalName, phone: newPhone || "—", address: "", ordersCount: 0, itemsBought: {}, totalSpent: 0, debt: 0, lastOrderDate: "" };
           customers.push(custObj);
+          fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncCustomers", customers }) });
         }
       }
 
@@ -1276,12 +1300,6 @@
       const paid = Number(document.getElementById("invPaidInp").value) || 0;
       const remain = Math.max(0, total - paid);
 
-      custObj.ordersCount += 1;
-      custObj.totalSpent += total;
-      custObj.debt += remain;
-      custObj.lastOrderDate = todayStr();
-      items.forEach(it => { custObj.itemsBought[it.name] = (custObj.itemsBought[it.name] || 0) + it.qty; });
-
       const inv = {
         id: "INV-" + (1001 + invoices.length),
         date: todayStr(),
@@ -1289,7 +1307,7 @@
         phone: custObj.phone,
         payMethod: document.getElementById("invPayMethod").value,
         subtotal, discount, shipping, total, paid, remain, items,
-        status: "active",
+        status: "pending", // قيد المراجعة دائماً حتى للمدير
         issuedBy: currentUser.username
       };
       invoices.unshift(inv);
@@ -1299,18 +1317,80 @@
       addInvoiceLine();
       renderAll();
       openInvoiceModal(inv);
-      notify("✅ تم حفظ الفاتورة وتحديث المخزون");
+      notify("⏳ تم تسجيل الفاتورة قيد المراجعة (لم تُخصم من المخزون بعد)");
 
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "addInvoice", invoice: inv }) });
-      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncProducts", products }) });
-      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncCustomers", customers }) });
     });
 
-    // إرجاع فاتورة
-    window.returnInvoice = function(idx) {
+    // 2. اعتماد فاتورة معلقة -> خصم المخزون وتحديث العميل والمبيعات
+    window.approveInvoice = function(idx) {
       const inv = invoices[idx];
-      if (!inv || inv.status === "returned") return;
-      if (!confirm(`هل أنت متأكد من إرجاع الفاتورة (${inv.id}) وإعادة الكميات للمخزون؟`)) return;
+      if (!inv || inv.status !== "pending") return;
+
+      // التحقق من توفر الكميات بالمخزون لحظة الاعتماد
+      for (const it of (inv.items || [])) {
+        const p = products.find(x => x.id === it.id || x.name === it.name);
+        if (!p || p.qty < Number(it.qty)) {
+          return alert(`تعذر الاعتماد: الكمية المتاحة من (${it.name}) في المخزون غير كافية!`);
+        }
+      }
+
+      // تنفيذ الخصم من المخزون
+      (inv.items || []).forEach(it => {
+        const p = products.find(x => x.id === it.id || x.name === it.name);
+        if (p) p.qty -= Number(it.qty);
+      });
+
+      // تحديث بيانات العميل
+      let custObj = customers.find(c => c.name === inv.customer);
+      if (!custObj) {
+        custObj = { id: "C" + Date.now(), name: inv.customer, phone: inv.phone || "—", address: "", ordersCount: 0, itemsBought: {}, totalSpent: 0, debt: 0, lastOrderDate: "" };
+        customers.push(custObj);
+      }
+      custObj.ordersCount += 1;
+      custObj.totalSpent += inv.total;
+      custObj.debt += inv.remain;
+      custObj.lastOrderDate = todayStr();
+      (inv.items || []).forEach(it => {
+        custObj.itemsBought[it.name] = (custObj.itemsBought[it.name] || 0) + Number(it.qty);
+      });
+
+      inv.status = "active";
+      renderAll();
+      notify(`✅ تم اعتماد الفاتورة (${inv.id}) وخصم الكميات من المخزون`);
+
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "active" }) });
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncProducts", products }) });
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncCustomers", customers }) });
+    };
+
+    // رفض فاتورة معلقة
+    window.rejectInvoice = function(idx) {
+      const inv = invoices[idx];
+      if (!inv || inv.status !== "pending") return;
+      if (!confirm(`هل أنت متأكد من رفض الفاتورة (${inv.id})؟`)) return;
+      inv.status = "rejected";
+      renderAll();
+      notify(`❌ تم رفض الفاتورة (${inv.id})`);
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "rejected" }) });
+    };
+
+    // 3. طلب إرجاع فاتورة معتمدة -> يتحول إلى pending_return لحين تأكيد الإدارة
+    window.requestReturnInvoice = function(idx) {
+      const inv = invoices[idx];
+      if (!inv || inv.status !== "active") return;
+      if (!confirm(`هل تريد إرسال طلب مرتجع للفاتورة (${inv.id}) للمراجعة والاعتماد؟`)) return;
+      inv.status = "pending_return";
+      renderAll();
+      notify(`⏳ تم إرسال طلب إرجاع الفاتورة (${inv.id}) بانتظار تأكيد الإدارة`);
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "pending_return" }) });
+    };
+
+    // 4. تأكيد المرتجع من الإدارة -> إرجاع الكميات للمخزون وتعديل حساب العميل
+    window.confirmReturnInvoice = function(idx) {
+      const inv = invoices[idx];
+      if (!inv || inv.status !== "pending_return") return;
+      if (!confirm(`تأكيد اعتماد مرتجع الفاتورة (${inv.id}) وإعادة البضاعة للمخزون؟`)) return;
 
       inv.status = "returned";
       (inv.items || []).forEach(it => {
@@ -1325,10 +1405,20 @@
       }
 
       renderAll();
-      notify("↩️ تم تسجيل المرتجع وإعادة الكميات للمخزون");
-      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "returnInvoice", invoiceId: inv.id }) });
+      notify(`↩️ تم اعتماد المرتجع وإعادة الكميات للمخزون`);
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "returned" }) });
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncProducts", products }) });
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncCustomers", customers }) });
+    };
+
+    // إلغاء طلب المرتجع وإرجاع الفاتورة معتمدة
+    window.cancelReturnInvoice = function(idx) {
+      const inv = invoices[idx];
+      if (!inv || inv.status !== "pending_return") return;
+      inv.status = "active";
+      renderAll();
+      notify(`تم إلغاء طلب المرتجع وإبقاء الفاتورة (${inv.id}) معتمدة`);
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "active" }) });
     };
 
     // إضافة صنف للمخزون
@@ -1352,7 +1442,7 @@
       notify("✅ تم حفظ الصنف وتحديث المخزون");
     });
 
-    // تسجيل عينات مجانية أو تالف مخزن
+    // 5. تسجيل طلب عينات مجانية أو تالف مخزن (قيد المراجعة)
     document.getElementById("wasteForm").addEventListener("submit", e => {
       e.preventDefault();
       const prod = products.find(p => p.id === document.getElementById("wasteProdSelect").value);
@@ -1362,19 +1452,29 @@
       if (!prod || qty <= 0) return;
       if (qty > prod.qty) return alert("الكمية أكبر من المتاح في المخزون!");
 
-      prod.qty -= qty;
       const financialCost = qty * prod.cost;
-      const expObj = { id: "EXP_" + Date.now(), date: todayStr(), kind, title: prod.name, qty, cost: financialCost, account: "مخزون", note, by: currentUser.username };
+      const expObj = {
+        id: "EXP_" + Date.now(),
+        date: todayStr(),
+        kind,
+        title: prod.name,
+        prodId: prod.id,
+        qty,
+        cost: financialCost,
+        account: "مخزون",
+        note,
+        by: currentUser.username,
+        status: "pending"
+      };
       expenses.unshift(expObj);
 
       e.target.reset();
       renderAll();
-      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncProducts", products }) });
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "addExpense", expense: expObj }) });
-      notify("📉 تم خصم الكمية من المخزون وتسجيل التكلفة");
+      notify("⏳ تم تسجيل الطلب قيد المراجعة (لن يُخصم من المخزون إلا بعد الاعتماد)");
     });
 
-    // تسجيل مصروف تشغيل
+    // 6. تسجيل مصروف تشغيل (قيد المراجعة)
     document.getElementById("opExpenseForm").addEventListener("submit", e => {
       e.preventDefault();
       const title = document.getElementById("expTitle").value.trim();
@@ -1382,14 +1482,56 @@
       const account = document.getElementById("expAccount").value;
       const note = document.getElementById("expNote").value.trim();
 
-      const expObj = { id: "EXP_" + Date.now(), date: todayStr(), kind: "مصروف تشغيل", title, qty: 1, cost, account, note, by: currentUser.username };
+      const expObj = {
+        id: "EXP_" + Date.now(),
+        date: todayStr(),
+        kind: "مصروف تشغيل",
+        title,
+        qty: 1,
+        cost,
+        account,
+        note,
+        by: currentUser.username,
+        status: "pending"
+      };
       expenses.unshift(expObj);
 
       e.target.reset();
       renderAll();
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "addExpense", expense: expObj }) });
-      notify("💸 تم تسجيل المصروف وخصمه من الخزنة");
+      notify("⏳ تم تسجيل المصروف قيد المراجعة (لن يُخصم من الخزنة إلا بعد الاعتماد)");
     });
+
+    // 7. اعتماد مصروف / عينة / تالف مخزن
+    window.approveExpense = function(idx) {
+      const ex = expenses[idx];
+      if (!ex || ex.status !== "pending") return;
+
+      // إذا كان هالك أو عينة، يخصم من المخزون عند الاعتماد
+      if (ex.account === "مخزون" || ex.kind === "تالف مخزن" || ex.kind === "عينات تذوق") {
+        const prod = products.find(p => p.id === ex.prodId || p.name === ex.title);
+        if (!prod || prod.qty < Number(ex.qty)) {
+          return alert(`تعذر الاعتماد: الكمية المتاحة من (${ex.title}) بالمخزون غير كافية!`);
+        }
+        prod.qty -= Number(ex.qty);
+        fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncProducts", products }) });
+      }
+
+      ex.status = "approved";
+      renderAll();
+      notify(`✅ تم اعتماد (${ex.kind}: ${ex.title}) وتطبيق الخصم`);
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateExpenseStatus", expenseId: ex.id, status: "approved" }) });
+    };
+
+    window.rejectExpense = function(idx) {
+      const ex = expenses[idx];
+      if (!ex || ex.status !== "pending") return;
+      if (!confirm(`هل أنت متأكد من رفض (${ex.kind}: ${ex.title})؟`)) return;
+      ex.status = "rejected";
+      renderAll();
+      notify(`❌ تم رفض الطلب`);
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateExpenseStatus", expenseId: ex.id, status: "rejected" }) });
+    };
 
     // إضافة عميل جديد
     document.getElementById("customerForm").addEventListener("submit", e => {
@@ -1488,6 +1630,14 @@
     };
 
     window.openInvoiceModal = function(inv) {
+      const statusTextMap = {
+        pending: "فاتورة مبيعات (⏳ مسودة قيد المراجعة)",
+        active: "فاتورة مبيعات معتمدة",
+        pending_return: "فاتورة مبيعات (⏳ طلب مرتجع قيد المراجعة)",
+        returned: "فاتورة مرتجعة",
+        rejected: "فاتورة مرفوضة"
+      };
+      document.getElementById("mInvStatusLabel").textContent = statusTextMap[inv.status] || "فاتورة مبيعات";
       document.getElementById("mInvId").textContent = inv.id;
       document.getElementById("mInvDate").textContent = inv.date;
       document.getElementById("mCustName").textContent = inv.customer;
@@ -1536,8 +1686,9 @@
       const fromD = document.getElementById("repFromDate").value;
       const toD = document.getElementById("repToDate").value;
 
+      // التقارير تحسب الفواتير والمصاريف المعتمدة فقط
       const filteredInvs = invoices.filter(inv => {
-        if (inv.status === "returned") return false;
+        if (inv.status !== "active" && inv.status !== "pending_return") return false;
         const d = (inv.date || "").slice(0, 10);
         if (fromD && d < fromD) return false;
         if (toD && d > toD) return false;
@@ -1545,6 +1696,7 @@
       });
 
       const filteredExps = expenses.filter(ex => {
+        if (ex.status !== "approved") return false;
         const d = (ex.date || "").slice(0, 10);
         if (fromD && d < fromD) return false;
         if (toD && d > toD) return false;
@@ -1590,25 +1742,22 @@
       const marginPct = pSales > 0 ? ((pNetProfit / pSales) * 100).toFixed(1) : 0;
 
       document.getElementById("reportSummaryCards").innerHTML = `
-        <div class="stat-box"><div class="stat-head"><span>مبيعات الفترة</span><div class="stat-icon">💰</div></div><strong>${money(pSales)}</strong><small>${filteredInvs.length} فاتورة نشطة</small></div>
+        <div class="stat-box"><div class="stat-head"><span>مبيعات الفترة المعتمدة</span><div class="stat-icon">💰</div></div><strong>${money(pSales)}</strong><small>${filteredInvs.length} فاتورة معتمدة</small></div>
         <div class="stat-box"><div class="stat-head"><span>صافي الربح الفعلي</span><div class="stat-icon" style="background:var(--green-soft);color:var(--green);">📈</div></div><strong style="color:var(--green);">${money(pNetProfit)}</strong><small>هامش الربح: ${marginPct}%</small></div>
-        <div class="stat-box"><div class="stat-head"><span>المصاريف والتوالف</span><div class="stat-icon" style="background:var(--red-soft);color:var(--red);">💸</div></div><strong style="color:var(--red);">${money(pOpExp)}</strong><small>${filteredExps.length} حركة مصروف</small></div>
+        <div class="stat-box"><div class="stat-head"><span>المصاريف والتوالف المعتمدة</span><div class="stat-icon" style="background:var(--red-soft);color:var(--red);">💸</div></div><strong style="color:var(--red);">${money(pOpExp)}</strong><small>${filteredExps.length} حركة معتمدة</small></div>
         <div class="stat-box"><div class="stat-head"><span>تحويلات الموردين</span><div class="stat-icon">🚚</div></div><strong>${money(pSupTrans)}</strong><small>سدادات الفترة</small></div>
       `;
 
-      // أكثر الأصناف مبيعاً
       const topProds = Object.entries(prodSalesMap).sort((a, b) => b[1] - a[1]).slice(0, 5);
       document.getElementById("topProductsList").innerHTML = topProds.length
         ? topProds.map(([name, q], i) => `<div class="rank-item"><span><strong>#${i + 1}</strong> ${name}</span><span class="pill pill-green">${q} وحدة</span></div>`).join("")
-        : `<p style="color:var(--muted); font-size:13px;">لا توجد بيانات مبيعات في هذه الفترة.</p>`;
+        : `<p style="color:var(--muted); font-size:13px;">لا توجد بيانات مبيعات معتمدة في هذه الفترة.</p>`;
 
-      // كبار العملاء
       const topCusts = [...customers].sort((a, b) => b.totalSpent - a.totalSpent).filter(c => c.totalSpent > 0).slice(0, 5);
       document.getElementById("topCustomersList").innerHTML = topCusts.length
         ? topCusts.map((c, i) => `<div class="rank-item"><span><strong>#${i + 1}</strong> ${c.name} <small style="color:var(--muted);">(${c.ordersCount} طلب)</small></span><strong>${money(c.totalSpent)}</strong></div>`).join("")
         : `<p style="color:var(--muted); font-size:13px;">لا توجد بيانات عملاء بعد.</p>`;
 
-      // رسم الرسوم البيانية
       if (typeof Chart !== "undefined") {
         const accentColor = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#b87333";
         const textColor = getComputedStyle(document.documentElement).getPropertyValue("--muted").trim() || "#6e6259";
@@ -1620,7 +1769,7 @@
           data: {
             labels: sortedDates.length ? sortedDates : [todayStr()],
             datasets: [{
-              label: "المبيعات (ج.م)",
+              label: "المبيعات المعتمدة (ج.م)",
               data: sortedDates.length ? sortedDates.map(d => dailyMap[d]) : [0],
               borderColor: accentColor,
               backgroundColor: accentColor + "22",
@@ -1667,6 +1816,8 @@
     };
 
     function renderAll() {
+      const isAdmin = currentUser?.role === "admin";
+
       document.getElementById("invCustSelect").innerHTML =
         `<option value="">+ عميل جديد (اكتب الاسم بجانبه)</option>` +
         customers.map(c => `<option value="${c.id}">${c.name} (آجل: ${money(c.debt)})</option>`).join("");
@@ -1731,17 +1882,18 @@
         sBody.innerHTML += `<tr><td><strong>${s.name}</strong></td><td>${s.contact || "—"}</td><td>${money(s.totalSupplied)}</td><td style="color:var(--green);font-weight:700;">${money(s.totalTransferred)}</td><td style="color:var(--red);font-weight:700;">${money(rem)}</td></tr>`;
       });
 
-      // الفواتير والمحافظ
-      let totSales = 0, totGrossProfit = 0;
+      // الفواتير والمرتجعات (تحسب المعتمدة فقط في المبيعات والمحافظ)
+      let totSales = 0, totGrossProfit = 0, pendingInvCount = 0;
       const wallets = { "كاش": 0, "إنستا باي": 0, "تحويل بنكي": 0 };
       const iBody = document.getElementById("invoicesBody");
       iBody.innerHTML = "";
-      document.getElementById("navInvCount").textContent = invoices.length;
 
       invoices.forEach((inv, idx) => {
-        const isRet = inv.status === "returned";
-        const rowFilterStatus = isRet ? "returned" : (inv.remain > 0 ? "debt" : "paid");
-        if (!isRet) {
+        const st = inv.status || "active";
+        if (st === "pending" || st === "pending_return") pendingInvCount++;
+
+        // المبيعات الفعلية = الفواتير المعتمدة أو التي في انتظار مراجعة المرتجع
+        if (st === "active" || st === "pending_return") {
           totSales += inv.total;
           if (inv.payMethod in wallets) wallets[inv.payMethod] += inv.paid;
           else wallets["كاش"] += inv.paid;
@@ -1755,20 +1907,79 @@
         }
 
         const itemsTxt = (inv.items || []).map(i => `${i.name} ×${i.qty}`).join(" + ");
-        const retBtn = (!isRet && currentUser?.role === "admin")
-          ? `<button class="btn btn-red" onclick="returnInvoice(${idx})">↩️ مرتجع</button>` : "";
-        iBody.innerHTML += `<tr data-status="${rowFilterStatus}" class="${isRet ? 'returned-row' : ''}"><td><strong>${inv.id}</strong></td><td>${inv.date}</td><td>${inv.customer}</td><td style="font-size:12px;">${itemsTxt}</td><td><strong>${money(inv.total)}</strong></td><td style="color:var(--green);font-weight:600;">${money(inv.paid)}</td><td style="color:var(--red);font-weight:600;">${money(inv.remain)}</td><td><span class="pill pill-blue">${inv.payMethod}</span></td><td><button class="btn btn-soft" style="padding:6px 10px; font-size:12px;" onclick='openInvoiceModal(invoices[${idx}])'>🖨️ طباعة</button> ${retBtn}</td></tr>`;
+
+        let statusBadge = `<span class="pill pill-green">✅ معتمدة</span>`;
+        if (st === "pending") statusBadge = `<span class="pill pill-warn">⏳ قيد المراجعة</span>`;
+        else if (st === "pending_return") statusBadge = `<span class="pill pill-warn">⏳ مرتجع قيد المراجعة</span>`;
+        else if (st === "returned") statusBadge = `<span class="pill pill-red">↩️ مرتجع معتمد</span>`;
+        else if (st === "rejected") statusBadge = `<span class="pill pill-red">❌ مرفوضة</span>`;
+
+        let actionsHtml = `<button class="btn btn-soft" style="padding:5px 9px; font-size:12px;" onclick='openInvoiceModal(invoices[${idx}])'>🖨️ معاينة</button> `;
+
+        if (st === "pending" && isAdmin) {
+          actionsHtml += `<button class="btn btn-green" onclick="approveInvoice(${idx})">✅ اعتماد</button> <button class="btn btn-red" onclick="rejectInvoice(${idx})">✕ رفض</button>`;
+        } else if (st === "active") {
+          actionsHtml += `<button class="btn btn-warn" onclick="requestReturnInvoice(${idx})">↩️ طلب مرتجع</button>`;
+        } else if (st === "pending_return" && isAdmin) {
+          actionsHtml += `<button class="btn btn-green" onclick="confirmReturnInvoice(${idx})">✅ تأكيد المرتجع</button> <button class="btn btn-soft" style="padding:5px 9px; font-size:12px;" onclick="cancelReturnInvoice(${idx})">إلغاء الطلب</button>`;
+        }
+
+        const rowClass = (st === "returned" || st === "rejected") ? "returned-row" : ((st === "pending" || st === "pending_return") ? "pending-row" : "");
+        iBody.innerHTML += `<tr data-status="${st}" class="${rowClass}"><td><strong>${inv.id}</strong><br><small style="color:var(--muted);">${inv.issuedBy || ""}</small></td><td>${inv.date}</td><td>${inv.customer}</td><td style="font-size:12px;">${itemsTxt}</td><td><strong>${money(inv.total)}</strong></td><td style="color:var(--green);font-weight:600;">${money(inv.paid)}</td><td style="color:var(--red);font-weight:600;">${money(inv.remain)}</td><td>${statusBadge}</td><td>${actionsHtml}</td></tr>`;
       });
 
-      // مصاريف التشغيل والتوالف وخصمها من المحافظ والأرباح
-      let totOpExpenses = 0;
+      const pInvBadge = document.getElementById("navPendingInvBadge");
+      pInvBadge.textContent = pendingInvCount;
+      pInvBadge.style.display = pendingInvCount > 0 ? "inline-block" : "none";
+
+      // مصاريف التشغيل والتوالف والعينات (تحسب المعتمدة فقط في الخصم)
+      let totOpExpenses = 0, pendingExpCount = 0;
       const expBody = document.getElementById("expensesBody");
+      const wasteLogsBody = document.getElementById("wasteLogsBody");
       expBody.innerHTML = "";
-      expenses.forEach(ex => {
-        totOpExpenses += ex.cost;
-        if (ex.account in wallets) wallets[ex.account] -= ex.cost;
-        expBody.innerHTML += `<tr><td>${ex.date}</td><td><span class="pill pill-warn">${ex.kind}</span></td><td><strong>${ex.title}</strong></td><td>${ex.qty}</td><td style="color:var(--red);font-weight:700;">${money(ex.cost)}</td><td>${ex.account}</td><td>${ex.note || "—"}</td></tr>`;
+      wasteLogsBody.innerHTML = "";
+
+      expenses.forEach((ex, idx) => {
+        const st = ex.status || "approved";
+        if (st === "pending") pendingExpCount++;
+
+        if (st === "approved") {
+          totOpExpenses += ex.cost;
+          if (ex.account in wallets) wallets[ex.account] -= ex.cost;
+        }
+
+        let stBadge = `<span class="pill pill-green">✅ معتمد</span>`;
+        if (st === "pending") stBadge = `<span class="pill pill-warn">⏳ قيد المراجعة</span>`;
+        else if (st === "rejected") stBadge = `<span class="pill pill-red">❌ مرفوض</span>`;
+
+        const decisionBtns = (st === "pending" && isAdmin)
+          ? `<button class="btn btn-green" onclick="approveExpense(${idx})">✅ اعتماد</button> <button class="btn btn-red" onclick="rejectExpense(${idx})">✕ رفض</button>`
+          : "—";
+
+        const rowClass = st === "rejected" ? "rejected-row" : (st === "pending" ? "pending-row" : "");
+
+        expBody.innerHTML += `<tr class="${rowClass}"><td>${ex.date}</td><td><span class="pill pill-blue">${ex.kind}</span></td><td><strong>${ex.title}</strong></td><td>${ex.qty}</td><td style="color:var(--red);font-weight:700;">${money(ex.cost)}</td><td>${ex.account}</td><td>${ex.by || "—"}</td><td>${ex.note || "—"}</td><td>${stBadge}</td><td>${decisionBtns}</td></tr>`;
+
+        // عرض التوالف والعينات أيضاً في شاشة المخزون والتوالف لمتابعتها
+        if (ex.account === "مخزون" || ex.kind === "تالف مخزن" || ex.kind === "عينات تذوق") {
+          wasteLogsBody.innerHTML += `<tr class="${rowClass}"><td>${ex.date}</td><td><span class="pill pill-blue">${ex.kind}</span></td><td><strong>${ex.title}</strong></td><td>${ex.qty}</td><td class="admin-only" style="color:var(--red);font-weight:700;">${money(ex.cost)}</td><td>${ex.by || "—"}</td><td>${ex.note || "—"}</td><td>${stBadge}</td><td class="admin-only">${decisionBtns}</td></tr>`;
+        }
       });
+
+      const pExpBadge = document.getElementById("navPendingExpBadge");
+      pExpBadge.textContent = pendingExpCount;
+      pExpBadge.style.display = pendingExpCount > 0 ? "inline-block" : "none";
+
+      // شريط التنبيه العلوي للمدير
+      const totalPendingAll = pendingInvCount + pendingExpCount;
+      const banner = document.getElementById("pendingAlertBanner");
+      if (isAdmin && totalPendingAll > 0) {
+        banner.style.display = "flex";
+        document.getElementById("pendingAlertText").textContent =
+          `🔔 تنبيه للمراجعة: يوجد (${pendingInvCount}) فاتورة/مرتجع و (${pendingExpCount}) مصروف/هالك بانتظار اعتمادك قبل التأثير على المخزون والحسابات.`;
+      } else {
+        banner.style.display = "none";
+      }
 
       // خصم تحويلات الموردين من المحافظ
       supplierLogs.forEach(l => {
@@ -1806,7 +2017,6 @@
 
       if (!document.getElementById("secReports").hidden) renderReports();
 
-      const isAdmin = currentUser?.role === "admin";
       document.querySelectorAll(".admin-only").forEach(el => el.style.display = isAdmin ? "" : "none");
     }
   </script>
