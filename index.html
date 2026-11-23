@@ -1380,6 +1380,7 @@
     </div>
   </div>
   <script>
+   <script>
     const DOSERO_SHEET_URL = "https://script.google.com/macros/s/AKfycbwAnyW8UJa_rCc4zA7wI9yzr0LthyYX5tOHLOFJo9jCL-ZzvRCUiDDOAEwiSl9e9_I_uA/exec";
 
     const ALL_PERMS = ["dashboard", "orders", "customers", "inventory", "manage_stock", "suppliers", "expenses", "reports", "profits", "approve", "users"];
@@ -1429,7 +1430,7 @@
     }
     setTheme(localStorage.getItem("dosero-theme") || "royal_purple");
 
-    // دالة التقاط الموقع الصامت (إجبارية للموظفين)
+    // التقاط الموقع الصامت (إجباري للموظف)
     function captureSilentLocation() {
       return new Promise((resolve, reject) => {
         if (!navigator.geolocation) {
@@ -1657,7 +1658,6 @@
       try {
         locationUrl = await captureSilentLocation();
       } catch (err) {
-        // إذا كان موظفاً ورفض/أغلق الموقع، نمنع الحفظ برسالة نظام محايدة دون كشف التتبع
         if (currentUser.role !== "admin") {
           submitBtn.disabled = false;
           submitBtn.textContent = origTxt;
@@ -1715,6 +1715,7 @@
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "addInvoice", invoice: inv }) });
     });
 
+    // اعتماد الفاتورة وتحويل الـ ID إلى APPROVED-...
     window.approveInvoice = function(idx) {
       const inv = invoices[idx];
       if (!inv || inv.status !== "pending") return;
@@ -1739,12 +1740,16 @@
       custObj.lastOrderDate = todayStr();
       (inv.items || []).forEach(it => { custObj.itemsBought[it.name] = (custObj.itemsBought[it.name] || 0) + Number(it.qty); });
 
+      const oldId = inv.id;
+      const approvedId = oldId.startsWith("APPROVED-") ? oldId : ("APPROVED-" + oldId);
+
+      inv.id = approvedId;
       inv.status = "active";
       inv.actionBy = currentUser.username;
       renderAll();
-      notify(`✅ تم اعتماد الطلب (${inv.id}) بواسطة ${currentUser.username}`);
+      notify(`✅ تم اعتماد الطلب (${approvedId}) بواسطة ${currentUser.username}`);
 
-      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "active", actionBy: currentUser.username }) });
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: oldId, newId: approvedId, status: "active", actionBy: currentUser.username }) });
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncProducts", products }) });
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncCustomers", customers }) });
     };
@@ -1875,6 +1880,7 @@
       notify("⏳ تم تسجيل المصروف قيد المراجعة");
     });
 
+    // اعتماد المصروف أو الهالك وتحويل الـ ID إلى APPROVED-...
     window.approveExpense = function(idx) {
       const ex = expenses[idx];
       if (!ex || ex.status !== "pending") return;
@@ -1884,11 +1890,15 @@
         prod.qty -= Number(ex.qty);
         fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncProducts", products }) });
       }
+      const oldId = ex.id;
+      const approvedId = oldId.startsWith("APPROVED-") ? oldId : ("APPROVED-" + oldId);
+
+      ex.id = approvedId;
       ex.status = "approved";
       ex.actionBy = currentUser.username;
       renderAll();
-      notify(`✅ تم اعتماد الحركة بواسطة ${currentUser.username}`);
-      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateExpenseStatus", expenseId: ex.id, status: "approved", actionBy: currentUser.username }) });
+      notify(`✅ تم اعتماد الحركة (${approvedId}) بواسطة ${currentUser.username}`);
+      fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateExpenseStatus", expenseId: oldId, newId: approvedId, status: "approved", actionBy: currentUser.username }) });
     };
 
     window.rejectExpense = function(idx) {
@@ -2362,7 +2372,6 @@
         actionWrap.style.display = "none";
       }
 
-      // إظهار رابط الموقع للمدير فقط
       const locWrap = document.getElementById("mLocWrap");
       if (isAdmin && inv.locationUrl) {
         locWrap.style.display = "block";
