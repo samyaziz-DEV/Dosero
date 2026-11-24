@@ -74,7 +74,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Modals & Overlays */
     .overlay {
       position: fixed; inset: 0; z-index: 2000;
       background: rgba(16, 24, 40, 0.62);
@@ -98,7 +97,6 @@
     .modal-head h3 { margin: 0; font-size: 17px; font-weight: 700; }
     .close-x { background: transparent; border: 0; font-size: 22px; color: var(--muted); cursor: pointer; }
 
-    /* Welcome Splash Modal */
     .welcome-splash {
       text-align: center;
       padding: 34px 28px;
@@ -116,7 +114,6 @@
       letter-spacing: 0.4px;
     }
 
-    /* Toast */
     .toast-container { position: fixed; bottom: 20px; left: 20px; z-index: 3000; display: flex; flex-direction: column; gap: 8px; }
     .toast {
       background: #101828; color: #fff; padding: 12px 18px; border-radius: 10px;
@@ -126,7 +123,6 @@
     }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Sidebar */
     aside.sidebar {
       width: 260px;
       background: var(--sidebar-bg);
@@ -190,7 +186,6 @@
     }
     .powered-side span { color: var(--accent); font-weight: 700; }
 
-    /* Top Header Bar */
     .main-shell { flex: 1; display: flex; flex-direction: column; min-width: 0; }
     .top-header {
       height: 62px; background: var(--surface); border-bottom: 1px solid var(--border);
@@ -218,7 +213,6 @@
 
     .content-area { padding: 24px; max-width: 1480px; width: 100%; margin: 0 auto; flex: 1; }
 
-    /* Global Footer */
     .site-footer {
       text-align: center;
       padding: 16px 24px;
@@ -231,7 +225,6 @@
     }
     .site-footer strong { color: var(--accent); }
 
-    /* Page Title Row */
     .page-head {
       display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
       margin-bottom: 20px;
@@ -239,7 +232,6 @@
     .page-head h1 { margin: 0; font-size: 22px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
     .page-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
-    /* Buttons */
     .btn {
       border: 1px solid transparent; border-radius: 9px; padding: 8px 15px;
       font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
@@ -256,7 +248,6 @@
     .btn-warn { background: var(--warn-soft); color: var(--warn); padding: 5px 10px; font-size: 12px; }
     .btn-map { background: var(--blue-soft); color: var(--blue); padding: 4px 9px; font-size: 11.5px; border-radius: 7px; }
 
-    /* Filter Segmented Control */
     .seg-group {
       display: inline-flex; background: var(--surface); border: 1px solid var(--border);
       border-radius: 9px; padding: 3px;
@@ -268,7 +259,6 @@
     }
     .seg-btn.active { background: var(--accent); color: #fff; }
 
-    /* Dashboard Cards */
     .dash-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 18px; }
     .dash-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 18px; }
     .f-card {
@@ -286,8 +276,8 @@
     .f-card-val { font-size: 24px; font-weight: 700; color: var(--text); margin: 4px 0 12px; }
     .spark-wrap { height: 75px; position: relative; }
     .chart-lg-wrap { height: 240px; position: relative; }
+    .chart-xl-wrap { height: 290px; position: relative; }
 
-    /* Table Card */
     .table-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius); box-shadow: var(--shadow-xs); overflow: hidden;
@@ -317,7 +307,6 @@
     tr.pending-row { background: rgba(253, 176, 34, 0.05); }
     tr.rejected-row { opacity: 0.55; background: var(--red-soft); }
 
-    /* Pills */
     .pill {
       padding: 3px 10px; border-radius: 16px; font-size: 11.5px; font-weight: 600;
       display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
@@ -326,9 +315,9 @@
     .pill-warn { background: var(--warn-soft); color: var(--warn); }
     .pill-red { background: var(--red-soft); color: var(--red); }
     .pill-purple { background: var(--accent-soft); color: var(--accent); }
+    .pill-blue { background: var(--blue-soft); color: var(--blue); }
     .by-sub { display: block; font-size: 11px; color: var(--muted); margin-top: 3px; }
 
-    /* Report Hub Cards */
     .report-hub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 22px; }
     .report-tile {
       background: var(--surface); border: 1px solid var(--border);
@@ -342,7 +331,6 @@
     .report-tile small { color: var(--muted); font-size: 12px; }
     .report-arrow { font-size: 18px; color: var(--muted); }
 
-    /* Forms & Custom Permissions Checkboxes */
     label { display: block; font-size: 12.5px; color: var(--text); margin-bottom: 6px; font-weight: 600; }
     input[type="text"], input[type="password"], input[type="number"], input[type="date"], select, textarea {
       width: 100%; padding: 9px 12px; border: 1px solid var(--border);
@@ -369,7 +357,6 @@
     }
     .perm-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent); margin: 0; cursor: pointer; }
 
-    /* POS */
     .pos-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; align-items: start; }
     .inv-line {
       display: grid; grid-template-columns: 2.2fr 0.9fr 1.1fr 1.1fr 36px;
@@ -377,7 +364,6 @@
       border-radius: 9px; margin-bottom: 8px; border: 1px solid var(--border);
     }
 
-    /* Alert Banner */
     .pending-strip {
       background: var(--warn-soft); border: 1px solid #fec84b;
       border-radius: 10px; padding: 10px 16px; margin-bottom: 18px;
@@ -385,7 +371,6 @@
       font-size: 13px; font-weight: 600; color: var(--warn);
     }
 
-    /* Printable Sheet */
     .invoice-sheet {
       width: min(680px, 100%); background: #fff; color: #111;
       border-radius: 14px; padding: 30px; box-shadow: var(--shadow-lg);
@@ -445,7 +430,7 @@
           <label>كلمة المرور</label>
           <input type="password" id="loginPass" placeholder="••••••••" required>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;padding:11px;">تسجيل الدخول</button>
+        <button type="submit" id="loginSubmitBtn" class="btn btn-primary" style="width:100%;padding:11px;">تسجيل الدخول</button>
       </form>
     </div>
   </div>
@@ -509,6 +494,11 @@
         </div>
       </div>
 
+      <!-- 4.1 قسم الرسوم البيانية الشامل -->
+      <button class="nav-item perm-el" data-perm="reports" data-view="viewChartsHub">
+        <span class="nav-left"><span class="nav-ico">📈</span> الرسوم البيانية</span>
+      </button>
+
       <!-- 5. المخزون -->
       <div class="perm-el" data-perm="inventory">
         <button class="nav-parent" onclick="toggleSubmenu('subInventory', 'viewInvItems')">
@@ -534,6 +524,7 @@
         <div class="nav-submenu" id="subManage">
           <button class="nav-sub-item perm-el" data-perm="expenses" data-view="viewExpenses"><span>الخزنة والمصاريف</span><span class="badge-count" id="badgePendingExp" style="display:none;">0</span></button>
           <button class="nav-sub-item perm-el" data-perm="users" data-view="viewUsers">المستخدمين والصلاحيات</button>
+          <button class="nav-sub-item admin-only-el" data-view="viewActivityLogs">🛡️ سجل النشاطات</button>
           <button class="nav-sub-item" data-view="viewSettings">المظهر والإعدادات</button>
         </div>
       </div>
@@ -892,6 +883,48 @@
         </div>
       </section>
 
+      <!-- ==================== 5.2 قسم الرسوم البيانية الشامل ==================== -->
+      <section id="viewChartsHub" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>📈 لوحة الرسوم البيانية والتحليلات البصرية</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-outline" onclick="renderChartsHub()">🔄 تحديث الرسوم</button>
+          </div>
+        </div>
+
+        <div class="dash-grid-2">
+          <div class="f-card">
+            <div class="f-card-top">
+              <span class="f-card-title">تطور المبيعات اليومية المعتمدة (EGP)</span>
+            </div>
+            <div class="chart-xl-wrap"><canvas id="hubChartSalesLine"></canvas></div>
+          </div>
+
+          <div class="f-card">
+            <div class="f-card-top">
+              <span class="f-card-title">مقارنة المبيعات والتكاليف والمصاريف وصافي الربح</span>
+            </div>
+            <div class="chart-xl-wrap"><canvas id="hubChartProfitBar"></canvas></div>
+          </div>
+        </div>
+
+        <div class="dash-grid-2">
+          <div class="f-card">
+            <div class="f-card-top">
+              <span class="f-card-title">أعلى المنتجات تحقيقاً للإيرادات</span>
+            </div>
+            <div class="chart-xl-wrap"><canvas id="hubChartTopProducts"></canvas></div>
+          </div>
+
+          <div class="f-card">
+            <div class="f-card-top">
+              <span class="f-card-title">توزيع التحصيل حسب طرق الدفع (كاش / إنستا باي / بنكي / آجل)</span>
+            </div>
+            <div class="chart-xl-wrap"><canvas id="hubChartPayments"></canvas></div>
+          </div>
+        </div>
+      </section>
+
       <!-- ==================== 6. المخزون: مواد المخزون ==================== -->
       <section id="viewInvItems" class="view-sec" hidden>
         <div class="page-head">
@@ -1115,7 +1148,36 @@
         </div>
       </section>
 
-      <!-- ==================== 7.2 الإدارة: المظهر والإعدادات ==================== -->
+      <!-- ==================== 7.2 الإدارة: سجل نشاطات المستخدمين (Activity Logs) ==================== -->
+      <section id="viewActivityLogs" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>🛡️ سجل نشاطات وحركات المستخدمين (Activity Logs)</h1>
+          <div class="page-actions">
+            <input type="text" placeholder="🔍 بحث بالمستخدم أو الحركة..." style="width:240px;padding:6px 10px;" oninput="filterTable('activityLogsBody', this.value)">
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ والوقت</th>
+                  <th>المستخدم</th>
+                  <th>نوع الحساب</th>
+                  <th>نوع الحركة</th>
+                  <th>تفاصيل العملية</th>
+                  <th>الموقع (GPS)</th>
+                  <th>الجهاز / المتصفح</th>
+                </tr>
+              </thead>
+              <tbody id="activityLogsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 7.3 الإدارة: المظهر والإعدادات ==================== -->
       <section id="viewSettings" class="view-sec" hidden>
         <div class="page-head"><h1>المظهر والإعدادات</h1></div>
         <div class="f-card" style="max-width:540px;">
@@ -1310,7 +1372,7 @@
             <label class="perm-item"><input type="checkbox" value="manage_stock"> ➕ إضافة/توريد أصناف</label>
             <label class="perm-item"><input type="checkbox" value="suppliers"> 🚚 الموردين والمشتريات</label>
             <label class="perm-item"><input type="checkbox" value="expenses"> 💸 الخزنة والمصاريف</label>
-            <label class="perm-item"><input type="checkbox" value="reports"> 📊 التقارير التفصيلية</label>
+            <label class="perm-item"><input type="checkbox" value="reports"> 📊 التقارير والرسوم البيانية</label>
             <label class="perm-item"><input type="checkbox" value="profits"> 💰 رؤية التكلفة والأرباح</label>
             <label class="perm-item"><input type="checkbox" value="approve"> ✅ اعتماد الفواتير والمرتجعات</label>
             <label class="perm-item"><input type="checkbox" value="users"> ⚙️ إدارة المستخدمين</label>
@@ -1381,17 +1443,17 @@
   </div>
   <script>
     const DOSERO_SHEET_URL = "https://script.google.com/macros/s/AKfycbwAnyW8UJa_rCc4zA7wI9yzr0LthyYX5tOHLOFJo9jCL-ZzvRCUiDDOAEwiSl9e9_I_uA/exec";
-    
+
     const ALL_PERMS = ["dashboard", "orders", "customers", "inventory", "manage_stock", "suppliers", "expenses", "reports", "profits", "approve", "users"];
     const USER_DEFAULT_PERMS = ["dashboard", "orders", "customers", "inventory"];
     const PERM_LABELS = {
       dashboard: "الملخص", orders: "الطلبات", customers: "العملاء", inventory: "المخزون",
       manage_stock: "إضافة أصناف", suppliers: "الموردين", expenses: "الخزنة",
-      reports: "التقارير", profits: "الأرباح", approve: "الاعتمادات", users: "المستخدمين"
+      reports: "التقارير والرسوم", profits: "الأرباح", approve: "الاعتمادات", users: "المستخدمين"
     };
 
     let currentUser = JSON.parse(sessionStorage.getItem("dosero-user")) || null;
-    let products = [], customers = [], suppliers = [], invoices = [], users = [], supplierLogs = [], expenses = [];
+    let products = [], customers = [], suppliers = [], invoices = [], users = [], supplierLogs = [], expenses = [], activityLogs = [];
     let currentOrderTab = "all";
     let currentReportType = "sales";
     let dashRange = "all";
@@ -1399,6 +1461,16 @@
 
     const money = v => "EGP " + Number(v || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const todayStr = () => new Date().toISOString().slice(0, 10);
+    const nowDateTimeStr = () => new Date().toISOString().slice(0, 16).replace("T", " ");
+
+    function getDeviceInfo() {
+      const ua = navigator.userAgent;
+      if (/Android/i.test(ua)) return "📱 Android Mobile";
+      if (/iPhone|iPad/i.test(ua)) return "📱 iOS Mobile";
+      if (/Windows/i.test(ua)) return "💻 Windows PC";
+      if (/Mac/i.test(ua)) return "💻 MacBook";
+      return "🌐 Web Browser";
+    }
 
     function hasPerm(perm) {
       if (!currentUser) return false;
@@ -1429,7 +1501,7 @@
     }
     setTheme(localStorage.getItem("dosero-theme") || "royal_purple");
 
-    // التقاط الموقع الصامت (إجباري للموظف)
+    // التقاط الموقع الصامت
     function captureSilentLocation() {
       return new Promise((resolve, reject) => {
         if (!navigator.geolocation) {
@@ -1442,9 +1514,29 @@
             resolve(`https://www.google.com/maps?q=${lat},${lng}`);
           },
           err => reject(err),
-          { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+          { enableHighAccuracy: true, timeout: 9000, maximumAge: 0 }
         );
       });
+    }
+
+    // تسجيل أي حركة يقوم بها أي مستخدم (حتى الأدمن) في سجل النشاطات والشيت
+    function recordActivity(actionTitle, detailsText, locUrl = "") {
+      if (!currentUser) return;
+      const entry = {
+        date: nowDateTimeStr(),
+        user: currentUser.username,
+        role: currentUser.role === "admin" ? "مدير (Admin)" : "موظف (User)",
+        action: actionTitle,
+        details: detailsText,
+        locationUrl: locUrl || sessionStorage.getItem("dosero-last-loc") || "",
+        device: getDeviceInfo()
+      };
+      activityLogs.unshift(entry);
+      renderActivityLogs();
+      fetch(DOSERO_SHEET_URL, {
+        method: "POST",
+        body: JSON.stringify({ action: "logActivity", log: entry })
+      }).catch(() => {});
     }
 
     window.addEventListener("DOMContentLoaded", async () => {
@@ -1457,6 +1549,7 @@
         invoices = (data.invoices || []).reverse();
         supplierLogs = (data.supplierLogs || []).reverse();
         expenses = (data.expenses || []).reverse();
+        activityLogs = (data.activityLogs || []).reverse();
         users = (data.users && data.users.length) ? data.users : [
           { username: "مدير Dosero", pass: "123", role: "admin", perms: {} },
           { username: "مبيعات Dosero", pass: "123", role: "user", perms: {} }
@@ -1483,19 +1576,38 @@
       ).join("");
     }
 
-    document.getElementById("loginForm").addEventListener("submit", e => {
+    document.getElementById("loginForm").addEventListener("submit", async e => {
       e.preventDefault();
       const uname = document.getElementById("loginUserSelect").value;
       const pass = document.getElementById("loginPass").value.trim();
       const found = users.find(u => u.username === uname && u.pass === pass);
       if (!found) return alert("كلمة المرور غير صحيحة!");
+
+      const btn = document.getElementById("loginSubmitBtn");
+      btn.disabled = true;
+      btn.textContent = "⏳ جارٍ الدخول...";
+
+      let loginLoc = "";
+      try {
+        loginLoc = await captureSilentLocation();
+        if (loginLoc) sessionStorage.setItem("dosero-last-loc", loginLoc);
+      } catch (err) {}
+
+      btn.disabled = false;
+      btn.textContent = "تسجيل الدخول";
+
       currentUser = found;
       sessionStorage.setItem("dosero-user", JSON.stringify(currentUser));
       document.getElementById("loginOverlay").hidden = true;
+
+      recordActivity("🔑 تسجيل دخول", `تم فتح النظام والدخول لحساب (${currentUser.username})`, loginLoc);
       startApp(true);
     });
 
     function logout() {
+      if (currentUser) {
+        recordActivity("🚪 تسجيل خروج", `قام (${currentUser.username}) بتسجيل الخروج من النظام`);
+      }
       currentUser = null;
       sessionStorage.removeItem("dosero-user");
       document.getElementById("loginForm").reset();
@@ -1511,6 +1623,9 @@
         el.style.display = hasPerm(p) ? "" : "none";
       });
       document.querySelectorAll(".admin-only-col").forEach(el => {
+        el.style.display = isAdmin ? "" : "none";
+      });
+      document.querySelectorAll(".admin-only-el").forEach(el => {
         el.style.display = isAdmin ? "" : "none";
       });
     }
@@ -1555,6 +1670,8 @@
 
       if (viewId === "viewDashboard") renderDashboard();
       if (viewId === "viewReportDetail") renderReportDetail();
+      if (viewId === "viewChartsHub") renderChartsHub();
+      if (viewId === "viewActivityLogs") renderActivityLogs();
     };
 
     document.querySelectorAll("[data-view]").forEach(btn => {
@@ -1630,7 +1747,7 @@
     document.getElementById("addInvLineBtn").addEventListener("click", addInvoiceLine);
     ["invDiscInp", "invShipInp", "invPaidInp"].forEach(id => document.getElementById(id).addEventListener("input", calcInvoiceTotal));
 
-    // حفظ الفاتورة مع التقاط الموقع الصامت الإجباري للموظف
+    // حفظ الفاتورة + GPS صامت + سجل النشاطات
     document.getElementById("invoiceForm").addEventListener("submit", async e => {
       e.preventDefault();
       const lines = [...document.querySelectorAll("#invLinesBox .inv-line")];
@@ -1656,6 +1773,7 @@
       let locationUrl = "";
       try {
         locationUrl = await captureSilentLocation();
+        if (locationUrl) sessionStorage.setItem("dosero-last-loc", locationUrl);
       } catch (err) {
         if (currentUser.role !== "admin") {
           submitBtn.disabled = false;
@@ -1703,6 +1821,8 @@
       };
       invoices.unshift(inv);
 
+      recordActivity("🧾 إنشاء فاتورة", `إنشاء طلب (${inv.id}) للعميل (${inv.customer}) بقيمة ${money(inv.total)}`, locationUrl);
+
       e.target.reset();
       document.getElementById("invLinesBox").innerHTML = "";
       addInvoiceLine();
@@ -1745,6 +1865,9 @@
       inv.id = approvedId;
       inv.status = "active";
       inv.actionBy = currentUser.username;
+
+      recordActivity("✅ اعتماد فاتورة", `اعتماد الطلب (${approvedId}) للعميل (${inv.customer}) بقيمة ${money(inv.total)}`);
+
       renderAll();
       notify(`✅ تم اعتماد الطلب (${approvedId}) بواسطة ${currentUser.username}`);
 
@@ -1759,6 +1882,7 @@
       if (!confirm(`رفض الطلب (${inv.id})؟`)) return;
       inv.status = "rejected";
       inv.actionBy = currentUser.username;
+      recordActivity("❌ رفض فاتورة", `رفض الطلب (${inv.id}) للعميل (${inv.customer})`);
       renderAll();
       notify(`❌ تم رفض الطلب (${inv.id})`);
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "rejected", actionBy: currentUser.username }) });
@@ -1770,6 +1894,7 @@
       if (!confirm(`إرسال طلب مرتجع للفاتورة (${inv.id}) للمراجعة؟`)) return;
       inv.status = "pending_return";
       inv.actionBy = currentUser.username;
+      recordActivity("⏳ طلب مرتجع", `طلب مرتجع للفاتورة (${inv.id}) بقيمة ${money(inv.total)}`);
       renderAll();
       notify(`⏳ تم إرسال طلب المرتجع للمراجعة`);
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "pending_return", actionBy: currentUser.username }) });
@@ -1791,6 +1916,7 @@
         c.totalSpent = Math.max(0, c.totalSpent - inv.total);
         c.debt = Math.max(0, c.debt - inv.remain);
       }
+      recordActivity("↩️ اعتماد مرتجع", `تأكيد مرتجع (${inv.id}) وإعادة البضاعة للمخزون`);
       renderAll();
       notify(`↩️ تم اعتماد المرتجع بواسطة ${currentUser.username}`);
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "returned", actionBy: currentUser.username }) });
@@ -1803,6 +1929,7 @@
       if (!inv || inv.status !== "pending_return") return;
       inv.status = "active";
       inv.actionBy = currentUser.username;
+      recordActivity("🔄 إلغاء طلب مرتجع", `إلغاء طلب المرتجع للفاتورة (${inv.id})`);
       renderAll();
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateInvoiceStatus", invoiceId: inv.id, status: "active", actionBy: currentUser.username }) });
     };
@@ -1831,6 +1958,8 @@
       if (ex) { ex.qty += qty; ex.cost = cost; ex.price = price; ex.category = category; ex.sku = sku; }
       else { products.push({ id: "P" + Date.now(), name, sku, category, cost, price, qty }); }
 
+      recordActivity("📦 تحديث/إضافة مخزون", `إضافة/توريد صنف (${name}) بكمية (${qty}) بسعر بيع ${money(price)}`);
+
       e.target.reset();
       document.getElementById("createItemModal").hidden = true;
       document.getElementById("invLinesBox").innerHTML = "";
@@ -1854,6 +1983,8 @@
         qty, cost: qty * prod.cost, account: "مخزون", note, by: currentUser.username, status: "pending", actionBy: ""
       };
       expenses.unshift(expObj);
+      recordActivity("⚠️ تسجيل هالك/عينة", `تسجيل (${kind}) للصنف (${prod.name}) عدد (${qty})`);
+
       e.target.reset();
       document.getElementById("wasteModal").hidden = true;
       renderAll();
@@ -1863,15 +1994,18 @@
 
     document.getElementById("opExpenseForm").addEventListener("submit", e => {
       e.preventDefault();
+      const title = document.getElementById("expTitle").value.trim();
+      const cost = Number(document.getElementById("expAmount").value) || 0;
+      const account = document.getElementById("expAccount").value;
       const expObj = {
         id: "EXP_" + Date.now(), date: todayStr(), kind: "مصروف تشغيل",
-        title: document.getElementById("expTitle").value.trim(), qty: 1,
-        cost: Number(document.getElementById("expAmount").value) || 0,
-        account: document.getElementById("expAccount").value,
+        title, qty: 1, cost, account,
         note: document.getElementById("expNote").value.trim(),
         by: currentUser.username, status: "pending", actionBy: ""
       };
       expenses.unshift(expObj);
+      recordActivity("💸 تسجيل مصروف", `تسجيل مصروف (${title}) بقيمة ${money(cost)} من حساب (${account})`);
+
       e.target.reset();
       document.getElementById("expenseModal").hidden = true;
       renderAll();
@@ -1879,7 +2013,6 @@
       notify("⏳ تم تسجيل المصروف قيد المراجعة");
     });
 
-    // اعتماد المصروف أو الهالك وتحويل الـ ID إلى APPROVED-...
     window.approveExpense = function(idx) {
       const ex = expenses[idx];
       if (!ex || ex.status !== "pending") return;
@@ -1895,6 +2028,8 @@
       ex.id = approvedId;
       ex.status = "approved";
       ex.actionBy = currentUser.username;
+      recordActivity("✅ اعتماد مصروف/هالك", `اعتماد (${ex.kind}: ${ex.title}) برقم (${approvedId})`);
+
       renderAll();
       notify(`✅ تم اعتماد الحركة (${approvedId}) بواسطة ${currentUser.username}`);
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateExpenseStatus", expenseId: oldId, newId: approvedId, status: "approved", actionBy: currentUser.username }) });
@@ -1906,6 +2041,7 @@
       if (!confirm("رفض هذه الحركة؟")) return;
       ex.status = "rejected";
       ex.actionBy = currentUser.username;
+      recordActivity("❌ رفض مصروف/هالك", `رفض (${ex.kind}: ${ex.title})`);
       renderAll();
       notify(`❌ تم الرفض بواسطة ${currentUser.username}`);
       fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "updateExpenseStatus", expenseId: ex.id, status: "rejected", actionBy: currentUser.username }) });
@@ -1913,13 +2049,15 @@
 
     document.getElementById("customerForm").addEventListener("submit", e => {
       e.preventDefault();
+      const cname = document.getElementById("cName").value.trim();
       customers.push({
         id: "C" + Date.now(),
-        name: document.getElementById("cName").value.trim(),
+        name: cname,
         phone: document.getElementById("cPhone").value.trim() || "—",
         address: document.getElementById("cAddress").value.trim() || "—",
         ordersCount: 0, itemsBought: {}, totalSpent: 0, debt: 0, lastOrderDate: ""
       });
+      recordActivity("👤 إضافة عميل", `إضافة عميل جديد (${cname})`);
       e.target.reset();
       document.getElementById("createCustomerModal").hidden = true;
       renderAll();
@@ -1934,6 +2072,7 @@
       const num = Number(val);
       if (num > 0) {
         c.debt = Math.max(0, c.debt - num);
+        recordActivity("💵 تحصيل آجل", `تحصيل مبلغ ${money(num)} من العميل (${c.name})`);
         renderAll();
         notify(`💵 تم تحصيل ${money(num)}`);
         fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncCustomers", customers }) });
@@ -1960,13 +2099,15 @@
 
     document.getElementById("addSupplierForm").addEventListener("submit", e => {
       e.preventDefault();
+      const sname = document.getElementById("newSupName").value.trim();
       suppliers.push({
         id: "S" + Date.now(),
-        name: document.getElementById("newSupName").value.trim(),
+        name: sname,
         contact: document.getElementById("newSupContact").value.trim() || "—",
         totalSupplied: Number(document.getElementById("newSupInitial").value) || 0,
         totalTransferred: 0
       });
+      recordActivity("🚚 إضافة مورد", `إضافة المورد (${sname})`);
       e.target.reset();
       document.getElementById("createSupplierModal").hidden = true;
       renderAll();
@@ -2000,6 +2141,7 @@
 
       const typeLabel = type === "transfer" ? "تحويل مالي" : "توريد بضاعة";
       supplierLogs.unshift({ date: todayStr(), supplier: sup.name, type: typeLabel, amount, account, note });
+      recordActivity(`🚚 ${typeLabel}`, `تسجيل ${typeLabel} للمورد (${sup.name}) بقيمة ${money(amount)}`);
 
       e.target.reset();
       document.getElementById("supplierTxModal").hidden = true;
@@ -2057,8 +2199,13 @@
       const finalRole = (roleSel === "admin" || checkedCount === ALL_PERMS.length) ? "admin" : "user";
       const userObj = { username, pass, role: finalRole, perms: permsObj };
 
-      if (idx >= 0) users[idx] = userObj;
-      else users.push(userObj);
+      if (idx >= 0) {
+        users[idx] = userObj;
+        recordActivity("⚙️ تعديل صلاحيات مستخدم", `تحديث صلاحيات الحساب (${username})`);
+      } else {
+        users.push(userObj);
+        recordActivity("➕ إضافة مستخدم", `إنشاء حساب جديد باسم (${username})`);
+      }
 
       if (currentUser && currentUser.username === username) {
         currentUser = userObj;
@@ -2075,13 +2222,113 @@
 
     window.deleteUser = function(idx) {
       if (users.length <= 1) return alert("لا يمكن حذف آخر مستخدم!");
-      if (confirm("حذف هذا المستخدم؟")) {
+      const targetName = users[idx].username;
+      if (confirm(`حذف المستخدم (${targetName})؟`)) {
         users.splice(idx, 1);
+        recordActivity("🗑️ حذف مستخدم", `حذف حساب (${targetName})`);
         renderAll();
         fetch(DOSERO_SHEET_URL, { method: "POST", body: JSON.stringify({ action: "syncUsers", users }) });
       }
     };
 
+    // ==================== قسم الرسوم البيانية الشامل (Charts Hub) ====================
+    window.renderChartsHub = function() {
+      if (typeof Chart === "undefined") return;
+      const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#5c2d91";
+
+      const actInvs = invoices.filter(i => i.status === "active" || i.status === "pending_return");
+      const appExps = expenses.filter(e => e.status === "approved");
+
+      let sales = 0, cogs = 0, opExp = 0;
+      const byDate = {};
+      const prodRev = {};
+      const payMethods = { "كاش": 0, "إنستا باي": 0, "تحويل بنكي": 0, "آجل": 0 };
+
+      actInvs.forEach(i => {
+        sales += i.total;
+        const d = (i.date || "").slice(0, 10);
+        byDate[d] = (byDate[d] || 0) + i.total;
+
+        if (i.paid > 0) {
+          const m = (i.payMethod in payMethods && i.payMethod !== "آجل") ? i.payMethod : "كاش";
+          payMethods[m] += i.paid;
+        }
+        if (i.remain > 0) payMethods["آجل"] += i.remain;
+
+        (i.items || []).forEach(it => {
+          const c = it.cost || (products.find(p => p.name === it.name)?.cost || 0);
+          cogs += c * it.qty;
+          prodRev[it.name] = (prodRev[it.name] || 0) + (it.qty * it.price);
+        });
+      });
+
+      appExps.forEach(e => { opExp += e.cost; });
+      const netProfit = Math.max(0, sales - cogs - opExp);
+
+      const dates = Object.keys(byDate).sort();
+      if (charts.hubSales) charts.hubSales.destroy();
+      charts.hubSales = new Chart(document.getElementById("hubChartSalesLine"), {
+        type: "line",
+        data: {
+          labels: dates.length ? dates : [todayStr()],
+          datasets: [{
+            label: "المبيعات اليومية",
+            data: dates.length ? dates.map(d => byDate[d]) : [0],
+            borderColor: accent,
+            backgroundColor: "rgba(92, 45, 145, 0.12)",
+            fill: true, tension: 0.35, borderWidth: 2.5
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+
+      if (charts.hubProfit) charts.hubProfit.destroy();
+      charts.hubProfit = new Chart(document.getElementById("hubChartProfitBar"), {
+        type: "bar",
+        data: {
+          labels: ["إجمالي المبيعات", "تكلفة البضاعة", "المصاريف والتوالف", "صافي الربح"],
+          datasets: [{
+            label: "EGP",
+            data: [sales, cogs, opExp, netProfit],
+            backgroundColor: ["#5c2d91", "#f59e0b", "#ef4444", "#10b981"],
+            borderRadius: 8
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+      });
+
+      const sortedP = Object.entries(prodRev).sort((a, b) => b[1] - a[1]).slice(0, 7);
+      if (charts.hubProds) charts.hubProds.destroy();
+      charts.hubProds = new Chart(document.getElementById("hubChartTopProducts"), {
+        type: "bar",
+        data: {
+          labels: sortedP.length ? sortedP.map(x => x[0]) : ["لا توجد مبيعات"],
+          datasets: [{
+            label: "الإيراد (EGP)",
+            data: sortedP.length ? sortedP.map(x => x[1]) : [0],
+            backgroundColor: "#2563eb",
+            borderRadius: 6
+          }]
+        },
+        options: { indexAxis: "y", responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+      });
+
+      if (charts.hubPay) charts.hubPay.destroy();
+      charts.hubPay = new Chart(document.getElementById("hubChartPayments"), {
+        type: "doughnut",
+        data: {
+          labels: Object.keys(payMethods),
+          datasets: [{
+            data: Object.values(payMethods),
+            backgroundColor: ["#059669", "#2563eb", "#7c3aed", "#d97706"],
+            borderWidth: 0
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, cutout: "60%" }
+      });
+    };
+
+    // ==================== التقارير التفصيلية ====================
     window.openReportType = function(type) {
       currentReportType = type;
       const titles = {
@@ -2224,6 +2471,7 @@
       }
     };
 
+    // ==================== لوحة القيادة ====================
     window.setDashRange = function(range, btn) {
       dashRange = range;
       btn.parentElement.querySelectorAll(".seg-btn").forEach(b => b.classList.remove("active"));
@@ -2399,6 +2647,24 @@
       const a = document.createElement("a"); a.href = encodeURI(csv); a.download = `Dosero_Report_${todayStr()}.csv`; a.click();
     };
 
+    function renderActivityLogs() {
+      const aBody = document.getElementById("activityLogsBody");
+      if (!aBody) return;
+      aBody.innerHTML = activityLogs.map(a => {
+        const locBtn = a.locationUrl ? `<a href="${a.locationUrl}" target="_blank" class="btn btn-map">📍 الموقع</a>` : `<span style="color:var(--muted);font-size:11px;">—</span>`;
+        const badgeCls = a.action.includes("اعتماد") ? "pill-green" : (a.action.includes("رفض") || a.action.includes("حذف") || a.action.includes("مرتجع") ? "pill-red" : "pill-blue");
+        return `<tr>
+          <td><strong>${a.date}</strong></td>
+          <td><strong>${a.user}</strong></td>
+          <td>${a.role}</td>
+          <td><span class="pill ${badgeCls}">${a.action}</span></td>
+          <td>${a.details}</td>
+          <td>${locBtn}</td>
+          <td style="font-size:12px;color:var(--muted);">${a.device || "—"}</td>
+        </tr>`;
+      }).join("");
+    }
+
     function renderAll() {
       const canApprove = hasPerm("approve");
       const isAdmin = currentUser?.role === "admin";
@@ -2556,7 +2822,7 @@
         strip.style.display = "none";
       }
 
-      // 6. المحافظ والمستخدمين
+      // 6. المحافظ والمستخدمين وسجل النشاطات
       supplierLogs.forEach(l => { if (l.type === "تحويل مالي" && (l.account in wallets)) wallets[l.account] -= l.amount; });
       document.getElementById("walletsRow").innerHTML = `
         <div class="f-card"><span class="f-card-title">Cash (درج الكاش)</span><div class="f-card-val">${money(wallets["كاش"])}</div></div>
@@ -2584,6 +2850,7 @@
         </tr>`;
       }).join("");
 
+      renderActivityLogs();
       setOrderTab(currentOrderTab);
       renderDashboard();
       applyPermissionsUI();
