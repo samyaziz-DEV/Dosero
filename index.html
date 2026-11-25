@@ -397,43 +397,42 @@
       .dash-grid-3, .report-hub-grid, .grid-2, .grid-3, .grid-4, .perm-grid { grid-template-columns: 1fr; }
       .inv-line { grid-template-columns: 1fr 1fr; }
     }
-/* === iOS Liquid Glass + Dynamic Themes === */
-body {
-  background-image: 
-    radial-gradient(circle at 12% 18%, rgba(225, 29, 72, 0.12), transparent 42%),
-    radial-gradient(circle at 88% 15%, rgba(56, 189, 248, 0.14), transparent 45%),
-    radial-gradient(circle at 50% 88%, rgba(167, 139, 250, 0.12), transparent 50%) !important;
-  background-attachment: fixed !important;
-}
+/* === Full iOS Liquid Glass (Light + All Themes + Dark Mode) === */
 
-.sidebar, aside, header, .topbar {
-  background-color: color-mix(in srgb, var(--bg-card, #ffffff) 68%, transparent) !important;
+/* 1. الزجاج في الثيمات الفاتحة (بنفسجي، إسبريسو، أزرق، أخضر) */
+.sidebar, aside, header, .topbar,
+.card, .f-card, .report-tile, .table-card, .modal-box, .login-box {
+  background: rgba(255, 255, 255, 0.65) !important;
   backdrop-filter: blur(22px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
-  border-color: rgba(255, 255, 255, 0.45) !important;
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.85) !important;
 }
 
+/* 2. الزجاج في الوضع الليلي (Dark Mode) */
+body.dark .sidebar, body.dark aside, body.dark header, body.dark .topbar,
+body.dark .card, body.dark .f-card, body.dark .report-tile, body.dark .table-card, body.dark .modal-box,
+[data-theme="dark"] .sidebar, [data-theme="dark"] aside, [data-theme="dark"] header, [data-theme="dark"] .topbar,
+[data-theme="dark"] .card, [data-theme="dark"] .f-card, [data-theme="dark"] .report-tile, [data-theme="dark"] .table-card, [data-theme="dark"] .modal-box {
+  background: rgba(15, 23, 42, 0.58) !important;
+  backdrop-filter: blur(24px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.18) !important;
+}
+
+/* 3. الحواف الدائرية والأزرار الكبسولية (iOS Style) */
 .card, .f-card, .report-tile, .table-card, .modal-box, .login-box {
-  background-color: color-mix(in srgb, var(--bg-card, #ffffff) 76%, transparent) !important;
-  backdrop-filter: blur(20px) saturate(175%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(175%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
   border-radius: 22px !important;
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.7) !important;
 }
 
 .btn, .tab-btn, .nav-item, .nav-sub-item, .pill {
   border-radius: 999px !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
 input, select, textarea {
-  background-color: color-mix(in srgb, var(--bg-card, #ffffff) 65%, transparent) !important;
-  backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.55) !important;
   border-radius: 14px !important;
 }
   </style>
