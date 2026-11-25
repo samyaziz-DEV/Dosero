@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar" dir="rtl" data-theme="royal_purple">
+<html lang="ar" dir="rtl" data-theme="dosero_red">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,85 +9,148 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
-    :root {
-      --bg: #f5f6fa;
+    :root,
+    html[data-theme="dosero_red"] {
+      --bg: #f6f3f5;
+      --bg-glow-1: rgba(225, 29, 72, 0.16);
+      --bg-glow-2: rgba(251, 113, 133, 0.14);
+      --bg-glow-3: rgba(244, 63, 94, 0.10);
+      --glass-surface: rgba(255, 255, 255, 0.68);
+      --glass-surface-strong: rgba(255, 255, 255, 0.82);
+      --glass-border: rgba(255, 255, 255, 0.78);
+      --glass-shadow: 0 8px 32px rgba(15, 23, 42, 0.07), inset 0 1px 1px rgba(255, 255, 255, 0.92);
       --surface: #ffffff;
-      --surface-alt: #f8f9fc;
-      --surface-hover: #f3f0fa;
-      --sidebar-bg: #ffffff;
-      --sidebar-text: #344054;
-      --sidebar-muted: #667085;
-      --sidebar-active-bg: #f4ebff;
-      --sidebar-active-text: #5c2d91;
-      --accent: #5c2d91;
-      --accent-hover: #472172;
-      --accent-soft: rgba(92, 45, 145, 0.1);
-      --text: #101828;
-      --muted: #667085;
-      --border: #eaecf0;
+      --surface-alt: rgba(255, 255, 255, 0.55);
+      --surface-hover: rgba(225, 29, 72, 0.06);
+      --sidebar-bg: rgba(255, 255, 255, 0.66);
+      --sidebar-text: #1e293b;
+      --sidebar-muted: #64748b;
+      --sidebar-active-bg: rgba(225, 29, 72, 0.13);
+      --sidebar-active-text: #be123c;
+      --accent: #e11d48;
+      --accent-hover: #be123c;
+      --accent-soft: rgba(225, 29, 72, 0.12);
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: rgba(226, 232, 240, 0.8);
       --green: #027a48;
-      --green-soft: #ecfdf3;
+      --green-soft: rgba(236, 253, 243, 0.85);
       --red: #b42318;
-      --red-soft: #fef3f2;
+      --red-soft: rgba(254, 243, 242, 0.85);
       --warn: #b54708;
-      --warn-soft: #fffaeb;
+      --warn-soft: rgba(255, 250, 235, 0.88);
       --blue: #175cd3;
-      --blue-soft: #eff8ff;
-      --shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.04);
-      --shadow-sm: 0 2px 8px rgba(16, 24, 40, 0.05);
-      --shadow-lg: 0 20px 40px -12px rgba(16, 24, 40, 0.25);
-      --radius: 12px;
+      --blue-soft: rgba(239, 248, 255, 0.85);
+      --shadow-xs: 0 2px 8px rgba(16, 24, 40, 0.04);
+      --shadow-sm: 0 6px 20px rgba(16, 24, 40, 0.06);
+      --shadow-lg: 0 20px 45px -12px rgba(16, 24, 40, 0.25);
+      --radius: 22px;
+    }
+
+    html[data-theme="royal_purple"] {
+      --bg: #f4f2f8;
+      --bg-glow-1: rgba(92, 45, 145, 0.16);
+      --bg-glow-2: rgba(167, 139, 250, 0.15);
+      --bg-glow-3: rgba(192, 132, 252, 0.11);
+      --accent: #5c2d91; --accent-hover: #472172; --accent-soft: rgba(92, 45, 145, 0.12);
+      --sidebar-active-bg: rgba(92, 45, 145, 0.13); --sidebar-active-text: #5c2d91;
+      --surface-hover: rgba(92, 45, 145, 0.06);
     }
 
     html[data-theme="espresso"] {
-      --accent: #b87333; --accent-hover: #965b23; --accent-soft: rgba(184,115,51,0.12);
-      --sidebar-active-bg: #fdf5ed; --sidebar-active-text: #965b23;
+      --bg: #f7f4f1;
+      --bg-glow-1: rgba(184, 115, 51, 0.18);
+      --bg-glow-2: rgba(217, 119, 6, 0.13);
+      --bg-glow-3: rgba(146, 64, 14, 0.10);
+      --accent: #b87333; --accent-hover: #965b23; --accent-soft: rgba(184, 115, 51, 0.14);
+      --sidebar-active-bg: rgba(184, 115, 51, 0.14); --sidebar-active-text: #965b23;
+      --surface-hover: rgba(184, 115, 51, 0.06);
     }
+
     html[data-theme="royal"] {
-      --accent: #2563eb; --accent-hover: #1d4ed8; --accent-soft: rgba(37,99,235,0.1);
-      --sidebar-active-bg: #eff6ff; --sidebar-active-text: #1d4ed8;
+      --bg: #f1f5fb;
+      --bg-glow-1: rgba(37, 99, 235, 0.16);
+      --bg-glow-2: rgba(56, 189, 248, 0.15);
+      --bg-glow-3: rgba(96, 165, 250, 0.11);
+      --accent: #2563eb; --accent-hover: #1d4ed8; --accent-soft: rgba(37, 99, 235, 0.12);
+      --sidebar-active-bg: rgba(37, 99, 235, 0.13); --sidebar-active-text: #1d4ed8;
+      --surface-hover: rgba(37, 99, 235, 0.06);
     }
+
     html[data-theme="emerald"] {
-      --accent: #059669; --accent-hover: #047857; --accent-soft: rgba(5,150,105,0.1);
-      --sidebar-active-bg: #ecfdf5; --sidebar-active-text: #047857;
+      --bg: #f1f8f5;
+      --bg-glow-1: rgba(5, 150, 105, 0.16);
+      --bg-glow-2: rgba(52, 211, 153, 0.15);
+      --bg-glow-3: rgba(16, 185, 129, 0.11);
+      --accent: #059669; --accent-hover: #047857; --accent-soft: rgba(5, 150, 105, 0.12);
+      --sidebar-active-bg: rgba(5, 150, 105, 0.13); --sidebar-active-text: #047857;
+      --surface-hover: rgba(5, 150, 105, 0.06);
     }
+
     html[data-theme="dark"] {
-      --bg: #0f1117; --surface: #181b23; --surface-alt: #20242f; --surface-hover: #252a37;
-      --sidebar-bg: #14171f; --sidebar-text: #d0d5dd; --sidebar-muted: #98a2b3;
-      --sidebar-active-bg: rgba(127, 86, 217, 0.18); --sidebar-active-text: #d6bbfb;
-      --accent: #7f56d9; --accent-hover: #6941c6; --accent-soft: rgba(127,86,217,0.18);
-      --text: #f9fafb; --muted: #98a2b3; --border: #292e3d;
-      --green: #32d583; --green-soft: rgba(50,213,131,0.15);
-      --red: #f97066; --red-soft: rgba(249,112,102,0.15);
-      --warn: #fdb022; --warn-soft: rgba(253,176,34,0.15);
+      --bg: #0b0e14;
+      --bg-glow-1: rgba(225, 29, 72, 0.22);
+      --bg-glow-2: rgba(56, 189, 248, 0.14);
+      --bg-glow-3: rgba(139, 92, 246, 0.16);
+      --glass-surface: rgba(22, 27, 38, 0.62);
+      --glass-surface-strong: rgba(24, 30, 44, 0.74);
+      --glass-border: rgba(255, 255, 255, 0.13);
+      --glass-shadow: 0 10px 36px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.16);
+      --surface: #181e2c;
+      --surface-alt: rgba(30, 38, 56, 0.62);
+      --surface-hover: rgba(255, 255, 255, 0.06);
+      --sidebar-bg: rgba(18, 23, 34, 0.68);
+      --sidebar-text: #e2e8f0;
+      --sidebar-muted: #94a3b8;
+      --sidebar-active-bg: rgba(244, 63, 94, 0.22);
+      --sidebar-active-text: #fda4af;
+      --accent: #f43f5e;
+      --accent-hover: #e11d48;
+      --accent-soft: rgba(244, 63, 94, 0.2);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.12);
+      --green: #34d399; --green-soft: rgba(52, 211, 153, 0.16);
+      --red: #fb7185; --red-soft: rgba(251, 113, 133, 0.16);
+      --warn: #fbbf24; --warn-soft: rgba(251, 191, 36, 0.16);
+      --blue: #60a5fa; --blue-soft: rgba(96, 165, 250, 0.16);
     }
 
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif;
-      background: var(--bg);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 12% 16%, var(--bg-glow-1), transparent 45%),
+        radial-gradient(circle at 86% 14%, var(--bg-glow-2), transparent 48%),
+        radial-gradient(circle at 50% 88%, var(--bg-glow-3), transparent 52%);
+      background-attachment: fixed;
       color: var(--text);
       display: flex;
       min-height: 100vh;
       font-variant-numeric: tabular-nums;
       -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, color 0.2s ease;
     }
 
     .overlay {
       position: fixed; inset: 0; z-index: 2000;
-      background: rgba(16, 24, 40, 0.62);
-      backdrop-filter: blur(6px);
+      background: rgba(10, 14, 23, 0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       display: grid; place-items: center; padding: 20px;
     }
     .overlay[hidden] { display: none; }
     .modal-box {
       width: min(520px, 100%);
-      background: var(--surface);
-      border-radius: 18px;
+      background: var(--glass-surface-strong);
+      backdrop-filter: blur(26px) saturate(185%);
+      -webkit-backdrop-filter: blur(26px) saturate(185%);
+      border-radius: 26px;
       padding: 26px;
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--border);
+      box-shadow: var(--glass-shadow), var(--shadow-lg);
+      border: 1px solid var(--glass-border);
       max-height: 92vh; overflow-y: auto;
     }
     .modal-head {
@@ -109,25 +172,33 @@
       font-size: 12px;
       font-weight: 700;
       padding: 5px 14px;
-      border-radius: 20px;
+      border-radius: 999px;
       margin-bottom: 12px;
       letter-spacing: 0.4px;
+      border: 1px solid var(--glass-border);
     }
 
     .toast-container { position: fixed; bottom: 20px; left: 20px; z-index: 3000; display: flex; flex-direction: column; gap: 8px; }
     .toast {
-      background: #101828; color: #fff; padding: 12px 18px; border-radius: 10px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      color: #fff; padding: 12px 18px; border-radius: 16px;
       font-size: 13px; font-weight: 600; box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       border-inline-start: 4px solid var(--accent);
       animation: fadeUp .2s ease;
     }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     aside.sidebar {
-      width: 260px;
+      width: 265px;
       background: var(--sidebar-bg);
+      backdrop-filter: blur(24px) saturate(185%);
+      -webkit-backdrop-filter: blur(24px) saturate(185%);
       color: var(--sidebar-text);
-      border-inline-end: 1px solid var(--border);
+      border-inline-end: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
       display: flex; flex-direction: column; justify-content: space-between;
       position: sticky; top: 0; height: 100vh; overflow-y: auto;
       flex-shrink: 0; transition: width .2s ease;
@@ -143,33 +214,47 @@
     .brand-logo small { font-size: 10.5px; color: var(--muted); font-weight: 600; display: block; }
 
     .nav-item, .nav-parent {
-      width: 100%; border: 0; background: transparent; color: var(--sidebar-text);
+      width: 100%; border: 1px solid transparent; background: transparent; color: var(--sidebar-text);
       font: inherit; font-size: 13.5px; font-weight: 600;
-      padding: 10px 12px; border-radius: 8px; cursor: pointer;
+      padding: 10px 14px; border-radius: 999px; cursor: pointer;
       display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 3px; transition: .15s ease; text-align: start;
+      margin-bottom: 4px; transition: .18s ease; text-align: start;
     }
-    .nav-item:hover, .nav-parent:hover { background: var(--surface-alt); }
+    .nav-item:hover, .nav-parent:hover {
+      background: var(--surface-alt);
+      border-color: var(--glass-border);
+    }
     .nav-item.active {
       background: var(--sidebar-active-bg);
       color: var(--sidebar-active-text);
+      border-color: var(--glass-border);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
       font-weight: 700;
     }
     .nav-left { display: flex; align-items: center; gap: 10px; }
-    .nav-ico { width: 18px; text-align: center; font-size: 15px; opacity: 0.85; }
-    .nav-submenu { padding-inline-start: 26px; display: none; flex-direction: column; gap: 2px; margin-bottom: 6px; }
+    .nav-ico { width: 18px; text-align: center; font-size: 15px; opacity: 0.9; }
+    .nav-arrow { transition: transform 0.2s ease; font-size: 13px; }
+    .nav-parent.expanded .nav-arrow { transform: rotate(180deg); }
+
+    .nav-submenu { padding-inline-start: 22px; display: none; flex-direction: column; gap: 3px; margin-bottom: 8px; }
     .nav-submenu.open { display: flex; }
     .nav-sub-item {
-      border: 0; background: transparent; color: var(--sidebar-muted);
+      border: 1px solid transparent; background: transparent; color: var(--sidebar-muted);
       font: inherit; font-size: 13px; font-weight: 500;
-      padding: 8px 12px; border-radius: 7px; cursor: pointer; text-align: start;
+      padding: 8px 14px; border-radius: 999px; cursor: pointer; text-align: start;
       display: flex; align-items: center; justify-content: space-between;
+      transition: .15s ease;
     }
     .nav-sub-item:hover { color: var(--text); background: var(--surface-alt); }
-    .nav-sub-item.active { color: var(--sidebar-active-text); background: var(--sidebar-active-bg); font-weight: 700; }
+    .nav-sub-item.active {
+      color: var(--sidebar-active-text);
+      background: var(--sidebar-active-bg);
+      border-color: var(--glass-border);
+      font-weight: 700;
+    }
 
     .badge-count {
-      font-size: 11px; padding: 1px 7px; border-radius: 12px;
+      font-size: 11px; padding: 1px 8px; border-radius: 999px;
       background: var(--warn-soft); color: var(--warn); font-weight: 700;
     }
     .badge-red { background: var(--red-soft); color: var(--red); }
@@ -183,41 +268,50 @@
 
     .main-shell { flex: 1; display: flex; flex-direction: column; min-width: 0; }
     .top-header {
-      height: 62px; background: var(--surface); border-bottom: 1px solid var(--border);
+      height: 64px;
+      background: var(--glass-surface);
+      backdrop-filter: blur(24px) saturate(185%);
+      -webkit-backdrop-filter: blur(24px) saturate(185%);
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-xs);
       padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
       position: sticky; top: 0; z-index: 90;
     }
     .header-search {
       display: flex; align-items: center; gap: 8px;
-      background: var(--surface-alt); border: 1px solid var(--border);
-      border-radius: 9px; padding: 6px 12px; width: min(320px, 100%);
+      background: var(--surface-alt); border: 1px solid var(--glass-border);
+      border-radius: 999px; padding: 6px 14px; width: min(320px, 100%);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
     }
     .header-search input { border: 0; background: transparent; padding: 2px; font-size: 13px; width: 100%; }
     .header-search input:focus { box-shadow: none; }
     .header-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .powered-pill {
       font-size: 11.5px; font-weight: 700; color: var(--accent);
-      background: var(--accent-soft); border: 1px solid var(--border);
-      padding: 5px 11px; border-radius: 20px; white-space: nowrap;
+      background: var(--accent-soft); border: 1px solid var(--glass-border);
+      padding: 5px 12px; border-radius: 999px; white-space: nowrap;
     }
     .sync-live-pill {
       font-size: 11px; font-weight: 700; color: var(--green);
-      background: var(--green-soft); padding: 4px 10px; border-radius: 20px;
+      background: var(--green-soft); padding: 5px 11px; border-radius: 999px;
       display: inline-flex; align-items: center; gap: 5px;
+      border: 1px solid var(--glass-border);
     }
     .account-chip {
       font-size: 12px; font-weight: 700; color: var(--muted);
-      background: var(--surface-alt); border: 1px solid var(--border);
-      padding: 5px 10px; border-radius: 8px;
+      background: var(--surface-alt); border: 1px solid var(--glass-border);
+      padding: 5px 12px; border-radius: 999px;
     }
 
     .content-area { padding: 24px; max-width: 1480px; width: 100%; margin: 0 auto; flex: 1; }
 
     .site-footer {
       text-align: center;
-      padding: 16px 24px;
-      border-top: 1px solid var(--border);
-      background: var(--surface);
+      padding: 15px 24px;
+      border-top: 1px solid var(--glass-border);
+      background: var(--glass-surface);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       font-size: 12.5px;
       color: var(--muted);
       font-weight: 600;
@@ -233,38 +327,49 @@
     .page-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
     .btn {
-      border: 1px solid transparent; border-radius: 9px; padding: 8px 15px;
+      border: 1px solid var(--glass-border); border-radius: 999px; padding: 8px 16px;
       font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
       display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-      transition: .15s ease; white-space: nowrap; text-decoration: none;
+      transition: .18s ease; white-space: nowrap; text-decoration: none;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
     }
-    .btn:hover { filter: brightness(0.95); }
-    .btn-primary { background: var(--accent); color: #fff; }
+    .btn:hover { transform: translateY(-1px); filter: brightness(0.97); }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 6px 18px var(--accent-soft), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+    }
     .btn-primary:hover { background: var(--accent-hover); }
-    .btn-outline { background: var(--surface); color: var(--text); border-color: var(--border); box-shadow: var(--shadow-xs); }
-    .btn-outline:hover { background: var(--surface-alt); }
-    .btn-green { background: var(--green-soft); color: var(--green); padding: 5px 10px; font-size: 12px; }
-    .btn-red { background: var(--red-soft); color: var(--red); padding: 5px 10px; font-size: 12px; }
-    .btn-warn { background: var(--warn-soft); color: var(--warn); padding: 5px 10px; font-size: 12px; }
-    .btn-map { background: var(--blue-soft); color: var(--blue); padding: 4px 9px; font-size: 11.5px; border-radius: 7px; }
+    .btn-outline { background: var(--glass-surface-strong); color: var(--text); border-color: var(--glass-border); }
+    .btn-outline:hover { background: var(--surface-hover); }
+    .btn-green { background: var(--green-soft); color: var(--green); padding: 5px 11px; font-size: 12px; }
+    .btn-red { background: var(--red-soft); color: var(--red); padding: 5px 11px; font-size: 12px; }
+    .btn-warn { background: var(--warn-soft); color: var(--warn); padding: 5px 11px; font-size: 12px; }
+    .btn-map { background: var(--blue-soft); color: var(--blue); padding: 4px 10px; font-size: 11.5px; border-radius: 999px; }
 
     .seg-group {
-      display: inline-flex; background: var(--surface); border: 1px solid var(--border);
-      border-radius: 9px; padding: 3px;
+      display: inline-flex; background: var(--glass-surface); border: 1px solid var(--glass-border);
+      backdrop-filter: blur(14px);
+      border-radius: 999px; padding: 3px;
     }
     .seg-btn {
       border: 0; background: transparent; color: var(--muted);
       font: inherit; font-size: 12.5px; font-weight: 600;
-      padding: 5px 13px; border-radius: 7px; cursor: pointer;
+      padding: 5px 14px; border-radius: 999px; cursor: pointer;
     }
     .seg-btn.active { background: var(--accent); color: #fff; }
 
     .dash-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 18px; }
     .dash-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 18px; }
     .f-card {
-      background: var(--surface); border: 1px solid var(--border);
+      background: var(--glass-surface-strong);
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
+      border: 1px solid var(--glass-border);
       border-radius: var(--radius); padding: 18px 20px;
-      box-shadow: var(--shadow-xs);
+      box-shadow: var(--glass-shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .f-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
     .f-card-title { font-size: 13.5px; font-weight: 600; color: var(--muted); }
@@ -279,23 +384,29 @@
     .chart-xl-wrap { height: 290px; position: relative; }
 
     .table-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); box-shadow: var(--shadow-xs); overflow: hidden;
+      background: var(--glass-surface-strong);
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      box-shadow: var(--glass-shadow);
+      overflow: hidden;
     }
     .table-tabs-bar {
       display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
-      padding: 0 18px; border-bottom: 1px solid var(--border); background: var(--surface);
+      padding: 6px 18px; border-bottom: 1px solid var(--border); background: transparent;
     }
-    .tab-list { display: flex; gap: 4px; overflow-x: auto; }
+    .tab-list { display: flex; gap: 6px; overflow-x: auto; padding: 4px 0; }
     .tab-btn {
-      border: 0; background: transparent; color: var(--muted);
+      border: 1px solid transparent; background: transparent; color: var(--muted);
       font: inherit; font-size: 13px; font-weight: 600;
-      padding: 14px 14px; cursor: pointer; position: relative; white-space: nowrap;
+      padding: 8px 14px; border-radius: 999px; cursor: pointer; position: relative; white-space: nowrap;
     }
-    .tab-btn.active { color: var(--accent); font-weight: 700; }
-    .tab-btn.active::after {
-      content: ""; position: absolute; bottom: 0; inset-inline: 8px;
-      height: 2.5px; background: var(--accent); border-radius: 2px;
+    .tab-btn.active {
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-color: var(--glass-border);
+      font-weight: 700;
     }
 
     .table-wrap { overflow-x: auto; }
@@ -304,12 +415,13 @@
     th { background: var(--surface-alt); font-weight: 600; color: var(--muted); font-size: 12px; }
     tbody tr:hover { background: var(--surface-hover); }
     tbody tr:last-child td { border-bottom: 0; }
-    tr.pending-row { background: rgba(253, 176, 34, 0.05); }
+    tr.pending-row { background: rgba(253, 176, 34, 0.08); }
     tr.rejected-row { opacity: 0.55; background: var(--red-soft); }
 
     .pill {
-      padding: 3px 10px; border-radius: 16px; font-size: 11.5px; font-weight: 600;
+      padding: 3px 11px; border-radius: 999px; font-size: 11.5px; font-weight: 600;
       display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
+      border: 1px solid var(--glass-border);
     }
     .pill-green { background: var(--green-soft); color: var(--green); }
     .pill-warn { background: var(--warn-soft); color: var(--warn); }
@@ -320,10 +432,13 @@
 
     .report-hub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 22px; }
     .report-tile {
-      background: var(--surface); border: 1px solid var(--border);
+      background: var(--glass-surface-strong);
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
+      border: 1px solid var(--glass-border);
       border-radius: var(--radius); padding: 20px 22px;
       display: flex; justify-content: space-between; align-items: center;
-      cursor: pointer; transition: .15s ease; box-shadow: var(--shadow-xs);
+      cursor: pointer; transition: .18s ease; box-shadow: var(--glass-shadow);
       text-align: start; font: inherit; color: var(--text);
     }
     .report-tile:hover { border-color: var(--accent); background: var(--surface-hover); transform: translateY(-2px); }
@@ -333,9 +448,10 @@
 
     label { display: block; font-size: 12.5px; color: var(--text); margin-bottom: 6px; font-weight: 600; }
     input[type="text"], input[type="password"], input[type="number"], input[type="date"], select, textarea {
-      width: 100%; padding: 9px 12px; border: 1px solid var(--border);
-      border-radius: 9px; font: inherit; font-size: 13.5px;
-      background: var(--surface); color: var(--text);
+      width: 100%; padding: 9px 14px; border: 1px solid var(--glass-border);
+      border-radius: 14px; font: inherit; font-size: 13.5px;
+      background: var(--surface-alt); color: var(--text);
+      backdrop-filter: blur(10px);
     }
     input:focus, select:focus, textarea:focus {
       outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft);
@@ -347,13 +463,13 @@
 
     .perm-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-      background: var(--surface-alt); padding: 12px; border-radius: 10px;
+      background: var(--surface-alt); padding: 12px; border-radius: 16px;
       border: 1px solid var(--border);
     }
     .perm-item {
       display: flex; align-items: center; gap: 8px;
       font-size: 12.5px; font-weight: 600; cursor: pointer; margin: 0;
-      padding: 6px 8px; border-radius: 7px; background: var(--surface);
+      padding: 6px 10px; border-radius: 12px; background: var(--glass-surface-strong);
       border: 1px solid var(--border);
     }
     .perm-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent); margin: 0; cursor: pointer; }
@@ -362,19 +478,21 @@
     .inv-line {
       display: grid; grid-template-columns: 2.2fr 0.9fr 1.1fr 1.1fr 36px;
       gap: 8px; align-items: center; padding: 8px; background: var(--surface-alt);
-      border-radius: 9px; margin-bottom: 8px; border: 1px solid var(--border);
+      border-radius: 16px; margin-bottom: 8px; border: 1px solid var(--border);
     }
 
     .pending-strip {
-      background: var(--warn-soft); border: 1px solid #fec84b;
-      border-radius: 10px; padding: 10px 16px; margin-bottom: 18px;
+      background: var(--warn-soft);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(254, 200, 75, 0.6);
+      border-radius: 18px; padding: 10px 18px; margin-bottom: 18px;
       display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
       font-size: 13px; font-weight: 600; color: var(--warn);
     }
 
     .invoice-sheet {
       width: min(680px, 100%); background: #fff; color: #111;
-      border-radius: 14px; padding: 30px; box-shadow: var(--shadow-lg);
+      border-radius: 22px; padding: 30px; box-shadow: var(--shadow-lg);
       max-height: 92vh; overflow-y: auto;
     }
 
@@ -397,44 +515,6 @@
       .dash-grid-3, .report-hub-grid, .grid-2, .grid-3, .grid-4, .perm-grid { grid-template-columns: 1fr; }
       .inv-line { grid-template-columns: 1fr 1fr; }
     }
-/* === Full iOS Liquid Glass (Light + All Themes + Dark Mode) === */
-
-/* 1. الزجاج في الثيمات الفاتحة (بنفسجي، إسبريسو، أزرق، أخضر) */
-.sidebar, aside, header, .topbar,
-.card, .f-card, .report-tile, .table-card, .modal-box, .login-box {
-  background: rgba(255, 255, 255, 0.65) !important;
-  backdrop-filter: blur(22px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.7) !important;
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.85) !important;
-}
-
-/* 2. الزجاج في الوضع الليلي (Dark Mode) */
-body.dark .sidebar, body.dark aside, body.dark header, body.dark .topbar,
-body.dark .card, body.dark .f-card, body.dark .report-tile, body.dark .table-card, body.dark .modal-box,
-[data-theme="dark"] .sidebar, [data-theme="dark"] aside, [data-theme="dark"] header, [data-theme="dark"] .topbar,
-[data-theme="dark"] .card, [data-theme="dark"] .f-card, [data-theme="dark"] .report-tile, [data-theme="dark"] .table-card, [data-theme="dark"] .modal-box {
-  background: rgba(15, 23, 42, 0.58) !important;
-  backdrop-filter: blur(24px) saturate(190%) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.18) !important;
-}
-
-/* 3. الحواف الدائرية والأزرار الكبسولية (iOS Style) */
-.card, .f-card, .report-tile, .table-card, .modal-box, .login-box {
-  border-radius: 22px !important;
-}
-
-.btn, .tab-btn, .nav-item, .nav-sub-item, .pill {
-  border-radius: 999px !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-}
-
-input, select, textarea {
-  border-radius: 14px !important;
-}
   </style>
 </head>
 <body>
@@ -501,7 +581,7 @@ input, select, textarea {
     </div>
   </div>
 
-  <!-- القائمة الجانبية -->
+  <!-- القائمة الجانبية (جميع القوائم الفرعية مغلقة افتراضياً عند الفتح) -->
   <aside class="sidebar">
     <div class="side-top">
       <div class="brand-row">
@@ -532,9 +612,9 @@ input, select, textarea {
       </button>
 
       <div class="perm-el" data-perm="reports">
-        <button class="nav-parent" onclick="toggleSubmenu('subReports', 'viewReportsHub')">
+        <button class="nav-parent" onclick="toggleSubmenu('subReports', this)">
           <span class="nav-left"><span class="nav-ico">📊</span> التقارير</span>
-          <span>▾</span>
+          <span class="nav-arrow">▾</span>
         </button>
         <div class="nav-submenu" id="subReports">
           <button class="nav-sub-item" onclick="openReportType('sales')">تقارير المبيعات</button>
@@ -551,11 +631,11 @@ input, select, textarea {
       </button>
 
       <div class="perm-el" data-perm="inventory">
-        <button class="nav-parent" onclick="toggleSubmenu('subInventory', 'viewInvItems')">
+        <button class="nav-parent" onclick="toggleSubmenu('subInventory', this)">
           <span class="nav-left"><span class="nav-ico">📦</span> المخزون</span>
-          <span>▾</span>
+          <span class="nav-arrow">▾</span>
         </button>
-        <div class="nav-submenu open" id="subInventory">
+        <div class="nav-submenu" id="subInventory">
           <button class="nav-sub-item" data-view="viewInvItems"><span>مواد المخزون</span><span class="badge-count badge-red" id="badgeLowStock" style="display:none;">0</span></button>
           <button class="nav-sub-item perm-el" data-perm="suppliers" data-view="viewSuppliers">الموردين</button>
           <button class="nav-sub-item perm-el" data-perm="suppliers" data-view="viewPurchasing">عمليات الشراء</button>
@@ -566,9 +646,9 @@ input, select, textarea {
       </div>
 
       <div class="perm-el" data-perm="manage">
-        <button class="nav-parent" onclick="toggleSubmenu('subManage', 'viewExpenses')">
+        <button class="nav-parent" onclick="toggleSubmenu('subManage', this)">
           <span class="nav-left"><span class="nav-ico">⚙️</span> الإدارة</span>
-          <span>▾</span>
+          <span class="nav-arrow">▾</span>
         </button>
         <div class="nav-submenu" id="subManage">
           <button class="nav-sub-item perm-el" data-perm="expenses" data-view="viewExpenses"><span>الخزنة والمصاريف</span><span class="badge-count" id="badgePendingExp" style="display:none;">0</span></button>
@@ -791,7 +871,7 @@ input, select, textarea {
                   <input type="text" id="invRemainInp" readonly style="color:var(--red);font-weight:700;background:var(--surface-alt);">
                 </div>
               </div>
-              <div style="font-size:12px;color:var(--warn);background:var(--warn-soft);padding:10px;border-radius:8px;">
+              <div style="font-size:12px;color:var(--warn);background:var(--warn-soft);padding:10px;border-radius:12px;">
                 ⏳ يسجل الطلب بحالة <strong>قيد المراجعة</strong>، وعند اعتماد الإدارة تُرسل الفاتورة للعميل عبر واتساب.
               </div>
               <button type="submit" id="saveOrderSubmitBtn" class="btn btn-primary" style="width:100%;padding:12px;">حفظ الطلب للمراجعة</button>
@@ -819,26 +899,26 @@ input, select, textarea {
               <button class="tab-btn" data-otab="returned" onclick="setOrderTab('returned')">مرتجعات</button>
               <button class="tab-btn" data-otab="rejected" onclick="setOrderTab('rejected')">مرفوضة</button>
             </div>
-            <input type="text" id="orderSearchInp" placeholder="🔍 بحث برقم الفاتورة أو الصنف..." style="width:230px;padding:6px 10px;" oninput="applyOrdersFilter()">
+            <input type="text" id="orderSearchInp" placeholder="🔍 بحث برقم الفاتورة أو الصنف..." style="width:230px;padding:6px 12px;" oninput="applyOrdersFilter()">
           </div>
 
           <div style="display:flex;gap:8px;flex-wrap:wrap;padding:12px 18px;background:var(--surface-alt);border-bottom:1px solid var(--border);align-items:center;">
-            <input type="date" id="ordFromDate" style="width:auto;padding:5px 9px;font-size:12.5px;" onchange="applyOrdersFilter()" title="من تاريخ">
-            <input type="date" id="ordToDate" style="width:auto;padding:5px 9px;font-size:12.5px;" onchange="applyOrdersFilter()" title="إلى تاريخ">
-            <select id="ordCustFilter" style="width:auto;min-width:140px;padding:5px 9px;font-size:12.5px;" onchange="applyOrdersFilter()">
+            <input type="date" id="ordFromDate" style="width:auto;padding:5px 10px;font-size:12.5px;" onchange="applyOrdersFilter()" title="من تاريخ">
+            <input type="date" id="ordToDate" style="width:auto;padding:5px 10px;font-size:12.5px;" onchange="applyOrdersFilter()" title="إلى تاريخ">
+            <select id="ordCustFilter" style="width:auto;min-width:140px;padding:5px 10px;font-size:12.5px;" onchange="applyOrdersFilter()">
               <option value="">كل العملاء</option>
             </select>
-            <select id="ordPayFilter" style="width:auto;padding:5px 9px;font-size:12.5px;" onchange="applyOrdersFilter()">
+            <select id="ordPayFilter" style="width:auto;padding:5px 10px;font-size:12.5px;" onchange="applyOrdersFilter()">
               <option value="">كل طرق الدفع</option>
               <option value="كاش">كاش</option>
               <option value="إنستا باي">إنستا باي</option>
               <option value="تحويل بنكي">تحويل بنكي</option>
               <option value="آجل">آجل</option>
             </select>
-            <select id="ordUserFilter" style="width:auto;min-width:130px;padding:5px 9px;font-size:12.5px;" onchange="applyOrdersFilter()">
+            <select id="ordUserFilter" style="width:auto;min-width:130px;padding:5px 10px;font-size:12.5px;" onchange="applyOrdersFilter()">
               <option value="">كل الموظفين</option>
             </select>
-            <button type="button" class="btn btn-outline" style="padding:5px 10px;font-size:12px;" onclick="resetOrdersFilter()">🔄 مسح الفلاتر</button>
+            <button type="button" class="btn btn-outline" style="padding:5px 12px;font-size:12px;" onclick="resetOrdersFilter()">🔄 مسح الفلاتر</button>
           </div>
           <div class="table-wrap">
             <table>
@@ -878,7 +958,7 @@ input, select, textarea {
               <button class="tab-btn" onclick="filterCustomerTab('debt', this)">لديهم رصيد آجل</button>
               <button class="tab-btn" onclick="filterCustomerTab('followup', this)">يحتاجون إعادة طلب (+10 أيام)</button>
             </div>
-            <input type="text" placeholder="🔍 بحث بالاسم أو الهاتف..." style="width:240px;padding:6px 10px;" oninput="filterTable('customersBody', this.value)">
+            <input type="text" placeholder="🔍 بحث بالاسم أو الهاتف..." style="width:240px;padding:6px 12px;" oninput="filterTable('customersBody', this.value)">
           </div>
           <div class="table-wrap">
             <table>
@@ -938,7 +1018,7 @@ input, select, textarea {
         <div id="reportDetailView">
           <div class="page-head">
             <div>
-              <button type="button" class="btn btn-outline no-print" style="margin-bottom:8px;padding:4px 10px;font-size:12px;" onclick="switchView('viewReportsHub')">→ رجوع للتقارير</button>
+              <button type="button" class="btn btn-outline no-print" style="margin-bottom:8px;padding:4px 12px;font-size:12px;" onclick="switchView('viewReportsHub')">→ رجوع للتقارير</button>
               <h1 id="repDetailTitle">تقرير المبيعات</h1>
             </div>
             <div class="page-actions no-print">
@@ -1034,7 +1114,7 @@ input, select, textarea {
               <button class="tab-btn active" onclick="filterStockTab('all', this)">الكل</button>
               <button class="tab-btn" onclick="filterStockTab('low', this)">مخزون منخفض (≤ 10)</button>
             </div>
-            <input type="text" placeholder="🔍 بحث بالاسم أو كود SKU..." style="width:240px;padding:6px 10px;" oninput="filterTable('inventoryBody', this.value)">
+            <input type="text" placeholder="🔍 بحث بالاسم أو كود SKU..." style="width:240px;padding:6px 12px;" oninput="filterTable('inventoryBody', this.value)">
           </div>
           <div class="table-wrap">
             <table>
@@ -1249,7 +1329,7 @@ input, select, textarea {
         <div class="page-head">
           <h1>🛡️ سجل نشاطات وحركات المستخدمين (Activity Logs)</h1>
           <div class="page-actions">
-            <input type="text" placeholder="🔍 بحث بالمستخدم أو الحركة..." style="width:240px;padding:6px 10px;" oninput="filterTable('activityLogsBody', this.value)">
+            <input type="text" placeholder="🔍 بحث بالمستخدم أو الحركة..." style="width:240px;padding:6px 12px;" oninput="filterTable('activityLogsBody', this.value)">
           </div>
         </div>
 
@@ -1276,10 +1356,11 @@ input, select, textarea {
       <!-- 7.3 الإدارة: المظهر والإعدادات -->
       <section id="viewSettings" class="view-sec" hidden>
         <div class="page-head"><h1>المظهر والإعدادات</h1></div>
-        <div class="f-card" style="max-width:540px;">
-          <strong style="display:block;margin-bottom:12px;">🎨 اختر لون ومظهر واجهة Dosero</strong>
+        <div class="f-card" style="max-width:580px;">
+          <strong style="display:block;margin-bottom:14px;">🎨 اختر لون ومظهر واجهة Dosero (Liquid Glass)</strong>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button type="button" class="btn btn-outline" onclick="setTheme('royal_purple')">🟣 بنفسجي ملكي (افتراضي)</button>
+            <button type="button" class="btn btn-outline" onclick="setTheme('dosero_red')">🔴 أحمر Dosero (افتراضي)</button>
+            <button type="button" class="btn btn-outline" onclick="setTheme('royal_purple')">🟣 بنفسجي ملكي</button>
             <button type="button" class="btn btn-outline" onclick="setTheme('espresso')">☕ إسبريسو (نحاسي)</button>
             <button type="button" class="btn btn-outline" onclick="setTheme('royal')">🔵 أزرق ملكي</button>
             <button type="button" class="btn btn-outline" onclick="setTheme('emerald')">🟢 أخضر زمردي</button>
@@ -1394,12 +1475,12 @@ input, select, textarea {
 
         <div style="display:flex;justify-content:space-between;align-items:center;">
           <strong style="font-size:13.5px;">الأصناف المشتراة (ستُضاف للمخزون فوراً):</strong>
-          <button type="button" class="btn btn-outline" style="padding:4px 10px;font-size:12px;" onclick="addPurchaseLine()">+ إضافة صنف</button>
+          <button type="button" class="btn btn-outline" style="padding:4px 12px;font-size:12px;" onclick="addPurchaseLine()">+ إضافة صنف</button>
         </div>
 
         <div id="purLinesBox"></div>
 
-        <div style="background:var(--surface-alt);padding:12px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);">
+        <div style="background:var(--surface-alt);padding:12px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);">
           <strong>إجمالي فاتورة الشراء:</strong>
           <strong id="purTotalDisplay" style="font-size:18px;color:var(--accent);">EGP 0.00</strong>
         </div>
@@ -1552,7 +1633,7 @@ input, select, textarea {
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;background:#f8f9fc;padding:12px;border-radius:10px;font-size:13px;margin-bottom:16px;border:1px solid #eaecf0;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;background:#f8f9fc;padding:12px;border-radius:12px;font-size:13px;margin-bottom:16px;border:1px solid #eaecf0;">
         <div><strong>العميل:</strong> <span id="mCustName"></span></div>
         <div><strong>الهاتف:</strong> <span id="mCustPhone"></span></div>
         <div><strong>طريقة الدفع:</strong> <span id="mPayMethod"></span></div>
@@ -1593,7 +1674,6 @@ input, select, textarea {
       </div>
     </div>
   </div>
-
   <script>
     const DOSERO_SHEET_URL = "https://script.google.com/macros/s/AKfycbwAnyW8UJa_rCc4zA7wI9yzr0LthyYX5tOHLOFJo9jCL-ZzvRCUiDDOAEwiSl9e9_I_uA/exec";
     const DOSERO_COMPANY_WA = "01501538360";
@@ -1663,12 +1743,12 @@ input, select, textarea {
     }
 
     function setTheme(th) {
-      if (th === "foodics") th = "royal_purple";
+      if (th === "foodics") th = "dosero_red";
       document.documentElement.dataset.theme = th;
       localStorage.setItem("dosero-theme", th);
-      renderDashboard();
+      if (typeof renderDashboard === "function" && currentUser) renderDashboard();
     }
-    setTheme(localStorage.getItem("dosero-theme") || "royal_purple");
+    setTheme(localStorage.getItem("dosero-theme") || "dosero_red");
 
     // ==================== دوال إرسال الفاتورة عبر واتساب ====================
     function formatEgyptWhatsAppPhone(rawPhone) {
@@ -1902,6 +1982,10 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       document.getElementById("sideRoleBadge").textContent = currentUser.role === "admin" ? "مدير" : "مخصص";
       document.getElementById("topAccountChip").textContent = `${currentUser.username} • ${todayStr()}`;
 
+      // التأكد من أن جميع القوائم الجانبية الفرعية مغلقة عند فتح النظام
+      document.querySelectorAll(".nav-submenu").forEach(s => s.classList.remove("open"));
+      document.querySelectorAll(".nav-parent").forEach(p => p.classList.remove("expanded"));
+
       if (!document.querySelectorAll("#invLinesBox .inv-line").length) addInvoiceLine();
       renderAll();
 
@@ -1919,10 +2003,11 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       }
     }
 
-    window.toggleSubmenu = function(subId, defaultView) {
+    window.toggleSubmenu = function(subId, btnEl) {
       const el = document.getElementById(subId);
-      el.classList.toggle("open");
-      if (defaultView) switchView(defaultView);
+      const isOpen = el.classList.contains("open");
+      el.classList.toggle("open", !isOpen);
+      if (btnEl) btnEl.classList.toggle("expanded", !isOpen);
     };
 
     window.switchView = function(viewId) {
@@ -2745,7 +2830,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
     // ==================== قسم الرسوم البيانية الشامل ====================
     window.renderChartsHub = function() {
       if (typeof Chart === "undefined") return;
-      const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#5c2d91";
+      const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#e11d48";
 
       const actInvs = invoices.filter(i => i.status === "active" || i.status === "pending_return");
       const appExps = expenses.filter(e => e.status === "approved");
@@ -2785,7 +2870,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
           datasets: [{
             label: "المبيعات اليومية",
             data: dates.length ? dates.map(d => byDate[d]) : [0],
-            borderColor: accent, backgroundColor: "rgba(92, 45, 145, 0.12)",
+            borderColor: accent, backgroundColor: "rgba(225, 29, 72, 0.14)",
             fill: true, tension: 0.35, borderWidth: 2.5
           }]
         },
@@ -2797,7 +2882,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         type: "bar",
         data: {
           labels: ["إجمالي المبيعات", "تكلفة البضاعة", "المصاريف والتوالف", "صافي الربح"],
-          datasets: [{ label: "EGP", data: [sales, cogs, opExp, netProfit], backgroundColor: ["#5c2d91", "#f59e0b", "#ef4444", "#10b981"], borderRadius: 8 }]
+          datasets: [{ label: "EGP", data: [sales, cogs, opExp, netProfit], backgroundColor: [accent, "#f59e0b", "#ef4444", "#10b981"], borderRadius: 8 }]
         },
         options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
       });
@@ -2808,7 +2893,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         type: "bar",
         data: {
           labels: sortedP.length ? sortedP.map(x => x[0]) : ["لا توجد مبيعات"],
-          datasets: [{ label: "الإيراد (EGP)", data: sortedP.length ? sortedP.map(x => x[1]) : [0], backgroundColor: "#2563eb", borderRadius: 6 }]
+          datasets: [{ label: "الإيراد (EGP)", data: sortedP.length ? sortedP.map(x => x[1]) : [0], backgroundColor: accent, borderRadius: 6 }]
         },
         options: { indexAxis: "y", responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
       });
@@ -2931,12 +3016,11 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         chartValues = products.map(p => p.qty * p.cost);
         chartLabelTitle = "قيمة المخزون بالتكلفة";
       }
-        else if (currentReportType === "stock_movement") {
+      else if (currentReportType === "stock_movement") {
         let moves = [];
         let totalIn = 0;
         let totalOut = 0;
 
-        // 1. المبيعات المعتمدة (منصرف -)
         activeInvs.forEach(inv => {
           (inv.items || []).forEach(it => {
             const q = Number(it.qty) || 0;
@@ -2954,7 +3038,6 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
           });
         });
 
-        // 2. المرتجعات المعتمدة (وارد +)
         invoices.filter(i => {
           if (i.status !== "returned") return false;
           const d = (i.date || "").slice(0, 10);
@@ -2979,7 +3062,6 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
           });
         });
 
-        // 3. المشتريات والتوريدات (وارد +)
         supplierLogs.filter(l => {
           if (l.type === "تحويل مالي") return false;
           const d = (l.date || "").slice(0, 10);
@@ -3007,7 +3089,6 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
           });
         });
 
-        // 4. الهالك وعينات التذوق المعتمدة (منصرف -)
         approvedExps.filter(ex => ex.account === "مخزون" || ex.kind === "تالف مخزن" || ex.kind === "عينات تذوق").forEach(ex => {
           const q = Number(ex.qty) || 0;
           totalOut += q;
@@ -3078,7 +3159,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       }
 
       if (!document.getElementById("repChartBox").hidden && typeof Chart !== "undefined") {
-        const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#5c2d91";
+        const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#e11d48";
         if (charts.repDetail) charts.repDetail.destroy();
         charts.repDetail = new Chart(document.getElementById("repDetailCanvas"), {
           type: "bar",
@@ -3164,7 +3245,9 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       document.getElementById("dLiquidityNote").textContent = `السيولة المتاحة: ${money(totalLiq)}`;
 
       if (typeof Chart === "undefined") return;
-      const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#5c2d91";
+      const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#e11d48";
+      const isDark = document.documentElement.dataset.theme === "dark";
+      const legendColor = isDark ? "#e2e8f0" : "#334155";
       const dates = Object.keys(dailySales).sort();
       const labels = dates.length ? dates : [today];
 
@@ -3189,14 +3272,14 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         charts[id] = new Chart(document.getElementById(id), {
           type: "doughnut",
           data: { labels: lbls, datasets: [{ data: vals, backgroundColor: colors, borderWidth: 0 }] },
-          options: { responsive: true, maintainAspectRatio: false, cutout: "68%", plugins: { legend: { position: "left", labels: { font: { family: "IBM Plex Sans Arabic", size: 11 } } } } }
+          options: { responsive: true, maintainAspectRatio: false, cutout: "68%", plugins: { legend: { position: "left", labels: { color: legendColor, font: { family: "IBM Plex Sans Arabic", size: 11 } } } } }
         });
       };
 
       const topP = Object.entries(prodRev).sort((a, b) => b[1] - a[1]).slice(0, 4);
-      makeDonut("donutProducts", topP.length ? topP.map(x => x[0]) : ["لا يوجد"], topP.length ? topP.map(x => x[1]) : [1], ["#5c2d91", "#2563eb", "#059669", "#d97706"]);
-      makeDonut("donutPayments", Object.keys(payMethods), Object.values(payMethods), ["#027a48", "#175cd3", "#5c2d91", "#b54708"]);
-      makeDonut("donutWallets", ["كاش", "إنستا باي", "تحويل بنكي"], [Math.max(0, wallets["كاش"]), Math.max(0, wallets["إنستا باي"]), Math.max(0, wallets["تحويل بنكي"])], ["#059669", "#2563eb", "#7f56d9"]);
+      makeDonut("donutProducts", topP.length ? topP.map(x => x[0]) : ["لا يوجد"], topP.length ? topP.map(x => x[1]) : [1], [accent, "#2563eb", "#059669", "#d97706"]);
+      makeDonut("donutPayments", Object.keys(payMethods), Object.values(payMethods), ["#027a48", "#175cd3", accent, "#b54708"]);
+      makeDonut("donutWallets", ["كاش", "إنستا باي", "تحويل بنكي"], [Math.max(0, wallets["كاش"]), Math.max(0, wallets["إنستا باي"]), Math.max(0, wallets["تحويل بنكي"])], ["#059669", "#2563eb", accent]);
     }
 
     function daysSince(dateStr) {
@@ -3325,7 +3408,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         const isLow = p.qty <= 10;
         if (isLow) lowStockCount++;
         const badge = isLow ? `<span class="pill pill-red">منخفض</span>` : `<span class="pill pill-green">متوفر</span>`;
-        const editBtn = canManageStock ? `<td class="perm-el" data-perm="manage_stock"><button class="btn btn-outline" style="padding:4px 9px;font-size:12px;" onclick="openProductModal('${p.id}')">✏️ تعديل</button></td>` : "";
+        const editBtn = canManageStock ? `<td class="perm-el" data-perm="manage_stock"><button class="btn btn-outline" style="padding:4px 10px;font-size:12px;" onclick="openProductModal('${p.id}')">✏️ تعديل</button></td>` : "";
         invBody.innerHTML += `<tr data-low="${isLow ? '1' : '0'}">
           <td><strong>${p.name}</strong></td>
           <td><span style="color:var(--muted);">${p.sku || "—"}</span></td>
@@ -3356,7 +3439,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         const debtHtml = c.debt > 0 ? `<span class="pill pill-warn">${money(c.debt)}</span>` : `<span class="pill pill-green">EGP 0</span>`;
         const tierBadge = `<span class="pill pill-purple">${TIER_LABELS[c.priceTier || "retail"]}</span>`;
         const colBtn = c.debt > 0 ? `<button class="btn btn-green" onclick="collectDebt('${c.id}')">تحصيل</button> ` : "";
-        const editCustBtn = `<button class="btn btn-outline" style="padding:4px 8px;font-size:12px;" onclick="openCustomerModal('${c.id}')">✏️ تعديل</button>`;
+        const editCustBtn = `<button class="btn btn-outline" style="padding:4px 9px;font-size:12px;" onclick="openCustomerModal('${c.id}')">✏️ تعديل</button>`;
         cBody.innerHTML += `<tr data-hasdebt="${c.debt > 0 ? '1' : '0'}" data-followup="${needFollow ? '1' : '0'}">
           <td><strong>${c.name}</strong><span class="by-sub">${c.address || ""}</span></td>
           <td>${c.phone}</td>
@@ -3418,7 +3501,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
           ? `<td>${inv.locationUrl ? `<a href="${inv.locationUrl}" target="_blank" class="btn btn-map">📍 الموقع</a>` : `<span style="color:var(--muted);font-size:11px;">—</span>`}</td>`
           : "";
 
-        let actionsHtml = `<button class="btn btn-outline" style="padding:4px 9px;font-size:12px;" onclick='openInvoiceModal(invoices[${idx}])'>معاينة</button> `;
+        let actionsHtml = `<button class="btn btn-outline" style="padding:4px 10px;font-size:12px;" onclick='openInvoiceModal(invoices[${idx}])'>معاينة</button> `;
         if (isAdmin) {
           actionsHtml += `<button class="btn btn-green" onclick='sendInvoiceWhatsApp(invoices[${idx}])' title="إرسال الفاتورة للعميل عبر واتساب">📲 واتساب</button> `;
         }
@@ -3427,7 +3510,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         } else if (st === "active") {
           actionsHtml += `<button class="btn btn-warn" onclick="requestReturnInvoice(${idx})">↩️ مرتجع</button>`;
         } else if (st === "pending_return" && canApprove) {
-          actionsHtml += `<button class="btn btn-green" onclick="confirmReturnInvoice(${idx})">✓ تأكيد المرتجع</button> <button class="btn btn-outline" style="padding:4px 8px;font-size:12px;" onclick="cancelReturnInvoice(${idx})">إلغاء</button>`;
+          actionsHtml += `<button class="btn btn-green" onclick="confirmReturnInvoice(${idx})">✓ تأكيد المرتجع</button> <button class="btn btn-outline" style="padding:4px 9px;font-size:12px;" onclick="cancelReturnInvoice(${idx})">إلغاء</button>`;
         }
 
         const rowClass = (st === "returned" || st === "rejected") ? "rejected-row" : ((st === "pending" || st === "pending_return") ? "pending-row" : "");
@@ -3504,7 +3587,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
           <td style="max-width:340px;">${permTags}</td>
           <td>${u.pass}</td>
           <td>
-            <button class="btn btn-outline" style="padding:4px 9px;font-size:12px;" onclick="openUserModal(${idx})">⚙️ تعديل الصلاحيات</button>
+            <button class="btn btn-outline" style="padding:4px 10px;font-size:12px;" onclick="openUserModal(${idx})">⚙️ تعديل الصلاحيات</button>
             <button class="btn btn-red" onclick="deleteUser(${idx})">حذف</button>
           </td>
         </tr>`;
