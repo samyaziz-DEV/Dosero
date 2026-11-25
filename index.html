@@ -1622,7 +1622,7 @@
       }
 
       const itemsLines = (inv.items || [])
-        .map(it => `• ${it.name} (×${it.qty}) = ${money(it.qty * it.price)}`)
+        .map(it => `• ${it.name} (${it.qty} × ${money(it.price)}) = ${money(it.qty * it.price)}`)
         .join("\n");
 
       const statusTxt = inv.status === "pending" ? "قيد المراجعة" : (inv.status === "returned" ? "مرتجع" : "معتمدة ✅");
