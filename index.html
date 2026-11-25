@@ -397,22 +397,43 @@
       .dash-grid-3, .report-hub-grid, .grid-2, .grid-3, .grid-4, .perm-grid { grid-template-columns: 1fr; }
       .inv-line { grid-template-columns: 1fr 1fr; }
     }
-/* === iOS Liquid Glass Compatible Theme === */
+/* === iOS Liquid Glass + Dynamic Themes === */
+body {
+  background-image: 
+    radial-gradient(circle at 12% 18%, rgba(225, 29, 72, 0.12), transparent 42%),
+    radial-gradient(circle at 88% 15%, rgba(56, 189, 248, 0.14), transparent 45%),
+    radial-gradient(circle at 50% 88%, rgba(167, 139, 250, 0.12), transparent 50%) !important;
+  background-attachment: fixed !important;
+}
+
 .sidebar, aside, header, .topbar {
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background-color: color-mix(in srgb, var(--bg-card, #ffffff) 68%, transparent) !important;
+  backdrop-filter: blur(22px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
+  border-color: rgba(255, 255, 255, 0.45) !important;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.6) !important;
 }
+
 .card, .f-card, .report-tile, .table-card, .modal-box, .login-box {
-  backdrop-filter: blur(18px) saturate(170%);
-  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  background-color: color-mix(in srgb, var(--bg-card, #ffffff) 76%, transparent) !important;
+  backdrop-filter: blur(20px) saturate(175%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(175%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
   border-radius: 22px !important;
-  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.7) !important;
 }
+
 .btn, .tab-btn, .nav-item, .nav-sub-item, .pill {
   border-radius: 999px !important;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
+
 input, select, textarea {
+  background-color: color-mix(in srgb, var(--bg-card, #ffffff) 65%, transparent) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
   border-radius: 14px !important;
 }
   </style>
@@ -3496,12 +3517,5 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       applyPermissionsUI();
     }
   </script>
-<script>
-  window.addEventListener("load", function() {
-    document.querySelectorAll(".nav-sub, .sub-menu, [id*='sub']").forEach(function(el) {
-      el.style.display = "none";
-    });
-  });
-</script>
 </body>
 </html>
