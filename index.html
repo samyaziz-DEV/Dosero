@@ -397,59 +397,23 @@
       .dash-grid-3, .report-hub-grid, .grid-2, .grid-3, .grid-4, .perm-grid { grid-template-columns: 1fr; }
       .inv-line { grid-template-columns: 1fr 1fr; }
     }
-    /* === iOS Liquid Glass Theme === */
-:root {
-  --glass-bg: rgba(255, 255, 255, 0.62);
-  --glass-bg-strong: rgba(255, 255, 255, 0.82);
-  --glass-border: rgba(255, 255, 255, 0.75);
-  --glass-shadow: 0 8px 32px rgba(15, 23, 42, 0.07), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-  --glass-blur: blur(20px) saturate(180%);
-}
-body {
-  background: radial-gradient(circle at 12% 18%, rgba(225, 29, 72, 0.11), transparent 42%),
-              radial-gradient(circle at 88% 15%, rgba(56, 189, 248, 0.14), transparent 45%),
-              radial-gradient(circle at 50% 88%, rgba(167, 139, 250, 0.12), transparent 50%),
-              #eef2f6 !important;
-  background-attachment: fixed !important;
-}
+/* === iOS Liquid Glass Compatible Theme === */
 .sidebar, aside, header, .topbar {
-  background: var(--glass-bg) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border-color: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
-.card, .f-card, .report-tile, .table-card, .modal-box, .login-box, section > div[style*="background"] {
-  background: var(--glass-bg-strong) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border: 1px solid var(--glass-border) !important;
+.card, .f-card, .report-tile, .table-card, .modal-box, .login-box {
+  backdrop-filter: blur(18px) saturate(170%);
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
   border-radius: 22px !important;
-  box-shadow: var(--glass-shadow) !important;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.45);
 }
-.btn, .tab-btn, .nav-item, .nav-sub-item {
+.btn, .tab-btn, .nav-item, .nav-sub-item, .pill {
   border-radius: 999px !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-.btn-primary {
-  background: linear-gradient(135deg, rgba(225, 29, 72, 0.9), rgba(190, 18, 60, 0.95)) !important;
-  border: 1px solid rgba(255, 255, 255, 0.35) !important;
-  box-shadow: 0 6px 20px rgba(225, 29, 72, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.5) !important;
-}
-.btn-outline {
-  background: rgba(255, 255, 255, 0.55) !important;
-  border: 1px solid rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(10px);
 }
 input, select, textarea {
-  background: rgba(255, 255, 255, 0.65) !important;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.85) !important;
   border-radius: 14px !important;
-}
-.pill {
-  border-radius: 999px !important;
-  backdrop-filter: blur(8px);
 }
   </style>
 </head>
@@ -3532,5 +3496,12 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       applyPermissionsUI();
     }
   </script>
+<script>
+  window.addEventListener("load", function() {
+    document.querySelectorAll(".nav-sub, .sub-menu, [id*='sub']").forEach(function(el) {
+      el.style.display = "none";
+    });
+  });
+</script>
 </body>
 </html>
