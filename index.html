@@ -502,6 +502,7 @@
           <button class="nav-sub-item" onclick="openReportType('sales')">تقارير المبيعات</button>
           <button class="nav-sub-item" onclick="openReportType('payments')">تقارير المدفوعات</button>
           <button class="nav-sub-item" onclick="openReportType('inventory')">تقارير المخزون</button>
+          <button class="nav-sub-item" onclick="openReportType('stock_movement')">حركة المخزون (وارد ومنصرف)</button>
           <button class="nav-sub-item" onclick="openReportType('business')">تقارير الأعمال والأرباح</button>
           <button class="nav-sub-item" onclick="openReportType('analytics')">تقارير التحليلات</button>
         </div>
@@ -780,7 +781,26 @@
               <button class="tab-btn" data-otab="returned" onclick="setOrderTab('returned')">مرتجعات</button>
               <button class="tab-btn" data-otab="rejected" onclick="setOrderTab('rejected')">مرفوضة</button>
             </div>
-            <input type="text" id="orderSearchInp" placeholder="🔍 تصفية برقم الطلب أو العميل..." style="width:240px;padding:6px 10px;" oninput="filterTable('invoicesBody', this.value)">
+            <input type="text" id="orderSearchInp" placeholder="🔍 بحث برقم الفاتورة أو الصنف..." style="width:230px;padding:6px 10px;" oninput="applyOrdersFilter()">
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;padding:12px 18px;background:var(--surface-alt);border-bottom:1px solid var(--border);align-items:center;">
+            <input type="date" id="ordFromDate" style="width:auto;padding:5px 9px;font-size:12.5px;" onchange="applyOrdersFilter()" title="من تاريخ">
+            <input type="date" id="ordToDate" style="width:auto;padding:5px 9px;font-size:12.5px;" onchange="applyOrdersFilter()" title="إلى تاريخ">
+            <select id="ordCustFilter" style="width:auto;min-width:140px;padding:5px 9px;font-size:12.5px;" onchange="applyOrdersFilter()">
+              <option value="">كل العملاء</option>
+            </select>
+            <select id="ordPayFilter" style="width:auto;padding:5px 9px;font-size:12.5px;" onchange="applyOrdersFilter()">
+              <option value="">كل طرق الدفع</option>
+              <option value="كاش">كاش</option>
+              <option value="إنستا باي">إنستا باي</option>
+              <option value="تحويل بنكي">تحويل بنكي</option>
+              <option value="آجل">آجل</option>
+            </select>
+            <select id="ordUserFilter" style="width:auto;min-width:130px;padding:5px 9px;font-size:12.5px;" onchange="applyOrdersFilter()">
+              <option value="">كل الموظفين</option>
+            </select>
+            <button type="button" class="btn btn-outline" style="padding:5px 10px;font-size:12px;" onclick="resetOrdersFilter()">🔄 مسح الفلاتر</button>
           </div>
           <div class="table-wrap">
             <table>
@@ -860,6 +880,10 @@
             <div><strong>تقارير المخزون</strong><small>مستويات المخزون، تكلفة البضاعة، والهالك</small></div>
             <span class="report-arrow">‹</span>
           </button>
+          <button class="report-tile" onclick="openReportType('stock_movement')">
+            <div><strong>تقرير حركة المخزون</strong><small>سجل الوارد والمنصرف (مشتريات، مبيعات، مرتجعات، وهالك)</small></div>
+            <span class="report-arrow">‹</span>
+          </button>
           <button class="report-tile" onclick="openReportType('business')">
             <div><strong>تقارير الأعمال والأرباح</strong><small>صافي الربح الفعلي، المصاريف، وحركة الموردين</small></div>
             <span class="report-arrow">‹</span>
@@ -880,10 +904,24 @@
               <h1 id="repDetailTitle">تقرير المبيعات</h1>
             </div>
             <div class="page-actions no-print">
-              <input type="date" id="repFromDate" style="width:auto;">
-              <input type="date" id="repToDate" style="width:auto;">
+              <input type="date" id="repFromDate" style="width:auto;" title="من تاريخ">
+              <input type="date" id="repToDate" style="width:auto;" title="إلى تاريخ">
+              <select id="repCustFilter" style="width:auto;min-width:135px;">
+                <option value="">كل العملاء</option>
+              </select>
+              <select id="repPayFilter" style="width:auto;">
+                <option value="">كل طرق الدفع</option>
+                <option value="كاش">كاش</option>
+                <option value="إنستا باي">إنستا باي</option>
+                <option value="تحويل بنكي">تحويل بنكي</option>
+                <option value="آجل">آجل</option>
+              </select>
+              <select id="repUserFilter" style="width:auto;min-width:125px;">
+                <option value="">كل الموظفين</option>
+              </select>
               <button type="button" class="btn btn-primary" onclick="renderReportDetail()">تطبيق</button>
-              <button type="button" class="btn btn-outline" onclick="toggleReportChart()">📊 عرض الرسم البياني</button>
+              <button type="button" class="btn btn-outline" onclick="resetReportFilters()">🔄 مسح</button>
+              <button type="button" class="btn btn-outline" onclick="toggleReportChart()">📊 الرسم البياني</button>
               <button type="button" class="btn btn-outline" onclick="printReport()">🖨️ طباعة</button>
               <button type="button" class="btn btn-outline" onclick="exportReportCSV()">📥 تصدير</button>
             </div>
@@ -2179,12 +2217,47 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
     window.setOrderTab = function(tab) {
       currentOrderTab = tab;
       document.querySelectorAll("#orderTabsList .tab-btn").forEach(b => b.classList.toggle("active", b.dataset.otab === tab));
-      document.querySelectorAll("#invoicesBody tr").forEach(tr => {
-        const st = tr.dataset.status;
-        if (tab === "all") tr.style.display = "";
-        else if (tab === "pending") tr.style.display = (st === "pending" || st === "pending_return") ? "" : "none";
-        else tr.style.display = (st === tab) ? "" : "none";
+      applyOrdersFilter();
+    };
+
+    window.applyOrdersFilter = function() {
+      const q = (document.getElementById("orderSearchInp")?.value || "").trim().toLowerCase();
+      const fromD = document.getElementById("ordFromDate")?.value || "";
+      const toD = document.getElementById("ordToDate")?.value || "";
+      const custF = document.getElementById("ordCustFilter")?.value || "";
+      const payF = document.getElementById("ordPayFilter")?.value || "";
+      const userF = document.getElementById("ordUserFilter")?.value || "";
+
+      document.querySelectorAll("#invoicesBody tr").forEach((tr, idx) => {
+        const inv = invoices[idx];
+        if (!inv) return;
+        const st = inv.status || "active";
+        const d = (inv.date || "").slice(0, 10);
+
+        let matchTab = true;
+        if (currentOrderTab === "pending") matchTab = (st === "pending" || st === "pending_return");
+        else if (currentOrderTab !== "all") matchTab = (st === currentOrderTab);
+
+        const matchSearch = !q || tr.textContent.toLowerCase().includes(q);
+        const matchFrom = !fromD || d >= fromD;
+        const matchTo = !toD || d <= toD;
+        const matchCust = !custF || inv.customer === custF;
+        const matchPay = !payF || inv.payMethod === payF;
+        const matchUser = !userF || inv.issuedBy === userF;
+
+        tr.style.display = (matchTab && matchSearch && matchFrom && matchTo && matchCust && matchPay && matchUser) ? "" : "none";
       });
+    };
+
+    window.resetOrdersFilter = function() {
+      document.getElementById("orderSearchInp").value = "";
+      document.getElementById("ordFromDate").value = "";
+      document.getElementById("ordToDate").value = "";
+      document.getElementById("ordCustFilter").value = "";
+      document.getElementById("ordPayFilter").value = "";
+      document.getElementById("ordUserFilter").value = "";
+      applyOrdersFilter();
+    };
     };
 
     // ==================== إدارة المنتجات بالأسعار الـ 3 ====================
@@ -2718,6 +2791,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         sales: "تقرير المبيعات التفصيلي",
         payments: "تقرير المدفوعات والتحصيل",
         inventory: "تقرير مستويات وتكلفة المخزون",
+        stock_movement: "تقرير حركة المخزون (الوارد والمنصرف)",
         business: "تقرير الأعمال وصافي الأرباح",
         analytics: "تقرير التحليلات (الأصناف والعملاء)"
       };
@@ -2731,15 +2805,30 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       if (!box.hidden) renderReportDetail();
     };
 
+    window.resetReportFilters = function() {
+      document.getElementById("repFromDate").value = "";
+      document.getElementById("repToDate").value = "";
+      document.getElementById("repCustFilter").value = "";
+      document.getElementById("repPayFilter").value = "";
+      document.getElementById("repUserFilter").value = "";
+      renderReportDetail();
+    };
+
     window.renderReportDetail = function() {
       const fromD = document.getElementById("repFromDate").value;
       const toD = document.getElementById("repToDate").value;
+      const custF = document.getElementById("repCustFilter").value;
+      const payF = document.getElementById("repPayFilter").value;
+      const userF = document.getElementById("repUserFilter").value;
 
       const activeInvs = invoices.filter(i => {
         if (i.status !== "active" && i.status !== "pending_return") return false;
         const d = (i.date || "").slice(0, 10);
         if (fromD && d < fromD) return false;
         if (toD && d > toD) return false;
+        if (custF && i.customer !== custF) return false;
+        if (payF && i.payMethod !== payF) return false;
+        if (userF && i.issuedBy !== userF) return false;
         return true;
       });
 
@@ -2804,6 +2893,114 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         chartLabels = products.map(p => p.name);
         chartValues = products.map(p => p.qty * p.cost);
         chartLabelTitle = "قيمة المخزون بالتكلفة";
+      }
+        else if (currentReportType === "stock_movement") {
+        let moves = [];
+        let totalIn = 0;
+        let totalOut = 0;
+
+        // 1. المبيعات المعتمدة (منصرف -)
+        activeInvs.forEach(inv => {
+          (inv.items || []).forEach(it => {
+            const q = Number(it.qty) || 0;
+            totalOut += q;
+            moves.push({
+              date: inv.date,
+              type: "منصرف (مبيعات)",
+              badge: "pill-red",
+              item: it.name,
+              qtyTxt: `-${q}`,
+              ref: inv.id,
+              party: inv.customer,
+              by: inv.actionBy || inv.issuedBy || "—"
+            });
+          });
+        });
+
+        // 2. المرتجعات المعتمدة (وارد +)
+        invoices.filter(i => {
+          if (i.status !== "returned") return false;
+          const d = (i.date || "").slice(0, 10);
+          if (fromD && d < fromD) return false;
+          if (toD && d > toD) return false;
+          if (custF && i.customer !== custF) return false;
+          return true;
+        }).forEach(inv => {
+          (inv.items || []).forEach(it => {
+            const q = Number(it.qty) || 0;
+            totalIn += q;
+            moves.push({
+              date: inv.date,
+              type: "وارد (مرتجع مبيعات)",
+              badge: "pill-green",
+              item: it.name,
+              qtyTxt: `+${q}`,
+              ref: inv.id,
+              party: inv.customer,
+              by: inv.actionBy || "—"
+            });
+          });
+        });
+
+        // 3. المشتريات والتوريدات (وارد +)
+        supplierLogs.filter(l => {
+          if (l.type === "تحويل مالي") return false;
+          const d = (l.date || "").slice(0, 10);
+          if (fromD && d < fromD) return false;
+          if (toD && d > toD) return false;
+          return true;
+        }).forEach(l => {
+          const parts = (l.note || "").split("|")[0].split("+");
+          parts.forEach(part => {
+            const m = part.trim().match(/^(.+?)\s*\(×(\d+)\)$/);
+            if (m) {
+              const q = Number(m[2]) || 0;
+              totalIn += q;
+              moves.push({
+                date: l.date,
+                type: "وارد (توريد مشتريات)",
+                badge: "pill-green",
+                item: m[1].trim(),
+                qtyTxt: `+${q}`,
+                ref: "فاتورة شراء",
+                party: l.supplier,
+                by: l.by || "—"
+              });
+            }
+          });
+        });
+
+        // 4. الهالك وعينات التذوق المعتمدة (منصرف -)
+        approvedExps.filter(ex => ex.account === "مخزون" || ex.kind === "تالف مخزن" || ex.kind === "عينات تذوق").forEach(ex => {
+          const q = Number(ex.qty) || 0;
+          totalOut += q;
+          moves.push({
+            date: ex.date,
+            type: `منصرف (${ex.kind})`,
+            badge: "pill-warn",
+            item: ex.title,
+            qtyTxt: `-${q}`,
+            ref: ex.id,
+            party: ex.note || "—",
+            by: ex.actionBy || ex.by || "—"
+          });
+        });
+
+        moves.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+
+        kpiBox.innerHTML = `
+          <div class="f-card"><span class="f-card-title">إجمالي الوارد للمخزن (وحدة)</span><div class="f-card-val" style="color:var(--green);">+${totalIn}</div></div>
+          <div class="f-card"><span class="f-card-title">إجمالي المنصرف من المخزن (وحدة)</span><div class="f-card-val" style="color:var(--red);">-${totalOut}</div></div>
+          <div class="f-card"><span class="f-card-title">صافي حركة المخزون</span><div class="f-card-val">${totalIn - totalOut >= 0 ? "+" : ""}${totalIn - totalOut}</div></div>
+        `;
+
+        wrap.innerHTML = `<table><thead><tr><th>التاريخ</th><th>نوع الحركة</th><th>الصنف</th><th>الكمية</th><th>المرجع</th><th>الجهة / العميل / المورد</th><th>بواسطة</th></tr></thead><tbody>` +
+          (moves.length ? moves.map(m => `<tr><td>${m.date}</td><td><span class="pill ${m.badge}">${m.type}</span></td><td><strong>${m.item}</strong></td><td><strong style="direction:ltr;display:inline-block;">${m.qtyTxt}</strong></td><td>${m.ref}</td><td>${m.party}</td><td>${m.by}</td></tr>`).join("") : `<tr><td colspan="7" style="text-align:center;color:var(--muted);">لا توجد حركات مخزون في هذه الفترة</td></tr>`) +
+          `</tbody></table>`;
+
+        chartLabels = ["الوارد للمخزن (+)", "المنصرف من المخزن (-)"];
+        chartValues = [totalIn, totalOut];
+        chartLabelTitle = "ملخص حركة الوحدات";
       }
       else if (currentReportType === "business") {
         let sales = 0, cogs = 0, opExp = 0;
@@ -3053,6 +3250,28 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       document.getElementById("invCustSelect").innerHTML =
         `<option value="">+ عميل جديد (اكتب الاسم بجانبه)</option>` +
         customers.map(c => `<option value="${c.id}">${c.name} [${TIER_LABELS[c.priceTier || "retail"]}]</option>`).join("");
+      const custFilterOpts = `<option value="">كل العملاء</option>` + customers.map(c => `<option value="${c.name}">${c.name}</option>`).join("");
+      const userFilterOpts = `<option value="">كل الموظفين</option>` + users.map(u => `<option value="${u.username}">${u.username}</option>`).join("");
+      if (document.getElementById("ordCustFilter")) {
+        const prevC = document.getElementById("ordCustFilter").value;
+        document.getElementById("ordCustFilter").innerHTML = custFilterOpts;
+        document.getElementById("ordCustFilter").value = prevC;
+      }
+      if (document.getElementById("ordUserFilter")) {
+        const prevU = document.getElementById("ordUserFilter").value;
+        document.getElementById("ordUserFilter").innerHTML = userFilterOpts;
+        document.getElementById("ordUserFilter").value = prevU;
+      }
+      if (document.getElementById("repCustFilter")) {
+        const prevRC = document.getElementById("repCustFilter").value;
+        document.getElementById("repCustFilter").innerHTML = custFilterOpts;
+        document.getElementById("repCustFilter").value = prevRC;
+      }
+      if (document.getElementById("repUserFilter")) {
+        const prevRU = document.getElementById("repUserFilter").value;
+        document.getElementById("repUserFilter").innerHTML = userFilterOpts;
+        document.getElementById("repUserFilter").value = prevRU;
+      }
 
       document.getElementById("wasteProdSelect").innerHTML =
         products.map(p => `<option value="${p.id}">${p.name} (متاح: ${p.qty})</option>`).join("");
