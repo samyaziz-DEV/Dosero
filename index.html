@@ -2046,7 +2046,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       const remain = Math.max(0, total - paid);
 
       const inv = {
-        id: "ORD-" + (11660 + invoices.length),
+        id: "INV-" + (11660 + invoices.length),
         date: todayStr(),
         customer: custObj.name,
         phone: finalPhone,
@@ -2099,7 +2099,8 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       (inv.items || []).forEach(it => { custObj.itemsBought[it.name] = (custObj.itemsBought[it.name] || 0) + Number(it.qty); });
 
       const oldId = inv.id;
-      const approvedId = oldId.startsWith("APPROVED-") ? oldId : ("APPROVED-" + oldId);
+      const cleanId = oldId.replace("ORD-", "INV-");
+      const approvedId = cleanId.startsWith("APPROVED-") ? cleanId : ("APPROVED-" + cleanId);
 
       inv.id = approvedId;
       inv.status = "active";
@@ -2305,7 +2306,8 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         postToSheet({ action: "syncProducts", products });
       }
       const oldId = ex.id;
-      const approvedId = oldId.startsWith("APPROVED-") ? oldId : ("APPROVED-" + oldId);
+      const cleanId = oldId.replace("ORD-", "INV-");
+      const approvedId = cleanId.startsWith("APPROVED-") ? cleanId : ("APPROVED-" + cleanId);
 
       ex.id = approvedId;
       ex.status = "approved";
