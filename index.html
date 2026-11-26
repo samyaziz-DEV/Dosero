@@ -16,13 +16,13 @@
       --bg-glow-2: rgba(251, 113, 133, 0.14);
       --bg-glow-3: rgba(244, 63, 94, 0.10);
       --glass-surface: rgba(255, 255, 255, 0.68);
-      --glass-surface-strong: rgba(255, 255, 255, 0.82);
+      --glass-surface-strong: rgba(255, 255, 255, 0.84);
       --glass-border: rgba(255, 255, 255, 0.78);
       --glass-shadow: 0 8px 32px rgba(15, 23, 42, 0.07), inset 0 1px 1px rgba(255, 255, 255, 0.92);
       --surface: #ffffff;
-      --surface-alt: rgba(255, 255, 255, 0.55);
+      --surface-alt: rgba(255, 255, 255, 0.58);
       --surface-hover: rgba(225, 29, 72, 0.06);
-      --sidebar-bg: rgba(255, 255, 255, 0.66);
+      --sidebar-bg: rgba(255, 255, 255, 0.68);
       --sidebar-text: #1e293b;
       --sidebar-muted: #64748b;
       --sidebar-active-bg: rgba(225, 29, 72, 0.13);
@@ -92,14 +92,14 @@
       --bg-glow-1: rgba(225, 29, 72, 0.22);
       --bg-glow-2: rgba(56, 189, 248, 0.14);
       --bg-glow-3: rgba(139, 92, 246, 0.16);
-      --glass-surface: rgba(22, 27, 38, 0.62);
-      --glass-surface-strong: rgba(24, 30, 44, 0.74);
+      --glass-surface: rgba(22, 27, 38, 0.66);
+      --glass-surface-strong: rgba(24, 30, 44, 0.78);
       --glass-border: rgba(255, 255, 255, 0.13);
       --glass-shadow: 0 10px 36px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.16);
       --surface: #181e2c;
-      --surface-alt: rgba(30, 38, 56, 0.62);
+      --surface-alt: rgba(30, 38, 56, 0.65);
       --surface-hover: rgba(255, 255, 255, 0.06);
-      --sidebar-bg: rgba(18, 23, 34, 0.68);
+      --sidebar-bg: rgba(18, 23, 34, 0.72);
       --sidebar-text: #e2e8f0;
       --sidebar-muted: #94a3b8;
       --sidebar-active-bg: rgba(244, 63, 94, 0.22);
@@ -180,7 +180,7 @@
 
     .toast-container { position: fixed; bottom: 20px; left: 20px; z-index: 3000; display: flex; flex-direction: column; gap: 8px; }
     .toast {
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(15, 23, 42, 0.88);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       color: #fff; padding: 12px 18px; border-radius: 16px;
@@ -192,7 +192,7 @@
     @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     aside.sidebar {
-      width: 265px;
+      width: 268px;
       background: var(--sidebar-bg);
       backdrop-filter: blur(24px) saturate(185%);
       -webkit-backdrop-filter: blur(24px) saturate(185%);
@@ -210,15 +210,14 @@
       padding: 4px 8px 14px; margin-bottom: 10px; border-bottom: 1px solid var(--border);
     }
     .brand-logo { display: flex; align-items: center; gap: 10px; }
-    .brand-logo strong { font-size: 18px; letter-spacing: 0.5px; color: var(--accent); display: block; line-height: 1.1; }
     .brand-logo small { font-size: 10.5px; color: var(--muted); font-weight: 600; display: block; }
 
     .nav-item, .nav-parent {
       width: 100%; border: 1px solid transparent; background: transparent; color: var(--sidebar-text);
       font: inherit; font-size: 13.5px; font-weight: 600;
-      padding: 10px 14px; border-radius: 999px; cursor: pointer;
+      padding: 9px 14px; border-radius: 999px; cursor: pointer;
       display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 4px; transition: .18s ease; text-align: start;
+      margin-bottom: 3px; transition: .18s ease; text-align: start;
     }
     .nav-item:hover, .nav-parent:hover {
       background: var(--surface-alt);
@@ -236,12 +235,12 @@
     .nav-arrow { transition: transform 0.2s ease; font-size: 13px; }
     .nav-parent.expanded .nav-arrow { transform: rotate(180deg); }
 
-    .nav-submenu { padding-inline-start: 22px; display: none; flex-direction: column; gap: 3px; margin-bottom: 8px; }
+    .nav-submenu { padding-inline-start: 20px; display: none; flex-direction: column; gap: 3px; margin-bottom: 8px; }
     .nav-submenu.open { display: flex; }
     .nav-sub-item {
       border: 1px solid transparent; background: transparent; color: var(--sidebar-muted);
-      font: inherit; font-size: 13px; font-weight: 500;
-      padding: 8px 14px; border-radius: 999px; cursor: pointer; text-align: start;
+      font: inherit; font-size: 12.8px; font-weight: 500;
+      padding: 7px 14px; border-radius: 999px; cursor: pointer; text-align: start;
       display: flex; align-items: center; justify-content: space-between;
       transition: .15s ease;
     }
@@ -258,6 +257,7 @@
       background: var(--warn-soft); color: var(--warn); font-weight: 700;
     }
     .badge-red { background: var(--red-soft); color: var(--red); }
+    .badge-blue { background: var(--blue-soft); color: var(--blue); }
 
     .side-bottom { padding: 12px; border-top: 1px solid var(--border); }
     .powered-side {
@@ -274,33 +274,70 @@
       -webkit-backdrop-filter: blur(24px) saturate(185%);
       border-bottom: 1px solid var(--glass-border);
       box-shadow: var(--shadow-xs);
-      padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
-      position: sticky; top: 0; z-index: 90;
+      padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      position: sticky; top: 0; z-index: 95;
     }
     .header-search {
       display: flex; align-items: center; gap: 8px;
       background: var(--surface-alt); border: 1px solid var(--glass-border);
-      border-radius: 999px; padding: 6px 14px; width: min(320px, 100%);
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+      border-radius: 999px; padding: 6px 14px; width: min(290px, 100%);
     }
     .header-search input { border: 0; background: transparent; padding: 2px; font-size: 13px; width: 100%; }
     .header-search input:focus { box-shadow: none; }
-    .header-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .header-tools { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; position: relative; }
     .powered-pill {
-      font-size: 11.5px; font-weight: 700; color: var(--accent);
+      font-size: 11px; font-weight: 700; color: var(--accent);
       background: var(--accent-soft); border: 1px solid var(--glass-border);
-      padding: 5px 12px; border-radius: 999px; white-space: nowrap;
+      padding: 5px 11px; border-radius: 999px; white-space: nowrap;
     }
     .sync-live-pill {
       font-size: 11px; font-weight: 700; color: var(--green);
-      background: var(--green-soft); padding: 5px 11px; border-radius: 999px;
+      background: var(--green-soft); padding: 5px 10px; border-radius: 999px;
       display: inline-flex; align-items: center; gap: 5px;
       border: 1px solid var(--glass-border);
     }
     .account-chip {
       font-size: 12px; font-weight: 700; color: var(--muted);
       background: var(--surface-alt); border: 1px solid var(--glass-border);
-      padding: 5px 12px; border-radius: 999px;
+      padding: 5px 11px; border-radius: 999px;
+    }
+
+    /* Notification Bell & Dropdown */
+    .notif-btn {
+      position: relative;
+      background: var(--glass-surface-strong);
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text);
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .notif-dot {
+      background: #e11d48; color: #fff;
+      font-size: 10.5px; font-weight: 700;
+      padding: 1px 6px; border-radius: 999px;
+    }
+    .notif-dropdown {
+      position: absolute; top: 48px; left: 0;
+      width: min(390px, 92vw);
+      background: var(--glass-surface-strong);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      box-shadow: var(--shadow-lg);
+      padding: 14px;
+      z-index: 500;
+      max-height: 430px; overflow-y: auto;
+    }
+    .notif-dropdown[hidden] { display: none; }
+    .notif-item {
+      padding: 10px 12px; border-radius: 14px;
+      background: var(--surface-alt); border: 1px solid var(--border);
+      margin-bottom: 8px; font-size: 12.5px;
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;
     }
 
     .content-area { padding: 24px; max-width: 1480px; width: 100%; margin: 0 auto; flex: 1; }
@@ -369,7 +406,6 @@
       border: 1px solid var(--glass-border);
       border-radius: var(--radius); padding: 18px 20px;
       box-shadow: var(--glass-shadow);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .f-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
     .f-card-title { font-size: 13.5px; font-weight: 600; color: var(--muted); }
@@ -382,6 +418,15 @@
     .spark-wrap { height: 75px; position: relative; }
     .chart-lg-wrap { height: 240px; position: relative; }
     .chart-xl-wrap { height: 290px; position: relative; }
+
+    .progress-track {
+      width: 100%; height: 10px; background: var(--surface-alt);
+      border-radius: 999px; overflow: hidden; border: 1px solid var(--border); margin: 8px 0;
+    }
+    .progress-fill {
+      height: 100%; background: linear-gradient(90deg, var(--accent), #10b981);
+      border-radius: 999px; transition: width 0.35s ease;
+    }
 
     .table-card {
       background: var(--glass-surface-strong);
@@ -531,7 +576,7 @@
         <text fill="#F01E44" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="13"><textPath href="#c1" startOffset="50%" text-anchor="middle" textLength="275" lengthAdjust="spacing">EVERY DOSE TELLS A STORY</textPath></text>
       </svg>
       <h3 style="margin:0 0 6px;">جارٍ تحميل نظام Dosero...</h3>
-      <p style="margin:0 0 12px;color:var(--muted);font-size:13px;">تتم الآن مزامنة المخزون والطلبات والتقارير</p>
+      <p style="margin:0 0 12px;color:var(--muted);font-size:13px;">تتم الآن مزامنة المخزون والطلبات والتقارير والموارد البشرية</p>
       <div class="welcome-badge">Powered by Samy Aziz</div>
     </div>
   </div>
@@ -546,7 +591,7 @@
           <text x="180" y="88" text-anchor="middle" fill="#FFFFFF" font-family="Impact, 'Arial Black', sans-serif" font-weight="900" font-size="64" textLength="296" lengthAdjust="spacingAndGlyphs">DOSERO</text>
           <text fill="#F01E44" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="13"><textPath href="#c2" startOffset="50%" text-anchor="middle" textLength="275" lengthAdjust="spacing">EVERY DOSE TELLS A STORY</textPath></text>
         </svg>
-        <p style="margin:0 0 8px;color:var(--muted);font-size:13px;">نظام إدارة المبيعات والمخزون والحسابات</p>
+        <p style="margin:0 0 8px;color:var(--muted);font-size:13px;">نظام إدارة المبيعات والمخزون والحسابات والموارد البشرية</p>
         <div class="welcome-badge">Powered by Samy Aziz</div>
       </div>
       <form class="stack" id="loginForm">
@@ -575,7 +620,7 @@
       <div class="welcome-badge">Powered by Samy Aziz</div>
       <h2 id="splashGreeting" style="margin:0 0 8px;font-size:22px;">أهلاً بك في نظام Dosero!</h2>
       <p style="margin:0 0 22px;color:var(--muted);font-size:13.5px;line-height:1.7;">
-        منصتك المتكاملة لإدارة المبيعات، المخزون، المشتريات، التقارير المالية، ونظام الاعتمادات الذكي.
+        منصتك المتكاملة لإدارة المبيعات، المخزون، المشتريات، التقارير المالية، المتابعات، ونظام HR الذكي.
       </p>
       <button type="button" class="btn btn-primary" style="width:100%;padding:12px;font-size:14px;" onclick="document.getElementById('welcomeSplashModal').hidden=true">بدء العمل الآن ←</button>
     </div>
@@ -606,11 +651,29 @@
         <span class="badge-count" id="badgePendingOrders" style="display:none;">0</span>
       </button>
 
-      <button class="nav-item perm-el" data-perm="customers" data-view="viewCustomers">
-        <span class="nav-left"><span class="nav-ico">👥</span> العملاء</span>
-        <span class="badge-count badge-red" id="badgeFollowCust" style="display:none;">0</span>
+      <!-- قسم العملاء والمتابعة (مغلق افتراضياً) -->
+      <div class="perm-el" data-perm="customers">
+        <button class="nav-parent" onclick="toggleSubmenu('subCustomers', this)">
+          <span class="nav-left"><span class="nav-ico">👥</span> العملاء والمتابعة</span>
+          <span style="display:flex;align-items:center;gap:4px;">
+            <span class="badge-count badge-red" id="badgeFollowCust" style="display:none;">0</span>
+            <span class="nav-arrow">▾</span>
+          </span>
+        </button>
+        <div class="nav-submenu" id="subCustomers">
+          <button class="nav-sub-item" data-view="viewCustomers">العملاء الفعليين</button>
+          <button class="nav-sub-item" data-view="viewProspects">زيارات بدون شراء (غير مفعل)</button>
+          <button class="nav-sub-item" data-view="viewFollowUps"><span>المتابعة الدورية</span><span class="badge-count badge-blue" id="badgeDueFollowUps" style="display:none;">0</span></button>
+        </div>
+      </div>
+
+      <!-- قسم التشغيل والتحديثات -->
+      <button class="nav-item perm-el" data-perm="operations" data-view="viewOperations">
+        <span class="nav-left"><span class="nav-ico">⚡</span> التشغيل والتحديثات</span>
+        <span class="badge-count" id="badgePendingOps" style="display:none;">0</span>
       </button>
 
+      <!-- قسم التقارير (مغلق افتراضياً) -->
       <div class="perm-el" data-perm="reports">
         <button class="nav-parent" onclick="toggleSubmenu('subReports', this)">
           <span class="nav-left"><span class="nav-ico">📊</span> التقارير</span>
@@ -630,6 +693,7 @@
         <span class="nav-left"><span class="nav-ico">📈</span> الرسوم البيانية</span>
       </button>
 
+      <!-- قسم المخزون (مغلق افتراضياً) -->
       <div class="perm-el" data-perm="inventory">
         <button class="nav-parent" onclick="toggleSubmenu('subInventory', this)">
           <span class="nav-left"><span class="nav-ico">📦</span> المخزون</span>
@@ -645,6 +709,20 @@
         </div>
       </div>
 
+      <!-- قسم الموارد البشرية HR (مغلق افتراضياً) -->
+      <div class="perm-el" data-perm="hr">
+        <button class="nav-parent" onclick="toggleSubmenu('subHR', this)">
+          <span class="nav-left"><span class="nav-ico">👔</span> الموارد البشرية (HR)</span>
+          <span class="nav-arrow">▾</span>
+        </button>
+        <div class="nav-submenu" id="subHR">
+          <button class="nav-sub-item" data-view="viewAttendance">الحضور والانصراف</button>
+          <button class="nav-sub-item" data-view="viewTargets">تارجيت الموظفين</button>
+          <button class="nav-sub-item admin-only-el" data-view="viewPayroll">المرتبات والسلف والخصومات</button>
+        </div>
+      </div>
+
+      <!-- قسم الإدارة (مغلق افتراضياً) -->
       <div class="perm-el" data-perm="manage">
         <button class="nav-parent" onclick="toggleSubmenu('subManage', this)">
           <span class="nav-left"><span class="nav-ico">⚙️</span> الإدارة</span>
@@ -673,15 +751,36 @@
         <input type="text" id="globalSearchInp" placeholder="بحث سريع في الفواتير، العملاء، الأصناف..." oninput="handleGlobalSearch(this.value)">
       </div>
       <div class="header-tools">
-        <span class="sync-live-pill" id="liveSyncBadge" title="مزامنة حية تلقائية مع Google Sheets">● متصل بالشيت</span>
-        <span class="powered-pill">⚡ Powered by Samy Aziz</span>
+        <!-- أزرار الحضور والانصراف السريعة في الهيدر -->
+        <button type="button" class="btn btn-green" id="quickCheckInBtn" onclick="recordAttendance('in')" title="تسجيل حضور الشيفت اليوم">🟢 حضور</button>
+        <button type="button" class="btn btn-warn" id="quickCheckOutBtn" onclick="recordAttendance('out')" title="تسجيل انصراف الشيفت اليوم">🔴 انصراف</button>
+
+        <!-- جرس الإشعارات -->
+        <button type="button" class="notif-btn" onclick="toggleNotifDropdown()" title="الإشعارات والتنبيهات">
+          🔔 <span class="notif-dot" id="notifCountBadge">0</span>
+        </button>
+        <div class="notif-dropdown" id="notifDropdown" hidden>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">
+            <strong style="font-size:13.5px;">🔔 مركز الإشعارات والتنبيهات</strong>
+            <button type="button" class="close-x" style="font-size:18px;" onclick="document.getElementById('notifDropdown').hidden=true">×</button>
+          </div>
+          <div id="notifListBox"></div>
+        </div>
+
+        <span class="sync-live-pill" id="liveSyncBadge" title="مزامنة حية تلقائية">● متصل</span>
         <button type="button" class="btn btn-primary perm-el" data-perm="orders" onclick="switchView('viewNewOrder')">+ طلب جديد</button>
         <span class="account-chip" id="topAccountChip">DOSERO</span>
-        <button type="button" class="btn btn-outline" style="padding:6px 10px;" onclick="syncFromSheet(true)" title="مزامنة فورية مع الشيت">🔄</button>
+        <button type="button" class="btn btn-outline" style="padding:6px 10px;" onclick="syncFromSheet(true)" title="مزامنة فورية">🔄</button>
       </div>
     </header>
 
     <main class="content-area">
+      <!-- شريط تنبيهات الإشعارات العاجلة -->
+      <div id="urgentNotifBanner" class="pending-strip" style="display:none;background:var(--blue-soft);border-color:rgba(96,165,250,0.5);color:var(--blue);">
+        <span id="urgentNotifText">📅 لديك مواعيد متابعة دورية مستحقة!</span>
+        <button type="button" class="btn btn-primary" style="padding:4px 12px;font-size:12px;" onclick="switchView('viewFollowUps')">عرض المتابعات</button>
+      </div>
+
       <div id="pendingAlertStrip" class="pending-strip perm-el" data-perm="approve" style="display:none;">
         <span id="pendingStripText">⏳ يوجد معاملات بانتظار المراجعة والاعتماد.</span>
         <div style="display:flex; gap:8px;">
@@ -702,6 +801,18 @@
             </div>
             <input type="date" id="dashDateInp" style="width:auto; padding:6px 10px;" onchange="renderDashboard()">
           </div>
+        </div>
+
+        <!-- بطاقة تارجيت الموظف الشخصي في الداشبورد -->
+        <div class="f-card" id="myTargetDashCard" style="margin-bottom:18px;display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div>
+              <strong style="font-size:15px;">🎯 تارجيت المبيعات الشهري الخاص بك (<span id="myTargetMonthLbl"></span>)</strong>
+              <small style="display:block;color:var(--muted);" id="myTargetSubLbl">المبيعات المعتمدة: EGP 0 / الهدف: EGP 0</small>
+            </div>
+            <span class="pill pill-purple" style="font-size:13px;" id="myTargetPctBadge">0%</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="myTargetBarFill" style="width:0%;"></div></div>
         </div>
 
         <div class="dash-grid-3">
@@ -754,7 +865,7 @@
 
           <div class="f-card perm-el" data-perm="profits">
             <div class="f-card-top">
-              <span class="f-card-title">صافي الربح الفعلي</span>
+              <span class="f-card-title">صافي الربح الفعلي (بعد الرواتب والمصاريف)</span>
               <button class="f-card-link perm-el" data-perm="reports" onclick="openReportType('business')">عرض التقرير</button>
             </div>
             <div class="f-card-val" style="color:var(--green);" id="dNetProfit">EGP 0.00</div>
@@ -827,6 +938,17 @@
             </div>
 
             <div id="invLinesBox"></div>
+
+            <!-- ملاحظات داخلية سرية لا تظهر للعميل وتسمع في المتابعة -->
+            <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--border);">
+              <label style="color:var(--accent);">🔒 ملاحظات داخلية للفاتورة (لا تظهر للعميل وتُرحَّل تلقائياً للمتابعة الدورية)</label>
+              <div class="grid-2">
+                <input type="text" id="invInternalNote" placeholder="مثال: العميل سيطلب كمية أكبر الأسبوع القادم / يفضل التوصيل صباحاً...">
+                <div>
+                  <input type="date" id="invFollowUpDate" title="تاريخ المتابعة القادمة (اختياري)">
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="f-card" style="position:sticky; top:80px;">
@@ -838,8 +960,15 @@
                   <input type="text" id="invSubInp" readonly style="background:var(--surface-alt);font-weight:700;">
                 </div>
                 <div>
-                  <label>الخصم (EGP)</label>
-                  <input type="number" id="invDiscInp" min="0" step="0.01" value="0">
+                  <label style="display:flex;justify-content:space-between;align-items:center;">
+                    <span>الخصم</span>
+                    <select id="invDiscType" onchange="calcInvoiceTotal()" style="width:auto;padding:2px 8px;font-size:11.5px;border-radius:999px;">
+                      <option value="pct">نسبة (%)</option>
+                      <option value="amt">مبلغ (EGP)</option>
+                    </select>
+                  </label>
+                  <input type="number" id="invDiscInp" min="0" step="0.01" value="0" placeholder="0">
+                  <small id="invDiscCalcHint" style="color:var(--muted);font-size:11px;display:block;margin-top:3px;">قيمة الخصم: EGP 0.00</small>
                 </div>
               </div>
               <div class="grid-2">
@@ -854,11 +983,11 @@
               </div>
               <div>
                 <label>طريقة الدفع</label>
-                <select id="invPayMethod">
-                  <option value="كاش">Cash (كاش)</option>
-                  <option value="إنستا باي">InstaPay (إنستا باي)</option>
-                  <option value="تحويل بنكي">Bank Transfer (تحويل بنكي)</option>
-                  <option value="آجل">Credit (آجل بالكامل)</option>
+                <select id="invPayMethod" onchange="onPayMethodChange()">
+                  <option value="كاش">Cash (كاش - دفع كامل)</option>
+                  <option value="إنستا باي">InstaPay (إنستا باي - دفع كامل)</option>
+                  <option value="تحويل بنكي">Bank Transfer (تحويل بنكي - دفع كامل)</option>
+                  <option value="آجل">Credit (آجل / دفع جزئي)</option>
                 </select>
               </div>
               <div class="grid-2">
@@ -866,7 +995,7 @@
                   <label>المدفوع الآن</label>
                   <input type="number" id="invPaidInp" min="0" step="0.01" value="0" required style="color:var(--green);font-weight:700;">
                 </div>
-                <div>
+                <div id="invRemainWrap">
                   <label>المتبقي (آجل)</label>
                   <input type="text" id="invRemainInp" readonly style="color:var(--red);font-weight:700;background:var(--surface-alt);">
                 </div>
@@ -942,10 +1071,10 @@
         </div>
       </section>
 
-      <!-- 4. العملاء -->
+      <!-- 4. العملاء الفعليين -->
       <section id="viewCustomers" class="view-sec" hidden>
         <div class="page-head">
-          <h1>العملاء</h1>
+          <h1>العملاء الفعليين</h1>
           <div class="page-actions">
             <button type="button" class="btn btn-primary" onclick="openCustomerModal()">+ إضافة عميل</button>
           </div>
@@ -980,11 +1109,99 @@
         </div>
       </section>
 
+      <!-- 4.1 زيارات العملاء بدون شراء (عميل غير مفعل) -->
+      <section id="viewProspects" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>📍 زيارات العملاء بدون شراء (عملاء غير مفعلين)</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary" onclick="document.getElementById('prospectModal').hidden=false">+ تسجيل زيارة جديدة</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-tabs-bar">
+            <div class="tab-list"><button class="tab-btn active">سجل الزيارات الميدانية وأسباب الرفض</button></div>
+            <input type="text" placeholder="🔍 بحث بالاسم أو السبب أو المندوب..." style="width:250px;padding:6px 12px;" oninput="filterTable('prospectsBody', this.value)">
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ والوقت</th>
+                  <th>اسم المكان / العميل</th>
+                  <th>الهاتف</th>
+                  <th>سبب الرفض / عدم الشراء</th>
+                  <th>المندوب</th>
+                  <th>موقع المكان (GPS)</th>
+                  <th>إجراء</th>
+                </tr>
+              </thead>
+              <tbody id="prospectsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4.2 المتابعة الدورية للعملاء -->
+      <section id="viewFollowUps" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>📅 المتابعة الدورية للعملاء</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary" onclick="openFollowUpModal()">+ جدولة متابعة دورية</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-tabs-bar">
+            <div class="tab-list"><button class="tab-btn active">جدول المتابعات (تُرسل واتساب للإدارة وتنبه قبل الموعد بيوم)</button></div>
+            <input type="text" placeholder="🔍 بحث بالعميل أو الموظف..." style="width:240px;padding:6px 12px;" oninput="filterTable('followUpsBody', this.value)">
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>تاريخ المتابعة المحدد</th>
+                  <th>العميل</th>
+                  <th>الملاحظة / الكمية المتوقعة</th>
+                  <th>الموظف المسؤول (اليوزر)</th>
+                  <th>حالة التنبيه</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="followUpsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4.3 خانة التشغيل والتحديثات (Operations Log) -->
+      <section id="viewOperations" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>⚡ التشغيل والتحديثات اليومية (السيلز والإدارة)</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary" onclick="document.getElementById('operationModal').hidden=false">+ كتابة تحديث تشغيل جديد</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ والوقت</th>
+                  <th>المرسل</th>
+                  <th>القسم</th>
+                  <th>تفاصيل التحديث</th>
+                  <th>حالة المراجعة</th>
+                  <th class="perm-el" data-perm="approve">إجراء الإدارة</th>
+                </tr>
+              </thead>
+              <tbody id="operationsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       <!-- 5. مركز التقارير -->
       <section id="viewReportsHub" class="view-sec" hidden>
-        <div class="page-head">
-          <h1>التقارير</h1>
-        </div>
+        <div class="page-head"><h1>التقارير</h1></div>
         <div class="report-hub-grid">
           <button class="report-tile" onclick="openReportType('sales')">
             <div><strong>تقارير المبيعات</strong><small>المبيعات المعتمدة، الخصومات، وصافي الفواتير</small></div>
@@ -1003,7 +1220,7 @@
             <span class="report-arrow">‹</span>
           </button>
           <button class="report-tile" onclick="openReportType('business')">
-            <div><strong>تقارير الأعمال والأرباح</strong><small>صافي الربح الفعلي، المصاريف، وحركة الموردين</small></div>
+            <div><strong>تقارير الأعمال والأرباح</strong><small>صافي الربح الفعلي بعد الرواتب والمصاريف</small></div>
             <span class="report-arrow">‹</span>
           </button>
           <button class="report-tile" onclick="openReportType('analytics')">
@@ -1024,9 +1241,7 @@
             <div class="page-actions no-print">
               <input type="date" id="repFromDate" style="width:auto;" title="من تاريخ">
               <input type="date" id="repToDate" style="width:auto;" title="إلى تاريخ">
-              <select id="repCustFilter" style="width:auto;min-width:135px;">
-                <option value="">كل العملاء</option>
-              </select>
+              <select id="repCustFilter" style="width:auto;min-width:135px;"><option value="">كل العملاء</option></select>
               <select id="repPayFilter" style="width:auto;">
                 <option value="">كل طرق الدفع</option>
                 <option value="كاش">كاش</option>
@@ -1034,9 +1249,7 @@
                 <option value="تحويل بنكي">تحويل بنكي</option>
                 <option value="آجل">آجل</option>
               </select>
-              <select id="repUserFilter" style="width:auto;min-width:125px;">
-                <option value="">كل الموظفين</option>
-              </select>
+              <select id="repUserFilter" style="width:auto;min-width:125px;"><option value="">كل الموظفين</option></select>
               <button type="button" class="btn btn-primary" onclick="renderReportDetail()">تطبيق</button>
               <button type="button" class="btn btn-outline" onclick="resetReportFilters()">🔄 مسح</button>
               <button type="button" class="btn btn-outline" onclick="toggleReportChart()">📊 الرسم البياني</button>
@@ -1068,32 +1281,22 @@
 
         <div class="dash-grid-2">
           <div class="f-card">
-            <div class="f-card-top">
-              <span class="f-card-title">تطور المبيعات اليومية المعتمدة (EGP)</span>
-            </div>
+            <div class="f-card-top"><span class="f-card-title">تطور المبيعات اليومية المعتمدة (EGP)</span></div>
             <div class="chart-xl-wrap"><canvas id="hubChartSalesLine"></canvas></div>
           </div>
-
           <div class="f-card">
-            <div class="f-card-top">
-              <span class="f-card-title">مقارنة المبيعات والتكاليف والمصاريف وصافي الربح</span>
-            </div>
+            <div class="f-card-top"><span class="f-card-title">مقارنة المبيعات والتكاليف والمصاريف وصافي الربح</span></div>
             <div class="chart-xl-wrap"><canvas id="hubChartProfitBar"></canvas></div>
           </div>
         </div>
 
         <div class="dash-grid-2">
           <div class="f-card">
-            <div class="f-card-top">
-              <span class="f-card-title">أعلى المنتجات تحقيقاً للإيرادات</span>
-            </div>
+            <div class="f-card-top"><span class="f-card-title">أعلى المنتجات تحقيقاً للإيرادات</span></div>
             <div class="chart-xl-wrap"><canvas id="hubChartTopProducts"></canvas></div>
           </div>
-
           <div class="f-card">
-            <div class="f-card-top">
-              <span class="f-card-title">توزيع التحصيل حسب طرق الدفع (كاش / إنستا باي / بنكي / آجل)</span>
-            </div>
+            <div class="f-card-top"><span class="f-card-title">توزيع التحصيل حسب طرق الدفع (كاش / إنستا باي / بنكي / آجل)</span></div>
             <div class="chart-xl-wrap"><canvas id="hubChartPayments"></canvas></div>
           </div>
         </div>
@@ -1263,10 +1466,90 @@
         </div>
       </section>
 
-      <!-- 7. الإدارة: الخزنة والمصاريف -->
+      <!-- ==================== قسم الموارد البشرية (HR) ==================== -->
+
+      <!-- 7.0 HR: الحضور والانصراف -->
+      <section id="viewAttendance" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>🕒 سجل الحضور والانصراف اليومي (HR)</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-green" onclick="recordAttendance('in')">🟢 تسجيل حضور اليوم</button>
+            <button type="button" class="btn btn-warn" onclick="recordAttendance('out')">🔴 تسجيل انصراف اليوم</button>
+            <button type="button" class="btn btn-outline" onclick="window.print()">🖨️ طباعة التقرير</button>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-tabs-bar">
+            <div class="tab-list"><button class="tab-btn active">تقرير الحضور والانصراف (يُسجل مرة واحدة لكل موظف يومياً)</button></div>
+            <input type="date" id="attFilterDate" style="width:auto;padding:5px 10px;" onchange="renderHR()">
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ</th>
+                  <th>اسم الموظف</th>
+                  <th>وقت الحضور (بداية الشيفت)</th>
+                  <th>وقت الانصراف (نهاية الشيفت)</th>
+                  <th>موقع الحضور</th>
+                  <th>الحالة</th>
+                </tr>
+              </thead>
+              <tbody id="attendanceBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7.01 HR: تارجيت الموظفين -->
+      <section id="viewTargets" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>🎯 تارجيت المبيعات الشهري للموظفين (HR)</h1>
+          <div class="page-actions admin-only-el">
+            <button type="button" class="btn btn-primary" onclick="openTargetModal()">+ تحديد / تعديل تارجيت موظف</button>
+          </div>
+        </div>
+
+        <div class="dash-grid-3" id="targetsCardsGrid"></div>
+      </section>
+
+      <!-- 7.02 HR: المرتبات والسلف والخصومات -->
+      <section id="viewPayroll" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>💰 المرتبات والسلف والخصومات (تُخصم تلقائياً من مصروفات الشركة)</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary" onclick="openPayrollModal()">+ تسجيل راتب / سلفة / خصم</button>
+          </div>
+        </div>
+
+        <div class="dash-grid-3" id="payrollKpisRow"></div>
+
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ</th>
+                  <th>الموظف</th>
+                  <th>النوع</th>
+                  <th>المبلغ الأساسي</th>
+                  <th>السلف / الخصومات</th>
+                  <th>الصافي المنصرف (يُخصم من الشركة)</th>
+                  <th>الحساب</th>
+                  <th>ملاحظات</th>
+                </tr>
+              </thead>
+              <tbody id="payrollBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. الإدارة: الخزنة والمصاريف -->
       <section id="viewExpenses" class="view-sec" hidden>
         <div class="page-head">
-          <h1>الخزنة ومصاريف التشغيل</h1>
+          <h1>الخزنة ومصاريف التشغيل والرواتب</h1>
           <button type="button" class="btn btn-primary" onclick="document.getElementById('expenseModal').hidden=false">+ تسجيل مصروف تشغيل</button>
         </div>
 
@@ -1275,7 +1558,7 @@
         <div class="table-card">
           <div class="table-tabs-bar">
             <div class="tab-list">
-              <button class="tab-btn active">سجل المصاريف والتوالف (خاضع للاعتماد)</button>
+              <button class="tab-btn active">سجل المصاريف والتوالف والرواتب</button>
             </div>
           </div>
           <div class="table-wrap">
@@ -1300,7 +1583,7 @@
         </div>
       </section>
 
-      <!-- 7.1 الإدارة: المستخدمين والصلاحيات المخصصة -->
+      <!-- 8.1 الإدارة: المستخدمين والصلاحيات المخصصة -->
       <section id="viewUsers" class="view-sec" hidden>
         <div class="page-head">
           <h1>المستخدمين والأدوار المخصصة</h1>
@@ -1324,7 +1607,7 @@
         </div>
       </section>
 
-      <!-- 7.2 الإدارة: سجل نشاطات المستخدمين -->
+      <!-- 8.2 الإدارة: سجل نشاطات المستخدمين -->
       <section id="viewActivityLogs" class="view-sec" hidden>
         <div class="page-head">
           <h1>🛡️ سجل نشاطات وحركات المستخدمين (Activity Logs)</h1>
@@ -1353,7 +1636,7 @@
         </div>
       </section>
 
-      <!-- 7.3 الإدارة: المظهر والإعدادات -->
+      <!-- 8.3 الإدارة: المظهر والإعدادات -->
       <section id="viewSettings" class="view-sec" hidden>
         <div class="page-head"><h1>المظهر والإعدادات</h1></div>
         <div class="f-card" style="max-width:580px;">
@@ -1375,9 +1658,141 @@
       Dosero Business Management System &copy; 2026 — <strong>Powered by Samy Aziz</strong>
     </footer>
   </div>
+
   <!-- ==================== MODALS ==================== -->
 
-  <!-- Modal: إنشاء / تعديل عميل مع تحديد شريحة السعر -->
+  <!-- Modal: تسجيل زيارة عميل بدون شراء (غير مفعل) -->
+  <div class="overlay" id="prospectModal" hidden>
+    <div class="modal-box">
+      <div class="modal-head"><h3>📍 تسجيل زيارة بدون شراء (عميل غير مفعل)</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
+      <form id="prospectForm" class="stack">
+        <div><label>اسم المكان / العميل *</label><input type="text" id="prosName" placeholder="مثال: كافيه روما - المعادي" required></div>
+        <div><label>رقم الهاتف (إن وجد)</label><input type="text" id="prosPhone" placeholder="010xxxxxxxx"></div>
+        <div><label>سبب الرفض / عدم الشراء *</label><textarea id="prosReason" rows="3" placeholder="مثال: متعاقد حالياً مع مورد آخر / السعر غير مناسب..." required></textarea></div>
+        <div style="font-size:12px;color:var(--blue);background:var(--blue-soft);padding:10px;border-radius:12px;">
+          📍 سيتم تسجيل الموقع الجغرافي (GPS) الحالي للمكان تلقائياً عند الحفظ.
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;">
+          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
+          <button type="submit" id="saveProsBtn" class="btn btn-primary">حفظ الزيارة بالموقع</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: جدولة متابعة دورية لعميل -->
+  <div class="overlay" id="followUpModal" hidden>
+    <div class="modal-box">
+      <div class="modal-head"><h3>📅 جدولة متابعة دورية لعميل</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
+      <form id="followUpForm" class="stack">
+        <div>
+          <label>اختر العميل *</label>
+          <select id="fuCustSelect" required></select>
+        </div>
+        <div>
+          <label>تاريخ المتابعة المحدد *</label>
+          <input type="date" id="fuDateInp" required>
+        </div>
+        <div>
+          <label>تفاصيل المتابعة / الكمية المتوقعة *</label>
+          <textarea id="fuNoteInp" rows="3" placeholder="مثال: سيطلب 20 كيلو إسبريسو بداية الشهر القادم..." required></textarea>
+        </div>
+        <div style="font-size:12px;color:var(--green);background:var(--green-soft);padding:10px;border-radius:12px;">
+          📲 ستُرسل رسالة واتساب فوراً للإدارة بتفاصيل المتابعة، وسيظهر إشعار في النظام قبل الموعد بيوم واحد.
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;">
+          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
+          <button type="submit" class="btn btn-primary">حفظ وإرسال واتساب للإدارة</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: كتابة تحديث تشغيل -->
+  <div class="overlay" id="operationModal" hidden>
+    <div class="modal-box">
+      <div class="modal-head"><h3>⚡ كتابة تحديث تشغيل جديد</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
+      <form id="operationForm" class="stack">
+        <div>
+          <label>القسم</label>
+          <select id="opDeptSelect">
+            <option value="المبيعات (Sales)">المبيعات (Sales)</option>
+            <option value="الإدارة (Management)">الإدارة (Management)</option>
+            <option value="المخازن والتوصيل">المخازن والتوصيل</option>
+          </select>
+        </div>
+        <div>
+          <label>نص التحديث / الملاحظة التشغيلية *</label>
+          <textarea id="opTextInp" rows="3" placeholder="اكتب التحديث ليتم مراجعته من الإدارة..." required></textarea>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;">
+          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
+          <button type="submit" class="btn btn-primary">إرسال للإدارة + واتساب</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: تحديد تارجيت موظف (HR) -->
+  <div class="overlay" id="targetModal" hidden>
+    <div class="modal-box">
+      <div class="modal-head"><h3>🎯 تحديد تارجيت المبيعات الشهري للموظف</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
+      <form id="targetForm" class="stack">
+        <div><label>اختر الموظف *</label><select id="trgUserSelect" required></select></div>
+        <div class="grid-2">
+          <div><label>الشهر (YYYY-MM) *</label><input type="text" id="trgMonthInp" required></div>
+          <div><label>قيمة التارجيت المطلوب (EGP) *</label><input type="number" id="trgAmountInp" min="1" step="100" required></div>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;">
+          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
+          <button type="submit" class="btn btn-primary">حفظ التارجيت</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: تسجيل راتب / سلفة / خصم (HR Payroll) -->
+  <div class="overlay" id="payrollModal" hidden>
+    <div class="modal-box">
+      <div class="modal-head"><h3>💰 تسجيل راتب / سلفة / خصم موظف</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
+      <form id="payrollForm" class="stack">
+        <div class="grid-2">
+          <div><label>الموظف *</label><select id="payEmpSelect" required></select></div>
+          <div>
+            <label>نوع الحركة *</label>
+            <select id="payTypeSelect" onchange="calcPayrollNet()">
+              <option value="صرف راتب">💵 صرف راتب شهري</option>
+              <option value="سلفة موظف">📤 سلفة نقدية</option>
+              <option value="خصم إداري">⚠️ خصم إداري / جزاء</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid-3">
+          <div><label>المبلغ الأساسي (EGP) *</label><input type="number" id="payBaseInp" min="0" step="0.01" value="0" oninput="calcPayrollNet()" required></div>
+          <div><label>قيمة السلف / الخصومات</label><input type="number" id="payDeductInp" min="0" step="0.01" value="0" oninput="calcPayrollNet()"></div>
+          <div><label>الصافي المنصرف</label><input type="text" id="payNetDisp" readonly style="background:var(--accent-soft);color:var(--accent);font-weight:700;"></div>
+        </div>
+        <div>
+          <label>الحساب المخصوم منه</label>
+          <select id="payAccountSelect">
+            <option value="كاش">Cash (درج الكاش)</option>
+            <option value="إنستا باي">InstaPay (إنستا باي)</option>
+            <option value="تحويل بنكي">Bank Transfer (تحويل بنكي)</option>
+          </select>
+        </div>
+        <div><label>ملاحظات</label><input type="text" id="payNoteInp" placeholder="مثال: راتب شهر نوفمبر / سلفة طارئة..."></div>
+        <div style="font-size:12px;color:var(--red);background:var(--red-soft);padding:10px;border-radius:12px;">
+          📉 الصافي المنصرف يُسجل تلقائياً كمصروف معتمد ويُخصم من خزنة الشركة وصافي الأرباح.
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;">
+          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
+          <button type="submit" class="btn btn-primary">اعتماد وصرف</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: إنشاء / تعديل عميل -->
   <div class="overlay" id="createCustomerModal" hidden>
     <div class="modal-box">
       <div class="modal-head"><h3 id="custModalTitle">إضافة عميل جديد</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
@@ -1404,7 +1819,7 @@
     </div>
   </div>
 
-  <!-- Modal: إنشاء / تعديل وحدة مخزون بالأسعار الـ 3 -->
+  <!-- Modal: إنشاء / تعديل وحدة مخزون -->
   <div class="overlay" id="createItemModal" hidden>
     <div class="modal-box" style="width:min(560px,100%);">
       <div class="modal-head"><h3 id="prodModalTitle">إنشاء وحدة مخزون</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
@@ -1472,19 +1887,15 @@
           </div>
           <div><label>ملاحظات / رقم فاتورة المورد</label><input type="text" id="purNote" placeholder="اختياري..."></div>
         </div>
-
         <div style="display:flex;justify-content:space-between;align-items:center;">
           <strong style="font-size:13.5px;">الأصناف المشتراة (ستُضاف للمخزون فوراً):</strong>
           <button type="button" class="btn btn-outline" style="padding:4px 12px;font-size:12px;" onclick="addPurchaseLine()">+ إضافة صنف</button>
         </div>
-
         <div id="purLinesBox"></div>
-
         <div style="background:var(--surface-alt);padding:12px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);">
           <strong>إجمالي فاتورة الشراء:</strong>
           <strong id="purTotalDisplay" style="font-size:18px;color:var(--accent);">EGP 0.00</strong>
         </div>
-
         <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">
           <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
           <button type="submit" class="btn btn-primary">حفظ التوريد وإضافة الكميات للمخزون</button>
@@ -1570,7 +1981,7 @@
     </div>
   </div>
 
-  <!-- Modal: إضافة/تعديل مستخدم وصلاحياته المخصصة -->
+  <!-- Modal: إضافة/تعديل مستخدم وصلاحياته -->
   <div class="overlay" id="userModal" hidden>
     <div class="modal-box" style="width:min(540px,100%);">
       <div class="modal-head"><h3 id="userModalTitle">إضافة مستخدم وتحديد الصلاحيات</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
@@ -1588,13 +1999,13 @@
             <option value="admin">👑 مدير كامل (كل الصلاحيات)</option>
           </select>
         </div>
-
         <div>
           <label>اختر الشاشات والصلاحيات المتاحة لهذا الشخص:</label>
           <div class="perm-grid" id="userPermsBox">
             <label class="perm-item"><input type="checkbox" value="dashboard" checked> ⊞ شاشة الملخص</label>
             <label class="perm-item"><input type="checkbox" value="orders" checked> 🧾 الطلبات والفواتير</label>
-            <label class="perm-item"><input type="checkbox" value="customers" checked> 👥 العملاء والتحصيل</label>
+            <label class="perm-item"><input type="checkbox" value="customers" checked> 👥 العملاء والمتابعة</label>
+            <label class="perm-item"><input type="checkbox" value="operations" checked> ⚡ التشغيل والتحديثات</label>
             <label class="perm-item"><input type="checkbox" value="inventory" checked> 📦 عرض المخزون والهالك</label>
             <label class="perm-item"><input type="checkbox" value="manage_stock"> ➕ إضافة/توريد أصناف</label>
             <label class="perm-item"><input type="checkbox" value="suppliers"> 🚚 الموردين والمشتريات</label>
@@ -1602,10 +2013,10 @@
             <label class="perm-item"><input type="checkbox" value="reports"> 📊 التقارير والرسوم البيانية</label>
             <label class="perm-item"><input type="checkbox" value="profits"> 💰 رؤية التكلفة والأرباح</label>
             <label class="perm-item"><input type="checkbox" value="approve"> ✅ اعتماد الفواتير والمرتجعات</label>
+            <label class="perm-item"><input type="checkbox" value="hr" checked> 👔 الحضور والتارجيت (HR)</label>
             <label class="perm-item"><input type="checkbox" value="users"> ⚙️ إدارة المستخدمين</label>
           </div>
         </div>
-
         <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
           <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
           <button type="submit" class="btn btn-primary">حفظ المستخدم والصلاحيات</button>
@@ -1614,7 +2025,7 @@
     </div>
   </div>
 
-  <!-- Modal: معاينة وطباعة الفاتورة -->
+  <!-- Modal: معاينة وطباعة الفاتورة (لا تعرض الملاحظات الداخلية السرية) -->
   <div class="overlay" id="invoiceModal" hidden>
     <div class="invoice-sheet">
       <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #101828;padding-bottom:14px;margin-bottom:16px;">
@@ -1660,7 +2071,7 @@
         <div>الشحن: <strong id="mShip"></strong></div>
         <div style="font-size:17px;border-top:1px solid #ddd;padding-top:6px;">الإجمالي: <strong id="mTotal"></strong></div>
         <div style="color:#027a48;">المدفوع: <strong id="mPaid"></strong></div>
-        <div style="color:#b42318;">المتبقي (آجل): <strong id="mRemain"></strong></div>
+        <div id="mRemainLine" style="color:#b42318;">المتبقي (آجل): <strong id="mRemain"></strong></div>
       </div>
 
       <div style="margin-top:18px;text-align:center;font-size:11px;color:#667085;border-top:1px dashed #eaecf0;padding-top:10px;">
@@ -1678,12 +2089,12 @@
     const DOSERO_SHEET_URL = "https://script.google.com/macros/s/AKfycbwAnyW8UJa_rCc4zA7wI9yzr0LthyYX5tOHLOFJo9jCL-ZzvRCUiDDOAEwiSl9e9_I_uA/exec";
     const DOSERO_COMPANY_WA = "01501538360";
 
-    const ALL_PERMS = ["dashboard", "orders", "customers", "inventory", "manage_stock", "suppliers", "expenses", "reports", "profits", "approve", "users"];
-    const USER_DEFAULT_PERMS = ["dashboard", "orders", "customers", "inventory"];
+    const ALL_PERMS = ["dashboard", "orders", "customers", "operations", "inventory", "manage_stock", "suppliers", "expenses", "reports", "profits", "approve", "hr", "users"];
+    const USER_DEFAULT_PERMS = ["dashboard", "orders", "customers", "operations", "inventory", "hr"];
     const PERM_LABELS = {
-      dashboard: "الملخص", orders: "الطلبات", customers: "العملاء", inventory: "المخزون",
-      manage_stock: "إضافة أصناف", suppliers: "الموردين", expenses: "الخزنة",
-      reports: "التقارير والرسوم", profits: "الأرباح", approve: "الاعتمادات", users: "المستخدمين"
+      dashboard: "الملخص", orders: "الطلبات", customers: "العملاء والمتابعة", operations: "التشغيل",
+      inventory: "المخزون", manage_stock: "إضافة أصناف", suppliers: "الموردين", expenses: "الخزنة",
+      reports: "التقارير والرسوم", profits: "الأرباح", approve: "الاعتمادات", hr: "HR", users: "المستخدمين"
     };
     const TIER_LABELS = {
       retail: "🏷️ قطاعي",
@@ -1693,6 +2104,14 @@
 
     let currentUser = JSON.parse(sessionStorage.getItem("dosero-user")) || null;
     let products = [], customers = [], suppliers = [], invoices = [], users = [], supplierLogs = [], expenses = [], activityLogs = [];
+    // الموديولات الجديدة (متزامنة مع الشيت + محفوظة محلياً كنسخة احتياطية فورية)
+    let prospects = JSON.parse(localStorage.getItem("dosero-prospects") || "[]");
+    let followUps = JSON.parse(localStorage.getItem("dosero-followups") || "[]");
+    let operationsLogs = JSON.parse(localStorage.getItem("dosero-operations") || "[]");
+    let attendanceLogs = JSON.parse(localStorage.getItem("dosero-attendance") || "[]");
+    let employeeTargets = JSON.parse(localStorage.getItem("dosero-targets") || "[]");
+    let payrollLogs = JSON.parse(localStorage.getItem("dosero-payroll") || "[]");
+
     let currentOrderTab = "all";
     let currentReportType = "sales";
     let dashRange = "all";
@@ -1703,7 +2122,18 @@
 
     const money = v => "EGP " + Number(v || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const todayStr = () => new Date().toISOString().slice(0, 10);
+    const currentMonthStr = () => new Date().toISOString().slice(0, 7);
+    const nowTimeOnly = () => new Date().toTimeString().slice(0, 5);
     const nowDateTimeStr = () => new Date().toISOString().slice(0, 16).replace("T", " ");
+
+    function saveLocalModules() {
+      localStorage.setItem("dosero-prospects", JSON.stringify(prospects));
+      localStorage.setItem("dosero-followups", JSON.stringify(followUps));
+      localStorage.setItem("dosero-operations", JSON.stringify(operationsLogs));
+      localStorage.setItem("dosero-attendance", JSON.stringify(attendanceLogs));
+      localStorage.setItem("dosero-targets", JSON.stringify(employeeTargets));
+      localStorage.setItem("dosero-payroll", JSON.stringify(payrollLogs));
+    }
 
     function getProductPriceByTier(prod, tier) {
       if (!prod) return 0;
@@ -1727,6 +2157,7 @@
       const p = currentUser.perms;
       if (p && typeof p === "object" && Object.keys(p).length > 0) {
         if (perm === "manage") return Boolean(p.expenses || p.users);
+        if (perm === "operations" || perm === "hr") return p[perm] !== undefined ? Boolean(p[perm]) : true;
         return Boolean(p[perm]);
       }
       if (perm === "manage") return false;
@@ -1739,7 +2170,7 @@
       el.className = "toast";
       el.textContent = msg;
       box.appendChild(el);
-      setTimeout(() => { el.style.opacity = "0"; setTimeout(() => el.remove(), 250); }, 3400);
+      setTimeout(() => { el.style.opacity = "0"; setTimeout(() => el.remove(), 250); }, 3500);
     }
 
     function setTheme(th) {
@@ -1750,7 +2181,7 @@
     }
     setTheme(localStorage.getItem("dosero-theme") || "dosero_red");
 
-    // ==================== دوال إرسال الفاتورة عبر واتساب ====================
+    // ==================== دوال واتساب (للعميل وللإدارة) ====================
     function formatEgyptWhatsAppPhone(rawPhone) {
       if (!rawPhone) return "";
       let digits = rawPhone.toString().replace(/\D/g, "");
@@ -1760,7 +2191,14 @@
       return digits.length >= 11 ? digits : "";
     }
 
-    window.sendInvoiceWhatsApp = function(inv, isAutoAfterApprove = false) {
+    function sendWhatsAppToAdmin(textMsg) {
+      const adminWa = formatEgyptWhatsAppPhone(DOSERO_COMPANY_WA);
+      const waUrl = `https://api.whatsapp.com/send?phone=${adminWa}&text=${encodeURIComponent(textMsg)}`;
+      const win = window.open(waUrl, "_blank", "noopener,noreferrer");
+      if (!win) window.location.href = waUrl;
+    }
+
+    window.sendInvoiceWhatsApp = function(inv) {
       if (!inv || currentUser?.role !== "admin") return;
       const custRecord = customers.find(c => c.name === inv.customer);
       const rawPhone = (inv.phone && inv.phone !== "—") ? inv.phone : (custRecord ? custRecord.phone : "");
@@ -1782,6 +2220,8 @@
         .join("\n");
 
       const statusTxt = inv.status === "pending" ? "قيد المراجعة" : (inv.status === "returned" ? "مرتجع" : "معتمدة ✅");
+      const remainLine = Number(inv.remain) > 0 ? `*المتبقي (آجل):* ${money(inv.remain)}\n` : "";
+      // ملاحظة: الملاحظات الداخلية السرية لا تُرسل للعميل أبداً
       const msg =
 `*DOSERO — فاتورة مبيعات*
 ━━━━━━━━━━━━━━
@@ -1796,28 +2236,23 @@ ${itemsLines}
 *المجموع الفرعي:* ${money(inv.subtotal || inv.total)}
 ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Number(inv.shipping) > 0 ? `*الشحن:* +${money(inv.shipping)}\n` : ""}*الإجمالي النهائي:* ${money(inv.total)}
 *المدفوع:* ${money(inv.paid)}
-*المتبقي (آجل):* ${money(inv.remain)}
-*طريقة الدفع:* ${inv.payMethod}
+${remainLine}*طريقة الدفع:* ${inv.payMethod}
 ━━━━━━━━━━━━━━
 شكراً لتعاملكم مع *DOSERO*
 للاستفسار والتواصل عبر واتساب الشركة: ${DOSERO_COMPANY_WA}`;
 
       const waUrl = `https://api.whatsapp.com/send?phone=${waPhone}&text=${encodeURIComponent(msg)}`;
       const win = window.open(waUrl, "_blank", "noopener,noreferrer");
-      if (!win) {
-        window.location.href = waUrl;
-      }
+      if (!win) window.location.href = waUrl;
     };
 
     window.sendCurrentModalWhatsApp = function() {
-      if (activeModalInvoice) sendInvoiceWhatsApp(activeModalInvoice, false);
+      if (activeModalInvoice) sendInvoiceWhatsApp(activeModalInvoice);
     };
 
     function captureSilentLocation() {
       return new Promise((resolve, reject) => {
-        if (!navigator.geolocation) {
-          return reject(new Error("NO_GEO"));
-        }
+        if (!navigator.geolocation) return reject(new Error("NO_GEO"));
         navigator.geolocation.getCurrentPosition(
           pos => {
             const lat = pos.coords.latitude.toFixed(6);
@@ -1872,6 +2307,13 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         expenses = (data.expenses || []).reverse();
         activityLogs = (data.activityLogs || []).reverse();
         if (data.users && data.users.length) users = data.users;
+        if (data.prospects?.length) prospects = data.prospects;
+        if (data.followUps?.length) followUps = data.followUps;
+        if (data.operationsLogs?.length) operationsLogs = data.operationsLogs;
+        if (data.attendanceLogs?.length) attendanceLogs = data.attendanceLogs;
+        if (data.employeeTargets?.length) employeeTargets = data.employeeTargets;
+        if (data.payrollLogs?.length) payrollLogs = data.payrollLogs;
+        saveLocalModules();
 
         if (currentUser) {
           const updatedMe = users.find(u => u.username === currentUser.username);
@@ -1883,8 +2325,8 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
           if (!document.getElementById("viewChartsHub").hidden) renderChartsHub();
           if (!document.getElementById("viewReportDetail").hidden) renderReportDetail();
         }
-        if (badge) badge.textContent = "● متصل بالشيت";
-        if (isManual) notify("✅ تم تحديث البيانات من Google Sheets");
+        if (badge) badge.textContent = "● متصل";
+        if (isManual) notify("✅ تم تحديث جميع البيانات بنجاح");
       } catch (err) {
         if (badge) badge.textContent = "⚠️ وضع محلي";
       } finally {
@@ -1982,7 +2424,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       document.getElementById("sideRoleBadge").textContent = currentUser.role === "admin" ? "مدير" : "مخصص";
       document.getElementById("topAccountChip").textContent = `${currentUser.username} • ${todayStr()}`;
 
-      // التأكد من أن جميع القوائم الجانبية الفرعية مغلقة عند فتح النظام
+      // إغلاق جميع القوائم الفرعية تلقائياً عند الدخول
       document.querySelectorAll(".nav-submenu").forEach(s => s.classList.remove("open"));
       document.querySelectorAll(".nav-parent").forEach(p => p.classList.remove("expanded"));
 
@@ -2023,6 +2465,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       if (viewId === "viewReportDetail") renderReportDetail();
       if (viewId === "viewChartsHub") renderChartsHub();
       if (viewId === "viewActivityLogs") renderActivityLogs();
+      if (["viewAttendance", "viewTargets", "viewPayroll"].includes(viewId)) renderHR();
     };
 
     document.querySelectorAll("[data-view]").forEach(btn => {
@@ -2043,7 +2486,457 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       });
     };
 
-    // ==================== نظام التسعير وتعبئة رقم العميل تلقائياً ====================
+    // ==================== 1. زيارات العملاء بدون شراء (غير مفعل) ====================
+    document.getElementById("prospectForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      const btn = document.getElementById("saveProsBtn");
+      btn.disabled = true; btn.textContent = "⏳ جارٍ التقاط الموقع...";
+      let loc = "";
+      try { loc = await captureSilentLocation(); } catch (err) { loc = sessionStorage.getItem("dosero-last-loc") || ""; }
+      btn.disabled = false; btn.textContent = "حفظ الزيارة بالموقع";
+
+      const entry = {
+        id: "PROS-" + Date.now(),
+        date: nowDateTimeStr(),
+        name: document.getElementById("prosName").value.trim(),
+        phone: document.getElementById("prosPhone").value.trim() || "—",
+        reason: document.getElementById("prosReason").value.trim(),
+        by: currentUser.username,
+        locationUrl: loc
+      };
+      prospects.unshift(entry);
+      saveLocalModules();
+      recordActivity("📍 زيارة بدون شراء", `تسجيل زيارة (${entry.name}) — السبب: ${entry.reason}`, loc);
+      postToSheet({ action: "syncProspects", prospects });
+
+      e.target.reset();
+      document.getElementById("prospectModal").hidden = true;
+      renderAll();
+      notify("✅ تم تسجيل زيارة العميل غير المفعل بالموقع بنجاح");
+    });
+
+    window.activateProspectToCustomer = function(idx) {
+      const p = prospects[idx];
+      if (!p) return;
+      if (!confirm(`تحويل (${p.name}) إلى عميل فعلي في قائمة العملاء؟`)) return;
+      customers.push({
+        id: "C" + Date.now(), name: p.name, phone: p.phone, address: "—", priceTier: "retail",
+        ordersCount: 0, itemsBought: {}, totalSpent: 0, debt: 0, lastOrderDate: ""
+      });
+      prospects.splice(idx, 1);
+      saveLocalModules();
+      recordActivity("✅ تفعيل عميل", `تحويل (${p.name}) من زيارة بدون شراء إلى عميل فعلي`);
+      postToSheet({ action: "syncCustomers", customers });
+      postToSheet({ action: "syncProspects", prospects });
+      renderAll();
+      notify(`✅ تم تفعيل العميل (${p.name})`);
+    };
+
+    // ==================== 2. المتابعة الدورية للعملاء (واتساب للإدارة + إشعار قبلها بيوم) ====================
+    window.openFollowUpModal = function() {
+      document.getElementById("fuCustSelect").innerHTML = customers.length
+        ? customers.map(c => `<option value="${c.name}">${c.name} (${c.phone || "—"})</option>`).join("")
+        : `<option value="عميل عام">عميل عام</option>`;
+      document.getElementById("fuDateInp").value = todayStr();
+      document.getElementById("followUpModal").hidden = false;
+    };
+
+    function createFollowUpEntry(custName, targetDate, noteText, sendWaNow = true) {
+      const fu = {
+        id: "FU-" + Date.now(),
+        createdDate: todayStr(),
+        followDate: targetDate || todayStr(),
+        customer: custName,
+        note: noteText,
+        user: currentUser.username,
+        done: false
+      };
+      followUps.unshift(fu);
+      saveLocalModules();
+      postToSheet({ action: "syncFollowUps", followUps });
+
+      if (sendWaNow) {
+        const msg =
+`*DOSERO — متابعة دورية لعميل*
+━━━━━━━━━━━━━━
+*الموظف:* ${fu.user}
+*العميل:* ${fu.customer}
+*تاريخ المتابعة المحدد:* ${fu.followDate}
+*الملاحظة / التفاصيل:*
+${fu.note}
+━━━━━━━━━━━━━━
+سيتم التنبيه في النظام قبل الموعد بيوم واحد.`;
+        sendWhatsAppToAdmin(msg);
+      }
+    }
+
+    document.getElementById("followUpForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const custName = document.getElementById("fuCustSelect").value;
+      const fDate = document.getElementById("fuDateInp").value;
+      const note = document.getElementById("fuNoteInp").value.trim();
+
+      createFollowUpEntry(custName, fDate, note, true);
+      recordActivity("📅 جدولة متابعة دورية", `متابعة للعميل (${custName}) بتاريخ (${fDate}): ${note}`);
+
+      e.target.reset();
+      document.getElementById("followUpModal").hidden = true;
+      renderAll();
+      notify("✅ تم حفظ المتابعة الدورية وإرسالها واتساب للإدارة");
+    });
+
+    window.markFollowUpDone = function(idx) {
+      if (!followUps[idx]) return;
+      followUps[idx].done = true;
+      saveLocalModules();
+      postToSheet({ action: "syncFollowUps", followUps });
+      renderAll();
+      notify("✅ تم إتمام المتابعة");
+    };
+
+    // ==================== 3. خانة التشغيل والتحديثات (Operations Log) ====================
+    document.getElementById("operationForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const dept = document.getElementById("opDeptSelect").value;
+      const text = document.getElementById("opTextInp").value.trim();
+      const op = {
+        id: "OP-" + Date.now(),
+        date: nowDateTimeStr(),
+        user: currentUser.username,
+        dept,
+        text,
+        status: "pending",
+        reviewedBy: ""
+      };
+      operationsLogs.unshift(op);
+      saveLocalModules();
+      recordActivity("⚡ تحديث تشغيل", `(${dept}) بواسطة ${currentUser.username}: ${text}`);
+      postToSheet({ action: "syncOperations", operationsLogs });
+
+      const msg =
+`*DOSERO — تحديث تشغيل جديد*
+━━━━━━━━━━━━━━
+*المرسل:* ${op.user}
+*القسم:* ${op.dept}
+*التوقيت:* ${op.date}
+*التحديث:*
+${op.text}`;
+      sendWhatsAppToAdmin(msg);
+
+      e.target.reset();
+      document.getElementById("operationModal").hidden = true;
+      renderAll();
+      notify("✅ تم إرسال التحديث للإدارة وعبر واتساب");
+    });
+
+    window.approveOperation = function(idx) {
+      if (!operationsLogs[idx]) return;
+      operationsLogs[idx].status = "reviewed";
+      operationsLogs[idx].reviewedBy = currentUser.username;
+      saveLocalModules();
+      postToSheet({ action: "syncOperations", operationsLogs });
+      renderAll();
+      notify("✅ تم اعتماد ومراجعة تحديث التشغيل");
+    };
+
+    // ==================== 4. شريط الإشعارات والجرس (Notification Bar) ====================
+    window.toggleNotifDropdown = function() {
+      const dd = document.getElementById("notifDropdown");
+      dd.hidden = !dd.hidden;
+    };
+
+    function renderNotifications() {
+      const today = todayStr();
+      const tomorrowObj = new Date();
+      tomorrowObj.setDate(tomorrowObj.getDate() + 1);
+      const tomorrow = tomorrowObj.toISOString().slice(0, 10);
+
+      const items = [];
+
+      // 1. متابعات دورية موعدها غداً (قبلها بيوم) أو اليوم أو متأخرة
+      const dueFollowUps = followUps.filter(f => !f.done && f.followDate <= tomorrow);
+      dueFollowUps.forEach(f => {
+        const whenTxt = f.followDate === tomorrow ? "⏰ غداً (تنبيه قبل الموعد بيوم)" : (f.followDate === today ? "🔥 اليوم" : `⚠️ متأخرة (${f.followDate})`);
+        items.push({
+          title: `📅 متابعة: ${f.customer} (${whenTxt})`,
+          sub: `بواسطة: ${f.user} — ${f.note}`,
+          view: "viewFollowUps"
+        });
+      });
+
+      // 2. تحديثات التشغيل المعلقة
+      const pendOps = operationsLogs.filter(o => o.status === "pending");
+      pendOps.forEach(o => {
+        items.push({
+          title: `⚡ تحديث تشغيل من ${o.user}`,
+          sub: o.text,
+          view: "viewOperations"
+        });
+      });
+
+      // 3. الطلبات المعلقة للاعتماد
+      const pendInvs = invoices.filter(i => i.status === "pending" || i.status === "pending_return");
+      if (pendInvs.length > 0 && hasPerm("approve")) {
+        items.push({
+          title: `🧾 يوجد (${pendInvs.length}) طلب/مرتجع بانتظار الاعتماد`,
+          sub: "اضغط للمراجعة والاعتماد",
+          view: "viewOrders"
+        });
+      }
+
+      document.getElementById("notifCountBadge").textContent = items.length;
+      const bDue = document.getElementById("badgeDueFollowUps");
+      if (bDue) { bDue.textContent = dueFollowUps.length; bDue.style.display = dueFollowUps.length > 0 ? "inline-block" : "none"; }
+
+      const banner = document.getElementById("urgentNotifBanner");
+      if (dueFollowUps.length > 0) {
+        banner.style.display = "flex";
+        document.getElementById("urgentNotifText").textContent = `🔔 تنبيه المتابعة الدورية: لديك (${dueFollowUps.length}) عميل مستحق للمتابعة (غداً أو اليوم)!`;
+      } else {
+        banner.style.display = "none";
+      }
+
+      const listBox = document.getElementById("notifListBox");
+      listBox.innerHTML = items.length
+        ? items.map(it => `
+          <div class="notif-item" style="cursor:pointer;" onclick="switchView('${it.view}'); document.getElementById('notifDropdown').hidden=true;">
+            <div>
+              <strong style="display:block;margin-bottom:3px;">${it.title}</strong>
+              <small style="color:var(--muted);">${it.sub}</small>
+            </div>
+            <span style="color:var(--accent);font-weight:700;">←</span>
+          </div>`).join("")
+        : `<div style="text-align:center;color:var(--muted);padding:18px;font-size:13px;">لا توجد إشعارات جديدة حالياً ✨</div>`;
+    }
+
+    // ==================== 6 & 7. الموارد البشرية (HR: الحضور والانصراف + التارجيت + المرتبات) ====================
+    window.recordAttendance = async function(type) {
+      if (!currentUser) return;
+      const today = todayStr();
+      const uname = currentUser.username;
+      let existing = attendanceLogs.find(a => a.date === today && a.user === uname);
+
+      if (type === "in") {
+        if (existing && existing.checkIn) {
+          return alert(`⚠️ تم تسجيل حضورك اليوم (${today}) بالفعل في الساعة ${existing.checkIn}، ولا يمكن تكرار الحضور مرتين في نفس اليوم.`);
+        }
+        let loc = "";
+        try { loc = await captureSilentLocation(); } catch (e) { loc = sessionStorage.getItem("dosero-last-loc") || ""; }
+        const timeNow = nowTimeOnly();
+        if (!existing) {
+          existing = { date: today, user: uname, checkIn: timeNow, checkOut: "", locationUrl: loc };
+          attendanceLogs.unshift(existing);
+        } else {
+          existing.checkIn = timeNow;
+          existing.locationUrl = loc;
+        }
+        saveLocalModules();
+        recordActivity("🟢 تسجيل حضور", `تسجيل حضور الشيفت للموظف (${uname}) الساعة ${timeNow}`, loc);
+        postToSheet({ action: "syncAttendance", attendanceLogs });
+        renderHR();
+        notify(`🟢 تم تسجيل حضورك اليوم الساعة ${timeNow}`);
+      } else if (type === "out") {
+        if (!existing || !existing.checkIn) {
+          return alert("⚠️ يجب تسجيل الحضور (بداية الشيفت) أولاً قبل تسجيل الانصراف!");
+        }
+        if (existing.checkOut) {
+          return alert(`⚠️ تم تسجيل انصرافك اليوم (${today}) بالفعل في الساعة ${existing.checkOut}، ولا يمكن تكرار الانصراف مرتين في نفس اليوم.`);
+        }
+        const timeNow = nowTimeOnly();
+        existing.checkOut = timeNow;
+        saveLocalModules();
+        recordActivity("🔴 تسجيل انصراف", `تسجيل انصراف الشيفت للموظف (${uname}) الساعة ${timeNow}`);
+        postToSheet({ action: "syncAttendance", attendanceLogs });
+        renderHR();
+        notify(`🔴 تم تسجيل انصرافك اليوم الساعة ${timeNow}`);
+      }
+    };
+
+    window.openTargetModal = function() {
+      document.getElementById("trgUserSelect").innerHTML = users.map(u => `<option value="${u.username}">${u.username}</option>`).join("");
+      document.getElementById("trgMonthInp").value = currentMonthStr();
+      document.getElementById("targetModal").hidden = false;
+    };
+
+    document.getElementById("targetForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const user = document.getElementById("trgUserSelect").value;
+      const month = document.getElementById("trgMonthInp").value.trim();
+      const targetAmount = Number(document.getElementById("trgAmountInp").value) || 0;
+
+      const idx = employeeTargets.findIndex(t => t.user === user && t.month === month);
+      if (idx >= 0) employeeTargets[idx].targetAmount = targetAmount;
+      else employeeTargets.unshift({ user, month, targetAmount });
+
+      saveLocalModules();
+      recordActivity("🎯 تحديد تارجيت", `تحديد تارجيت شهر (${month}) للموظف (${user}) بقيمة ${money(targetAmount)}`);
+      postToSheet({ action: "syncTargets", employeeTargets });
+
+      e.target.reset();
+      document.getElementById("targetModal").hidden = true;
+      renderAll();
+      notify("✅ تم حفظ تارجيت الموظف بنجاح");
+    });
+
+    window.openPayrollModal = function() {
+      document.getElementById("payEmpSelect").innerHTML = users.map(u => `<option value="${u.username}">${u.username}</option>`).join("");
+      document.getElementById("payrollForm").reset();
+      calcPayrollNet();
+      document.getElementById("payrollModal").hidden = false;
+    };
+
+    window.calcPayrollNet = function() {
+      const base = Number(document.getElementById("payBaseInp").value) || 0;
+      const ded = Number(document.getElementById("payDeductInp").value) || 0;
+      const net = Math.max(0, base - ded);
+      document.getElementById("payNetDisp").value = money(net);
+      return net;
+    };
+
+    document.getElementById("payrollForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const emp = document.getElementById("payEmpSelect").value;
+      const kind = document.getElementById("payTypeSelect").value;
+      const baseAmount = Number(document.getElementById("payBaseInp").value) || 0;
+      const deductions = Number(document.getElementById("payDeductInp").value) || 0;
+      const netPaid = calcPayrollNet();
+      const account = document.getElementById("payAccountSelect").value;
+      const note = document.getElementById("payNoteInp").value.trim();
+
+      const entry = {
+        id: "PAY-" + Date.now(),
+        date: todayStr(),
+        employee: emp,
+        kind,
+        baseAmount,
+        deductions,
+        netPaid,
+        account,
+        note,
+        by: currentUser.username
+      };
+      payrollLogs.unshift(entry);
+      saveLocalModules();
+
+      // خصم المبلغ تلقائياً من مصروفات الشركة وخزنة الحساب المحدد
+      if (netPaid > 0) {
+        const expObj = {
+          id: "EXP-HR-" + Date.now(),
+          date: todayStr(),
+          kind: `رواتب وHR (${kind})`,
+          title: `${kind} — ${emp}`,
+          qty: 1,
+          cost: netPaid,
+          account,
+          note: `أساسي: ${baseAmount} | خصومات/سلف: ${deductions}${note ? " — " + note : ""}`,
+          by: currentUser.username,
+          status: "approved",
+          actionBy: currentUser.username
+        };
+        expenses.unshift(expObj);
+        postToSheet({ action: "addExpense", expense: expObj });
+      }
+
+      recordActivity("💰 حركة رواتب/HR", `تسجيل (${kind}) للموظف (${emp}) بصافي ${money(netPaid)} مخصوم من (${account})`);
+      postToSheet({ action: "syncPayroll", payrollLogs });
+
+      e.target.reset();
+      document.getElementById("payrollModal").hidden = true;
+      renderAll();
+      notify(`✅ تم تسجيل (${kind}) وخصم ${money(netPaid)} من مصروفات الشركة`);
+    });
+
+    function renderHR() {
+      const today = todayStr();
+      const curMonth = currentMonthStr();
+      const isAdmin = currentUser?.role === "admin";
+
+      // تحديث حالة أزرار الحضور والانصراف في الهيدر
+      const myTodayAtt = attendanceLogs.find(a => a.date === today && a.user === currentUser?.username);
+      const inBtn = document.getElementById("quickCheckInBtn");
+      const outBtn = document.getElementById("quickCheckOutBtn");
+      if (inBtn && outBtn) {
+        if (myTodayAtt?.checkIn) {
+          inBtn.textContent = `✓ حضر (${myTodayAtt.checkIn})`;
+          inBtn.style.opacity = "0.7";
+        } else {
+          inBtn.textContent = "🟢 حضور";
+          inBtn.style.opacity = "1";
+        }
+        if (myTodayAtt?.checkOut) {
+          outBtn.textContent = `✓ انصرف (${myTodayAtt.checkOut})`;
+          outBtn.style.opacity = "0.7";
+        } else {
+          outBtn.textContent = "🔴 انصراف";
+          outBtn.style.opacity = "1";
+        }
+      }
+
+      // 1. جدول الحضور والانصراف
+      const filterD = document.getElementById("attFilterDate")?.value || "";
+      const attBody = document.getElementById("attendanceBody");
+      if (attBody) {
+        const rows = attendanceLogs.filter(a => (!filterD || a.date === filterD) && (isAdmin || a.user === currentUser?.username));
+        attBody.innerHTML = rows.length ? rows.map(a => {
+          const locHtml = (isAdmin && a.locationUrl) ? `<a href="${a.locationUrl}" target="_blank" class="btn btn-map">📍 الموقع</a>` : "—";
+          const stHtml = a.checkOut ? `<span class="pill pill-green">✓ شيفت مكتمل</span>` : `<span class="pill pill-warn">⏳ على رأس العمل</span>`;
+          return `<tr>
+            <td><strong>${a.date}</strong></td>
+            <td><strong>${a.user}</strong></td>
+            <td style="color:var(--green);font-weight:700;">${a.checkIn || "—"}</td>
+            <td style="color:var(--red);font-weight:700;">${a.checkOut || "لم ينصرف بعد"}</td>
+            <td>${locHtml}</td>
+            <td>${stHtml}</td>
+          </tr>`;
+        }).join("") : `<tr><td colspan="6" style="text-align:center;color:var(--muted);">لا توجد سجلات حضور مسجلة</td></tr>`;
+      }
+
+      // 2. بطاقات تارجيت الموظفين
+      const trgGrid = document.getElementById("targetsCardsGrid");
+      if (trgGrid) {
+        const visibleTargets = employeeTargets.filter(t => isAdmin || t.user === currentUser?.username);
+        trgGrid.innerHTML = visibleTargets.length ? visibleTargets.map(t => {
+          const achieved = invoices
+            .filter(i => (i.status === "active" || i.status === "pending_return") && i.issuedBy === t.user && (i.date || "").startsWith(t.month))
+            .reduce((sum, i) => sum + Number(i.total || 0), 0);
+          const pct = t.targetAmount > 0 ? Math.min(100, Math.round((achieved / t.targetAmount) * 100)) : 0;
+          return `<div class="f-card">
+            <div class="f-card-top">
+              <strong>👤 ${t.user}</strong>
+              <span class="pill pill-purple">${t.month}</span>
+            </div>
+            <div class="f-card-val" style="font-size:20px;">${money(achieved)} <small style="font-size:12px;color:var(--muted);">/ ${money(t.targetAmount)}</small></div>
+            <div class="progress-track"><div class="progress-fill" style="width:${pct}%;"></div></div>
+            <small style="color:var(--green);font-weight:700;">نسبة التحقيق: ${pct}%</small>
+          </div>`;
+        }).join("") : `<div class="f-card" style="grid-column:1/-1;text-align:center;color:var(--muted);">لم يتم تحديد تارجيت شهري بعد</div>`;
+      }
+
+      // 3. جدول المرتبات والسلف والخصومات
+      const payBody = document.getElementById("payrollBody");
+      const payKpis = document.getElementById("payrollKpisRow");
+      if (payBody && payKpis) {
+        let totBase = 0, totDed = 0, totNet = 0;
+        payrollLogs.forEach(p => { totBase += Number(p.baseAmount || 0); totDed += Number(p.deductions || 0); totNet += Number(p.netPaid || 0); });
+        payKpis.innerHTML = `
+          <div class="f-card"><span class="f-card-title">إجمالي الرواتب الأساسية</span><div class="f-card-val">${money(totBase)}</div></div>
+          <div class="f-card"><span class="f-card-title">إجمالي السلف والخصومات</span><div class="f-card-val" style="color:var(--warn);">${money(totDed)}</div></div>
+          <div class="f-card"><span class="f-card-title">الصافي المخصوم من الشركة</span><div class="f-card-val" style="color:var(--red);">${money(totNet)}</div></div>
+        `;
+        payBody.innerHTML = payrollLogs.length ? payrollLogs.map(p => `<tr>
+          <td>${p.date}</td>
+          <td><strong>${p.employee}</strong></td>
+          <td><span class="pill pill-purple">${p.kind}</span></td>
+          <td>${money(p.baseAmount)}</td>
+          <td style="color:var(--warn);">${money(p.deductions)}</td>
+          <td style="color:var(--red);font-weight:700;">${money(p.netPaid)}</td>
+          <td>${p.account}</td>
+          <td>${p.note || "—"}</td>
+        </tr>`).join("") : `<tr><td colspan="8" style="text-align:center;color:var(--muted);">لا توجد حركات رواتب أو سلف مسجلة</td></tr>`;
+      }
+    }
+
+    // ==================== 8 & 9. نظام التسعير، الخصم (%) أو مبلغ، وإلغاء الآجل عند الدفع الكامل ====================
     window.onInvoiceCustomerChange = function(custId) {
       const cust = customers.find(c => String(c.id) === String(custId));
       const tierSel = document.getElementById("invPriceTier");
@@ -2118,25 +3011,61 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       calcLine();
     }
 
+    window.onPayMethodChange = function() {
+      const method = document.getElementById("invPayMethod").value;
+      const total = Number(document.getElementById("invTotalInp").value) || 0;
+      const paidInp = document.getElementById("invPaidInp");
+      if (method !== "آجل") {
+        paidInp.value = total.toFixed(2);
+      } else {
+        paidInp.value = "0";
+      }
+      calcInvoiceTotal();
+    };
+
     function calcInvoiceTotal() {
       let sub = 0;
       document.querySelectorAll("#invLinesBox .inv-line").forEach(r => {
         sub += (Number(r.querySelector(".l-qty").value) || 0) * (Number(r.querySelector(".l-price").value) || 0);
       });
-      const disc = Number(document.getElementById("invDiscInp").value) || 0;
+      const discType = document.getElementById("invDiscType")?.value || "pct";
+      const discRaw = Number(document.getElementById("invDiscInp").value) || 0;
+      const discount = discType === "pct" ? Math.min(sub, (sub * discRaw) / 100) : Math.min(sub, discRaw);
+
+      const hintEl = document.getElementById("invDiscCalcHint");
+      if (hintEl) hintEl.textContent = `قيمة الخصم المخصومة: ${money(discount)}`;
+
       const ship = Number(document.getElementById("invShipInp").value) || 0;
-      const total = Math.max(0, sub - disc + ship);
+      const total = Math.max(0, sub - discount + ship);
 
       document.getElementById("invSubInp").value = sub.toFixed(2);
       document.getElementById("invTotalInp").value = total.toFixed(2);
-      const paid = Number(document.getElementById("invPaidInp").value) || 0;
-      document.getElementById("invRemainInp").value = Math.max(0, total - paid).toFixed(2);
+
+      const method = document.getElementById("invPayMethod").value;
+      const paidInp = document.getElementById("invPaidInp");
+      if (method !== "آجل" && !paidInp.dataset.edited) {
+        paidInp.value = total.toFixed(2);
+      }
+
+      const paid = Number(paidInp.value) || 0;
+      const remain = Math.max(0, total - paid);
+      document.getElementById("invRemainInp").value = remain.toFixed(2);
+
+      // إلغاء وإخفاء خانة الآجل إذا تم دفع قيمة الفاتورة بالكامل
+      const remainWrap = document.getElementById("invRemainWrap");
+      if (remainWrap) {
+        remainWrap.style.display = remain <= 0.009 ? "none" : "block";
+      }
     }
 
     document.getElementById("addInvLineBtn").addEventListener("click", addInvoiceLine);
-    ["invDiscInp", "invShipInp", "invPaidInp"].forEach(id => document.getElementById(id).addEventListener("input", calcInvoiceTotal));
+    ["invDiscInp", "invShipInp"].forEach(id => document.getElementById(id).addEventListener("input", calcInvoiceTotal));
+    document.getElementById("invPaidInp").addEventListener("input", () => {
+      document.getElementById("invPaidInp").dataset.edited = "1";
+      calcInvoiceTotal();
+    });
 
-    // حفظ الفاتورة (قيد المراجعة) بدون فتح واتساب حتى يعتمدها الأدمن
+    // حفظ الفاتورة + ترحيل الملاحظات الداخلية لخانة المتابعة تلقائياً
     document.getElementById("invoiceForm").addEventListener("submit", async e => {
       e.preventDefault();
       const lines = [...document.querySelectorAll("#invLinesBox .inv-line")];
@@ -2200,36 +3129,52 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
 
       const finalPhone = enteredPhone || custObj.phone || "—";
       const subtotal = Number(document.getElementById("invSubInp").value) || 0;
-      const discount = Number(document.getElementById("invDiscInp").value) || 0;
+      const discType = document.getElementById("invDiscType").value;
+      const discRaw = Number(document.getElementById("invDiscInp").value) || 0;
+      const discount = discType === "pct" ? Math.min(subtotal, (subtotal * discRaw) / 100) : Math.min(subtotal, discRaw);
       const shipping = Number(document.getElementById("invShipInp").value) || 0;
-      const total = Number(document.getElementById("invTotalInp").value) || 0;
+      const total = Math.max(0, subtotal - discount + shipping);
       const paid = Number(document.getElementById("invPaidInp").value) || 0;
       const remain = Math.max(0, total - paid);
+
+      // الملاحظات الداخلية السرية
+      const internalNote = document.getElementById("invInternalNote").value.trim();
+      const followUpDate = document.getElementById("invFollowUpDate").value;
 
       const inv = {
         id: "INV-" + (11660 + invoices.length),
         date: todayStr(),
         customer: custObj.name,
         phone: finalPhone,
-        payMethod: document.getElementById("invPayMethod").value,
+        payMethod: remain <= 0.009 && document.getElementById("invPayMethod").value === "آجل" ? "كاش" : document.getElementById("invPayMethod").value,
         subtotal, discount, shipping, total, paid, remain, items,
         status: "pending",
         issuedBy: currentUser.username,
         actionBy: "",
         locationUrl,
-        priceTier
+        priceTier,
+        internalNote
       };
       invoices.unshift(inv);
 
+      // ترحيل الملاحظة الداخلية تلقائياً إلى قسم المتابعة الدورية
+      if (internalNote || followUpDate) {
+        const nextDate = followUpDate || (() => {
+          const d = new Date(); d.setDate(d.getDate() + 7); return d.toISOString().slice(0, 10);
+        })();
+        createFollowUpEntry(custObj.name, nextDate, `[ملاحظة فاتورة ${inv.id}]: ${internalNote || "متابعة ما بعد البيع"}`, false);
+      }
+
       recordActivity("🧾 إنشاء فاتورة", `إنشاء طلب (${inv.id}) للعميل (${inv.customer}) بفئة (${TIER_LABELS[priceTier]}) بقيمة ${money(inv.total)}`, locationUrl);
 
+      delete document.getElementById("invPaidInp").dataset.edited;
       e.target.reset();
       document.getElementById("invLinesBox").innerHTML = "";
       addInvoiceLine();
       renderAll();
       openInvoiceModal(inv);
       switchView("viewOrders");
-      notify("⏳ تم تسجيل الطلب قيد المراجعة — ستُرسل رسالة الواتساب عند اعتماد الإدارة");
+      notify("⏳ تم تسجيل الطلب قيد المراجعة" + (internalNote ? " وترحيل الملاحظة للمتابعة الدورية" : ""));
 
       postToSheet({ action: "addInvoice", invoice: inv });
     });
@@ -2276,7 +3221,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       postToSheet({ action: "syncProducts", products });
       postToSheet({ action: "syncCustomers", customers });
 
-      sendInvoiceWhatsApp(inv, true);
+      sendInvoiceWhatsApp(inv);
     };
 
     window.rejectInvoice = function(idx) {
@@ -2382,7 +3327,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       applyOrdersFilter();
     };
 
-    // ==================== إدارة المنتجات بالأسعار الـ 3 ====================
+    // ==================== إدارة المنتجات والهالك والمصاريف والعملاء والموردين ====================
     window.openProductModal = function(prodId = "") {
       if (prodId) {
         const p = products.find(x => x.id === prodId);
@@ -2434,7 +3379,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         } else {
           products.push({ id: "P" + Date.now(), name, sku, category, cost, price, halfPrice, wholesalePrice, qty });
         }
-        recordActivity("📦 إضافة صنف للمخزون", `إضافة (${name}) بكمية (${qty}) — قطاعي: ${price} / نصف جملة: ${halfPrice} / جملة: ${wholesalePrice}`);
+        recordActivity("📦 إضافة صنف للمخزون", `إضافة (${name}) بكمية (${qty})`);
       }
 
       e.target.reset();
@@ -2443,10 +3388,9 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       addInvoiceLine();
       renderAll();
       postToSheet({ action: "syncProducts", products });
-      notify("✅ تم حفظ الصنف والأسعار في الشيت");
+      notify("✅ تم حفظ الصنف والأسعار");
     });
 
-    // ==================== الهالك والمصاريف ====================
     document.getElementById("wasteForm").addEventListener("submit", e => {
       e.preventDefault();
       const prod = products.find(p => p.id === document.getElementById("wasteProdSelect").value);
@@ -2501,16 +3445,11 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         postToSheet({ action: "syncProducts", products });
       }
       const oldId = ex.id;
-      const cleanId = oldId.replace("ORD-", "INV-");
-      const approvedId = cleanId.startsWith("APPROVED-") ? cleanId : ("APPROVED-" + cleanId);
-
-      ex.id = approvedId;
-      ex.status = "approved";
-      ex.actionBy = currentUser.username;
+      const approvedId = oldId.startsWith("APPROVED-") ? oldId : ("APPROVED-" + oldId);
+      ex.id = approvedId; ex.status = "approved"; ex.actionBy = currentUser.username;
       recordActivity("✅ اعتماد مصروف/هالك", `اعتماد (${ex.kind}: ${ex.title}) برقم (${approvedId})`);
-
       renderAll();
-      notify(`✅ تم اعتماد الحركة (${approvedId}) بواسطة ${currentUser.username}`);
+      notify(`✅ تم اعتماد الحركة (${approvedId})`);
       postToSheet({ action: "updateExpenseStatus", expenseId: oldId, newId: approvedId, status: "approved", actionBy: currentUser.username });
     };
 
@@ -2518,15 +3457,13 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       const ex = expenses[idx];
       if (!ex || ex.status !== "pending") return;
       if (!confirm("رفض هذه الحركة؟")) return;
-      ex.status = "rejected";
-      ex.actionBy = currentUser.username;
+      ex.status = "rejected"; ex.actionBy = currentUser.username;
       recordActivity("❌ رفض مصروف/هالك", `رفض (${ex.kind}: ${ex.title})`);
       renderAll();
-      notify(`❌ تم الرفض بواسطة ${currentUser.username}`);
+      notify(`❌ تم الرفض`);
       postToSheet({ action: "updateExpenseStatus", expenseId: ex.id, status: "rejected", actionBy: currentUser.username });
     };
 
-    // ==================== إدارة العملاء وتحديد شريحة السعر ====================
     window.openCustomerModal = function(cid = "") {
       if (cid) {
         const c = customers.find(x => String(x.id) === String(cid));
@@ -2557,20 +3494,20 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       if (editId) {
         const c = customers.find(x => String(x.id) === String(editId));
         if (c) { c.name = cname; c.phone = phone; c.address = address; c.priceTier = priceTier; }
-        recordActivity("✏️ تعديل عميل", `تحديث بيانات العميل (${cname}) — فئة السعر: ${TIER_LABELS[priceTier]}`);
+        recordActivity("✏️ تعديل عميل", `تحديث بيانات العميل (${cname})`);
       } else {
         customers.push({
           id: "C" + Date.now(), name: cname, phone, address, priceTier,
           ordersCount: 0, itemsBought: {}, totalSpent: 0, debt: 0, lastOrderDate: ""
         });
-        recordActivity("👤 إضافة عميل", `إضافة عميل جديد (${cname}) بفئة سعر (${TIER_LABELS[priceTier]})`);
+        recordActivity("👤 إضافة عميل", `إضافة عميل جديد (${cname})`);
       }
 
       e.target.reset();
       document.getElementById("createCustomerModal").hidden = true;
       renderAll();
       postToSheet({ action: "syncCustomers", customers });
-      notify("✅ تم حفظ بيانات العميل وفئة السعر");
+      notify("✅ تم حفظ بيانات العميل");
     });
 
     window.collectDebt = function(cid) {
@@ -2605,13 +3542,11 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       });
     };
 
-    // ==================== الموردين وفواتير الشراء بالأصناف للمخزون ====================
     document.getElementById("addSupplierForm").addEventListener("submit", e => {
       e.preventDefault();
       const sname = document.getElementById("newSupName").value.trim();
       suppliers.push({
-        id: "S" + Date.now(),
-        name: sname,
+        id: "S" + Date.now(), name: sname,
         contact: document.getElementById("newSupContact").value.trim() || "—",
         totalSupplied: Number(document.getElementById("newSupInitial").value) || 0,
         totalTransferred: 0
@@ -2625,8 +3560,8 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
     });
 
     window.openPurchaseModal = function() {
-      if (!suppliers.length) return alert("يرجى إضافة مورد أولاً من تبويب الموردين!");
-      if (!products.length) return alert("يرجى إضافة الأصناف في مواد المخزون أولاً ليتم التوريد عليها!");
+      if (!suppliers.length) return alert("يرجى إضافة مورد أولاً!");
+      if (!products.length) return alert("يرجى إضافة الأصناف في مواد المخزون أولاً!");
       document.getElementById("purSupSelect").innerHTML = suppliers.map(s => `<option value="${s.id}">${s.name}</option>`).join("");
       document.getElementById("purLinesBox").innerHTML = "";
       addPurchaseLine();
@@ -2684,7 +3619,6 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
 
       let totalAmount = 0;
       const boughtSummary = [];
-
       lines.forEach(r => {
         const pid = r.querySelector(".pur-prod").value;
         const qty = Number(r.querySelector(".pur-qty").value) || 0;
@@ -2697,17 +3631,13 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
           boughtSummary.push(`${prod.name} (×${qty})`);
         }
       });
-
-      if (!boughtSummary.length) return alert("أدخل صنفاً واحداً على الأقل بكمية صحيحة!");
+      if (!boughtSummary.length) return alert("أدخل صنفاً واحداً على الأقل!");
 
       sup.totalSupplied += totalAmount;
-      if (account !== "آجل للمورد") {
-        sup.totalTransferred += totalAmount;
-      }
+      if (account !== "آجل للمورد") sup.totalTransferred += totalAmount;
 
       const fullNote = boughtSummary.join(" + ") + (userNote ? ` | ${userNote}` : "");
       supplierLogs.unshift({ date: todayStr(), supplier: sup.name, type: "توريد بضاعة", amount: totalAmount, account, note: fullNote });
-
       recordActivity("📦 فاتورة شراء وتوريد", `توريد من (${sup.name}): ${fullNote} بإجمالي ${money(totalAmount)}`);
 
       e.target.reset();
@@ -2827,30 +3757,25 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       }
     };
 
-    // ==================== قسم الرسوم البيانية الشامل ====================
+    // ==================== قسم الرسوم البيانية والتقارير ====================
     window.renderChartsHub = function() {
       if (typeof Chart === "undefined") return;
       const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#e11d48";
-
       const actInvs = invoices.filter(i => i.status === "active" || i.status === "pending_return");
       const appExps = expenses.filter(e => e.status === "approved");
 
       let sales = 0, cogs = 0, opExp = 0;
-      const byDate = {};
-      const prodRev = {};
-      const payMethods = { "كاش": 0, "إنستا باي": 0, "تحويل بنكي": 0, "آجل": 0 };
+      const byDate = {}, prodRev = {}, payMethods = { "كاش": 0, "إنستا باي": 0, "تحويل بنكي": 0, "آجل": 0 };
 
       actInvs.forEach(i => {
         sales += i.total;
         const d = (i.date || "").slice(0, 10);
         byDate[d] = (byDate[d] || 0) + i.total;
-
         if (i.paid > 0) {
           const m = (i.payMethod in payMethods && i.payMethod !== "آجل") ? i.payMethod : "كاش";
           payMethods[m] += i.paid;
         }
         if (i.remain > 0) payMethods["آجل"] += i.remain;
-
         (i.items || []).forEach(it => {
           const c = it.cost || (products.find(p => p.name === it.name)?.cost || 0);
           cogs += c * it.qty;
@@ -2860,30 +3785,19 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
 
       appExps.forEach(e => { opExp += e.cost; });
       const netProfit = Math.max(0, sales - cogs - opExp);
-
       const dates = Object.keys(byDate).sort();
+
       if (charts.hubSales) charts.hubSales.destroy();
       charts.hubSales = new Chart(document.getElementById("hubChartSalesLine"), {
         type: "line",
-        data: {
-          labels: dates.length ? dates : [todayStr()],
-          datasets: [{
-            label: "المبيعات اليومية",
-            data: dates.length ? dates.map(d => byDate[d]) : [0],
-            borderColor: accent, backgroundColor: "rgba(225, 29, 72, 0.14)",
-            fill: true, tension: 0.35, borderWidth: 2.5
-          }]
-        },
+        data: { labels: dates.length ? dates : [todayStr()], datasets: [{ label: "المبيعات اليومية", data: dates.length ? dates.map(d => byDate[d]) : [0], borderColor: accent, backgroundColor: "rgba(225, 29, 72, 0.14)", fill: true, tension: 0.35, borderWidth: 2.5 }] },
         options: { responsive: true, maintainAspectRatio: false }
       });
 
       if (charts.hubProfit) charts.hubProfit.destroy();
       charts.hubProfit = new Chart(document.getElementById("hubChartProfitBar"), {
         type: "bar",
-        data: {
-          labels: ["إجمالي المبيعات", "تكلفة البضاعة", "المصاريف والتوالف", "صافي الربح"],
-          datasets: [{ label: "EGP", data: [sales, cogs, opExp, netProfit], backgroundColor: [accent, "#f59e0b", "#ef4444", "#10b981"], borderRadius: 8 }]
-        },
+        data: { labels: ["إجمالي المبيعات", "تكلفة البضاعة", "المصاريف والرواتب", "صافي الربح"], datasets: [{ label: "EGP", data: [sales, cogs, opExp, netProfit], backgroundColor: [accent, "#f59e0b", "#ef4444", "#10b981"], borderRadius: 8 }] },
         options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
       });
 
@@ -2891,10 +3805,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       if (charts.hubProds) charts.hubProds.destroy();
       charts.hubProds = new Chart(document.getElementById("hubChartTopProducts"), {
         type: "bar",
-        data: {
-          labels: sortedP.length ? sortedP.map(x => x[0]) : ["لا توجد مبيعات"],
-          datasets: [{ label: "الإيراد (EGP)", data: sortedP.length ? sortedP.map(x => x[1]) : [0], backgroundColor: accent, borderRadius: 6 }]
-        },
+        data: { labels: sortedP.length ? sortedP.map(x => x[0]) : ["لا توجد مبيعات"], datasets: [{ label: "الإيراد (EGP)", data: sortedP.length ? sortedP.map(x => x[1]) : [0], backgroundColor: accent, borderRadius: 6 }] },
         options: { indexAxis: "y", responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
       });
 
@@ -2906,16 +3817,12 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       });
     };
 
-    // ==================== التقارير التفصيلية ====================
     window.openReportType = function(type) {
       currentReportType = type;
       const titles = {
-        sales: "تقرير المبيعات التفصيلي",
-        payments: "تقرير المدفوعات والتحصيل",
-        inventory: "تقرير مستويات وتكلفة المخزون",
-        stock_movement: "تقرير حركة المخزون (الوارد والمنصرف)",
-        business: "تقرير الأعمال وصافي الأرباح",
-        analytics: "تقرير التحليلات (الأصناف والعملاء)"
+        sales: "تقرير المبيعات التفصيلي", payments: "تقرير المدفوعات والتحصيل",
+        inventory: "تقرير مستويات وتكلفة المخزون", stock_movement: "تقرير حركة المخزون (الوارد والمنصرف)",
+        business: "تقرير الأعمال وصافي الأرباح (بعد الرواتب والمصاريف)", analytics: "تقرير التحليلات (الأصناف والعملاء)"
       };
       document.getElementById("repDetailTitle").textContent = titles[type] || "التقرير";
       switchView("viewReportDetail");
@@ -2967,8 +3874,8 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       let chartLabels = [], chartValues = [], chartLabelTitle = "";
 
       if (currentReportType === "sales") {
-        let tot = 0, disc = 0, ship = 0;
-        activeInvs.forEach(i => { tot += i.total; disc += (i.discount || 0); ship += (i.shipping || 0); });
+        let tot = 0, disc = 0;
+        activeInvs.forEach(i => { tot += i.total; disc += (i.discount || 0); });
         kpiBox.innerHTML = `
           <div class="f-card"><span class="f-card-title">إجمالي المبيعات</span><div class="f-card-val">${money(tot)}</div></div>
           <div class="f-card"><span class="f-card-title">الخصومات</span><div class="f-card-val">${money(disc)}</div></div>
@@ -2976,14 +3883,10 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         `;
         wrap.innerHTML = `<table><thead><tr><th>رقم الطلب</th><th>التاريخ</th><th>العميل</th><th>الإجمالي</th><th>الخصم</th><th>الشحن</th><th>المدفوع</th><th>الآجل</th><th>اعتمدها</th></tr></thead><tbody>` +
           activeInvs.map(i => `<tr><td><strong>${i.id}</strong></td><td>${i.date}</td><td>${i.customer}</td><td><strong>${money(i.total)}</strong></td><td>${money(i.discount)}</td><td>${money(i.shipping)}</td><td style="color:var(--green);">${money(i.paid)}</td><td style="color:var(--red);">${money(i.remain)}</td><td>${i.actionBy || "—"}</td></tr>`).join("") + `</tbody></table>`;
-
         const byDate = {};
         activeInvs.forEach(i => { const d = (i.date || "").slice(0, 10); byDate[d] = (byDate[d] || 0) + i.total; });
-        chartLabels = Object.keys(byDate).sort();
-        chartValues = chartLabels.map(d => byDate[d]);
-        chartLabelTitle = "المبيعات اليومية";
-      }
-      else if (currentReportType === "payments") {
+        chartLabels = Object.keys(byDate).sort(); chartValues = chartLabels.map(d => byDate[d]); chartLabelTitle = "المبيعات اليومية";
+      } else if (currentReportType === "payments") {
         const methods = { "كاش": { count: 0, paid: 0, ret: 0 }, "إنستا باي": { count: 0, paid: 0, ret: 0 }, "تحويل بنكي": { count: 0, paid: 0, ret: 0 }, "آجل": { count: 0, paid: 0, ret: 0 } };
         invoices.forEach(i => {
           const d = (i.date || "").slice(0, 10);
@@ -2998,11 +3901,8 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         kpiBox.innerHTML = "";
         wrap.innerHTML = `<table><thead><tr><th>طريقة الدفع</th><th>العدد</th><th>المبلغ المحصل / المستحق</th><th>مبلغ الإرجاع</th><th>الصافي</th></tr></thead><tbody>` +
           Object.entries(methods).map(([k, v]) => `<tr><td><strong>${k}</strong></td><td>${v.count}</td><td>${money(v.paid)}</td><td style="color:var(--red);">${money(v.ret)}</td><td><strong>${money(v.paid - v.ret)}</strong></td></tr>`).join("") + `</tbody></table>`;
-        chartLabels = Object.keys(methods);
-        chartValues = Object.values(methods).map(v => v.paid);
-        chartLabelTitle = "المدفوعات حسب الطريقة";
-      }
-      else if (currentReportType === "inventory") {
+        chartLabels = Object.keys(methods); chartValues = Object.values(methods).map(v => v.paid); chartLabelTitle = "المدفوعات";
+      } else if (currentReportType === "inventory") {
         let totCost = 0, totRetail = 0;
         products.forEach(p => { totCost += p.qty * p.cost; totRetail += p.qty * p.price; });
         kpiBox.innerHTML = `
@@ -3012,150 +3912,66 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         `;
         wrap.innerHTML = `<table><thead><tr><th>الصنف</th><th>الكمية</th><th>التكلفة</th><th>إجمالي التكلفة</th><th>قطاعي</th><th>نصف جملة</th><th>جملة</th></tr></thead><tbody>` +
           products.map(p => `<tr><td><strong>${p.name}</strong></td><td>${p.qty}</td><td>${money(p.cost)}</td><td>${money(p.qty * p.cost)}</td><td>${money(p.price)}</td><td>${money(p.halfPrice || p.price)}</td><td>${money(p.wholesalePrice || p.price)}</td></tr>`).join("") + `</tbody></table>`;
-        chartLabels = products.map(p => p.name);
-        chartValues = products.map(p => p.qty * p.cost);
-        chartLabelTitle = "قيمة المخزون بالتكلفة";
-      }
-      else if (currentReportType === "stock_movement") {
-        let moves = [];
-        let totalIn = 0;
-        let totalOut = 0;
-
-        activeInvs.forEach(inv => {
-          (inv.items || []).forEach(it => {
-            const q = Number(it.qty) || 0;
-            totalOut += q;
-            moves.push({
-              date: inv.date,
-              type: "منصرف (مبيعات)",
-              badge: "pill-red",
-              item: it.name,
-              qtyTxt: `-${q}`,
-              ref: inv.id,
-              party: inv.customer,
-              by: inv.actionBy || inv.issuedBy || "—"
-            });
-          });
-        });
-
-        invoices.filter(i => {
-          if (i.status !== "returned") return false;
-          const d = (i.date || "").slice(0, 10);
-          if (fromD && d < fromD) return false;
-          if (toD && d > toD) return false;
-          if (custF && i.customer !== custF) return false;
-          return true;
-        }).forEach(inv => {
-          (inv.items || []).forEach(it => {
-            const q = Number(it.qty) || 0;
-            totalIn += q;
-            moves.push({
-              date: inv.date,
-              type: "وارد (مرتجع مبيعات)",
-              badge: "pill-green",
-              item: it.name,
-              qtyTxt: `+${q}`,
-              ref: inv.id,
-              party: inv.customer,
-              by: inv.actionBy || "—"
-            });
-          });
-        });
-
-        supplierLogs.filter(l => {
-          if (l.type === "تحويل مالي") return false;
-          const d = (l.date || "").slice(0, 10);
-          if (fromD && d < fromD) return false;
-          if (toD && d > toD) return false;
-          return true;
-        }).forEach(l => {
-          const parts = (l.note || "").split("|")[0].split("+");
-          parts.forEach(part => {
+        chartLabels = products.map(p => p.name); chartValues = products.map(p => p.qty * p.cost); chartLabelTitle = "قيمة المخزون";
+      } else if (currentReportType === "stock_movement") {
+        let moves = [], totalIn = 0, totalOut = 0;
+        activeInvs.forEach(inv => (inv.items || []).forEach(it => {
+          const q = Number(it.qty) || 0; totalOut += q;
+          moves.push({ date: inv.date, type: "منصرف (مبيعات)", badge: "pill-red", item: it.name, qtyTxt: `-${q}`, ref: inv.id, party: inv.customer, by: inv.actionBy || inv.issuedBy || "—" });
+        }));
+        invoices.filter(i => i.status === "returned").forEach(inv => (inv.items || []).forEach(it => {
+          const q = Number(it.qty) || 0; totalIn += q;
+          moves.push({ date: inv.date, type: "وارد (مرتجع)", badge: "pill-green", item: it.name, qtyTxt: `+${q}`, ref: inv.id, party: inv.customer, by: inv.actionBy || "—" });
+        }));
+        supplierLogs.filter(l => l.type !== "تحويل مالي").forEach(l => {
+          (l.note || "").split("|")[0].split("+").forEach(part => {
             const m = part.trim().match(/^(.+?)\s*\(×(\d+)\)$/);
             if (m) {
-              const q = Number(m[2]) || 0;
-              totalIn += q;
-              moves.push({
-                date: l.date,
-                type: "وارد (توريد مشتريات)",
-                badge: "pill-green",
-                item: m[1].trim(),
-                qtyTxt: `+${q}`,
-                ref: "فاتورة شراء",
-                party: l.supplier,
-                by: l.by || "—"
-              });
+              const q = Number(m[2]) || 0; totalIn += q;
+              moves.push({ date: l.date, type: "وارد (توريد)", badge: "pill-green", item: m[1].trim(), qtyTxt: `+${q}`, ref: "فاتورة شراء", party: l.supplier, by: l.by || "—" });
             }
           });
         });
-
         approvedExps.filter(ex => ex.account === "مخزون" || ex.kind === "تالف مخزن" || ex.kind === "عينات تذوق").forEach(ex => {
-          const q = Number(ex.qty) || 0;
-          totalOut += q;
-          moves.push({
-            date: ex.date,
-            type: `منصرف (${ex.kind})`,
-            badge: "pill-warn",
-            item: ex.title,
-            qtyTxt: `-${q}`,
-            ref: ex.id,
-            party: ex.note || "—",
-            by: ex.actionBy || ex.by || "—"
-          });
+          const q = Number(ex.qty) || 0; totalOut += q;
+          moves.push({ date: ex.date, type: `منصرف (${ex.kind})`, badge: "pill-warn", item: ex.title, qtyTxt: `-${q}`, ref: ex.id, party: ex.note || "—", by: ex.actionBy || ex.by || "—" });
         });
-
         moves.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
-
         kpiBox.innerHTML = `
-          <div class="f-card"><span class="f-card-title">إجمالي الوارد للمخزن (وحدة)</span><div class="f-card-val" style="color:var(--green);">+${totalIn}</div></div>
-          <div class="f-card"><span class="f-card-title">إجمالي المنصرف من المخزن (وحدة)</span><div class="f-card-val" style="color:var(--red);">-${totalOut}</div></div>
-          <div class="f-card"><span class="f-card-title">صافي حركة المخزون</span><div class="f-card-val">${totalIn - totalOut >= 0 ? "+" : ""}${totalIn - totalOut}</div></div>
+          <div class="f-card"><span class="f-card-title">إجمالي الوارد</span><div class="f-card-val" style="color:var(--green);">+${totalIn}</div></div>
+          <div class="f-card"><span class="f-card-title">إجمالي المنصرف</span><div class="f-card-val" style="color:var(--red);">-${totalOut}</div></div>
+          <div class="f-card"><span class="f-card-title">صافي الحركة</span><div class="f-card-val">${totalIn - totalOut}</div></div>
         `;
-
-        wrap.innerHTML = `<table><thead><tr><th>التاريخ</th><th>نوع الحركة</th><th>الصنف</th><th>الكمية</th><th>المرجع</th><th>الجهة / العميل / المورد</th><th>بواسطة</th></tr></thead><tbody>` +
-          (moves.length ? moves.map(m => `<tr><td>${m.date}</td><td><span class="pill ${m.badge}">${m.type}</span></td><td><strong>${m.item}</strong></td><td><strong style="direction:ltr;display:inline-block;">${m.qtyTxt}</strong></td><td>${m.ref}</td><td>${m.party}</td><td>${m.by}</td></tr>`).join("") : `<tr><td colspan="7" style="text-align:center;color:var(--muted);">لا توجد حركات مخزون في هذه الفترة</td></tr>`) +
-          `</tbody></table>`;
-
-        chartLabels = ["الوارد للمخزن (+)", "المنصرف من المخزن (-)"];
-        chartValues = [totalIn, totalOut];
-        chartLabelTitle = "ملخص حركة الوحدات";
-      }
-      else if (currentReportType === "business") {
+        wrap.innerHTML = `<table><thead><tr><th>التاريخ</th><th>نوع الحركة</th><th>الصنف</th><th>الكمية</th><th>المرجع</th><th>الجهة</th><th>بواسطة</th></tr></thead><tbody>` +
+          moves.map(m => `<tr><td>${m.date}</td><td><span class="pill ${m.badge}">${m.type}</span></td><td><strong>${m.item}</strong></td><td><strong>${m.qtyTxt}</strong></td><td>${m.ref}</td><td>${m.party}</td><td>${m.by}</td></tr>`).join("") + `</tbody></table>`;
+        chartLabels = ["الوارد (+)", "المنصرف (-)"]; chartValues = [totalIn, totalOut]; chartLabelTitle = "حركة الوحدات";
+      } else if (currentReportType === "business") {
         let sales = 0, cogs = 0, opExp = 0;
         activeInvs.forEach(i => {
           sales += i.total;
-          (i.items || []).forEach(it => {
-            const c = it.cost || (products.find(p => p.name === it.name)?.cost || 0);
-            cogs += c * it.qty;
-          });
+          (i.items || []).forEach(it => { cogs += (it.cost || (products.find(p => p.name === it.name)?.cost || 0)) * it.qty; });
         });
         approvedExps.forEach(e => { opExp += e.cost; });
         const net = sales - cogs - opExp;
         kpiBox.innerHTML = `
           <div class="f-card"><span class="f-card-title">المبيعات المعتمدة</span><div class="f-card-val">${money(sales)}</div></div>
-          <div class="f-card"><span class="f-card-title">التكلفة + المصاريف المعتمدة</span><div class="f-card-val" style="color:var(--red);">${money(cogs + opExp)}</div></div>
+          <div class="f-card"><span class="f-card-title">التكلفة + المصاريف والرواتب</span><div class="f-card-val" style="color:var(--red);">${money(cogs + opExp)}</div></div>
           <div class="f-card"><span class="f-card-title">صافي الربح الفعلي</span><div class="f-card-val" style="color:var(--green);">${money(net)}</div></div>
         `;
         wrap.innerHTML = `<table><thead><tr><th>التاريخ</th><th>النوع</th><th>البند</th><th>المبلغ</th><th>الحساب</th><th>أنشأه</th><th>اعتمده</th></tr></thead><tbody>` +
           approvedExps.map(e => `<tr><td>${e.date}</td><td>${e.kind}</td><td><strong>${e.title}</strong></td><td style="color:var(--red);">${money(e.cost)}</td><td>${e.account}</td><td>${e.by || "—"}</td><td>${e.actionBy || "—"}</td></tr>`).join("") + `</tbody></table>`;
-        chartLabels = ["المبيعات", "تكلفة البضاعة", "المصاريف والتوالف", "صافي الربح"];
-        chartValues = [sales, cogs, opExp, Math.max(0, net)];
-        chartLabelTitle = "ملخص الأعمال";
-      }
-      else if (currentReportType === "analytics") {
+        chartLabels = ["المبيعات", "تكلفة البضاعة", "المصاريف والرواتب", "صافي الربح"]; chartValues = [sales, cogs, opExp, Math.max(0, net)]; chartLabelTitle = "ملخص الأعمال";
+      } else if (currentReportType === "analytics") {
         const prodMap = {};
         activeInvs.forEach(i => (i.items || []).forEach(it => {
           if (!prodMap[it.name]) prodMap[it.name] = { qty: 0, rev: 0 };
-          prodMap[it.name].qty += it.qty;
-          prodMap[it.name].rev += it.qty * it.price;
+          prodMap[it.name].qty += it.qty; prodMap[it.name].rev += it.qty * it.price;
         }));
         const sorted = Object.entries(prodMap).sort((a, b) => b[1].rev - a[1].rev);
         kpiBox.innerHTML = "";
         wrap.innerHTML = `<table><thead><tr><th>الترتيب</th><th>المنتج</th><th>الكمية المباعة</th><th>صافي المبيعات</th></tr></thead><tbody>` +
           sorted.map(([name, d], idx) => `<tr><td><strong>#${idx + 1}</strong></td><td><strong>${name}</strong></td><td>${d.qty}</td><td><strong>${money(d.rev)}</strong></td></tr>`).join("") + `</tbody></table>`;
-        chartLabels = sorted.slice(0, 8).map(x => x[0]);
-        chartValues = sorted.slice(0, 8).map(x => x[1].rev);
-        chartLabelTitle = "الأكثر مبيعاً";
+        chartLabels = sorted.slice(0, 8).map(x => x[0]); chartValues = sorted.slice(0, 8).map(x => x[1].rev); chartLabelTitle = "الأكثر مبيعاً";
       }
 
       if (!document.getElementById("repChartBox").hidden && typeof Chart !== "undefined") {
@@ -3169,7 +3985,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       }
     };
 
-    // ==================== لوحة القيادة ====================
+    // ==================== لوحة القيادة (Dashboard) ====================
     window.setDashRange = function(range, btn) {
       dashRange = range;
       btn.parentElement.querySelectorAll(".seg-btn").forEach(b => b.classList.remove("active"));
@@ -3180,6 +3996,23 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
     function renderDashboard() {
       const targetDate = document.getElementById("dashDateInp").value;
       const today = todayStr();
+
+      // عرض تارجيت الموظف الحالي في الداشبورد
+      const myTrgCard = document.getElementById("myTargetDashCard");
+      const myTrg = employeeTargets.find(t => t.user === currentUser?.username && t.month === currentMonthStr());
+      if (myTrg && myTrgCard) {
+        const myAchieved = invoices
+          .filter(i => (i.status === "active" || i.status === "pending_return") && i.issuedBy === currentUser.username && (i.date || "").startsWith(myTrg.month))
+          .reduce((s, i) => s + Number(i.total || 0), 0);
+        const pct = myTrg.targetAmount > 0 ? Math.min(100, Math.round((myAchieved / myTrg.targetAmount) * 100)) : 0;
+        myTrgCard.style.display = "block";
+        document.getElementById("myTargetMonthLbl").textContent = myTrg.month;
+        document.getElementById("myTargetSubLbl").textContent = `مبيعاتك المعتمدة: ${money(myAchieved)} / الهدف: ${money(myTrg.targetAmount)}`;
+        document.getElementById("myTargetPctBadge").textContent = `${pct}%`;
+        document.getElementById("myTargetBarFill").style.width = `${pct}%`;
+      } else if (myTrgCard) {
+        myTrgCard.style.display = "none";
+      }
 
       const filterByRange = (dStr) => {
         const d = (dStr || "").slice(0, 10);
@@ -3201,9 +4034,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       const prodRev = {}, payMethods = { "كاش": 0, "إنستا باي": 0, "تحويل بنكي": 0, "آجل": 0 };
 
       actInvs.forEach(i => {
-        sales += i.total;
-        paidTotal += i.paid;
-        discTotal += (i.discount || 0);
+        sales += i.total; paidTotal += i.paid; discTotal += (i.discount || 0);
         const d = (i.date || "").slice(0, 10);
         dailyOrders[d] = (dailyOrders[d] || 0) + 1;
         dailySales[d] = (dailySales[d] || 0) + i.total;
@@ -3255,10 +4086,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         if (charts[id]) charts[id].destroy();
         charts[id] = new Chart(document.getElementById(id), {
           type: "line",
-          data: {
-            labels,
-            datasets: [{ data: dates.length ? dates.map(d => dataMap[d] || 0) : [0], borderColor: accent, borderWidth: 2, pointRadius: 2, tension: 0.3, fill: false }]
-          },
+          data: { labels, datasets: [{ data: dates.length ? dates.map(d => dataMap[d] || 0) : [0], borderColor: accent, borderWidth: 2, pointRadius: 2, tension: 0.3, fill: false }] },
           options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } } }
         });
       };
@@ -3289,6 +4117,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       return isNaN(diff) ? null : diff;
     }
 
+    // معاينة وطباعة الفاتورة (الملاحظات الداخلية السرية مخفية تماماً)
     window.openInvoiceModal = function(inv) {
       activeModalInvoice = inv;
       const isAdmin = currentUser?.role === "admin";
@@ -3330,6 +4159,11 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       document.getElementById("mTotal").textContent = money(inv.total);
       document.getElementById("mPaid").textContent = money(inv.paid);
       document.getElementById("mRemain").textContent = money(inv.remain);
+
+      // إخفاء سطر المتبقي (الآجل) في الفاتورة المطبوعة إذا كانت مدفوعة بالكامل
+      const remLine = document.getElementById("mRemainLine");
+      if (remLine) remLine.style.display = Number(inv.remain) <= 0.009 ? "none" : "block";
+
       document.getElementById("mItemsBody").innerHTML = (inv.items || []).map(it =>
         `<tr><td style="padding:8px;border:1px solid #eaecf0;">${it.name}</td><td style="padding:8px;border:1px solid #eaecf0;">${it.qty}</td><td style="padding:8px;border:1px solid #eaecf0;">${money(it.price)}</td><td style="padding:8px;border:1px solid #eaecf0;"><strong>${money(it.qty * it.price)}</strong></td></tr>`
       ).join("");
@@ -3372,34 +4206,16 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         customers.map(c => `<option value="${c.id}">${c.name} [${TIER_LABELS[c.priceTier || "retail"]}]</option>`).join("");
       const custFilterOpts = `<option value="">كل العملاء</option>` + customers.map(c => `<option value="${c.name}">${c.name}</option>`).join("");
       const userFilterOpts = `<option value="">كل الموظفين</option>` + users.map(u => `<option value="${u.username}">${u.username}</option>`).join("");
-      if (document.getElementById("ordCustFilter")) {
-        const prevC = document.getElementById("ordCustFilter").value;
-        document.getElementById("ordCustFilter").innerHTML = custFilterOpts;
-        document.getElementById("ordCustFilter").value = prevC;
-      }
-      if (document.getElementById("ordUserFilter")) {
-        const prevU = document.getElementById("ordUserFilter").value;
-        document.getElementById("ordUserFilter").innerHTML = userFilterOpts;
-        document.getElementById("ordUserFilter").value = prevU;
-      }
-      if (document.getElementById("repCustFilter")) {
-        const prevRC = document.getElementById("repCustFilter").value;
-        document.getElementById("repCustFilter").innerHTML = custFilterOpts;
-        document.getElementById("repCustFilter").value = prevRC;
-      }
-      if (document.getElementById("repUserFilter")) {
-        const prevRU = document.getElementById("repUserFilter").value;
-        document.getElementById("repUserFilter").innerHTML = userFilterOpts;
-        document.getElementById("repUserFilter").value = prevRU;
-      }
 
-      document.getElementById("wasteProdSelect").innerHTML =
-        products.map(p => `<option value="${p.id}">${p.name} (متاح: ${p.qty})</option>`).join("");
+      if (document.getElementById("ordCustFilter")) { const prevC = document.getElementById("ordCustFilter").value; document.getElementById("ordCustFilter").innerHTML = custFilterOpts; document.getElementById("ordCustFilter").value = prevC; }
+      if (document.getElementById("ordUserFilter")) { const prevU = document.getElementById("ordUserFilter").value; document.getElementById("ordUserFilter").innerHTML = userFilterOpts; document.getElementById("ordUserFilter").value = prevU; }
+      if (document.getElementById("repCustFilter")) { const prevRC = document.getElementById("repCustFilter").value; document.getElementById("repCustFilter").innerHTML = custFilterOpts; document.getElementById("repCustFilter").value = prevRC; }
+      if (document.getElementById("repUserFilter")) { const prevRU = document.getElementById("repUserFilter").value; document.getElementById("repUserFilter").innerHTML = userFilterOpts; document.getElementById("repUserFilter").value = prevRU; }
 
-      document.getElementById("supSelect").innerHTML =
-        suppliers.length ? suppliers.map(s => `<option value="${s.id}">${s.name}</option>`).join("") : `<option value="">-- أضف مورد أولاً --</option>`;
+      document.getElementById("wasteProdSelect").innerHTML = products.map(p => `<option value="${p.id}">${p.name} (متاح: ${p.qty})</option>`).join("");
+      document.getElementById("supSelect").innerHTML = suppliers.length ? suppliers.map(s => `<option value="${s.id}">${s.name}</option>`).join("") : `<option value="">-- أضف مورد أولاً --</option>`;
 
-      // 1. المخزون بالأسعار الـ 3
+      // 1. المخزون
       let lowStockCount = 0;
       const invBody = document.getElementById("inventoryBody");
       const countBody = document.getElementById("stockCountBody");
@@ -3426,7 +4242,7 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       const bLow = document.getElementById("badgeLowStock");
       bLow.textContent = lowStockCount; bLow.style.display = lowStockCount > 0 ? "inline-block" : "none";
 
-      // 2. العملاء مع شريحة السعر
+      // 2. العملاء الفعليين
       let followCount = 0;
       const cBody = document.getElementById("customersBody");
       cBody.innerHTML = "";
@@ -3453,6 +4269,69 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
       });
       const bFol = document.getElementById("badgeFollowCust");
       bFol.textContent = followCount; bFol.style.display = followCount > 0 ? "inline-block" : "none";
+
+      // 2.1 زيارات بدون شراء (غير مفعلين)
+      const prosBody = document.getElementById("prospectsBody");
+      if (prosBody) {
+        prosBody.innerHTML = prospects.length ? prospects.map((p, idx) => {
+          const locHtml = p.locationUrl ? `<a href="${p.locationUrl}" target="_blank" class="btn btn-map">📍 موقع المكان</a>` : "—";
+          return `<tr>
+            <td>${p.date}</td>
+            <td><strong>${p.name}</strong></td>
+            <td>${p.phone}</td>
+            <td style="color:var(--red);font-weight:600;">${p.reason}</td>
+            <td><strong>${p.by}</strong></td>
+            <td>${locHtml}</td>
+            <td><button class="btn btn-green" onclick="activateProspectToCustomer(${idx})">✓ تفعيل كعميل</button></td>
+          </tr>`;
+        }).join("") : `<tr><td colspan="7" style="text-align:center;color:var(--muted);">لا توجد زيارات مسجلة بدون شراء</td></tr>`;
+      }
+
+      // 2.2 المتابعة الدورية
+      const fuBody = document.getElementById("followUpsBody");
+      if (fuBody) {
+        const tomorrowObj = new Date(); tomorrowObj.setDate(tomorrowObj.getDate() + 1);
+        const tomorrow = tomorrowObj.toISOString().slice(0, 10);
+        fuBody.innerHTML = followUps.length ? followUps.map((f, idx) => {
+          const isAlert = !f.done && f.followDate <= tomorrow;
+          const stBadge = f.done
+            ? `<span class="pill pill-green">✓ تمت المتابعة</span>`
+            : (isAlert ? `<span class="pill pill-red">🔔 تنبيه مستحق</span>` : `<span class="pill pill-blue">⏳ مجدولة</span>`);
+          const actBtn = !f.done ? `<button class="btn btn-green" onclick="markFollowUpDone(${idx})">✓ تم التنفيذ</button>` : "—";
+          return `<tr>
+            <td><strong>${f.followDate}</strong></td>
+            <td><strong>${f.customer}</strong></td>
+            <td>${f.note}</td>
+            <td><span class="pill pill-purple">👤 ${f.user}</span></td>
+            <td>${stBadge}</td>
+            <td>${actBtn}</td>
+          </tr>`;
+        }).join("") : `<tr><td colspan="6" style="text-align:center;color:var(--muted);">لا توجد متابعات دورية مجدولة</td></tr>`;
+      }
+
+      // 2.3 التشغيل والتحديثات
+      const opBody = document.getElementById("operationsBody");
+      let pendOpsCount = 0;
+      if (opBody) {
+        opBody.innerHTML = operationsLogs.length ? operationsLogs.map((op, idx) => {
+          if (op.status === "pending") pendOpsCount++;
+          const stHtml = op.status === "reviewed"
+            ? `<span class="pill pill-green">✓ تمت المراجعة (${op.reviewedBy})</span>`
+            : `<span class="pill pill-warn">⏳ بانتظار الإدارة</span>`;
+          const revBtn = (op.status === "pending" && canApprove)
+            ? `<button class="btn btn-green" onclick="approveOperation(${idx})">✓ اعتماد ومراجعة</button>` : "—";
+          return `<tr>
+            <td>${op.date}</td>
+            <td><strong>${op.user}</strong></td>
+            <td><span class="pill pill-purple">${op.dept}</span></td>
+            <td>${op.text}</td>
+            <td>${stHtml}</td>
+            <td class="perm-el" data-perm="approve">${revBtn}</td>
+          </tr>`;
+        }).join("") : `<tr><td colspan="6" style="text-align:center;color:var(--muted);">لا توجد تحديثات تشغيل مسجلة</td></tr>`;
+      }
+      const bOps = document.getElementById("badgePendingOps");
+      if (bOps) { bOps.textContent = pendOpsCount; bOps.style.display = pendOpsCount > 0 ? "inline-block" : "none"; }
 
       // 3. الموردين والمشتريات والتحويلات
       const sBody = document.getElementById("suppliersBody");
@@ -3489,7 +4368,6 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         }
 
         const itemsTxt = (inv.items || []).map(i => `${i.name} ×${i.qty}`).join(" + ");
-
         const byTag = inv.actionBy ? `<span class="by-sub">✓ اعتمدها: ${inv.actionBy}</span>` : "";
         let statusBadge = `<span class="pill pill-green">معتمدة</span>${byTag}`;
         if (st === "pending") statusBadge = `<span class="pill pill-warn">⏳ قيد المراجعة</span>`;
@@ -3513,14 +4391,18 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
           actionsHtml += `<button class="btn btn-green" onclick="confirmReturnInvoice(${idx})">✓ تأكيد المرتجع</button> <button class="btn btn-outline" style="padding:4px 9px;font-size:12px;" onclick="cancelReturnInvoice(${idx})">إلغاء</button>`;
         }
 
+        const remainCellHtml = Number(inv.remain) > 0
+          ? `<span style="color:var(--green);">${money(inv.paid)}</span> / <span style="color:var(--red);">${money(inv.remain)}</span>`
+          : `<span style="color:var(--green);font-weight:700;">${money(inv.paid)} (مدفوع بالكامل)</span>`;
+
         const rowClass = (st === "returned" || st === "rejected") ? "rejected-row" : ((st === "pending" || st === "pending_return") ? "pending-row" : "");
-        iBody.innerHTML += `<tr data-status="${st}" class="${rowClass}"><td><strong>${inv.id}</strong><span class="by-sub">بواسطة: ${inv.issuedBy || "—"}</span></td><td><strong>${inv.customer}</strong><span class="by-sub">${TIER_LABELS[inv.priceTier || "retail"]}</span></td><td style="font-size:12px;">${itemsTxt}</td><td>${statusBadge}</td><td>${inv.payMethod}</td><td><strong>${money(inv.total)}</strong></td><td><span style="color:var(--green);">${money(inv.paid)}</span> / <span style="color:var(--red);">${money(inv.remain)}</span></td>${locCell}<td>${inv.date}</td><td>${actionsHtml}</td></tr>`;
+        iBody.innerHTML += `<tr data-status="${st}" class="${rowClass}"><td><strong>${inv.id}</strong><span class="by-sub">بواسطة: ${inv.issuedBy || "—"}</span></td><td><strong>${inv.customer}</strong><span class="by-sub">${TIER_LABELS[inv.priceTier || "retail"]}</span></td><td style="font-size:12px;">${itemsTxt}</td><td>${statusBadge}</td><td>${inv.payMethod}</td><td><strong>${money(inv.total)}</strong></td><td>${remainCellHtml}</td>${locCell}<td>${inv.date}</td><td>${actionsHtml}</td></tr>`;
       });
 
       const bOrd = document.getElementById("badgePendingOrders");
       bOrd.textContent = pendingInvCount; bOrd.style.display = pendingInvCount > 0 ? "inline-block" : "none";
 
-      // 5. المصاريف والهالك
+      // 5. المصاريف والهالك والرواتب
       let pendingExpCount = 0, pendingWasteCount = 0;
       const expBody = document.getElementById("expensesBody");
       const wasteBody = document.getElementById("wasteLogsBody");
@@ -3593,6 +4475,8 @@ ${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Nu
         </tr>`;
       }).join("");
 
+      renderNotifications();
+      renderHR();
       renderActivityLogs();
       setOrderTab(currentOrderTab);
       renderDashboard();
