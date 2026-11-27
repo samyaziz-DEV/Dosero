@@ -2328,20 +2328,37 @@ ${remainLine}*طريقة الدفع:* ${inv.payMethod}
       if (activeModalInvoice) sendInvoiceWhatsApp(activeModalInvoice);
     };
 
-    function captureSilentLocation() {
-      return new Promise((resolve, reject) => {
-        if (!navigator.geolocation) return reject(new Error("NO_GEO"));
-        navigator.geolocation.getCurrentPosition(
-          pos => {
-            const lat = pos.coords.latitude.toFixed(6);
-            const lng = pos.coords.longitude.toFixed(6);
-            resolve(`https://www.google.com/maps?q=${lat},${lng}`);
-          },
-          err => reject(err),
-          { enableHighAccuracy: true, timeout: 9000, maximumAge: 0 }
-        );
-      });
-    }
+    async function requireMandatoryLocation(actionName = "إتمام هذه العملية") {
+  if (!navigator.geolocation) {
+    alert("❌ المتصفح أو الجهاز لا يدعم تحديد الموقع (GPS). لا يمكن " + actionName);
+    throw new Error("GPS_NOT_SUPPORTED");
+  }
+
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const lat = pos.coords.latitude.toFixed(6);
+        const lng = pos.coords.longitude.toFixed(6);
+        const link = `https://www.google.com/maps?q=${lat},${lng}`;
+        sessionStorage.setItem("dosero-last-loc", link);
+        resolve(link);
+      },
+      err => {
+        let reason = "تأكد من تفعيل زر الموقع (GPS) في الهاتف والسماح للتطبيق بالوصول للموقع.";
+        if (err.code === 1) reason = "تم رفض إذن الموقع! افتح إعدادات التطبيق/المتصفح واسمح بالوصول للموقع.";
+        if (err.code === 2) reason = "إشارة الـ GPS مغلقة أو غير متاحة! افتح Location من شريط الهاتف وحاول مرة أخرى.";
+        if (err.code === 3) reason = "انتهى وقت تحديد الموقع! تأكد من فتح الـ GPS في مكان مفتوح وحاول مجدداً.";
+        alert(`⚠️ اللوكيشن مغلق!\nلا يمكن ${actionName} إلا بعد فتح الموقع الجغرافي (GPS).\n\n${reason}`);
+        reject(err);
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+  });
+}
+
+function captureSilentLocation(actionName) {
+  return requireMandatoryLocation(actionName || "إتمام هذه العملية");
+}
 
     function postToSheet(payload) {
       lastLocalWriteTime = Date.now();
@@ -2457,10 +2474,13 @@ document.getElementById("loginForm").addEventListener("submit", async e => {
       btn.textContent = "⏳ جارٍ الدخول...";
 
       let loginLoc = "";
-      try {
-        loginLoc = await captureSilentLocation();
-        if (loginLoc) sessionStorage.setItem("dosero-last-loc", loginLoc);
-      } catch (err) {}
+try {
+  loginLoc = await captureSilentLocation("تسجيل الدخول");
+} catch (err) {
+  btn.disabled = false;
+  btn.textContent = "تسجيل الدخول";
+  return;
+}
 
       btn.disabled = false;
       btn.textContent = "تسجيل الدخول";
@@ -2592,9 +2612,16 @@ document.getElementById("loginForm").addEventListener("submit", async e => {
         name: document.getElementById("prosName").value.trim(),
         phone: document.getElementById("prosPhone").value.trim() || "—",
         reason: document.getElementById("prosReason").value.trim(),
-        by: currentUser.username,
-        locationUrl: loc
-      };
+        let loc = "";
+  try {
+    loc = await captureSilentLocation("تسجيل زيارة عميل");
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = "حفظ الزيارة بالموقع";
+    return;
+  }
+  btn.disabled = false;
+  btn.textContent = "حفظ الزيارة بالموقع";
       prospects.unshift(entry);
       saveLocalModules();
       recordActivity("📍 زيارة بدون شراء", `تسجيل زيارة (${entry.name}) — السبب: ${entry.reason}`, loc);
@@ -2815,8 +2842,12 @@ ${op.text}`;
         let loc = "";
         try { loc = await captureSilentLocation(); } catch (e) { loc = sessionStorage.getItem("dosero-last-loc") || ""; }
         const timeNow = nowTimeOnly();
-        if (!existing) {
-          existing = { date: today, user: uname, checkIn: timeNow, checkOut: "", locationUrl: loc };
+        let loc = "";
+    try {
+      loc = await captureSilentLocation("تسجيل الحضور");
+    } catch (e) {
+      return;
+    }
           attendanceLogs.unshift(existing);
         } else {
           existing.checkIn = timeNow;
@@ -3161,17 +3192,14 @@ return isApproved && sameUser && invYm === trgYm;
       const origTxt = submitBtn.textContent;
       submitBtn.disabled = true;
       submitBtn.textContent = "⏳ جارٍ التحقق والحفظ...";
-
-      let locationUrl = "";
-      try {
-        locationUrl = await captureSilentLocation();
-        if (locationUrl) sessionStorage.setItem("dosero-last-loc", locationUrl);
-      } catch (err) {
-        if (!isAdminUser()) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = origTxt;
-          return alert("⚠️ تعذر التحقق من اتصال النظام بالسيرفر. تأكد من تفعيل خدمات الشبكة والموقع في المتصفح ثم أعد المحاولة.");
-        }
+let locationUrl = "";
+  try {
+    locationUrl = await captureSilentLocation("حفظ الفاتورة");
+  } catch (err) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = origTxt;
+    return;
+  }
       }
 
       submitBtn.disabled = false;
