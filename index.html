@@ -1,4 +1,4 @@
-<!doctype html>
+ب<!doctype html>
 <html lang="ar" dir="rtl" data-theme="dosero_red">
 <head>
   <meta charset="utf-8">
@@ -2706,7 +2706,6 @@ btn.disabled = true;
       document.querySelectorAll(".nav-submenu").forEach(s => s.classList.remove("open"));
       document.querySelectorAll(".nav-parent").forEach(p => p.classList.remove("expanded"));
 
-      if (!document.querySelectorAll("#invLinesBox .inv-line").length) addInvoiceLine();
       renderAll();
 
       if (!hasPerm("dashboard")) {
@@ -3253,13 +3252,13 @@ return isApproved && sameUser && invYm === trgYm;
       const row = document.createElement("div");
       row.className = "inv-line";
       const opts = products.length
-        ? products.map(p => `<option value="${p.id}">${p.name} (متاح: ${p.qty})</option>`).join("")
-        : `<option value="">-- أضف أصناف بالمخزون أولاً --</option>`;
+    ? `<option value="" selected disabled>-- اختر الصنف --</option>` + products.map(p => `<option value="${p.id}">${p.name} (متاح: ${p.qty})</option>`).join("")
+    : `<option value="">-- أضف أصناف بالمخزون أولاً --</option>`;
 
-      row.innerHTML = `
-        <select class="l-prod">${opts}</select>
-        <input type="number" class="l-qty" min="1" value="1" placeholder="الكمية">
-        <input type="number" class="l-price" min="0.01" step="0.01" placeholder="السعر">
+  row.innerHTML = `
+    <select class="l-prod">${opts}</select>
+    <input type="number" class="l-qty" min="1" value="" placeholder="الكمية">
+    <input type="number" class="l-price" min="0.01" step="0.01" placeholder="السعر">
         <input type="text" class="l-sub" readonly style="background:transparent;border:0;font-weight:700;">
         <button type="button" class="btn btn-red" style="padding:6px;">✕</button>
       `;
@@ -3436,7 +3435,6 @@ let locationUrl = "";
       delete document.getElementById("invPaidInp").dataset.edited;
       e.target.reset();
       document.getElementById("invLinesBox").innerHTML = "";
-      addInvoiceLine();
       renderAll();
       openInvoiceModal(inv);
       switchView("viewOrders");
@@ -3651,7 +3649,6 @@ let locationUrl = "";
       e.target.reset();
       document.getElementById("createItemModal").hidden = true;
       document.getElementById("invLinesBox").innerHTML = "";
-      addInvoiceLine();
       renderAll();
       postToSheet({ action: "syncProducts", products });
       notify("✅ تم حفظ الصنف والأسعار");
