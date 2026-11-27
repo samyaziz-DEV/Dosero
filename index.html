@@ -2185,11 +2185,14 @@
     const getVisibleExpenses = () => canViewAllSales() ? expenses : expenses.filter(e => e.by === currentUser?.username);
     const getVisibleProspects = () => canViewAllCustomers() ? prospects : prospects.filter(p => p.by === currentUser?.username);
     const getVisibleFollowUps = () => canViewAllCustomers() ? followUps : followUps.filter(f => f.user === currentUser?.username);
-    const getVisibleOperations = () => canViewAllSales() ? operationsLogs : operationsLogs.filter(o => o.user === currentUser?.username);
+    const getVisibleOperations = () => {
+      if (canViewAllSales()) return operationsLogs;
+      return operationsLogs.filter(o => o.user === currentUser?.username || o.dept === "المبيعات (Sales)");
+    };
     const getVisibleCustomers = () => {
       if (canViewAllCustomers()) return customers;
       const myCustNames = new Set(invoices.filter(i => i.issuedBy === currentUser?.username).map(i => i.customer));
-      return customers.filter(c => myCustNames.has(c.name) || c.createdBy === currentUser?.username);
+      return customers.filter(c => myCustNames.has(c.name) || c.createdBy === currentUser?.username || Number(c.ordersCount || 0) === 0);
     };
 
     // ==================== التحكم في قائمة الموبايل ====================
@@ -2752,7 +2755,7 @@ ${op.text}`;
       });
 
       const visOps = getVisibleOperations();
-      visOps.filter(o => o.status === "pending").forEach(o => {
+      visOps.filter(o => o.status === "pending" || o.dept === "المبيعات (Sales)").slice(0, 5).forEach(o => {
         items.push({
           title: `⚡ تحديث تشغيل من ${o.user}`,
           sub: o.text,
@@ -3130,7 +3133,9 @@ ${op.text}`;
         items.push({ id: prod.id, name: prod.name, qty, price, cost: prod.cost });
       }
       if (!items.length) return alert("اختر صنفاً صحيحاً!");
-
+      if (!document.getElementById("invCustSelect").value && !document.getElementById("invNewCustName").value.trim()) {
+     return alert("⚠️ اختيار العميل أو كتابة اسم عميل جديد إجباري لإتمام الفاتورة!");
+   }
       const submitBtn = document.getElementById("saveOrderSubmitBtn");
       const origTxt = submitBtn.textContent;
       submitBtn.disabled = true;
