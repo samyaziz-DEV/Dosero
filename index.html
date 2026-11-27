@@ -667,7 +667,7 @@
         </div>
         <div>
           <label>كلمة المرور</label>
-          <input type="password" id="loginPass" placeholder="••••••••" required>
+          <input type="password" id="loginPass" autocomplete="new-password" placeholder="••••••••" required>
         </div>
         <button type="submit" id="loginSubmitBtn" class="btn btn-primary" style="width:100%;padding:11px;">تسجيل الدخول</button>
       </form>
@@ -2437,17 +2437,20 @@ ${remainLine}*طريقة الدفع:* ${inv.payMethod}
     });
 
     function populateLoginUsers() {
-      document.getElementById("loginUserSelect").innerHTML = users.map(u =>
-        `<option value="${u.username}">${u.role === 'admin' ? '👑' : '👤'} ${u.username}</option>`
-      ).join("");
-    }
+  document.getElementById("loginUserSelect").innerHTML =
+    '<option value="" selected disabled>-- اختر اسم المستخدم --</option>' +
+    users.map(u =>
+      `<option value="${u.username}">${u.role === 'admin' ? '👑' : '👤'} ${u.username}</option>`
+    ).join("");
+}
 
-    document.getElementById("loginForm").addEventListener("submit", async e => {
-      e.preventDefault();
-      const uname = document.getElementById("loginUserSelect").value;
-      const pass = document.getElementById("loginPass").value.trim();
-      const found = users.find(u => u.username === uname && u.pass === pass);
-      if (!found) return alert("كلمة المرور غير صحيحة!");
+document.getElementById("loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const uname = document.getElementById("loginUserSelect").value;
+  if (!uname) return alert("يرجى اختيار اسم المستخدم أولاً!");
+  const pass = document.getElementById("loginPass").value.trim();
+  const found = users.find(u => u.username === uname && u.pass === pass);
+  if (!found) return alert("كلمة المرور غير صحيحة!");
 
       const btn = document.getElementById("loginSubmitBtn");
       btn.disabled = true;
