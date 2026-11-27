@@ -2959,16 +2959,27 @@ ${op.text}`;
          .filter(i => {
            const isApproved = (i.status === "active" || i.status === "pending_return");
            const sameUser = (i.issuedBy || "").trim() === (t.user || "").trim();
-           const invYm = (i.date || "").trim().slice(0, 7).replace("/", "-");
-           const trgYm = (t.month || "").trim().slice(0, 7).replace("/", "-");
-           return isApproved && sameUser && invYm === trgYm;
+           const normalizeYm = (val) => {
+  const s = String(val || "").trim();
+  if (/^\d{4}[-/]\d{1,2}/.test(s)) {
+    const p = s.split(/[-/T ]/);
+    return `${p[0]}-${p[1].padStart(2, "0")}`;
+  }
+  if (/^\d{1,2}$/.test(s)) return `${new Date().getFullYear()}-${s.padStart(2, "0")}`;
+  const d = new Date(s);
+  if (!isNaN(d.getTime())) return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+  return s.slice(0, 7);
+};
+const invYm = normalizeYm(i.date);
+const trgYm = normalizeYm(t.month);
+return isApproved && sameUser && invYm === trgYm;
          })
          .reduce((sum, i) => sum + Number(i.total || 0), 0);
           const pct = t.targetAmount > 0 ? Math.min(100, Math.round((achieved / t.targetAmount) * 100)) : 0;
           return `<div class="f-card">
             <div class="f-card-top">
               <strong>👤 ${t.user}</strong>
-              <span class="pill pill-purple">${t.month}</span>
+              <span class="pill pill-purple">${String(t.month).includes("GMT") ? (new Date(t.month).toISOString().slice(0, 7)) : t.month}</span>
             </div>
             <div class="f-card-val" style="font-size:20px;">${money(achieved)} <small style="font-size:12px;color:var(--muted);">/ ${money(t.targetAmount)}</small></div>
             <div class="progress-track"><div class="progress-fill" style="width:${pct}%;"></div></div>
