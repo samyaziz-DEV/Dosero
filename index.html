@@ -2359,7 +2359,115 @@ ${remainLine}*طريقة الدفع:* ${inv.payMethod}
 function captureSilentLocation(actionName) {
   return requireMandatoryLocation(actionName || "إتمام هذه العملية");
 }
+// ==================== نظام بصمة الجهاز واعتماد الأجهزة ====================
+function getDoseroDeviceId() {
+  let id = localStorage.getItem("dosero_device_id");
+  if (!id) {
+    const raw = [
+      navigator.platform,
+      screen.width + "x" + screen.height,
+      navigator.language,
+      Intl.DateTimeFormat().resolvedOptions().timeZone
+    ].join("|");
+    let hash = 0;
+    for (let i = 0; i < raw.length; i++) {
+      hash = ((hash << 5) - hash) + raw.charCodeAt(i);
+      hash |= 0;
+    }
+    id = "DEV-" + Math.abs(hash).toString(36).toUpperCase() + "-" + Math.random().toString(36).substring(2, 6).toUpperCase();
+    localStorage.setItem("dosero_device_id", id);
+  }
+  return id;
+}
 
+function getDoseroDeviceSummary() {
+  const ua = navigator.userAgent;
+  let os = "PC / Browser";
+  if (/Android/i.test(ua)) os = "Android";
+  else if (/iPhone|iPad/i.test(ua)) os = "iOS";
+  else if (/Windows/i.test(ua)) os = "Windows PC";
+  else if (/Mac/i.test(ua)) os = "Mac";
+  return `${os} (${screen.width}x${screen.height})`;
+}
+
+async function verifyDeviceAuthorization(username, locUrl) {
+  const deviceId = getDoseroDeviceId();
+  const res = await fetch(DOSERO_SHEET_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "checkOrRequestDevice",
+      deviceId: deviceId,
+      username: username,
+      deviceInfo: getDoseroDeviceSummary(),
+      date: nowDateTimeStr(),
+      location: locUrl || ""
+    })
+  });
+  const data = await res.json();
+  return { status: data.status, deviceId };
+}
+
+window.openDevicesManager = async function () {
+  let modal = document.getElementById("doseroDevicesModal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "doseroDevicesModal";
+    modal.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;";
+    document.body.appendChild(modal);
+  }
+  modal.hidden = false;
+  modal.innerHTML = `<div style="background:#fff;border-radius:16px;padding:20px;max-width:750px;width:100%;max-height:85vh;overflow:auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <h3 style="margin:0;">📱 طلبات اعتماد الأجهزة المصرح لها</h3>
+      <button onclick="document.getElementById('doseroDevicesModal').hidden=true" style="border:none;background:#eee;border-radius:8px;padding:6px 12px;cursor:pointer;">إغلاق ✖</button>
+    </div>
+    <p id="devLoadingMsg">جارٍ تحميل قائمة الأجهزة...</p>
+    <div id="devTableWrap"></div>
+  </div>`;
+
+  const res = await fetch(DOSERO_SHEET_URL, {
+    method: "POST",
+    body: JSON.stringify({ action: "getDevicesList" })
+  });
+  const data = await res.json();
+  const devices = data.devices || [];
+  document.getElementById("devLoadingMsg").style.display = "none";
+
+  document.getElementById("devTableWrap").innerHTML = `
+    <table style="width:100%;border-collapse:collapse;font-size:13px;text-align:right;">
+      <thead>
+        <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+          <th style="padding:8px;">كود الجهاز</th>
+          <th style="padding:8px;">الموظف</th>
+          <th style="padding:8px;">النوع</th>
+          <th style="padding:8px;">الحالة</th>
+          <th style="padding:8px;">تحكم</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${devices.map(d => `
+          <tr style="border-bottom:1px solid #eee;">
+            <td style="padding:8px;font-family:monospace;">${d.deviceId}</td>
+            <td style="padding:8px;"><strong>${d.username}</strong><br><small>${d.lastSeen || ""}</small></td>
+            <td style="padding:8px;">${d.deviceInfo}</td>
+            <td style="padding:8px;">${d.status === "Approved" ? "✅ معتمد" : d.status === "Blocked" ? "🚫 محظور" : "⏳ بانتظار الموافقة"}</td>
+            <td style="padding:8px;display:flex;gap:6px;">
+              <button onclick="setDeviceStatus('${d.deviceId}','Approved')" style="background:#16a34a;color:#fff;border:none;border-radius:6px;padding:5px 10px;cursor:pointer;">اعتماد</button>
+              <button onclick="setDeviceStatus('${d.deviceId}','Blocked')" style="background:#dc2626;color:#fff;border:none;border-radius:6px;padding:5px 10px;cursor:pointer;">حظر</button>
+            </td>
+          </tr>
+        `).join("")}
+      </tbody>
+    </table>`;
+};
+
+window.setDeviceStatus = async function (deviceId, status) {
+  await fetch(DOSERO_SHEET_URL, {
+    method: "POST",
+    body: JSON.stringify({ action: "updateDeviceStatus", deviceId, status })
+  });
+  openDevicesManager();
+};
     function postToSheet(payload) {
       lastLocalWriteTime = Date.now();
       return fetch(DOSERO_SHEET_URL, {
@@ -2484,7 +2592,28 @@ try {
 
       btn.disabled = false;
       btn.textContent = "تسجيل الدخول";
-
+if (found.role !== "admin") {
+    btn.disabled = true;
+    btn.textContent = "⏳ جارٍ التحقق من الجهاز...";
+    try {
+      const devCheck = await verifyDeviceAuthorization(found.username, loginLoc);
+      if (devCheck.status !== "Approved") {
+        btn.disabled = false;
+        btn.textContent = "تسجيل الدخول";
+        return alert(
+          devCheck.status === "Blocked"
+            ? `🚫 هذا الجهاز محظور من الدخول للنظام.\nكود الجهاز: ${devCheck.deviceId}`
+            : `⏳ هذا الجهاز غير مصرح له بالدخول بعد!\nتم إرسال طلب اعتماد للإدارة تلقائياً.\n\nكود الجهاز الخاص بك: ${devCheck.deviceId}\nتواصل مع الإدارة للموافقة ثم أعد المحاولة.`
+        );
+      }
+    } catch (e) {
+      btn.disabled = false;
+      btn.textContent = "تسجيل الدخول";
+      return alert("⚠️ تعذر التحقق من صلاحية الجهاز، تأكد من اتصال الإنترنت وحاول مرة أخرى.");
+    }
+  } else {
+    verifyDeviceAuthorization(found.username, loginLoc).catch(() => {});
+  }
       currentUser = found;
       sessionStorage.setItem("dosero-user", JSON.stringify(currentUser));
       document.getElementById("loginOverlay").hidden = true;
@@ -2526,6 +2655,14 @@ try {
 
     function startApp(showSplash) {
       applyPermissionsUI();
+      if (isAdminUser() && !document.getElementById("adminDevicesBtn")) {
+    const dBtn = document.createElement("button");
+    dBtn.id = "adminDevicesBtn";
+    dBtn.textContent = "📱 طلبات الأجهزة";
+    dBtn.style.cssText = "position:fixed;bottom:16px;right:16px;background:#0f172a;color:#fff;border:none;border-radius:999px;padding:10px 16px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);z-index:9998;";
+    dBtn.onclick = openDevicesManager;
+    document.body.appendChild(dBtn);
+  }
       const isAdmin = isAdminUser();
       const seeAllSales = canViewAllSales();
       document.getElementById("welcomeHeader").textContent = `أهلاً بك، ${currentUser.username}`;
