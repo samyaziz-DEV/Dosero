@@ -2840,19 +2840,19 @@ ${op.text}`;
           return alert(`⚠️ تم تسجيل حضورك اليوم (${today}) بالفعل في الساعة ${existing.checkIn}، ولا يمكن تكرار الحضور مرتين في نفس اليوم.`);
         }
         let loc = "";
-        try { loc = await captureSilentLocation(); } catch (e) { loc = sessionStorage.getItem("dosero-last-loc") || ""; }
-        const timeNow = nowTimeOnly();
-        let loc = "";
     try {
       loc = await captureSilentLocation("تسجيل الحضور");
     } catch (e) {
       return;
     }
-          attendanceLogs.unshift(existing);
-        } else {
-          existing.checkIn = timeNow;
-          existing.locationUrl = loc;
-        }
+    const timeNow = nowTimeOnly();
+    if (!existing) {
+      existing = { date: today, user: uname, checkIn: timeNow, checkOut: "", locationUrl: loc };
+      attendanceLogs.unshift(existing);
+    } else {
+      existing.checkIn = timeNow;
+      existing.locationUrl = loc;
+    }
         saveLocalModules();
         recordActivity("🟢 تسجيل حضور", `تسجيل حضور الشيفت للموظف (${uname}) الساعة ${timeNow}`, loc);
         postToSheet({ action: "syncAttendance", attendanceLogs: attendanceLogs.slice().reverse() });
