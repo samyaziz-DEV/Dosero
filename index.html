@@ -4587,27 +4587,53 @@ return isApproved && sameUser && invYm === trgYm;
       applyPermissionsUI();
     }
   </script>
-  <!-- زر تبديل اللغة الإنجليزية / العربية -->
+  <!-- نظام الترجمة المتكامل EN / عربي -->
 <script>
 (function () {
   const dict = {
+    // --- الشريط العلوي والقائمة الجانبية ---
     "نظام إدارة المبيعات والمخزون والحسابات والموارد البشرية": "Sales, Inventory, Accounting & HR Management System",
+    "بحث سريع في الفواتير، العملاء، الأصناف...": "Quick search in invoices, customers, items...",
+    "القائمة": "Menu",
+    "تسجيل حضور": "Check In",
+    "حضر": "Checked In",
+    "انصراف": "Check Out",
+    "غير متصل": "Offline",
+    "متصل": "Online",
+    "+ طلب جديد": "+ New Order",
+    "طلب جديد": "New Order",
+    "الملخص": "Dashboard",
+    "الطلبات والفواتير": "Orders & Invoices",
+    "الطلبات و": "Orders & ",
+    "العملاء والمتابعة": "Customers & Follow-up",
+    "العملاء و": "Customers & ",
+    "والمتابعة": "& Follow-up",
+    "التشغيل والتحديثات": "Operations & Updates",
+    "التقارير": "Reports",
+    "الرسوم البيانية": "Charts & Analytics",
+    "المخزون": "Inventory",
+    "الموارد البشرية (HR)": "Human Resources (HR)",
+    "الموارد البشرية": "Human Resources",
+    "الإدارة": "Administration",
+    "مدير النظام": "System Admin",
+    "تسجيل خروج": "Logout",
+    "تسجيل الخروج": "Logout",
     "اسم المستخدم": "Username",
     "-- اختر اسم المستخدم --": "-- Select Username --",
     "كلمة المرور": "Password",
     "تسجيل الدخول": "Login",
     "جارٍ الدخول...": "Logging in...",
-    "القائمة": "Menu",
-    "حضر": "Checked In",
-    "تسجيل حضور": "Check In",
-    "انصراف": "Check Out",
-    "متصل": "Online",
-    "غير متصل": "Offline",
-    "+ طلب جديد": "+ New Order",
-    "طلب جديد": "New Order",
-    "بحث سريع في الفواتير، العملاء، الأصناف...": "Quick search in invoices, customers, items...",
+    // --- لوحة التحكم والإحصائيات ---
+    "تنبيه المتابعة الدورية: لديك": "Periodic Follow-up Alert: You have",
+    "عميل مستحق للمتابعة (غداً أو اليوم)!": "customer(s) due for follow-up (today or tomorrow)!",
     "عرض المتابعات": "View Follow-ups",
+    "طلب/مرتجع و": "order(s)/return(s) and",
+    "مصروف/هالك بانتظار المراجعة والاعتماد.": "expense(s)/waste awaiting review & approval.",
+    "يوجد": "There are",
+    "مراجعة الطلبات و": "Review Orders & ",
+    "مراجعة الهالك والمصاريف": "Review Waste & Expenses",
     "أهلاً بك،": "Welcome,",
+    "عرض شامل لجميع مبيعات وعمليات الشركة": "Comprehensive overview of all company sales & operations",
     "عرض مبيعاتك وعملياتك الخاصة بك فقط": "Showing your own sales and operations only",
     "اليوم": "Today",
     "الأسبوع": "This Week",
@@ -4619,95 +4645,133 @@ return isApproved && sameUser && invYm === trgYm;
     "الطلبات المعتمدة": "Approved Orders",
     "عرض التقرير": "View Report",
     "صافي المبيعات": "Net Sales",
-    "إجمالي المبيعات": "Total Sales",
-    "لوحة التحكم": "Dashboard",
-    "الرئيسية": "Home",
+    "صافي المدفوعات المحصلة": "Net Collected Payments",
+    "مبالغ الإرجاع": "Return Amounts",
+    "فاتورة مرتجعة": "Returned Invoice(s)",
+    "مبالغ الخصم": "Discount Amounts",
+    "إجمالي الخصومات الممنوحة": "Total Discounts Granted",
+    "صافي الربح الفعلي": "Actual Net Profit",
+    "السيولة:": "Cash Liquidity:",
+    "أعلى المنتجات حسب صافي البيع": "Top Products by Net Sales",
+    "أعلى المدفوعات حسب الطريقة": "Top Payments by Method",
+    "توزيع المستحقات والسيولة": "Receivables & Liquidity Distribution",
+    // --- الفواتير والعملاء والمخزون والحسابات ---
     "الفواتير": "Invoices",
-    "المبيعات": "Sales",
-    "العملاء": "Customers",
-    "الأصناف": "Products",
-    "المنتجات": "Products",
-    "المخزون": "Inventory",
-    "الحسابات": "Accounting",
-    "المصروفات": "Expenses",
+    "الطلبات": "Orders",
     "المرتجعات": "Returns",
-    "المتابعات": "Follow-ups",
-    "التقارير": "Reports",
-    "الموظفين": "Employees",
-    "الحضور والانصراف": "Attendance",
-    "تارجيت الموظفين": "Employee Targets",
-    "الإعدادات": "Settings",
-    "تسجيل الخروج": "Logout",
+    "العملاء": "Customers",
+    "إضافة عميل جديد": "Add New Customer",
     "اسم العميل": "Customer Name",
     "اختر العميل": "Select Customer",
     "رقم الهاتف": "Phone Number",
     "العنوان": "Address",
-    "الصنف": "Item",
-    "اختر الصنف": "Select Item",
+    "المنطقة": "Area",
+    "الأصناف": "Products",
+    "المنتجات": "Products",
+    "إضافة صنف": "Add Product",
+    "اسم الصنف": "Product Name",
+    "اختر الصنف": "Select Product",
     "الكمية": "Quantity",
+    "الكمية المتاحة": "Available Stock",
+    "سعر البيع": "Selling Price",
+    "سعر التكلفة": "Cost Price",
     "السعر": "Price",
     "الخصم": "Discount",
-    "الإجمالي": "Total",
     "الإجمالي النهائي": "Grand Total",
+    "الإجمالي": "Total",
     "المدفوع": "Paid",
     "المتبقي": "Remaining",
     "طريقة الدفع": "Payment Method",
     "نقدي": "Cash",
     "كاش": "Cash",
     "تحويل بنكي": "Bank Transfer",
+    "انستاباي": "InstaPay",
+    "فودافون كاش": "Vodafone Cash",
     "آجل": "Credit",
+    "المصروفات": "Expenses",
+    "الهالك": "Waste / Damage",
+    "الحسابات": "Accounting",
+    "الخزينة": "Treasury",
+    "الموظفين": "Employees",
+    "الحضور والانصراف": "Attendance",
+    "سجل الحضور": "Attendance Log",
+    "تارجيت الموظفين": "Employee Targets",
+    "الصلاحيات": "Permissions",
+    "تعديل الصلاحيات": "Edit Permissions",
+    "جميع الصلاحيات": "All Permissions",
+    "صلاحيات مخصصة": "Custom Permissions",
+    "الإعدادات": "Settings",
     "ملاحظات": "Notes",
-    "حفظ": "Save",
     "حفظ الفاتورة": "Save Invoice",
+    "حفظ": "Save",
     "إلغاء": "Cancel",
     "إغلاق": "Close",
     "تعديل": "Edit",
     "حذف": "Delete",
     "إضافة": "Add",
+    "اعتماد": "Approve",
+    "معتمد": "Approved",
+    "قيد المراجعة": "Pending Review",
+    "مرفوض": "Rejected",
     "طباعة": "Print",
     "إرسال واتساب": "Send WhatsApp",
     "الحالة": "Status",
     "التاريخ": "Date",
-    "الموظف": "Employee"
+    "الموظف": "Employee",
+    "أضيف بواسطة": "Added By"
   };
+  // ترتيب القاموس من الجملة الأطول للأقصر لمنع تداخل الكلمات
+  const sortedEntries = Object.entries(dict).sort((a, b) => b[0].length - a[0].length);
+  const reverseEntries = Object.entries(dict)
+    .map(([ar, en]) => [en, ar])
+    .sort((a, b) => b[0].length - a[0].length);
 
-  const reverseDict = Object.fromEntries(Object.entries(dict).map(([ar, en]) => [en, ar]));
   let currentLang = localStorage.getItem("dosero_lang") || "ar";
+  let isTranslating = false;
 
-  function translateText(text, toEn) {
-    if (!text || !text.trim()) return text;
-    const map = toEn ? dict : reverseDict;
-    let updated = text;
-    for (const [src, dest] of Object.entries(map)) {
-      if (updated.includes(src)) {
-        updated = updated.split(src).join(dest);
+  function translateString(str, toEn) {
+    if (!str || !str.trim()) return str;
+    const entries = toEn ? sortedEntries : reverseEntries;
+    let out = str;
+    for (const [src, dest] of entries) {
+      if (out.includes(src)) {
+        out = out.split(src).join(dest);
       }
     }
-    return updated;
+    return out;
   }
 
   function applyTranslation(root = document.body) {
-    const toEn = currentLang === "en";
-    document.documentElement.lang = toEn ? "en" : "ar";
-    document.documentElement.dir = toEn ? "ltr" : "rtl";
+    if (isTranslating || !root) return;
+    isTranslating = true;
+    try {
+      const toEn = currentLang === "en";
+      document.documentElement.lang = toEn ? "en" : "ar";
+      document.documentElement.dir = toEn ? "ltr" : "rtl";
 
-    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
-    let node;
-    while ((node = walker.nextNode())) {
-      const parentTag = node.parentElement && node.parentElement.tagName;
-      if (parentTag === "SCRIPT" || parentTag === "STYLE") continue;
-      const newVal = translateText(node.nodeValue, toEn);
-      if (newVal !== node.nodeValue) node.nodeValue = newVal;
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+      let node;
+      while ((node = walker.nextNode())) {
+        const tag = node.parentElement && node.parentElement.tagName;
+        if (tag === "SCRIPT" || tag === "STYLE") continue;
+        const translated = translateString(node.nodeValue, toEn);
+        if (translated !== node.nodeValue) node.nodeValue = translated;
+      }
+
+      if (root.querySelectorAll) {
+        root.querySelectorAll("input[placeholder], textarea[placeholder]").forEach(el => {
+          const ph = el.getAttribute("placeholder");
+          const newPh = translateString(ph, toEn);
+          if (newPh !== ph) el.setAttribute("placeholder", newPh);
+        });
+      }
+
+      document.querySelectorAll(".dosero-lang-btn").forEach(btn => {
+        btn.textContent = toEn ? "🌐 عربي" : "🌐 EN";
+      });
+    } finally {
+      isTranslating = false;
     }
-
-    root.querySelectorAll("input[placeholder], textarea[placeholder]").forEach(el => {
-      const newPh = translateText(el.getAttribute("placeholder"), toEn);
-      if (newPh !== el.getAttribute("placeholder")) el.setAttribute("placeholder", newPh);
-    });
-
-    document.querySelectorAll(".dosero-lang-btn").forEach(btn => {
-      btn.textContent = toEn ? "🌐 عربي" : "🌐 EN";
-    });
   }
 
   function createLangButton() {
@@ -4716,7 +4780,7 @@ return isApproved && sameUser && invYm === trgYm;
     btn.className = "dosero-lang-btn";
     btn.textContent = currentLang === "en" ? "🌐 عربي" : "🌐 EN";
     btn.style.cssText =
-      "background:#fff;color:#e11d48;border:1.5px solid #e11d48;border-radius:999px;padding:5px 12px;font-weight:700;font-size:12px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.08);z-index:9999;";
+      "background:#fff;color:#e11d48;border:1.5px solid #e11d48;border-radius:999px;padding:6px 14px;font-weight:700;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;box-shadow:0 2px 5px rgba(225,29,72,0.12);";
     btn.onclick = () => {
       currentLang = currentLang === "ar" ? "en" : "ar";
       localStorage.setItem("dosero_lang", currentLang);
@@ -4725,8 +4789,8 @@ return isApproved && sameUser && invYm === trgYm;
     return btn;
   }
 
-  function mountButtons() {
-    // 1. زر في شاشة تسجيل الدخول
+  function mountTopButtons() {
+    // 1. وضع الزر في أعلى شاشة تسجيل الدخول
     const loginForm = document.getElementById("loginForm");
     if (loginForm && !loginForm.parentElement.querySelector(".dosero-lang-btn")) {
       const wrap = document.createElement("div");
@@ -4735,32 +4799,49 @@ return isApproved && sameUser && invYm === trgYm;
       loginForm.parentElement.insertBefore(wrap, loginForm);
     }
 
-    // 2. زر عائم أنيق في أعلى الشاشة داخل النظام
-    if (!document.getElementById("doseroFloatingLang")) {
-      const floatBtn = createLangButton();
-      floatBtn.id = "doseroFloatingLang";
-      floatBtn.style.position = "fixed";
-      floatBtn.style.bottom = "16px";
-      floatBtn.style.left = "16px";
-      document.body.appendChild(floatBtn);
+    // 2. وضع الزر في الشريط العلوي للنظام بجانب زر + New Order / التاريخ
+    const topRightBox = Array.from(document.querySelectorAll("button")).find(
+      b => b.textContent.includes("طلب جديد") || b.textContent.includes("New Order")
+    );
+    if (topRightBox && topRightBox.parentElement && !topRightBox.parentElement.querySelector(".dosero-lang-btn")) {
+      const topBtn = createLangButton();
+      topBtn.style.marginInlineStart = "6px";
+      topRightBox.parentElement.appendChild(topBtn);
     }
   }
 
-  window.addEventListener("DOMContentLoaded", () => {
-    mountButtons();
+  function initLangSystem() {
+    mountTopButtons();
     if (currentLang === "en") applyTranslation(document.body);
 
     const observer = new MutationObserver(mutations => {
+      if (isTranslating) return;
+      mountTopButtons();
       if (currentLang === "en") {
         mutations.forEach(m => {
-          m.addedNodes.forEach(n => {
-            if (n.nodeType === 1) applyTranslation(n);
-          });
+          if (m.type === "characterData" && m.target.parentElement) {
+            applyTranslation(m.target.parentElement);
+          } else {
+            m.addedNodes.forEach(n => {
+              if (n.nodeType === 1) applyTranslation(n);
+            });
+          }
         });
       }
     });
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLangSystem);
+  } else {
+    initLangSystem();
+  }
 })();
 </script>
 </body>
