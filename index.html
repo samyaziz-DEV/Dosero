@@ -3200,11 +3200,9 @@ let locationUrl = "";
     submitBtn.textContent = origTxt;
     return;
   }
-      }
 
-      submitBtn.disabled = false;
-      submitBtn.textContent = origTxt;
-
+  submitBtn.disabled = false;
+  submitBtn.textContent = origTxt;
       const selCustId = document.getElementById("invCustSelect").value;
       const newName = document.getElementById("invNewCustName").value.trim();
       const enteredPhone = document.getElementById("invNewCustPhone").value.trim();
