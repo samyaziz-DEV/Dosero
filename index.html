@@ -498,7 +498,7 @@
     .report-arrow { font-size: 18px; color: var(--muted); }
 
     label { display: block; font-size: 12.5px; color: var(--text); margin-bottom: 6px; font-weight: 600; }
-    input[type="text"], input[type="password"], input[type="number"], input[type="date"], select, textarea {
+    input[type="text"], input[type="password"], input[type="number"], input[type="date"], input[type="month"], select, textarea {
       width: 100%; padding: 9px 14px; border: 1px solid var(--glass-border);
       border-radius: 14px; font: inherit; font-size: 13.5px;
       background: var(--surface-alt); color: var(--text);
@@ -660,7 +660,7 @@
         <p style="margin:0 0 8px;color:var(--muted);font-size:13px;">نظام إدارة المبيعات والمخزون والحسابات والموارد البشرية</p>
         <div class="welcome-badge">Powered by Samy Aziz</div>
       </div>
-      <form class="stack" id="loginForm">
+      <form class="stack" id="loginForm" autocomplete="off">
         <div>
           <label>اسم المستخدم</label>
           <select id="loginUserSelect" required></select>
@@ -803,7 +803,6 @@
       <div class="powered-side">Powered by <span>Samy Aziz</span></div>
     </div>
   </aside>
-
   <!-- الهيكل الرئيسي -->
   <div class="main-shell">
     <header class="top-header">
@@ -811,7 +810,7 @@
 
       <div class="header-search">
         <span>🔍</span>
-        <input type="text" id="globalSearchInp" placeholder="بحث سريع في الفواتير، العملاء، الأصناف..." oninput="handleGlobalSearch(this.value)">
+        <input type="text" id="globalSearchInp" autocomplete="off" placeholder="بحث سريع في الفواتير، العملاء، الأصناف..." oninput="handleGlobalSearch(this.value)">
       </div>
 
       <div class="header-tools">
@@ -980,20 +979,21 @@
 
             <div class="grid-4" style="margin-bottom:16px;">
               <div>
-                <label>اختر عميل مسجل</label>
+                <label>اختر عميل مسجل *</label>
                 <select id="invCustSelect" onchange="onInvoiceCustomerChange(this.value)"></select>
               </div>
               <div>
-                <label>أو اسم عميل جديد</label>
-                <input type="text" id="invNewCustName" placeholder="اكتب اسم العميل...">
+                <label>أو اسم عميل جديد *</label>
+                <input type="text" id="invNewCustName" name="dosero_cust_new" autocomplete="new-password" placeholder="اكتب اسم العميل...">
               </div>
               <div>
                 <label>رقم الهاتف (واتساب)</label>
-                <input type="text" id="invNewCustPhone" placeholder="010xxxxxxxx">
+                <input type="text" id="invNewCustPhone" name="dosero_cust_phone" autocomplete="new-password" placeholder="010xxxxxxxx">
               </div>
               <div>
                 <label>شريحة السعر المطبقة</label>
                 <select id="invPriceTier" onchange="applyPriceTierToAllLines()" style="border-color:var(--accent);font-weight:700;color:var(--accent);">
+                  <option value="">-- اختر شريحة السعر --</option>
                   <option value="retail">🏷️ قطاعي (Retail)</option>
                   <option value="half">📦 نصف جملة (Half Wholesale)</option>
                   <option value="wholesale">🏢 جملة (Wholesale)</option>
@@ -1006,7 +1006,7 @@
             <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--border);">
               <label style="color:var(--accent);">🔒 ملاحظات داخلية للفاتورة (لا تظهر للعميل وتُرحَّل تلقائياً للمتابعة الدورية)</label>
               <div class="grid-2">
-                <input type="text" id="invInternalNote" placeholder="مثال: العميل سيطلب كمية أكبر الأسبوع القادم...">
+                <input type="text" id="invInternalNote" name="dosero_internal_note" autocomplete="new-password" placeholder="مثال: العميل سيطلب كمية أكبر الأسبوع القادم...">
                 <div>
                   <input type="date" id="invFollowUpDate" title="تاريخ المتابعة القادمة (اختياري)">
                 </div>
@@ -1020,7 +1020,7 @@
               <div class="grid-2">
                 <div>
                   <label>المجموع الفرعي</label>
-                  <input type="text" id="invSubInp" readonly style="background:var(--surface-alt);font-weight:700;">
+                  <input type="text" id="invSubInp" readonly style="background:var(--surface-alt);font-weight:700;" placeholder="0.00">
                 </div>
                 <div>
                   <label style="display:flex;justify-content:space-between;align-items:center;">
@@ -1030,18 +1030,18 @@
                       <option value="amt">مبلغ (EGP)</option>
                     </select>
                   </label>
-                  <input type="number" id="invDiscInp" min="0" step="0.01" value="0" placeholder="0">
+                  <input type="number" id="invDiscInp" name="dosero_disc" autocomplete="off" min="0" step="0.01" placeholder="0">
                   <small id="invDiscCalcHint" style="color:var(--muted);font-size:11px;display:block;margin-top:3px;">قيمة الخصم: EGP 0.00</small>
                 </div>
               </div>
               <div class="grid-2">
                 <div>
                   <label>الشحن / التوصيل</label>
-                  <input type="number" id="invShipInp" min="0" step="0.01" value="0">
+                  <input type="number" id="invShipInp" name="dosero_ship" autocomplete="off" min="0" step="0.01" placeholder="0">
                 </div>
                 <div>
                   <label>الإجمالي النهائي</label>
-                  <input type="text" id="invTotalInp" readonly style="background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:15px;">
+                  <input type="text" id="invTotalInp" readonly style="background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:15px;" placeholder="0.00">
                 </div>
               </div>
               <div>
@@ -1056,11 +1056,11 @@
               <div class="grid-2">
                 <div>
                   <label>المدفوع الآن</label>
-                  <input type="number" id="invPaidInp" min="0" step="0.01" value="0" required style="color:var(--green);font-weight:700;">
+                  <input type="number" id="invPaidInp" name="dosero_paid" autocomplete="off" min="0" step="0.01" placeholder="0" required style="color:var(--green);font-weight:700;">
                 </div>
                 <div id="invRemainWrap">
                   <label>المتبقي (آجل)</label>
-                  <input type="text" id="invRemainInp" readonly style="color:var(--red);font-weight:700;background:var(--surface-alt);">
+                  <input type="text" id="invRemainInp" readonly style="color:var(--red);font-weight:700;background:var(--surface-alt);" placeholder="0.00">
                 </div>
               </div>
               <div style="font-size:12px;color:var(--warn);background:var(--warn-soft);padding:10px;border-radius:12px;">
@@ -1155,18 +1155,18 @@
           <div class="table-wrap">
             <table>
               <thead>
-             <tr>
-               <th>الاسم</th>
-               <th>الهاتف</th>
-               <th>فئة السعر</th>
-               <th>إجمالي الطلبات</th>
-               <th>الأصناف المشتراة</th>
-               <th>آخر طلب</th>
-               <th>رصيد الحساب (الآجل)</th>
-               <th>أضيف بواسطة</th>
-               <th>إجراءات</th>
-             </tr>
-           </thead>
+                <tr>
+                  <th>الاسم</th>
+                  <th>الهاتف</th>
+                  <th>فئة السعر</th>
+                  <th>إجمالي الطلبات</th>
+                  <th>الأصناف المشتراة</th>
+                  <th>آخر طلب</th>
+                  <th>رصيد الحساب (الآجل)</th>
+                  <th>أضيف بواسطة</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
               <tbody id="customersBody"></tbody>
             </table>
           </div>
@@ -1720,654 +1720,924 @@
       Dosero Business Management System &copy; 2026 — <strong>Powered by Samy Aziz</strong>
     </footer>
   </div>
+  <!-- الهيكل الرئيسي -->
+  <div class="main-shell">
+    <header class="top-header">
+      <button type="button" class="btn btn-outline mobile-menu-btn" onclick="openMobileMenu()">☰ القائمة</button>
 
-  <!-- ==================== MODALS ==================== -->
+      <div class="header-search">
+        <span>🔍</span>
+        <input type="text" id="globalSearchInp" autocomplete="off" placeholder="بحث سريع في الفواتير، العملاء، الأصناف..." oninput="handleGlobalSearch(this.value)">
+      </div>
 
-  <div class="overlay" id="prospectModal" hidden>
-    <div class="modal-box">
-      <div class="modal-head"><h3>📍 تسجيل زيارة بدون شراء (عميل غير مفعل)</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
-      <form id="prospectForm" class="stack">
-        <div><label>اسم المكان / العميل *</label><input type="text" id="prosName" placeholder="مثال: كافيه روما - المعادي" required></div>
-        <div><label>رقم الهاتف (إن وجد)</label><input type="text" id="prosPhone" placeholder="010xxxxxxxx"></div>
-        <div><label>سبب الرفض / عدم الشراء *</label><textarea id="prosReason" rows="3" placeholder="مثال: متعاقد حالياً مع مورد آخر / السعر غير مناسب..." required></textarea></div>
-        <div style="font-size:12px;color:var(--blue);background:var(--blue-soft);padding:10px;border-radius:12px;">
-          📍 سيتم تسجيل الموقع الجغرافي (GPS) الحالي للمكان تلقائياً عند الحفظ.
-        </div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;">
-          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
-          <button type="submit" id="saveProsBtn" class="btn btn-primary">حفظ الزيارة بالموقع</button>
-        </div>
-      </form>
-    </div>
-  </div>
+      <div class="header-tools">
+        <button type="button" class="btn btn-green" id="quickCheckInBtn" onclick="recordAttendance('in')" title="تسجيل حضور الشيفت اليوم">🟢 حضور</button>
+        <button type="button" class="btn btn-warn" id="quickCheckOutBtn" onclick="recordAttendance('out')" title="تسجيل انصراف الشيفت اليوم">🔴 انصراف</button>
 
-  <div class="overlay" id="followUpModal" hidden>
-    <div class="modal-box">
-      <div class="modal-head"><h3>📅 جدولة متابعة دورية لعميل</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
-      <form id="followUpForm" class="stack">
-        <div>
-          <label>اختر العميل *</label>
-          <select id="fuCustSelect" required></select>
-        </div>
-        <div>
-          <label>تاريخ المتابعة المحدد *</label>
-          <input type="date" id="fuDateInp" required>
-        </div>
-        <div>
-          <label>تفاصيل المتابعة / الكمية المتوقعة *</label>
-          <textarea id="fuNoteInp" rows="3" placeholder="مثال: سيطلب 20 كيلو إسبريسو بداية الشهر القادم..." required></textarea>
-        </div>
-        <div style="font-size:12px;color:var(--green);background:var(--green-soft);padding:10px;border-radius:12px;">
-          📲 ستُرسل رسالة واتساب فوراً للإدارة بتفاصيل المتابعة، وسيظهر إشعار في النظام قبل الموعد بيوم واحد.
-        </div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;">
-          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
-          <button type="submit" class="btn btn-primary">حفظ وإرسال واتساب للإدارة</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="overlay" id="operationModal" hidden>
-    <div class="modal-box">
-      <div class="modal-head"><h3>⚡ كتابة تحديث تشغيل جديد</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
-      <form id="operationForm" class="stack">
-        <div>
-          <label>القسم</label>
-          <select id="opDeptSelect">
-            <option value="المبيعات (Sales)">المبيعات (Sales)</option>
-            <option value="الإدارة (Management)">الإدارة (Management)</option>
-            <option value="المخازن والتوصيل">المخازن والتوصيل</option>
-          </select>
-        </div>
-        <div>
-          <label>نص التحديث / الملاحظة التشغيلية *</label>
-          <textarea id="opTextInp" rows="3" placeholder="اكتب التحديث ليتم مراجعته من الإدارة..." required></textarea>
-        </div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;">
-          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
-          <button type="submit" class="btn btn-primary">إرسال للإدارة + واتساب</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="overlay" id="targetModal" hidden>
-    <div class="modal-box">
-      <div class="modal-head"><h3>🎯 تحديد تارجيت المبيعات الشهري للموظف</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
-      <form id="targetForm" class="stack">
-        <div><label>اختر الموظف *</label><select id="trgUserSelect" required></select></div>
-        <div class="grid-2">
-          <div><label>الشهر (YYYY-MM) *</label><input type="month" id="trgMonthInp" required></div>
-          <div><label>قيمة التارجيت المطلوب (EGP) *</label><input type="number" id="trgAmountInp" min="1" step="100" required></div>
-        </div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;">
-          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
-          <button type="submit" class="btn btn-primary">حفظ التارجيت</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="overlay" id="payrollModal" hidden>
-    <div class="modal-box">
-      <div class="modal-head"><h3>💰 تسجيل راتب / سلفة / خصم موظف</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
-      <form id="payrollForm" class="stack">
-        <div class="grid-2">
-          <div><label>الموظف *</label><select id="payEmpSelect" required></select></div>
-          <div>
-            <label>نوع الحركة *</label>
-            <select id="payTypeSelect" onchange="calcPayrollNet()">
-              <option value="صرف راتب">💵 صرف راتب شهري</option>
-              <option value="سلفة موظف">📤 سلفة نقدية</option>
-              <option value="خصم إداري">⚠️ خصم إداري / جزاء</option>
-            </select>
+        <button type="button" class="notif-btn" onclick="toggleNotifDropdown()" title="الإشعارات والتنبيهات">
+          🔔 <span class="notif-dot" id="notifCountBadge">0</span>
+        </button>
+        <div class="notif-dropdown" id="notifDropdown" hidden>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">
+            <strong style="font-size:13.5px;">🔔 مركز الإشعارات والتنبيهات</strong>
+            <button type="button" class="close-x" style="font-size:18px;" onclick="document.getElementById('notifDropdown').hidden=true">×</button>
           </div>
+          <div id="notifListBox"></div>
         </div>
-        <div class="grid-3">
-          <div><label>المبلغ الأساسي (EGP) *</label><input type="number" id="payBaseInp" min="0" step="0.01" value="0" oninput="calcPayrollNet()" required></div>
-          <div><label>قيمة السلف / الخصومات</label><input type="number" id="payDeductInp" min="0" step="0.01" value="0" oninput="calcPayrollNet()"></div>
-          <div><label>الصافي المنصرف</label><input type="text" id="payNetDisp" readonly style="background:var(--accent-soft);color:var(--accent);font-weight:700;"></div>
-        </div>
-        <div>
-          <label>الحساب المخصوم منه</label>
-          <select id="payAccountSelect">
-            <option value="كاش">Cash (درج الكاش)</option>
-            <option value="إنستا باي">InstaPay (إنستا باي)</option>
-            <option value="تحويل بنكي">Bank Transfer (تحويل بنكي)</option>
-          </select>
-        </div>
-        <div><label>ملاحظات</label><input type="text" id="payNoteInp" placeholder="مثال: راتب شهر نوفمبر / سلفة طارئة..."></div>
-        <div style="font-size:12px;color:var(--red);background:var(--red-soft);padding:10px;border-radius:12px;">
-          📉 الصافي المنصرف يُسجل تلقائياً كمصروف معتمد ويُخصم من خزنة الشركة وصافي الأرباح.
-        </div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;">
-          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
-          <button type="submit" class="btn btn-primary">اعتماد وصرف</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
-  <div class="overlay" id="createCustomerModal" hidden>
-    <div class="modal-box">
-      <div class="modal-head"><h3 id="custModalTitle">إضافة عميل جديد</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
-      <form id="customerForm" class="stack">
-        <input type="hidden" id="editCustId" value="">
-        <div><label>اسم العميل *</label><input type="text" id="cName" required></div>
-        <div class="grid-2">
-          <div><label>رقم الهاتف (واتساب) *</label><input type="text" id="cPhone" placeholder="010xxxxxxxx"></div>
-          <div>
-            <label>فئة التسعير الافتراضية لهذا العميل *</label>
-            <select id="cPriceTier" style="border-color:var(--accent);font-weight:700;">
-              <option value="retail">🏷️ قطاعي (Retail)</option>
-              <option value="half">📦 نصف جملة (Half Wholesale)</option>
-              <option value="wholesale">🏢 جملة (Wholesale)</option>
-            </select>
-          </div>
-        </div>
-        <div><label>العنوان / المنطقة</label><input type="text" id="cAddress"></div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
-          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
-          <button type="submit" class="btn btn-primary">حفظ العميل</button>
-        </div>
-      </form>
-    </div>
-  </div>
+        <span class="sync-live-pill" id="liveSyncBadge" title="مزامنة حية تلقائية">● متصل</span>
+        <button type="button" class="btn btn-primary perm-el" data-perm="orders" onclick="switchView('viewNewOrder')">+ طلب جديد</button>
+        <span class="account-chip" id="topAccountChip">DOSERO</span>
+        <button type="button" class="btn btn-outline" style="padding:6px 10px;" onclick="syncFromSheet(true)" title="مزامنة فورية">🔄</button>
+      </div>
+    </header>
 
-  <div class="overlay" id="createItemModal" hidden>
-    <div class="modal-box" style="width:min(560px,100%);">
-      <div class="modal-head"><h3 id="prodModalTitle">إنشاء وحدة مخزون</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
-      <form id="productForm" class="stack">
-        <input type="hidden" id="editProdId" value="">
-        <div><label>اسم الصنف *</label><input type="text" id="pName" placeholder="Dosero Crema 1kg" required></div>
-        <div class="grid-3">
-          <div><label>كود التعريف (SKU)</label><input type="text" id="pSku" placeholder="sk-23320"></div>
-          <div>
-            <label>التصنيف</label>
-            <select id="pCat">
-              <option value="حبوب إسبريسو">حبوب إسبريسو</option>
-              <option value="إسبريسو مطحون">إسبريسو مطحون</option>
-              <option value="كبسولات">كبسولات</option>
-              <option value="مستلزمات">مستلزمات</option>
-            </select>
-          </div>
-          <div><label>الكمية المتاحة *</label><input type="number" id="pQty" min="0" step="1" required></div>
-        </div>
-        <div class="grid-4">
-          <div><label>سعر التكلفة *</label><input type="number" id="pCost" min="0" step="0.01" required></div>
-          <div><label>سعر القطاعي *</label><input type="number" id="pPrice" min="0" step="0.01" required></div>
-          <div><label>نصف الجملة *</label><input type="number" id="pHalfPrice" min="0" step="0.01" required></div>
-          <div><label>سعر الجملة *</label><input type="number" id="pWholesalePrice" min="0" step="0.01" required></div>
-        </div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
-          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
-          <button type="submit" class="btn btn-primary">حفظ الصنف</button>
-        </div>
-      </form>
-    </div>
-  </div>
+    <main class="content-area">
+      <div id="urgentNotifBanner" class="pending-strip" style="display:none;background:var(--blue-soft);border-color:rgba(96,165,250,0.5);color:var(--blue);">
+        <span id="urgentNotifText">📅 لديك مواعيد متابعة دورية مستحقة!</span>
+        <button type="button" class="btn btn-primary" style="padding:4px 12px;font-size:12px;" onclick="switchView('viewFollowUps')">عرض المتابعات</button>
+      </div>
 
-  <div class="overlay" id="createSupplierModal" hidden>
-    <div class="modal-box">
-      <div class="modal-head"><h3>إضافة مورد جديد</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
-      <form id="addSupplierForm" class="stack">
-        <div><label>اسم المورد *</label><input type="text" id="newSupName" required></div>
-        <div><label>بيانات التواصل</label><input type="text" id="newSupContact"></div>
-        <div><label>رصيد افتتاحي مستحق له</label><input type="number" id="newSupInitial" min="0" step="0.01" value="0"></div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
-          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
-          <button type="submit" class="btn btn-primary">حفظ</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="overlay" id="purchaseItemsModal" hidden>
-    <div class="modal-box" style="width:min(680px,100%);">
-      <div class="modal-head"><h3>📦 فاتورة شراء / توريد أصناف للمخزون</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
-      <form id="purchaseItemsForm" class="stack">
-        <div class="grid-3">
-          <div><label>المورد *</label><select id="purSupSelect" required></select></div>
-          <div>
-            <label>طريقة السداد / الحساب</label>
-            <select id="purAccount">
-              <option value="آجل للمورد">آجل (يضاف لرصيد المورد)</option>
-              <option value="كاش">Cash (كاش)</option>
-              <option value="إنستا باي">InstaPay (إنستا باي)</option>
-              <option value="تحويل بنكي">Bank Transfer (بنكي)</option>
-            </select>
-          </div>
-          <div><label>ملاحظات / رقم فاتورة المورد</label><input type="text" id="purNote" placeholder="اختياري..."></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <strong style="font-size:13.5px;">الأصناف المشتراة (ستُضاف للمخزون فوراً):</strong>
-          <button type="button" class="btn btn-outline" style="padding:4px 12px;font-size:12px;" onclick="addPurchaseLine()">+ إضافة صنف</button>
-        </div>
-        <div id="purLinesBox"></div>
-        <div style="background:var(--surface-alt);padding:12px;border-radius:14px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);">
-          <strong>إجمالي فاتورة الشراء:</strong>
-          <strong id="purTotalDisplay" style="font-size:18px;color:var(--accent);">EGP 0.00</strong>
-        </div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">
-          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
-          <button type="submit" class="btn btn-primary">حفظ التوريد وإضافة الكميات للمخزون</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="overlay" id="supplierTxModal" hidden>
-    <div class="modal-box">
-      <div class="modal-head"><h3 id="supTxModalTitle">تحويل مالي جديد لمورد</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
-      <form id="supplierTxForm" class="stack">
-        <div><label>المورد *</label><select id="supSelect" required></select></div>
-        <div class="grid-2">
-          <div><label>المبلغ المحول *</label><input type="number" id="supTxAmount" min="1" step="0.01" required></div>
-          <div>
-            <label>الحساب المحول منه</label>
-            <select id="supTxAccount">
-              <option value="كاش">Cash (كاش)</option>
-              <option value="إنستا باي">InstaPay (إنستا باي)</option>
-              <option value="تحويل بنكي">Bank Transfer (بنكي)</option>
-            </select>
-          </div>
-        </div>
-        <div><label>ملاحظات / رقم المرجع</label><input type="text" id="supTxNote"></div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
-          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
-          <button type="submit" class="btn btn-primary">تنفيذ التحويل</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="overlay" id="wasteModal" hidden>
-    <div class="modal-box">
-      <div class="modal-head"><h3>تسجيل هالك أو عينات تذوق</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
-      <form id="wasteForm" class="stack">
-        <div><label>الصنف *</label><select id="wasteProdSelect" required></select></div>
-        <div class="grid-2">
-          <div>
-            <label>النوع</label>
-            <select id="wasteKind">
-              <option value="عينات تذوق">🎁 عينات تذوق</option>
-              <option value="تالف مخزن">⚠️ تالف / هالك</option>
-            </select>
-          </div>
-          <div><label>الكمية *</label><input type="number" id="wasteQty" min="1" value="1" required></div>
-        </div>
-        <div><label>ملاحظات</label><input type="text" id="wasteNote" placeholder="السبب أو اسم العميل..."></div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
-          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
-          <button type="submit" class="btn btn-primary">إرسال للاعتماد</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="overlay" id="expenseModal" hidden>
-    <div class="modal-box">
-      <div class="modal-head"><h3>تسجيل مصروف تشغيل</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
-      <form id="opExpenseForm" class="stack">
-        <div><label>بند المصروف *</label><input type="text" id="expTitle" placeholder="مثال: شحن / تغليف / صيانة" required></div>
-        <div class="grid-2">
-          <div><label>المبلغ *</label><input type="number" id="expAmount" min="1" step="0.01" required></div>
-          <div>
-            <label>الحساب</label>
-            <select id="expAccount">
-              <option value="كاش">Cash (كاش)</option>
-              <option value="إنستا باي">InstaPay (إنستا باي)</option>
-              <option value="تحويل بنكي">Bank Transfer (بنكي)</option>
-            </select>
-          </div>
-        </div>
-        <div><label>ملاحظات</label><input type="text" id="expNote"></div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
-          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
-          <button type="submit" class="btn btn-primary">إرسال للاعتماد</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="overlay" id="userModal" hidden>
-    <div class="modal-box" style="width:min(560px,100%);">
-      <div class="modal-head"><h3 id="userModalTitle">إضافة مستخدم وتحديد الصلاحيات</h3><button class="close-x" onclick="this.closest('.overlay').hidden=true">×</button></div>
-      <form id="addUserForm" class="stack">
-        <input type="hidden" id="editUserIdx" value="-1">
-        <div class="grid-2">
-          <div><label>اسم المستخدم *</label><input type="text" id="uNameInp" required></div>
-          <div><label>كلمة المرور *</label><input type="text" id="uPassInp" required></div>
-        </div>
-        <div>
-          <label>قالب الدور السريع (أو اختر الصلاحيات يدوياً بالأسفل)</label>
-          <select id="uRoleInp" onchange="applyRolePreset(this.value)">
-            <option value="custom">🎛️ مخصص (اختيار يدوي للصلاحيات)</option>
-            <option value="user">👤 موظف مبيعات (يرى مبيعاته وعملاءه فقط)</option>
-            <option value="admin">👑 مدير كامل (يرى كل الشركة والصلاحيات)</option>
-          </select>
-        </div>
-        <div>
-          <label>اختر الشاشات والصلاحيات ونطاق الرؤية المتاح لهذا الشخص:</label>
-          <div class="perm-grid" id="userPermsBox">
-            <label class="perm-item"><input type="checkbox" value="dashboard" checked> ⊞ شاشة الملخص</label>
-            <label class="perm-item"><input type="checkbox" value="orders" checked> 🧾 الطلبات والفواتير</label>
-            <label class="perm-item"><input type="checkbox" value="customers" checked> 👥 العملاء والمتابعة</label>
-            <label class="perm-item perm-highlight"><input type="checkbox" value="view_all_sales"> 👁️ رؤية مبيعات كل الموظفين</label>
-            <label class="perm-item perm-highlight"><input type="checkbox" value="view_all_customers"> 🌐 رؤية كل عملاء الشركة</label>
-            <label class="perm-item"><input type="checkbox" value="operations" checked> ⚡ التشغيل والتحديثات</label>
-            <label class="perm-item"><input type="checkbox" value="inventory" checked> 📦 عرض المخزون والهالك</label>
-            <label class="perm-item"><input type="checkbox" value="manage_stock"> ➕ إضافة/توريد أصناف</label>
-            <label class="perm-item"><input type="checkbox" value="suppliers"> 🚚 الموردين والمشتريات</label>
-            <label class="perm-item"><input type="checkbox" value="expenses"> 💸 الخزنة والمصاريف</label>
-            <label class="perm-item"><input type="checkbox" value="reports" checked> 📊 التقارير والرسوم البيانية</label>
-            <label class="perm-item"><input type="checkbox" value="profits"> 💰 رؤية التكلفة والأرباح</label>
-            <label class="perm-item"><input type="checkbox" value="approve"> ✅ اعتماد الفواتير والمرتجعات</label>
-            <label class="perm-item"><input type="checkbox" value="hr" checked> 👔 الحضور والتارجيت (HR)</label>
-            <label class="perm-item"><input type="checkbox" value="users"> ⚙️ إدارة المستخدمين</label>
-          </div>
-        </div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px;">
-          <button type="button" class="btn btn-outline" onclick="this.closest('.overlay').hidden=true">إغلاق</button>
-          <button type="submit" class="btn btn-primary">حفظ المستخدم والصلاحيات</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="overlay" id="invoiceModal" hidden>
-    <div class="invoice-sheet">
-      <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #101828;padding-bottom:14px;margin-bottom:16px;">
-        <div>
-          <svg viewBox="0 0 360 155" style="width:155px;height:auto;display:block;margin-bottom:4px;">
-            <defs><path id="cInv" d="M 35,134 Q 180,108 325,134" /></defs>
-            <path d="M 24,18 Q 180,44 336,18 C 343,17 348,22 348,29 L 348,108 C 348,115 343,119 336,118 Q 180,90 24,118 C 17,119 12,115 12,108 L 12,29 C 12,22 17,17 24,18 Z" fill="#F01E44"/>
-            <text x="180" y="88" text-anchor="middle" fill="#FFFFFF" font-family="Impact, 'Arial Black', sans-serif" font-weight="900" font-size="64" textLength="296" lengthAdjust="spacingAndGlyphs">DOSERO</text>
-            <text fill="#F01E44" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="13"><textPath href="#cInv" startOffset="50%" text-anchor="middle" textLength="275" lengthAdjust="spacing">EVERY DOSE TELLS A STORY</textPath></text>
-          </svg>
-          <small id="mInvStatusLabel" style="color:#667085;">فاتورة مبيعات</small>
-        </div>
-        <div style="text-align:end;">
-          <strong id="mInvId" style="font-size:16px;"></strong><br>
-          <small id="mInvDate" style="color:#667085;"></small>
+      <div id="pendingAlertStrip" class="pending-strip perm-el" data-perm="approve" style="display:none;">
+        <span id="pendingStripText">⏳ يوجد معاملات بانتظار المراجعة والاعتماد.</span>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-warn" onclick="switchView('viewOrders'); setOrderTab('pending');">مراجعة الطلبات والمرتجعات</button>
+          <button type="button" class="btn btn-warn" onclick="switchView('viewWaste')">مراجعة الهالك والمصاريف</button>
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;background:#f8f9fc;padding:12px;border-radius:12px;font-size:13px;margin-bottom:16px;border:1px solid #eaecf0;">
-        <div><strong>العميل:</strong> <span id="mCustName"></span></div>
-        <div><strong>الهاتف:</strong> <span id="mCustPhone"></span></div>
-        <div><strong>طريقة الدفع:</strong> <span id="mPayMethod"></span></div>
-        <div><strong>حررت بواسطة:</strong> <span id="mIssuedBy"></span></div>
-        <div id="mActionByWrap" style="grid-column:1 / -1;display:none;"><strong>حالة الاعتماد:</strong> <span id="mActionBy"></span></div>
-        <div id="mLocWrap" class="no-print" style="grid-column:1 / -1;display:none;"><strong>موقع إصدار الفاتورة:</strong> <a id="mLocLink" href="#" target="_blank" class="btn btn-map">📍 فتح الموقع على الخريطة</a></div>
-      </div>
+      <!-- 1. الملخص (DASHBOARD) -->
+      <section id="viewDashboard" class="view-sec">
+        <div class="page-head">
+          <div>
+            <h1 id="welcomeHeader">مرحباً بك</h1>
+            <small id="dashScopeHint" style="color:var(--muted);font-weight:600;"></small>
+          </div>
+          <div class="page-actions">
+            <div class="seg-group">
+              <button type="button" class="seg-btn" onclick="setDashRange('today', this)">اليوم</button>
+              <button type="button" class="seg-btn" onclick="setDashRange('week', this)">الأسبوع</button>
+              <button type="button" class="seg-btn active" onclick="setDashRange('all', this)">الكل</button>
+            </div>
+            <input type="date" id="dashDateInp" style="width:auto; padding:6px 10px;" onchange="renderDashboard()">
+          </div>
+        </div>
 
-      <table style="min-width:100%;border-collapse:collapse;">
-        <thead>
-          <tr style="background:#f5f6fa;">
-            <th style="padding:9px;border:1px solid #eaecf0;">الصنف</th>
-            <th style="padding:9px;border:1px solid #eaecf0;">الكمية</th>
-            <th style="padding:9px;border:1px solid #eaecf0;">السعر</th>
-            <th style="padding:9px;border:1px solid #eaecf0;">الإجمالي</th>
-          </tr>
-        </thead>
-        <tbody id="mItemsBody"></tbody>
-      </table>
+        <!-- بطاقة تارجيت الموظف الشخصي في الداشبورد -->
+        <div class="f-card" id="myTargetDashCard" style="margin-bottom:18px;display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div>
+              <strong style="font-size:15px;">🎯 تارجيت المبيعات الشهري الخاص بك (<span id="myTargetMonthLbl"></span>)</strong>
+              <small style="display:block;color:var(--muted);" id="myTargetSubLbl">المبيعات المعتمدة: EGP 0 / الهدف: EGP 0</small>
+            </div>
+            <span class="pill pill-purple" style="font-size:13px;" id="myTargetPctBadge">0%</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="myTargetBarFill" style="width:0%;"></div></div>
+        </div>
 
-      <div style="margin-top:16px;text-align:end;font-size:14px;line-height:1.9;">
-        <div>المجموع الفرعي: <strong id="mSub"></strong></div>
-        <div>الخصم: <strong id="mDisc"></strong></div>
-        <div>الشحن: <strong id="mShip"></strong></div>
-        <div style="font-size:17px;border-top:1px solid #ddd;padding-top:6px;">الإجمالي: <strong id="mTotal"></strong></div>
-        <div style="color:#027a48;">المدفوع: <strong id="mPaid"></strong></div>
-        <div id="mRemainLine" style="color:#b42318;">المتبقي (آجل): <strong id="mRemain"></strong></div>
-      </div>
+        <div class="dash-grid-3">
+          <div class="f-card">
+            <div class="f-card-top">
+              <span class="f-card-title">الطلبات المعتمدة</span>
+              <button class="f-card-link" onclick="switchView('viewOrders')">عرض التقرير</button>
+            </div>
+            <div class="f-card-val" id="dOrdersCount">0</div>
+            <div class="spark-wrap"><canvas id="sparkOrders"></canvas></div>
+          </div>
 
-      <div style="margin-top:18px;text-align:center;font-size:11px;color:#667085;border-top:1px dashed #eaecf0;padding-top:10px;">
-        Dosero System — Powered by Samy Aziz
-      </div>
+          <div class="f-card">
+            <div class="f-card-top">
+              <span class="f-card-title">صافي المبيعات</span>
+              <button class="f-card-link perm-el" data-perm="reports" onclick="openReportType('sales')">عرض التقرير</button>
+            </div>
+            <div class="f-card-val" id="dNetSales">EGP 0.00</div>
+            <div class="spark-wrap"><canvas id="sparkSales"></canvas></div>
+          </div>
 
-      <div class="no-print" style="margin-top:16px;display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;">
-        <button type="button" class="btn btn-green admin-only-el" style="padding:8px 15px;font-size:13px;" onclick="sendCurrentModalWhatsApp()">📲 إرسال واتساب للعميل</button>
-        <button type="button" class="btn btn-primary" onclick="printInvoice()">🖨️ طباعة</button>
-        <button type="button" class="btn btn-outline" onclick="document.getElementById('invoiceModal').hidden=true">إغلاق</button>
-      </div>
-    </div>
+          <div class="f-card">
+            <div class="f-card-top">
+              <span class="f-card-title">صافي المدفوعات المحصلة</span>
+              <button class="f-card-link perm-el" data-perm="reports" onclick="openReportType('payments')">عرض التقرير</button>
+            </div>
+            <div class="f-card-val" id="dNetPayments">EGP 0.00</div>
+            <div class="spark-wrap"><canvas id="sparkPayments"></canvas></div>
+          </div>
+        </div>
+
+        <div class="dash-grid-3">
+          <div class="f-card">
+            <div class="f-card-top">
+              <span class="f-card-title">مبالغ الإرجاع</span>
+              <button class="f-card-link" onclick="switchView('viewOrders'); setOrderTab('returned');">عرض التقرير</button>
+            </div>
+            <div class="f-card-val" id="dReturnsVal">EGP 0.00</div>
+            <small style="color:var(--muted);" id="dReturnsSub">0 فاتورة مرتجعة</small>
+          </div>
+
+          <div class="f-card">
+            <div class="f-card-top">
+              <span class="f-card-title">مبالغ الخصم</span>
+              <button class="f-card-link perm-el" data-perm="reports" onclick="openReportType('sales')">عرض التقرير</button>
+            </div>
+            <div class="f-card-val" id="dDiscountVal">EGP 0.00</div>
+            <small style="color:var(--muted);">إجمالي الخصومات الممنوحة</small>
+          </div>
+
+          <div class="f-card perm-el" data-perm="profits">
+            <div class="f-card-top">
+              <span class="f-card-title">صافي الربح الفعلي</span>
+              <button class="f-card-link perm-el" data-perm="reports" onclick="openReportType('business')">عرض التقرير</button>
+            </div>
+            <div class="f-card-val" style="color:var(--green);" id="dNetProfit">EGP 0.00</div>
+            <small style="color:var(--muted);" id="dLiquidityNote">السيولة المتاحة: EGP 0.00</small>
+          </div>
+        </div>
+
+        <div class="dash-grid-3">
+          <div class="f-card">
+            <div class="f-card-top">
+              <span class="f-card-title">أعلى المنتجات حسب صافي البيع</span>
+              <button class="f-card-link perm-el" data-perm="reports" onclick="openReportType('analytics')">عرض التقرير</button>
+            </div>
+            <div class="chart-lg-wrap"><canvas id="donutProducts"></canvas></div>
+          </div>
+
+          <div class="f-card">
+            <div class="f-card-top">
+              <span class="f-card-title">أعلى المدفوعات حسب الطريقة</span>
+              <button class="f-card-link perm-el" data-perm="reports" onclick="openReportType('payments')">عرض التقرير</button>
+            </div>
+            <div class="chart-lg-wrap"><canvas id="donutPayments"></canvas></div>
+          </div>
+
+          <div class="f-card perm-el" data-perm="expenses">
+            <div class="f-card-top">
+              <span class="f-card-title">توزيع المستحقات والسيولة</span>
+              <button class="f-card-link perm-el" data-perm="reports" onclick="openReportType('business')">عرض التقرير</button>
+            </div>
+            <div class="chart-lg-wrap"><canvas id="donutWallets"></canvas></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. إنشاء طلب جديد (POS) -->
+      <section id="viewNewOrder" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>🧾 إنشاء طلب / فاتورة بيع جديدة</h1>
+          <button type="button" class="btn btn-outline" onclick="switchView('viewOrders')">← العودة للطلبات</button>
+        </div>
+
+        <form id="invoiceForm" class="pos-grid" autocomplete="off">
+          <div class="f-card">
+            <div class="f-card-top">
+              <strong style="font-size:15px;">العميل، شريحة السعر، والأصناف المطلوبة</strong>
+              <button type="button" class="btn btn-primary" id="addInvLineBtn">+ إضافة صنف</button>
+            </div>
+
+            <div class="grid-4" style="margin-bottom:16px;">
+              <div>
+                <label>اختر عميل مسجل *</label>
+                <select id="invCustSelect" onchange="onInvoiceCustomerChange(this.value)"></select>
+              </div>
+              <div>
+                <label>أو اسم عميل جديد *</label>
+                <input type="text" id="invNewCustName" name="dosero_cust_new" autocomplete="new-password" placeholder="اكتب اسم العميل...">
+              </div>
+              <div>
+                <label>رقم الهاتف (واتساب)</label>
+                <input type="text" id="invNewCustPhone" name="dosero_cust_phone" autocomplete="new-password" placeholder="010xxxxxxxx">
+              </div>
+              <div>
+                <label>شريحة السعر المطبقة</label>
+                <select id="invPriceTier" onchange="applyPriceTierToAllLines()" style="border-color:var(--accent);font-weight:700;color:var(--accent);">
+                  <option value="">-- اختر شريحة السعر --</option>
+                  <option value="retail">🏷️ قطاعي (Retail)</option>
+                  <option value="half">📦 نصف جملة (Half Wholesale)</option>
+                  <option value="wholesale">🏢 جملة (Wholesale)</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="invLinesBox"></div>
+
+            <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--border);">
+              <label style="color:var(--accent);">🔒 ملاحظات داخلية للفاتورة (لا تظهر للعميل وتُرحَّل تلقائياً للمتابعة الدورية)</label>
+              <div class="grid-2">
+                <input type="text" id="invInternalNote" name="dosero_internal_note" autocomplete="new-password" placeholder="مثال: العميل سيطلب كمية أكبر الأسبوع القادم...">
+                <div>
+                  <input type="date" id="invFollowUpDate" title="تاريخ المتابعة القادمة (اختياري)">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="f-card" style="position:sticky; top:80px;">
+            <strong style="display:block;font-size:15px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);">ملخص الحساب والدفع</strong>
+            <div class="stack">
+              <div class="grid-2">
+                <div>
+                  <label>المجموع الفرعي</label>
+                  <input type="text" id="invSubInp" readonly style="background:var(--surface-alt);font-weight:700;" placeholder="0.00">
+                </div>
+                <div>
+                  <label style="display:flex;justify-content:space-between;align-items:center;">
+                    <span>الخصم</span>
+                    <select id="invDiscType" onchange="calcInvoiceTotal()" style="width:auto;padding:2px 8px;font-size:11.5px;border-radius:999px;">
+                      <option value="pct">نسبة (%)</option>
+                      <option value="amt">مبلغ (EGP)</option>
+                    </select>
+                  </label>
+                  <input type="number" id="invDiscInp" name="dosero_disc" autocomplete="off" min="0" step="0.01" placeholder="0">
+                  <small id="invDiscCalcHint" style="color:var(--muted);font-size:11px;display:block;margin-top:3px;">قيمة الخصم: EGP 0.00</small>
+                </div>
+              </div>
+              <div class="grid-2">
+                <div>
+                  <label>الشحن / التوصيل</label>
+                  <input type="number" id="invShipInp" name="dosero_ship" autocomplete="off" min="0" step="0.01" placeholder="0">
+                </div>
+                <div>
+                  <label>الإجمالي النهائي</label>
+                  <input type="text" id="invTotalInp" readonly style="background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:15px;" placeholder="0.00">
+                </div>
+              </div>
+              <div>
+                <label>طريقة الدفع</label>
+                <select id="invPayMethod" onchange="onPayMethodChange()">
+                  <option value="كاش">Cash (كاش - دفع كامل)</option>
+                  <option value="إنستا باي">InstaPay (إنستا باي - دفع كامل)</option>
+                  <option value="تحويل بنكي">Bank Transfer (تحويل بنكي - دفع كامل)</option>
+                  <option value="آجل">Credit (آجل / دفع جزئي)</option>
+                </select>
+              </div>
+              <div class="grid-2">
+                <div>
+                  <label>المدفوع الآن</label>
+                  <input type="number" id="invPaidInp" name="dosero_paid" autocomplete="off" min="0" step="0.01" placeholder="0" required style="color:var(--green);font-weight:700;">
+                </div>
+                <div id="invRemainWrap">
+                  <label>المتبقي (آجل)</label>
+                  <input type="text" id="invRemainInp" readonly style="color:var(--red);font-weight:700;background:var(--surface-alt);" placeholder="0.00">
+                </div>
+              </div>
+              <div style="font-size:12px;color:var(--warn);background:var(--warn-soft);padding:10px;border-radius:12px;">
+                ⏳ يسجل الطلب بحالة <strong>قيد المراجعة</strong>، وعند اعتماد الإدارة تُرسل الفاتورة للعميل عبر واتساب.
+              </div>
+              <button type="submit" id="saveOrderSubmitBtn" class="btn btn-primary" style="width:100%;padding:12px;">حفظ الطلب للمراجعة</button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- 3. الطلبات والفواتير -->
+      <section id="viewOrders" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>الطلبات والفواتير</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-outline" onclick="exportReportCSV()">📥 تصدير</button>
+            <button type="button" class="btn btn-primary" onclick="switchView('viewNewOrder')">+ طلب جديد</button>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-tabs-bar">
+            <div class="tab-list" id="orderTabsList">
+              <button class="tab-btn active" data-otab="all" onclick="setOrderTab('all')">الكل</button>
+              <button class="tab-btn" data-otab="pending" onclick="setOrderTab('pending')">قيد المراجعة</button>
+              <button class="tab-btn" data-otab="active" onclick="setOrderTab('active')">معتمدة</button>
+              <button class="tab-btn" data-otab="returned" onclick="setOrderTab('returned')">مرتجعات</button>
+              <button class="tab-btn" data-otab="rejected" onclick="setOrderTab('rejected')">مرفوضة</button>
+            </div>
+            <input type="text" id="orderSearchInp" placeholder="🔍 بحث برقم الفاتورة أو الصنف..." style="width:230px;padding:6px 12px;" oninput="applyOrdersFilter()">
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;padding:12px 18px;background:var(--surface-alt);border-bottom:1px solid var(--border);align-items:center;">
+            <input type="date" id="ordFromDate" style="width:auto;padding:5px 10px;font-size:12.5px;" onchange="applyOrdersFilter()" title="من تاريخ">
+            <input type="date" id="ordToDate" style="width:auto;padding:5px 10px;font-size:12.5px;" onchange="applyOrdersFilter()" title="إلى تاريخ">
+            <select id="ordCustFilter" style="width:auto;min-width:140px;padding:5px 10px;font-size:12.5px;" onchange="applyOrdersFilter()">
+              <option value="">كل العملاء</option>
+            </select>
+            <select id="ordPayFilter" style="width:auto;padding:5px 10px;font-size:12.5px;" onchange="applyOrdersFilter()">
+              <option value="">كل طرق الدفع</option>
+              <option value="كاش">كاش</option>
+              <option value="إنستا باي">إنستا باي</option>
+              <option value="تحويل بنكي">تحويل بنكي</option>
+              <option value="آجل">آجل</option>
+            </select>
+            <select id="ordUserFilter" class="can-view-all-sales-el" style="width:auto;min-width:130px;padding:5px 10px;font-size:12.5px;" onchange="applyOrdersFilter()">
+              <option value="">كل الموظفين</option>
+            </select>
+            <button type="button" class="btn btn-outline" style="padding:5px 12px;font-size:12px;" onclick="resetOrdersFilter()">🔄 مسح الفلاتر</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>الرقم المرجعي</th>
+                  <th>العميل</th>
+                  <th>الأصناف</th>
+                  <th>الحالة والاعتماد</th>
+                  <th>طريقة الدفع</th>
+                  <th>الإجمالي</th>
+                  <th>المدفوع / الآجل</th>
+                  <th class="admin-only-col">الموقع</th>
+                  <th>تاريخ العمل</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="invoicesBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. العملاء الفعليين -->
+      <section id="viewCustomers" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>العملاء الفعليين</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary" onclick="openCustomerModal()">+ إضافة عميل</button>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-tabs-bar">
+            <div class="tab-list">
+              <button class="tab-btn active" onclick="filterCustomerTab('all', this)">الكل</button>
+              <button class="tab-btn" onclick="filterCustomerTab('debt', this)">لديهم رصيد آجل</button>
+              <button class="tab-btn" onclick="filterCustomerTab('followup', this)">يحتاجون إعادة طلب (+10 أيام)</button>
+            </div>
+            <input type="text" placeholder="🔍 بحث بالاسم أو الهاتف..." style="width:240px;padding:6px 12px;" oninput="filterTable('customersBody', this.value)">
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>الاسم</th>
+                  <th>الهاتف</th>
+                  <th>فئة السعر</th>
+                  <th>إجمالي الطلبات</th>
+                  <th>الأصناف المشتراة</th>
+                  <th>آخر طلب</th>
+                  <th>رصيد الحساب (الآجل)</th>
+                  <th>أضيف بواسطة</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="customersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4.1 زيارات العملاء بدون شراء -->
+      <section id="viewProspects" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>📍 زيارات العملاء بدون شراء (عملاء غير مفعلين)</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary" onclick="document.getElementById('prospectModal').hidden=false">+ تسجيل زيارة جديدة</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-tabs-bar">
+            <div class="tab-list"><button class="tab-btn active">سجل الزيارات الميدانية وأسباب الرفض</button></div>
+            <input type="text" placeholder="🔍 بحث بالاسم أو السبب أو المندوب..." style="width:250px;padding:6px 12px;" oninput="filterTable('prospectsBody', this.value)">
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ والوقت</th>
+                  <th>اسم المكان / العميل</th>
+                  <th>الهاتف</th>
+                  <th>سبب الرفض / عدم الشراء</th>
+                  <th>المندوب</th>
+                  <th>موقع المكان (GPS)</th>
+                  <th>إجراء</th>
+                </tr>
+              </thead>
+              <tbody id="prospectsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4.2 المتابعة الدورية للعملاء -->
+      <section id="viewFollowUps" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>📅 المتابعة الدورية للعملاء</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary" onclick="openFollowUpModal()">+ جدولة متابعة دورية</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-tabs-bar">
+            <div class="tab-list"><button class="tab-btn active">جدول المتابعات (تُرسل واتساب للإدارة وتنبه قبل الموعد بيوم)</button></div>
+            <input type="text" placeholder="🔍 بحث بالعميل أو الموظف..." style="width:240px;padding:6px 12px;" oninput="filterTable('followUpsBody', this.value)">
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>تاريخ المتابعة المحدد</th>
+                  <th>العميل</th>
+                  <th>الملاحظة / الكمية المتوقعة</th>
+                  <th>الموظف المسؤول (اليوزر)</th>
+                  <th>حالة التنبيه</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="followUpsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4.3 خانة التشغيل والتحديثات -->
+      <section id="viewOperations" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>⚡ التشغيل والتحديثات اليومية (السيلز والإدارة)</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary" onclick="document.getElementById('operationModal').hidden=false">+ كتابة تحديث تشغيل جديد</button>
+          </div>
+        </div>
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ والوقت</th>
+                  <th>المرسل</th>
+                  <th>القسم</th>
+                  <th>تفاصيل التحديث</th>
+                  <th>حالة المراجعة</th>
+                  <th class="perm-el" data-perm="approve">إجراء الإدارة</th>
+                </tr>
+              </thead>
+              <tbody id="operationsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. مركز التقارير -->
+      <section id="viewReportsHub" class="view-sec" hidden>
+        <div class="page-head"><h1>التقارير</h1></div>
+        <div class="report-hub-grid">
+          <button class="report-tile" onclick="openReportType('sales')">
+            <div><strong>تقارير المبيعات</strong><small>المبيعات المعتمدة، الخصومات، وصافي الفواتير</small></div>
+            <span class="report-arrow">‹</span>
+          </button>
+          <button class="report-tile" onclick="openReportType('payments')">
+            <div><strong>تقارير المدفوعات</strong><small>التحصيل حسب كاش، إنستا باي، بنكي، وآجل</small></div>
+            <span class="report-arrow">‹</span>
+          </button>
+          <button class="report-tile" onclick="openReportType('inventory')">
+            <div><strong>تقارير المخزون</strong><small>مستويات المخزون، تكلفة البضاعة، والهالك</small></div>
+            <span class="report-arrow">‹</span>
+          </button>
+          <button class="report-tile" onclick="openReportType('stock_movement')">
+            <div><strong>تقرير حركة المخزون</strong><small>سجل الوارد والمنصرف (مشتريات، مبيعات، مرتجعات، وهالك)</small></div>
+            <span class="report-arrow">‹</span>
+          </button>
+          <button class="report-tile" onclick="openReportType('business')">
+            <div><strong>تقارير الأعمال والأرباح</strong><small>صافي الربح الفعلي بعد الرواتب والمصاريف</small></div>
+            <span class="report-arrow">‹</span>
+          </button>
+          <button class="report-tile" onclick="openReportType('analytics')">
+            <div><strong>تقارير التحليلات</strong><small>الأكثر مبيعاً، كبار العملاء، وسجل الاعتمادات</small></div>
+            <span class="report-arrow">‹</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 5.1 شاشة عرض التقرير التفصيلي -->
+      <section id="viewReportDetail" class="view-sec" hidden>
+        <div id="reportDetailView">
+          <div class="page-head">
+            <div>
+              <button type="button" class="btn btn-outline no-print" style="margin-bottom:8px;padding:4px 12px;font-size:12px;" onclick="switchView('viewReportsHub')">→ رجوع للتقارير</button>
+              <h1 id="repDetailTitle">تقرير المبيعات</h1>
+            </div>
+            <div class="page-actions no-print">
+              <input type="date" id="repFromDate" style="width:auto;" title="من تاريخ">
+              <input type="date" id="repToDate" style="width:auto;" title="إلى تاريخ">
+              <select id="repCustFilter" style="width:auto;min-width:135px;"><option value="">كل العملاء</option></select>
+              <select id="repPayFilter" style="width:auto;">
+                <option value="">كل طرق الدفع</option>
+                <option value="كاش">كاش</option>
+                <option value="إنستا باي">إنستا باي</option>
+                <option value="تحويل بنكي">تحويل بنكي</option>
+                <option value="آجل">آجل</option>
+              </select>
+              <select id="repUserFilter" class="can-view-all-sales-el" style="width:auto;min-width:125px;"><option value="">كل الموظفين</option></select>
+              <button type="button" class="btn btn-primary" onclick="renderReportDetail()">تطبيق</button>
+              <button type="button" class="btn btn-outline" onclick="resetReportFilters()">🔄 مسح</button>
+              <button type="button" class="btn btn-outline" onclick="toggleReportChart()">📊 الرسم البياني</button>
+              <button type="button" class="btn btn-outline" onclick="printReport()">🖨️ طباعة</button>
+              <button type="button" class="btn btn-outline" onclick="exportReportCSV()">📥 تصدير</button>
+            </div>
+          </div>
+
+          <div id="repChartBox" class="f-card no-print" style="margin-bottom:18px;" hidden>
+            <div class="chart-lg-wrap"><canvas id="repDetailCanvas"></canvas></div>
+          </div>
+
+          <div class="dash-grid-3" id="repDetailKpis"></div>
+
+          <div class="table-card">
+            <div class="table-wrap" id="repDetailTableWrap"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5.2 قسم الرسوم البيانية الشامل -->
+      <section id="viewChartsHub" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>📈 لوحة الرسوم البيانية والتحليلات البصرية</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-outline" onclick="renderChartsHub()">🔄 تحديث الرسوم</button>
+          </div>
+        </div>
+
+        <div class="dash-grid-2">
+          <div class="f-card">
+            <div class="f-card-top"><span class="f-card-title">تطور المبيعات اليومية المعتمدة (EGP)</span></div>
+            <div class="chart-xl-wrap"><canvas id="hubChartSalesLine"></canvas></div>
+          </div>
+          <div class="f-card">
+            <div class="f-card-top"><span class="f-card-title">مقارنة المبيعات والتكاليف والمصاريف وصافي الربح</span></div>
+            <div class="chart-xl-wrap"><canvas id="hubChartProfitBar"></canvas></div>
+          </div>
+        </div>
+
+        <div class="dash-grid-2">
+          <div class="f-card">
+            <div class="f-card-top"><span class="f-card-title">أعلى المنتجات تحقيقاً للإيرادات</span></div>
+            <div class="chart-xl-wrap"><canvas id="hubChartTopProducts"></canvas></div>
+          </div>
+          <div class="f-card">
+            <div class="f-card-top"><span class="f-card-title">توزيع التحصيل حسب طرق الدفع (كاش / إنستا باي / بنكي / آجل)</span></div>
+            <div class="chart-xl-wrap"><canvas id="hubChartPayments"></canvas></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. المخزون: مواد المخزون -->
+      <section id="viewInvItems" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>مواد المخزون والأسعار</h1>
+          <div class="page-actions perm-el" data-perm="manage_stock">
+            <button type="button" class="btn btn-primary" onclick="openProductModal()">+ إنشاء / تعديل وحدة مخزون</button>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-tabs-bar">
+            <div class="tab-list">
+              <button class="tab-btn active" onclick="filterStockTab('all', this)">الكل</button>
+              <button class="tab-btn" onclick="filterStockTab('low', this)">مخزون منخفض (≤ 10)</button>
+            </div>
+            <input type="text" placeholder="🔍 بحث بالاسم أو كود SKU..." style="width:240px;padding:6px 12px;" oninput="filterTable('inventoryBody', this.value)">
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>الصنف</th>
+                  <th>كود SKU</th>
+                  <th>التصنيف</th>
+                  <th>المتاح</th>
+                  <th class="perm-el" data-perm="profits">التكلفة</th>
+                  <th>قطاعي</th>
+                  <th>نصف جملة</th>
+                  <th>جملة</th>
+                  <th>الحالة</th>
+                  <th class="perm-el" data-perm="manage_stock">تعديل</th>
+                </tr>
+              </thead>
+              <tbody id="inventoryBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6.1 المخزون: الموردين -->
+      <section id="viewSuppliers" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>الموردين</h1>
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('createSupplierModal').hidden=false">إضافة مورد</button>
+        </div>
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>اسم المورد</th>
+                  <th>بيانات التواصل</th>
+                  <th>إجمالي التوريدات</th>
+                  <th>إجمالي التحويلات</th>
+                  <th>الرصيد المتبقي له</th>
+                </tr>
+              </thead>
+              <tbody id="suppliersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6.2 المخزون: عمليات الشراء -->
+      <section id="viewPurchasing" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>عمليات الشراء والتوريد للمخزون</h1>
+          <button type="button" class="btn btn-primary" onclick="openPurchaseModal()">+ فاتورة شراء / توريد بضاعة</button>
+        </div>
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ</th>
+                  <th>المورد</th>
+                  <th>نوع العملية</th>
+                  <th>إجمالي الفاتورة</th>
+                  <th>الحساب</th>
+                  <th>الأصناف المضافة للمخزون والملاحظات</th>
+                </tr>
+              </thead>
+              <tbody id="purchasingBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6.3 المخزون: التحويلات -->
+      <section id="viewTransfers" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>التحويلات المالية وسداد الموردين</h1>
+          <button type="button" class="btn btn-primary" onclick="openTransferModal()">تحويل مالي جديد</button>
+        </div>
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ</th>
+                  <th>المورد</th>
+                  <th>المبلغ المحول</th>
+                  <th>الحساب المحول منه</th>
+                  <th>ملاحظات / مرجع</th>
+                </tr>
+              </thead>
+              <tbody id="transfersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6.4 المخزون: جرد المخزون -->
+      <section id="viewStockCount" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>جرد المخزون الحالي</h1>
+          <button type="button" class="btn btn-outline" onclick="window.print()">🖨️ طباعة ورقة الجرد</button>
+        </div>
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>كود SKU</th>
+                  <th>اسم الصنف</th>
+                  <th>التصنيف</th>
+                  <th>الرصيد الدفتري (النظام)</th>
+                  <th>الجرد الفعلي</th>
+                </tr>
+              </thead>
+              <tbody id="stockCountBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6.5 المخزون: الهالك والعينات -->
+      <section id="viewWaste" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>الهالك وعينات التذوق</h1>
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('wasteModal').hidden=false">+ تسجيل هالك / عينة</button>
+        </div>
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ</th>
+                  <th>النوع</th>
+                  <th>الصنف</th>
+                  <th>الكمية</th>
+                  <th class="perm-el" data-perm="profits">التكلفة</th>
+                  <th>بواسطة</th>
+                  <th>ملاحظات</th>
+                  <th>الحالة والاعتماد</th>
+                  <th class="perm-el" data-perm="approve">قرار الإدارة</th>
+                </tr>
+              </thead>
+              <tbody id="wasteLogsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7.0 HR: الحضور والانصراف -->
+      <section id="viewAttendance" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>🕒 سجل الحضور والانصراف اليومي (HR)</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-green" onclick="recordAttendance('in')">🟢 تسجيل حضور اليوم</button>
+            <button type="button" class="btn btn-warn" onclick="recordAttendance('out')">🔴 تسجيل انصراف اليوم</button>
+            <button type="button" class="btn btn-outline" onclick="window.print()">🖨️ طباعة التقرير</button>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-tabs-bar">
+            <div class="tab-list"><button class="tab-btn active">تقرير الحضور والانصراف (يُسجل مرة واحدة لكل موظف يومياً)</button></div>
+            <input type="date" id="attFilterDate" style="width:auto;padding:5px 10px;" onchange="renderHR()">
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ</th>
+                  <th>اسم الموظف</th>
+                  <th>وقت الحضور (بداية الشيفت)</th>
+                  <th>وقت الانصراف (نهاية الشيفت)</th>
+                  <th>موقع الحضور</th>
+                  <th>الحالة</th>
+                </tr>
+              </thead>
+              <tbody id="attendanceBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7.01 HR: تارجيت الموظفين -->
+      <section id="viewTargets" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>🎯 تارجيت المبيعات الشهري للموظفين (HR)</h1>
+          <div class="page-actions admin-only-el">
+            <button type="button" class="btn btn-primary" onclick="openTargetModal()">+ تحديد / تعديل تارجيت موظف</button>
+          </div>
+        </div>
+
+        <div class="dash-grid-3" id="targetsCardsGrid"></div>
+      </section>
+
+      <!-- 7.02 HR: المرتبات والسلف والخصومات -->
+      <section id="viewPayroll" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>💰 المرتبات والسلف والخصومات (تُخصم تلقائياً من مصروفات الشركة)</h1>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary" onclick="openPayrollModal()">+ تسجيل راتب / سلفة / خصم</button>
+          </div>
+        </div>
+
+        <div class="dash-grid-3" id="payrollKpisRow"></div>
+
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ</th>
+                  <th>الموظف</th>
+                  <th>النوع</th>
+                  <th>المبلغ الأساسي</th>
+                  <th>السلف / الخصومات</th>
+                  <th>الصافي المنصرف (يُخصم من الشركة)</th>
+                  <th>الحساب</th>
+                  <th>ملاحظات</th>
+                </tr>
+              </thead>
+              <tbody id="payrollBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. الإدارة: الخزنة والمصاريف -->
+      <section id="viewExpenses" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>الخزنة ومصاريف التشغيل والرواتب</h1>
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('expenseModal').hidden=false">+ تسجيل مصروف تشغيل</button>
+        </div>
+
+        <div class="dash-grid-3" id="walletsRow"></div>
+
+        <div class="table-card">
+          <div class="table-tabs-bar">
+            <div class="tab-list">
+              <button class="tab-btn active">سجل المصاريف والتوالف والرواتب</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ</th>
+                  <th>النوع</th>
+                  <th>البند</th>
+                  <th>الكمية</th>
+                  <th>المبلغ</th>
+                  <th>الحساب</th>
+                  <th>بواسطة</th>
+                  <th>ملاحظات</th>
+                  <th>الحالة والاعتماد</th>
+                  <th class="perm-el" data-perm="approve">قرار الإدارة</th>
+                </tr>
+              </thead>
+              <tbody id="expensesBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8.1 الإدارة: المستخدمين والصلاحيات المخصصة -->
+      <section id="viewUsers" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>المستخدمين والأدوار المخصصة</h1>
+          <button type="button" class="btn btn-primary" onclick="openUserModal()">+ إضافة مستخدم وتحديد صلاحياته</button>
+        </div>
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>الاسم</th>
+                  <th>نوع الحساب</th>
+                  <th>الصلاحيات الممنوحة</th>
+                  <th>كلمة المرور</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="usersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8.2 الإدارة: سجل نشاطات المستخدمين -->
+      <section id="viewActivityLogs" class="view-sec" hidden>
+        <div class="page-head">
+          <h1>🛡️ سجل نشاطات وحركات المستخدمين (Activity Logs)</h1>
+          <div class="page-actions">
+            <input type="text" placeholder="🔍 بحث بالمستخدم أو الحركة..." style="width:240px;padding:6px 12px;" oninput="filterTable('activityLogsBody', this.value)">
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>التاريخ والوقت</th>
+                  <th>المستخدم</th>
+                  <th>نوع الحساب</th>
+                  <th>نوع الحركة</th>
+                  <th>تفاصيل العملية</th>
+                  <th>الموقع (GPS)</th>
+                  <th>الجهاز / المتصفح</th>
+                </tr>
+              </thead>
+              <tbody id="activityLogsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8.3 الإدارة: المظهر والإعدادات -->
+      <section id="viewSettings" class="view-sec" hidden>
+        <div class="page-head"><h1>المظهر والإعدادات</h1></div>
+        <div class="f-card" style="max-width:580px;">
+          <strong style="display:block;margin-bottom:14px;">🎨 اختر لون ومظهر واجهة Dosero (Liquid Glass)</strong>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button type="button" class="btn btn-outline" onclick="setTheme('dosero_red')">🔴 أحمر Dosero (افتراضي)</button>
+            <button type="button" class="btn btn-outline" onclick="setTheme('royal_purple')">🟣 بنفسجي ملكي</button>
+            <button type="button" class="btn btn-outline" onclick="setTheme('espresso')">☕ إسبريسو (نحاسي)</button>
+            <button type="button" class="btn btn-outline" onclick="setTheme('royal')">🔵 أزرق ملكي</button>
+            <button type="button" class="btn btn-outline" onclick="setTheme('emerald')">🟢 أخضر زمردي</button>
+            <button type="button" class="btn btn-outline" onclick="setTheme('dark')">🌙 الوضع الليلي (Dark)</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer no-print">
+      Dosero Business Management System &copy; 2026 — <strong>Powered by Samy Aziz</strong>
+    </footer>
   </div>
-  <script>
-    const DOSERO_SHEET_URL = "https://script.google.com/macros/s/AKfycbwAnyW8UJa_rCc4zA7wI9yzr0LthyYX5tOHLOFJo9jCL-ZzvRCUiDDOAEwiSl9e9_I_uA/exec";
-    const DOSERO_COMPANY_WA = "01501538360";
-
-    const ALL_PERMS = ["dashboard", "orders", "customers", "view_all_sales", "view_all_customers", "operations", "inventory", "manage_stock", "suppliers", "expenses", "reports", "profits", "approve", "hr", "users"];
-    const USER_DEFAULT_PERMS = ["dashboard", "orders", "customers", "operations", "inventory", "reports", "hr"];
-    const PERM_LABELS = {
-      dashboard: "الملخص", orders: "الطلبات", customers: "العملاء والمتابعة",
-      view_all_sales: "👁️ كل المبيعات", view_all_customers: "🌐 كل العملاء",
-      operations: "التشغيل", inventory: "المخزون", manage_stock: "إضافة أصناف",
-      suppliers: "الموردين", expenses: "الخزنة", reports: "التقارير والرسوم",
-      profits: "الأرباح", approve: "الاعتمادات", hr: "HR", users: "المستخدمين"
-    };
-    const TIER_LABELS = {
-      retail: "🏷️ قطاعي",
-      half: "📦 نصف جملة",
-      wholesale: "🏢 جملة"
-    };
-
-    let currentUser = JSON.parse(sessionStorage.getItem("dosero-user")) || null;
-    let products = [], customers = [], suppliers = [], invoices = [], users = [], supplierLogs = [], expenses = [], activityLogs = [];
-    let prospects = JSON.parse(localStorage.getItem("dosero-prospects") || "[]");
-    let followUps = JSON.parse(localStorage.getItem("dosero-followups") || "[]");
-    let operationsLogs = JSON.parse(localStorage.getItem("dosero-operations") || "[]");
-    let attendanceLogs = JSON.parse(localStorage.getItem("dosero-attendance") || "[]");
-    let employeeTargets = JSON.parse(localStorage.getItem("dosero-targets") || "[]");
-    let payrollLogs = JSON.parse(localStorage.getItem("dosero-payroll") || "[]");
-
-    let currentOrderTab = "all";
-    let currentReportType = "sales";
-    let dashRange = "all";
-    let charts = {};
-    let isSyncingNow = false;
-    let lastLocalWriteTime = 0;
-    let activeModalInvoice = null;
-
-    const money = v => "EGP " + Number(v || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    const todayStr = () => new Date().toISOString().slice(0, 10);
-    const currentMonthStr = () => new Date().toISOString().slice(0, 7);
-    const nowTimeOnly = () => new Date().toTimeString().slice(0, 5);
-    const nowDateTimeStr = () => new Date().toISOString().slice(0, 16).replace("T", " ");
-
-    // ==================== دوال الصلاحيات ونطاق الرؤية لكل موظف ====================
-    const isAdminUser = () => currentUser?.role === "admin";
-    const canViewAllSales = () => isAdminUser() || hasPerm("view_all_sales");
-    const canViewAllCustomers = () => isAdminUser() || hasPerm("view_all_customers");
-
-    const getVisibleInvoices = () => canViewAllSales() ? invoices : invoices.filter(i => i.issuedBy === currentUser?.username);
-    const getVisibleExpenses = () => canViewAllSales() ? expenses : expenses.filter(e => e.by === currentUser?.username);
-    const getVisibleProspects = () => canViewAllCustomers() ? prospects : prospects.filter(p => p.by === currentUser?.username);
-    const getVisibleFollowUps = () => canViewAllCustomers() ? followUps : followUps.filter(f => f.user === currentUser?.username);
-    const getVisibleOperations = () => {
-      if (canViewAllSales()) return operationsLogs;
-      return operationsLogs.filter(o => o.user === currentUser?.username || o.dept === "المبيعات (Sales)");
-    };
-    const getVisibleCustomers = () => {
-      if (canViewAllCustomers()) return customers;
-      const myCustNames = new Set(invoices.filter(i => i.issuedBy === currentUser?.username).map(i => i.customer));
-      return customers.filter(c => myCustNames.has(c.name) || c.createdBy === currentUser?.username || Number(c.ordersCount || 0) === 0);
-    };
-
-    // ==================== التحكم في قائمة الموبايل ====================
-    window.openMobileMenu = function() {
-      document.getElementById("mainSidebar")?.classList.add("mobile-open");
-      document.getElementById("sidebarBackdrop")?.classList.add("show");
-    };
-    window.closeMobileMenu = function() {
-      document.getElementById("mainSidebar")?.classList.remove("mobile-open");
-      document.getElementById("sidebarBackdrop")?.classList.remove("show");
-    };
-
-    function saveLocalModules() {
-      localStorage.setItem("dosero-prospects", JSON.stringify(prospects));
-      localStorage.setItem("dosero-followups", JSON.stringify(followUps));
-      localStorage.setItem("dosero-operations", JSON.stringify(operationsLogs));
-      localStorage.setItem("dosero-attendance", JSON.stringify(attendanceLogs));
-      localStorage.setItem("dosero-targets", JSON.stringify(employeeTargets));
-      localStorage.setItem("dosero-payroll", JSON.stringify(payrollLogs));
-    }
-
-    function getProductPriceByTier(prod, tier) {
-      if (!prod) return 0;
-      if (tier === "half") return Number(prod.halfPrice) || Number(prod.price) || 0;
-      if (tier === "wholesale") return Number(prod.wholesalePrice) || Number(prod.price) || 0;
-      return Number(prod.price) || 0;
-    }
-
-    function getDeviceInfo() {
-      const ua = navigator.userAgent;
-      if (/Android/i.test(ua)) return "📱 Android Mobile";
-      if (/iPhone|iPad/i.test(ua)) return "📱 iOS Mobile";
-      if (/Windows/i.test(ua)) return "💻 Windows PC";
-      if (/Mac/i.test(ua)) return "💻 MacBook";
-      return "🌐 Web Browser";
-    }
-
-    function hasPerm(perm) {
-      if (!currentUser) return false;
-      if (currentUser.role === "admin") return true;
-      const p = currentUser.perms;
-      if (p && typeof p === "object" && Object.keys(p).length > 0) {
-        if (perm === "manage") return Boolean(p.expenses || p.users);
-        if (perm === "operations" || perm === "hr") return p[perm] !== undefined ? Boolean(p[perm]) : true;
-        return Boolean(p[perm]);
-      }
-      if (perm === "manage") return false;
-      return USER_DEFAULT_PERMS.includes(perm);
-    }
-
-    function notify(msg) {
-      const box = document.getElementById("toastContainer");
-      const el = document.createElement("div");
-      el.className = "toast";
-      el.textContent = msg;
-      box.appendChild(el);
-      setTimeout(() => { el.style.opacity = "0"; setTimeout(() => el.remove(), 250); }, 3500);
-    }
-
-    function setTheme(th) {
-      if (th === "foodics") th = "dosero_red";
-      document.documentElement.dataset.theme = th;
-      localStorage.setItem("dosero-theme", th);
-      if (typeof renderDashboard === "function" && currentUser) renderDashboard();
-    }
-    setTheme(localStorage.getItem("dosero-theme") || "dosero_red");
-
-    function formatEgyptWhatsAppPhone(rawPhone) {
-      if (!rawPhone) return "";
-      let digits = rawPhone.toString().replace(/\D/g, "");
-      if (digits.startsWith("0020")) digits = digits.slice(2);
-      else if (digits.startsWith("01") && digits.length === 11) digits = "2" + digits;
-      else if (digits.startsWith("1") && digits.length === 10) digits = "20" + digits;
-      return digits.length >= 11 ? digits : "";
-    }
-
-    function sendWhatsAppToAdmin(textMsg) {
-      const adminWa = formatEgyptWhatsAppPhone(DOSERO_COMPANY_WA);
-      const waUrl = `https://api.whatsapp.com/send?phone=${adminWa}&text=${encodeURIComponent(textMsg)}`;
-      const win = window.open(waUrl, "_blank", "noopener,noreferrer");
-      if (!win) window.location.href = waUrl;
-    }
-
-    window.sendInvoiceWhatsApp = function(inv) {
-      if (!inv || !isAdminUser()) return;
-      const custRecord = customers.find(c => c.name === inv.customer);
-      const rawPhone = (inv.phone && inv.phone !== "—") ? inv.phone : (custRecord ? custRecord.phone : "");
-      let waPhone = formatEgyptWhatsAppPhone(rawPhone);
-
-      if (!waPhone) {
-        const manualPhone = prompt(`العميل (${inv.customer}) ليس له رقم موبايل صحيح مسجل.\nأدخل رقم واتساب العميل لإرسال الفاتورة:`, "01");
-        waPhone = formatEgyptWhatsAppPhone(manualPhone);
-        if (!waPhone) return alert("⚠️ رقم الهاتف غير صحيح، لم يتم فتح واتساب.");
-        inv.phone = manualPhone.trim();
-        if (custRecord) {
-          custRecord.phone = manualPhone.trim();
-          postToSheet({ action: "syncCustomers", customers });
-        }
-      }
-
-      const itemsLines = (inv.items || [])
-        .map(it => `• ${it.name} (${it.qty} × ${money(it.price)}) = ${money(it.qty * it.price)}`)
-        .join("\n");
-
-      const statusTxt = inv.status === "pending" ? "قيد المراجعة" : (inv.status === "returned" ? "مرتجع" : "معتمدة ✅");
-      const remainLine = Number(inv.remain) > 0 ? `*المتبقي (آجل):* ${money(inv.remain)}\n` : "";
-      const msg =
-`*DOSERO — فاتورة مبيعات*
-━━━━━━━━━━━━━━
-*رقم الفاتورة:* ${inv.id}
-*التاريخ:* ${inv.date}
-*العميل:* ${inv.customer}
-*الحالة:* ${statusTxt}
-━━━━━━━━━━━━━━
-*الأصناف:*
-${itemsLines}
-━━━━━━━━━━━━━━
-*المجموع الفرعي:* ${money(inv.subtotal || inv.total)}
-${Number(inv.discount) > 0 ? `*الخصم:* -${money(inv.discount)}\n` : ""}${Number(inv.shipping) > 0 ? `*الشحن:* +${money(inv.shipping)}\n` : ""}*الإجمالي النهائي:* ${money(inv.total)}
-*المدفوع:* ${money(inv.paid)}
-${remainLine}*طريقة الدفع:* ${inv.payMethod}
-━━━━━━━━━━━━━━
-شكراً لتعاملكم مع *DOSERO*
-للاستفسار والتواصل عبر واتساب الشركة: ${DOSERO_COMPANY_WA}`;
-
-      const waUrl = `https://api.whatsapp.com/send?phone=${waPhone}&text=${encodeURIComponent(msg)}`;
-      const win = window.open(waUrl, "_blank", "noopener,noreferrer");
-      if (!win) window.location.href = waUrl;
-    };
-
-    window.sendCurrentModalWhatsApp = function() {
-      if (activeModalInvoice) sendInvoiceWhatsApp(activeModalInvoice);
-    };
-
-    function captureSilentLocation() {
-      return new Promise((resolve, reject) => {
-        if (!navigator.geolocation) return reject(new Error("NO_GEO"));
-        navigator.geolocation.getCurrentPosition(
-          pos => {
-            const lat = pos.coords.latitude.toFixed(6);
-            const lng = pos.coords.longitude.toFixed(6);
-            resolve(`https://www.google.com/maps?q=${lat},${lng}`);
-          },
-          err => reject(err),
-          { enableHighAccuracy: true, timeout: 9000, maximumAge: 0 }
-        );
-      });
-    }
-
-    function postToSheet(payload) {
-      lastLocalWriteTime = Date.now();
-      return fetch(DOSERO_SHEET_URL, {
-        method: "POST",
-        body: JSON.stringify(payload)
-      }).catch(() => {});
-    }
-
-    function recordActivity(actionTitle, detailsText, locUrl = "") {
-      if (!currentUser) return;
-      const entry = {
-        date: nowDateTimeStr(),
-        user: currentUser.username,
-        role: isAdminUser() ? "مدير (Admin)" : "موظف (User)",
-        action: actionTitle,
-        details: detailsText,
-        locationUrl: locUrl || sessionStorage.getItem("dosero-last-loc") || "",
-        device: getDeviceInfo()
-      };
-      activityLogs.unshift(entry);
-      renderActivityLogs();
-      postToSheet({ action: "logActivity", log: entry });
-    }
-
-    async function syncFromSheet(isManual = false) {
+  async function syncFromSheet(isManual = false) {
       if (isSyncingNow) return;
       if (!isManual && (Date.now() - lastLocalWriteTime < 6000)) return;
       isSyncingNow = true;
@@ -2549,6 +2819,12 @@ ${remainLine}*طريقة الدفع:* ${inv.payMethod}
       const activeBtn = document.querySelector(`[data-view="${viewId}"]`);
       if (activeBtn) activeBtn.classList.add("active");
 
+      if (viewId === "viewNewOrder") {
+        document.getElementById("invoiceForm").reset();
+        document.getElementById("invLinesBox").innerHTML = "";
+        addInvoiceLine();
+        calcInvoiceTotal();
+      }
       if (viewId === "viewDashboard") renderDashboard();
       if (viewId === "viewReportDetail") renderReportDetail();
       if (viewId === "viewChartsHub") renderChartsHub();
@@ -2850,10 +3126,10 @@ ${op.text}`;
     document.getElementById("targetForm").addEventListener("submit", e => {
       e.preventDefault();
       const user = document.getElementById("trgUserSelect").value;
-      const month = document.getElementById("trgMonthInp").value.trim();
+      const month = document.getElementById("trgMonthInp").value.trim().slice(0, 7);
       const targetAmount = Number(document.getElementById("trgAmountInp").value) || 0;
 
-      const idx = employeeTargets.findIndex(t => t.user === user && t.month === month);
+      const idx = employeeTargets.findIndex(t => (t.user || "").trim() === user && (t.month || "").trim().slice(0, 7) === month);
       if (idx >= 0) employeeTargets[idx].targetAmount = targetAmount;
       else employeeTargets.unshift({ user, month, targetAmount });
 
@@ -2919,6 +3195,19 @@ ${op.text}`;
       notify(`✅ تم تسجيل (${kind}) وخصم ${money(netPaid)} من مصروفات الشركة`);
     });
 
+    function calcUserAchievedSales(username, monthStr) {
+      const targetYm = (monthStr || "").trim().slice(0, 7).replace("/", "-");
+      const targetUser = (username || "").trim();
+      return invoices
+        .filter(i => {
+          const isApproved = (i.status === "active" || i.status === "pending_return");
+          const sameUser = (i.issuedBy || "").trim() === targetUser;
+          const invYm = (i.date || "").trim().slice(0, 7).replace("/", "-");
+          return isApproved && sameUser && invYm === targetYm;
+        })
+        .reduce((sum, i) => sum + Number(i.total || 0), 0);
+    }
+
     function renderHR() {
       const today = todayStr();
       const isAdmin = isAdminUser();
@@ -2953,17 +3242,9 @@ ${op.text}`;
 
       const trgGrid = document.getElementById("targetsCardsGrid");
       if (trgGrid) {
-        const visibleTargets = employeeTargets.filter(t => isAdmin || t.user === currentUser?.username);
+        const visibleTargets = employeeTargets.filter(t => isAdmin || (t.user || "").trim() === (currentUser?.username || "").trim());
         trgGrid.innerHTML = visibleTargets.length ? visibleTargets.map(t => {
-          const achieved = invoices
-  .filter(i => {
-    const isApproved = (i.status === "active" || i.status === "pending_return");
-    const sameUser = (i.issuedBy || "").trim() === (t.user || "").trim();
-    const invYm = (i.date || "").trim().slice(0, 7).replace("/", "-");
-    const trgYm = (t.month || "").trim().slice(0, 7).replace("/", "-");
-    return isApproved && sameUser && invYm === trgYm;
-  })
-  .reduce((sum, i) => sum + Number(i.total || 0), 0);
+          const achieved = calcUserAchievedSales(t.user, t.month);
           const pct = t.targetAmount > 0 ? Math.min(100, Math.round((achieved / t.targetAmount) * 100)) : 0;
           return `<div class="f-card">
             <div class="f-card-top">
@@ -3000,7 +3281,7 @@ ${op.text}`;
       }
     }
 
-    // ==================== 8 & 9. نظام التسعير، الخصم (%) أو مبلغ، وإلغاء الآجل ====================
+    // ==================== 8 & 9. نظام التسعير اليدوي والخصم ====================
     window.onInvoiceCustomerChange = function(custId) {
       const cust = customers.find(c => String(c.id) === String(custId));
       const tierSel = document.getElementById("invPriceTier");
@@ -3012,15 +3293,16 @@ ${op.text}`;
         phoneInp.value = (cust.phone && cust.phone !== "—") ? cust.phone : "";
         nameInp.value = "";
         notify(`تم اختيار (${cust.name}) — الهاتف: ${phoneInp.value || "غير مسجل"} — (${TIER_LABELS[tierSel.value]})`);
+        applyPriceTierToAllLines();
       } else {
-        tierSel.value = "retail";
+        tierSel.value = "";
         phoneInp.value = "";
       }
-      applyPriceTierToAllLines();
     };
 
     window.applyPriceTierToAllLines = function() {
       const tier = document.getElementById("invPriceTier").value;
+      if (!tier) return;
       document.querySelectorAll("#invLinesBox .inv-line").forEach(row => {
         const pid = row.querySelector(".l-prod").value;
         const prInp = row.querySelector(".l-price");
@@ -3030,7 +3312,7 @@ ${op.text}`;
           prInp.value = getProductPriceByTier(prod, tier);
         }
         const sub = (Number(row.querySelector(".l-qty").value) || 0) * (Number(prInp.value) || 0);
-        row.querySelector(".l-sub").value = money(sub);
+        row.querySelector(".l-sub").value = sub > 0 ? money(sub) : "";
       });
       calcInvoiceTotal();
     };
@@ -3040,14 +3322,13 @@ ${op.text}`;
       const row = document.createElement("div");
       row.className = "inv-line";
       const opts = `<option value="">-- اختر الصنف --</option>` +
-    products.map(p => `<option value="${p.id}">${p.name} (متاح: ${p.qty})</option>`).join("");
-        : `<option value="">-- أضف أصناف بالمخزون أولاً --</option>`;
+        products.map(p => `<option value="${p.id}">${p.name} (متاح: ${p.qty})</option>`).join("");
 
       row.innerHTML = `
         <select class="l-prod">${opts}</select>
-        <input type="number" class="l-qty" min="1" value="1" placeholder="الكمية">
-        <input type="number" class="l-price" min="0.01" step="0.01" placeholder="السعر">
-        <input type="text" class="l-sub" readonly style="background:transparent;border:0;font-weight:700;">
+        <input type="number" class="l-qty" min="1" value="" placeholder="الكمية">
+        <input type="number" class="l-price" min="0.01" step="0.01" value="" placeholder="السعر">
+        <input type="text" class="l-sub" readonly style="background:transparent;border:0;font-weight:700;" placeholder="0.00">
         <button type="button" class="btn btn-red" style="padding:6px;">✕</button>
       `;
       const pSel = row.querySelector(".l-prod");
@@ -3057,22 +3338,31 @@ ${op.text}`;
 
       function calcLine() {
         const prod = products.find(x => x.id === pSel.value);
-        const tier = document.getElementById("invPriceTier").value;
-        if (!prInp.dataset.manual && prod) {
+        const tier = document.getElementById("invPriceTier").value || "retail";
+        if (!prod) {
+          prInp.value = "";
+          subInp.value = "";
+          calcInvoiceTotal();
+          return;
+        }
+        if (!prInp.dataset.manual) {
           prInp.value = getProductPriceByTier(prod, tier);
         }
         const sub = (Number(qInp.value) || 0) * (Number(prInp.value) || 0);
-        subInp.value = money(sub);
+        subInp.value = sub > 0 ? money(sub) : "";
         calcInvoiceTotal();
       }
 
-      pSel.addEventListener("change", () => { delete prInp.dataset.manual; calcLine(); });
+      pSel.addEventListener("change", () => {
+        delete prInp.dataset.manual;
+        if (pSel.value && !qInp.value) qInp.value = 1;
+        calcLine();
+      });
       qInp.addEventListener("input", calcLine);
       prInp.addEventListener("input", () => { prInp.dataset.manual = "1"; calcLine(); });
       row.querySelector("button").addEventListener("click", () => { row.remove(); calcInvoiceTotal(); });
 
       box.appendChild(row);
-      calcLine();
     }
 
     window.onPayMethodChange = function() {
@@ -3080,8 +3370,8 @@ ${op.text}`;
       const total = Number(document.getElementById("invTotalInp").value) || 0;
       const paidInp = document.getElementById("invPaidInp");
       delete paidInp.dataset.edited;
-      if (method !== "آجل") paidInp.value = total.toFixed(2);
-      else paidInp.value = "0";
+      if (method !== "آجل") paidInp.value = total > 0 ? total.toFixed(2) : "";
+      else paidInp.value = "";
       calcInvoiceTotal();
     };
 
@@ -3106,7 +3396,7 @@ ${op.text}`;
       const method = document.getElementById("invPayMethod").value;
       const paidInp = document.getElementById("invPaidInp");
       if (method !== "آجل" && !paidInp.dataset.edited) {
-        paidInp.value = total.toFixed(2);
+        paidInp.value = total > 0 ? total.toFixed(2) : "";
       }
 
       const paid = Number(paidInp.value) || 0;
@@ -3139,10 +3429,14 @@ ${op.text}`;
         if (qty > prod.qty) return alert(`الكمية المطلوبة من (${prod.name}) أكبر من المتاح (${prod.qty})!`);
         items.push({ id: prod.id, name: prod.name, qty, price, cost: prod.cost });
       }
-      if (!items.length) return alert("اختر صنفاً صحيحاً!");
-      if (!document.getElementById("invCustSelect").value && !document.getElementById("invNewCustName").value.trim()) {
-     return alert("⚠️ اختيار العميل أو كتابة اسم عميل جديد إجباري لإتمام الفاتورة!");
-   }
+      if (!items.length) return alert("اختر صنفاً صحيحاً وحدد الكمية!");
+
+      const selCustId = document.getElementById("invCustSelect").value;
+      const newName = document.getElementById("invNewCustName").value.trim();
+      if (!selCustId && !newName) {
+        return alert("⚠️ اختيار العميل من القائمة أو كتابة اسم عميل جديد إجباري لإتمام الفاتورة!");
+      }
+
       const submitBtn = document.getElementById("saveOrderSubmitBtn");
       const origTxt = submitBtn.textContent;
       submitBtn.disabled = true;
@@ -3163,10 +3457,8 @@ ${op.text}`;
       submitBtn.disabled = false;
       submitBtn.textContent = origTxt;
 
-      const selCustId = document.getElementById("invCustSelect").value;
-      const newName = document.getElementById("invNewCustName").value.trim();
       const enteredPhone = document.getElementById("invNewCustPhone").value.trim();
-      const priceTier = document.getElementById("invPriceTier").value;
+      const priceTier = document.getElementById("invPriceTier").value || "retail";
       let custObj = customers.find(c => String(c.id) === String(selCustId));
 
       if (custObj) {
@@ -3175,7 +3467,7 @@ ${op.text}`;
           postToSheet({ action: "syncCustomers", customers });
         }
       } else {
-        const finalName = newName || "عميل نقدي";
+        const finalName = newName;
         custObj = customers.find(c => c.name === finalName);
         if (!custObj) {
           custObj = { id: "C" + Date.now(), name: finalName, phone: enteredPhone || "—", address: "", priceTier, ordersCount: 0, itemsBought: {}, totalSpent: 0, debt: 0, lastOrderDate: "", createdBy: currentUser.username };
@@ -4065,11 +4357,9 @@ ${op.text}`;
       const visExps = getVisibleExpenses();
 
       const myTrgCard = document.getElementById("myTargetDashCard");
-      const myTrg = employeeTargets.find(t => t.user === currentUser?.username && t.month === currentMonthStr());
+      const myTrg = employeeTargets.find(t => (t.user || "").trim() === (currentUser?.username || "").trim() && (t.month || "").trim().slice(0, 7) === currentMonthStr());
       if (myTrg && myTrgCard) {
-        const myAchieved = invoices
-          .filter(i => (i.status === "active" || i.status === "pending_return") && i.issuedBy === currentUser.username && (i.date || "").startsWith(myTrg.month))
-          .reduce((s, i) => s + Number(i.total || 0), 0);
+        const myAchieved = calcUserAchievedSales(currentUser.username, myTrg.month);
         const pct = myTrg.targetAmount > 0 ? Math.min(100, Math.round((myAchieved / myTrg.targetAmount) * 100)) : 0;
         myTrgCard.style.display = "block";
         document.getElementById("myTargetMonthLbl").textContent = myTrg.month;
@@ -4286,7 +4576,7 @@ ${op.text}`;
       const visOps = getVisibleOperations();
 
       document.getElementById("invCustSelect").innerHTML =
-        `<option value="">+ عميل جديد (اكتب الاسم بجانبه)</option>` +
+        `<option value="">-- اختر عميل مسجل أو اكتب جديد --</option>` +
         visCusts.map(c => `<option value="${c.id}">${c.name} [${TIER_LABELS[c.priceTier || "retail"]}]</option>`).join("");
       const custFilterOpts = `<option value="">كل العملاء</option>` + visCusts.map(c => `<option value="${c.name}">${c.name}</option>`).join("");
       const userFilterOpts = `<option value="">كل الموظفين</option>` + users.map(u => `<option value="${u.username}">${u.username}</option>`).join("");
