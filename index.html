@@ -2603,16 +2603,6 @@ try {
       const btn = document.getElementById("saveProsBtn");
       btn.disabled = true; btn.textContent = "⏳ جارٍ التقاط الموقع...";
       let loc = "";
-      try { loc = await captureSilentLocation(); } catch (err) { loc = sessionStorage.getItem("dosero-last-loc") || ""; }
-      btn.disabled = false; btn.textContent = "حفظ الزيارة بالموقع";
-
-      const entry = {
-        id: "PROS-" + Date.now(),
-        date: nowDateTimeStr(),
-        name: document.getElementById("prosName").value.trim(),
-        phone: document.getElementById("prosPhone").value.trim() || "—",
-        reason: document.getElementById("prosReason").value.trim(),
-        let loc = "";
   try {
     loc = await captureSilentLocation("تسجيل زيارة عميل");
   } catch (err) {
@@ -2622,6 +2612,16 @@ try {
   }
   btn.disabled = false;
   btn.textContent = "حفظ الزيارة بالموقع";
+
+  const entry = {
+    id: "PROS-" + Date.now(),
+    date: nowDateTimeStr(),
+    name: document.getElementById("prosName").value.trim(),
+    phone: document.getElementById("prosPhone").value.trim() || "-",
+    reason: document.getElementById("prosReason").value.trim(),
+    by: currentUser.username,
+    locationUrl: loc
+  };
       prospects.unshift(entry);
       saveLocalModules();
       recordActivity("📍 زيارة بدون شراء", `تسجيل زيارة (${entry.name}) — السبب: ${entry.reason}`, loc);
