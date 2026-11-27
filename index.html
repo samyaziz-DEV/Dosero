@@ -1798,7 +1798,7 @@
       <form id="targetForm" class="stack">
         <div><label>اختر الموظف *</label><select id="trgUserSelect" required></select></div>
         <div class="grid-2">
-          <div><label>الشهر (YYYY-MM) *</label><input type="text" id="trgMonthInp" required></div>
+          <div><label>الشهر *</label><input type="month" id="trgMonthInp" required></div>
           <div><label>قيمة التارجيت المطلوب (EGP) *</label><input type="number" id="trgAmountInp" min="1" step="100" required></div>
         </div>
         <div style="display:flex;gap:8px;justify-content:flex-end;">
@@ -2956,8 +2956,14 @@ ${op.text}`;
         const visibleTargets = employeeTargets.filter(t => isAdmin || t.user === currentUser?.username);
         trgGrid.innerHTML = visibleTargets.length ? visibleTargets.map(t => {
           const achieved = invoices
-            .filter(i => (i.status === "active" || i.status === "pending_return") && i.issuedBy === t.user && (i.date || "").startsWith(t.month))
-            .reduce((sum, i) => sum + Number(i.total || 0), 0);
+         .filter(i => {
+           const isApproved = (i.status === "active" || i.status === "pending_return");
+           const sameUser = (i.issuedBy || "").trim() === (t.user || "").trim();
+           const invYm = (i.date || "").trim().slice(0, 7).replace("/", "-");
+           const trgYm = (t.month || "").trim().slice(0, 7).replace("/", "-");
+           return isApproved && sameUser && invYm === trgYm;
+         })
+         .reduce((sum, i) => sum + Number(i.total || 0), 0);
           const pct = t.targetAmount > 0 ? Math.min(100, Math.round((achieved / t.targetAmount) * 100)) : 0;
           return `<div class="f-card">
             <div class="f-card-top">
