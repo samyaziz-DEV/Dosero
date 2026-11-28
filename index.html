@@ -31,6 +31,11 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
+    @media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
     :root,
     html[data-theme="dosero_red"] {
       --bg: #f6f3f5;
@@ -852,7 +857,7 @@
         </div>
 
         <span class="sync-live-pill" id="liveSyncBadge" title="مزامنة حية تلقائية">● متصل</span>
-        <button type="button" class="btn btn-primary perm-el" data-perm="orders" onclick="switchView('viewNewOrder')">+ طلب جديد</button>
+        <button type="button" class="btn btn-primary perm-el hide-on-mobile" data-perm="orders" onclick="switchView('viewNewOrder')">+ طلب جديد</button>
         <span class="account-chip" id="topAccountChip">DOSERO</span>
         <button type="button" class="btn btn-outline" style="padding:6px 10px;" onclick="syncFromSheet(true)" title="مزامنة فورية">🔄</button>
       </div>
