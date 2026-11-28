@@ -4,6 +4,28 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dosero | نظام الإدارة المتكامل — Powered by Samy Aziz</title>
+  <!-- إعدادات تشغيل Dosero كتطبيق مستقل على iOS / iPhone -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Dosero">
+<meta name="theme-color" content="#F01E44">
+<link id="appleTouchIcon" rel="apple-touch-icon" sizes="180x180" href="">
+<script>
+  (function () {
+    const c = document.createElement("canvas");
+    c.width = 180; c.height = 180;
+    const ctx = c.getContext("2d");
+    ctx.fillStyle = "#F01E44";
+    ctx.fillRect(0, 0, 180, 180);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "900 96px Arial, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("D", 90, 96);
+    document.getElementById("appleTouchIcon").href = c.toDataURL("image/png");
+  })();
+</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
